@@ -77,7 +77,7 @@ public final class DutchmansRest {
                 if (Math.abs(x) == 3 && z % 2 == 0 && depth > 3) b.set(hx + x, 3, hz + z, ModBlocks.GHOSTWOOD_LOG.getDefaultState());
             }
         b.chest(hx, 1, hz - 1, Direction.SOUTH, "chests/phase4_common");
-        b.chest(hx, 1, hz + 2, Direction.NORTH, "chests/phase4_treasure");
+        b.chest(hx, 1, hz + 2, Direction.NORTH, "chests/dutchman_hoard");
         b.set(hx + 1, 1, hz + 1, wet(Blocks.CHAIN.getDefaultState(), 1, depth));
         wrecks(b, r, depth);
         // flotsam on the surface

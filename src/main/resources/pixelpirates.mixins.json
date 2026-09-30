@@ -13,6 +13,7 @@
     "HideoutSpawnMixin",
     "LairSpawnMixin",
     "ArenaSpawnMixin",
+    "BossArmorDamageMixin",
     "ParrotShoulderMixin",
     "PlayerShoulderInvoker",
     "SalvageHookBobberMixin"

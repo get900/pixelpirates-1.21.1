@@ -135,6 +135,54 @@
           "weight": 1
         }
       ]
+    },
+    {
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_boots"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_boots"
+        }
+      ]
     }
   ]
 }

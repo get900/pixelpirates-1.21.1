@@ -93,6 +93,7 @@ public final class BossProgression {
     public static void onBossKilled(ServerPlayerEntity p, int index, int unlocksZone) {
         if (index < 0) return;
         Step step = CHAIN.get(index);
+        net.get900.pixelpirates.item.BossArmor.onBossKilled(p, index);     // a boss-set piece they don't own yet
         boolean advanced = progress(p) == index;
         if (advanced) {
             setProgress(p, index + 1);

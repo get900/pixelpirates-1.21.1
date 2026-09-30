@@ -100,7 +100,7 @@ public class KrakenHarpoonEntity extends ProjectileEntity implements GeoEntity {
             }
             case CARRYING -> {
                 if (victim == null || !victim.isAlive()) { this.discard(); return; }
-                if (!victim.hasVehicle()) victim.startRiding(this, true);
+                if (!victim.hasVehicle()) { if (net.get900.pixelpirates.item.BossArmor.slipped(victim)) { this.discard(); return; } victim.startRiding(this, true); }
                 Vec3d from = getPos(), to = from.add(v), probe = to.add(v.normalize().multiply(0.7));
                 BlockHitResult wall = sw.raycast(new RaycastContext(from, probe, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, this));
                 if (wall.getType() != HitResult.Type.MISS) { pin(sw, wall); return; }
@@ -111,7 +111,7 @@ public class KrakenHarpoonEntity extends ProjectileEntity implements GeoEntity {
             }
             case PINNED -> {
                 if (victim == null || !victim.isAlive()) { this.discard(); return; }
-                if (!victim.hasVehicle()) victim.startRiding(this, true);                   // no wriggling off
+                if (!victim.hasVehicle() && !net.get900.pixelpirates.item.BossArmor.slipped(victim)) victim.startRiding(this, true);   // no wriggling off (unless Tidecourt)
                 victim.fallDistance = 0;
                 if (pinned % 20 == 0) victim.damage(this.getDamageSources().mobProjectile(this, getOwner() instanceof LivingEntity o ? o : null), 2f);
                 if (victim instanceof ServerPlayerEntity p && pinned % 20 == 0)

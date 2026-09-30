@@ -825,7 +825,7 @@ public class LeviathanEntity extends ModBoss {
                 Vec3d d = m.subtract(p.getPos());
                 double dist = d.length();
                 if (dist > 34 || dist < 2) continue;
-                double k = 0.05 * (BossProgression.relicActive(p, ModItems.ROYAL_TIDE_SIGIL) ? 0.5 : 1);
+                double k = 0.05 * (BossProgression.relicActive(p, ModItems.ROYAL_TIDE_SIGIL) ? 0.5 : 1) * net.get900.pixelpirates.item.BossArmor.pullScale(p);
                 p.addVelocity(d.x / dist * k, d.y / dist * k, d.z / dist * k); p.velocityModified = true;
                 if (t % 10 == 0) w.spawnParticles(new DustParticleEffect(RED, 1.2f), p.getX(), p.getY() + 1, p.getZ(), 6, 0.4, 0.6, 0.4, 0);
             }
@@ -843,7 +843,8 @@ public class LeviathanEntity extends ModBoss {
                 Vec3d d = m.subtract(p.getPos());
                 double dist = d.length();
                 if (dist > 30 || dist < 2) continue;
-                p.addVelocity(d.x / dist * 0.08, d.y / dist * 0.08, d.z / dist * 0.08); p.velocityModified = true;
+                double g = 0.08 * net.get900.pixelpirates.item.BossArmor.pullScale(p);
+                p.addVelocity(d.x / dist * g, d.y / dist * g, d.z / dist * g); p.velocityModified = true;
             }
             if (t < 50 && t % 3 == 0) w.spawnParticles(ParticleTypes.BUBBLE, m.x, m.y, m.z, 30, 8, 4, 8, -0.3);
             if (t == 50) {

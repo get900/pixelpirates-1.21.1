@@ -405,7 +405,7 @@ public class BloodfinEntity extends ModBoss {
         modeTicks++;
         if (held != null) {
             if (!held.isAlive() || held.isRemoved()) held = null;
-            else if (!held.hasVehicle() && held.squaredDistanceTo(this) < 36) held.startRiding(this, true);   // no shift-escape
+            else if (!held.hasVehicle() && held.squaredDistanceTo(this) < 36 && !net.get900.pixelpirates.item.BossArmor.slipped(held)) held.startRiding(this, true);   // no shift-escape
             if (held != null && modeTicks % 20 == 0) {
                 held.damage(this.getDamageSources().mobAttack(this), 3f);
                 held.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 0), this);

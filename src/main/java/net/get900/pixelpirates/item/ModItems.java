@@ -182,6 +182,25 @@ public class ModItems {
     public static final Item KRAKEN_SCALE_BOOTS = registerItem("kraken_scale_boots",
             new ArmorItem(ModArmorMaterials.KRAKEN_SCALE, ArmorItem.Type.BOOTS, new Item.Settings()));
 
+    // BOSS SETS (item/BossArmor) - boss hoards + kills only. Index [tier][0..3] = helmet, chestplate, leggings, boots.
+    public static final String[] BOSS_SET_IDS = {"", "powder_monkey", "forgeguard", "tidecourt", "gallowbreaker", "thalassar"};
+    private static final Item[][] BOSS_SETS = new Item[6][];
+    static {
+        ModArmorMaterials[] mats = {null, ModArmorMaterials.POWDER_MONKEY, ModArmorMaterials.FORGEGUARD, ModArmorMaterials.TIDECOURT,
+                ModArmorMaterials.GALLOWBREAKER, ModArmorMaterials.THALASSAR};
+        ArmorItem.Type[] types = {ArmorItem.Type.HELMET, ArmorItem.Type.CHESTPLATE, ArmorItem.Type.LEGGINGS, ArmorItem.Type.BOOTS};
+        String[] names = {"helmet", "chestplate", "leggings", "boots"};
+        for (int t = 1; t <= 5; t++) {
+            BOSS_SETS[t] = new Item[4];
+            for (int i = 0; i < 4; i++)
+                BOSS_SETS[t][i] = registerItem(BOSS_SET_IDS[t] + "_" + names[i],
+                        new net.get900.pixelpirates.item.custom.BossArmorItem(mats[t], types[i], t, new Item.Settings()));
+        }
+    }
+
+    /** The four pieces of boss set `tier` (1..5): helmet, chestplate, leggings, boots. */
+    public static Item[] bossSet(int tier) { return BOSS_SETS[tier]; }
+
     // Weapon items
     public static final Item CUTLASS = registerItem("cutlass",
             new CutlassItem(ModToolMaterials.PIRATE, 3, -2.4f, new Item.Settings()));

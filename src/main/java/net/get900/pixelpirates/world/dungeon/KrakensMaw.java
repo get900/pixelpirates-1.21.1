@@ -108,7 +108,7 @@ public final class KrakensMaw {
         }
         wrecks(b, r, depth);
         // ---------------------------------------------------------------- treasure (what it pulled down)
-        b.chest(0, floorAt(9) + 1, 9, Direction.NORTH, "chests/phase2_treasure");
+        b.chest(0, floorAt(9) + 1, 9, Direction.NORTH, "chests/kraken_hoard");
         b.chest(9, floorAt(9) + 1, 0, Direction.WEST, "chests/phase2_common");
         b.chest(-15, floorAt(15) + 1, -4, Direction.EAST, "chests/phase2_treasure");
         // ---------------------------------------------------------------- the Kraken, deep in the abyss

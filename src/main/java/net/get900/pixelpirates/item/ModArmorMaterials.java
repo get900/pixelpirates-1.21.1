@@ -35,7 +35,30 @@ public enum ModArmorMaterials implements ArmorMaterial {
     // Ring 5 — abyssal kraken scale
     KRAKEN_SCALE("kraken_scale", 34, new int[]{3, 7, 9, 3}, 18,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3.0f, 0.05f,
-            () -> Ingredient.ofItems(ModItems.KRAKEN_SCALE));
+            () -> Ingredient.ofItems(ModItems.KRAKEN_SCALE)),
+
+    // ---- BOSS SETS (item/BossArmor): from boss hoards + kills, one per pair of chain bosses.
+    // Toughness and knockback resistance are PER PIECE (x4 for the set).
+    // I  Rackham + Serpent: 15 armor, tough 1, kb 0.05/pc (= the design's +0.2 set knockback resistance)
+    POWDER_MONKEY("powder_monkey", 22, new int[]{2, 5, 6, 2}, 14,
+            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0f, 0.05f,
+            () -> Ingredient.ofItems(net.minecraft.item.Items.GUNPOWDER)),
+    // II Warlord + Ghost Captain: 19 armor, tough 2
+    FORGEGUARD("forgeguard", 28, new int[]{3, 6, 7, 3}, 14,
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0f, 0,
+            () -> Ingredient.ofItems(ModItems.VOLCANIC_EMBER)),
+    // III King + Bloodfin: 21 armor, tough 2.5
+    TIDECOURT("tidecourt", 32, new int[]{3, 7, 8, 3}, 16,
+            SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 2.5f, 0,
+            () -> Ingredient.ofItems(net.minecraft.item.Items.PRISMARINE_CRYSTALS)),
+    // IV Kraken + Revenant: 22 armor, tough 3, kb 0.1
+    GALLOWBREAKER("gallowbreaker", 36, new int[]{3, 7, 9, 3}, 16,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3.0f, 0.1f,
+            () -> Ingredient.ofItems(ModItems.KRAKEN_SCALE)),
+    // V Heart + Leviathan: 23 armor, tough 3.5, kb 0.15
+    THALASSAR("thalassar", 40, new int[]{3, 8, 9, 3}, 18,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3.5f, 0.15f,
+            () -> Ingredient.ofItems(ModItems.LEVIATHAN_SCALE));
 
     private static final int[] BASE_DURABILITY = {13, 15, 16, 11}; // boots, leggings, chestplate, helmet
 

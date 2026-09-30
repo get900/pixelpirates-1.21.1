@@ -262,6 +262,7 @@ public class ModItemGroups {
                         entries.add(ModItems.KRAKEN_SCALE_CHESTPLATE);
                         entries.add(ModItems.KRAKEN_SCALE_LEGGINGS);
                         entries.add(ModItems.KRAKEN_SCALE_BOOTS);
+                        for (int t = 1; t <= 5; t++) for (var piece : ModItems.bossSet(t)) entries.add(piece);
                         entries.add(ModItems.FROST_HELM);
                         entries.add(ModItems.SHIP_REPAIR_KIT);
                         entries.add(ModItems.SHIP_BLUEPRINT);

@@ -692,6 +692,37 @@ palace -> court -> well (the court shell would wall up the passage). `SunkenCour
 
 ---
 
+## BOSS ARMOR SETS (2026-09-30, design `D:\Minecraft Modding\Boss Armor - Design.txt`)
+
+Five sets, one per pair of chain bosses: I Powder-Monkey's Brigandine (Rackham+Serpent), II Forgeguard Plate
+(Warlord+Ghost Captain), III Tidecourt Regalia (King+Bloodfin), IV Gallowbreaker Harness (Kraken+Revenant),
+V Mantle of Thalassar (Heart+Leviathan). Items `<powder_monkey|forgeguard|tidecourt|gallowbreaker|thalassar>_<helmet|
+chestplate|leggings|boots>` (`ModItems.bossSet(tier)`, `item/custom/BossArmorItem`: fireproof, tier, tooltip lists ward +
+bonus), materials in `ModArmorMaterials` (toughness/knockback PER PIECE). Logic all in **`item/BossArmor`**:
+- BOSS WARD 3/4/4/5/6% per piece vs damage "from a boss" (`fromBoss`: attacker/source is a ModBoss, or any of our
+  entities within 48 of one, projectiles resolve to their owner; owner-less damage - magic, explosions, burning - counts
+  when a ModBoss is within 64). Applied by `mixin/BossArmorDamageMixin` at RETURN of `LivingEntity.modifyAppliedDamage`
+  (after armor + Protection), so it reaches magic too.
+- Set bonuses (all 4 of one tier, `fullSet`): I boss explosions x0.6, burning near bosses ticks down twice as fast;
+  II no fire damage/burning near bosses, boss magic x0.7, dolphin's grace in water; III after 28 ticks riding anything
+  of a boss's you are dismounted (`slipped()` guards the re-grab lines in Bloodfin/Kraken/KrakenArm/KrakenHarpoon),
+  pulls x0.6 (`pullScale` at the Royal-Tide-Sigil pull sites: Kraken inhale x2, Leviathan lure+gulp, Heart systole), boss
+  slowness removed; IV wither/darkness/blindness removed near bosses, nausea capped at 1 s, falls near a boss x0.5, boss
+  wither damage 0; V LAST STAND (a boss hit that would take you under 25% stops at 25% and gives Absorption III +
+  Resistance 6 s, 90 s cooldown), boss magic x0.7, water breathing/dolphin/night vision in water. Tick = `BossArmor.tick`
+  every 5 ticks. NOT covered yet: Revenant hook/noose/shackle (no riding), King maelstrom + `Abilities.pull` (relic skip only).
+- LOOT: hoards get 2 pieces + 50% a third: rackham_hoard, serpent_hoard, citadel_hoard, dutchman_hoard, court_hoard,
+  whalers_hoard, kraken_hoard, revenant_hoard, heart_hoard; the Leviathan's rift_hoard/gullet_wreck/spire_ruin 1 piece.
+  serpent/kraken/dutchman hoards are NEW tables (copies of phaseN_treasure) so the shared tables stay armor-free - the lair
+  classes point their main chest at them. KILL: `BossProgression.onBossKilled` -> `BossArmor.onBossKilled` gives every
+  credited player one piece of tier index/2+1 they don't own (inventory, equipped or ender chest).
+- Textures: `tools/gen_boss_armor.py` repaints corsair/ashen/kraken/cursed-bone shapes with each set's palette - a FIRST
+  PASS for balance testing, the real art is still to do (with the old-set visual overhaul, see HANDOFF.md).
+- `/pparmortest` (op): damage per loadout (none/diamond/netherite/I-V) vs the nearest boss (spawns a still Rackham if
+  none), same pipeline as applyDamage. Verified 2026-09-30: melee 16 -> none 16, diamond 5.8, netherite 5.2, I 8.6,
+  II 5.4, III 4.1, IV 3.2, V 2.4; magic 8 -> 8 / 8 / 8 / 7.0 / 4.7 / 6.7 / 6.4 / 4.3; loot rolls give the right pieces.
+  NOT verified: set bonuses in a real fight (slip, pulls, last stand feel), textures in game.
+
 ## HOMESTEAD (2026-09-30 overnight build) - base building, economy and survival
 
 All in `homestead/` with its own registries (`HomesteadBlocks/Items/BlockEntities/Entities/Effects`, `Homestead.init()`

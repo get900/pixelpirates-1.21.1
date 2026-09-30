@@ -195,7 +195,7 @@ public class KrakenArmEntity extends ModMob {
         }
         if (held == null) return;
         if (!held.isAlive()) { held = null; return; }
-        if (!held.hasVehicle() && held.squaredDistanceTo(this) < 100) held.startRiding(this, true);
+        if (!held.hasVehicle() && held.squaredDistanceTo(this) < 100 && !net.get900.pixelpirates.item.BossArmor.slipped(held)) held.startRiding(this, true);
         if (--heldTicks % 20 == 0) held.damage(this.getDamageSources().mobAttack(this), 2f);
         if (heldTicks > 0) return;
         // FLING toward the abyss

@@ -175,6 +175,54 @@
           ]
         }
       ]
+    },
+    {
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:powder_monkey_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:powder_monkey_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:powder_monkey_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:powder_monkey_boots"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:powder_monkey_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:powder_monkey_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:powder_monkey_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:powder_monkey_boots"
+        }
+      ]
     }
   ]
 }

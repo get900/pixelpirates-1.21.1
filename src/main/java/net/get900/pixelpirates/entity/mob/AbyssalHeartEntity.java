@@ -540,7 +540,7 @@ public class AbyssalHeartEntity extends ModBoss {
                         Vec3d d = c.subtract(p.getPos());
                         double dist = d.length();
                         if (dist > 34 || dist < 1) continue;
-                        double k = 0.05 * (1 - dist / 40) * (BossProgression.relicActive(p, ModItems.ROYAL_TIDE_SIGIL) ? 0.5 : 1);
+                        double k = 0.05 * (1 - dist / 40) * (BossProgression.relicActive(p, ModItems.ROYAL_TIDE_SIGIL) ? 0.5 : 1) * net.get900.pixelpirates.item.BossArmor.pullScale(p);
                         p.addVelocity(d.x / dist * k, d.y / dist * k, d.z / dist * k);
                         p.velocityModified = true;
                         if (t % 3 == 0) w.spawnParticles(ParticleTypes.BUBBLE, p.getX(), p.getY() + 1, p.getZ(), 3, 0.5, 0.5, 0.5, 0);

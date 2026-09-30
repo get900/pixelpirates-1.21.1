@@ -1,4 +1,4 @@
-// 1.20.1	2026-09-30T13:14:28.9493268	Pixel Pirates/Recipes
+// 1.20.1	2026-09-30T16:36:05.2969751	Pixel Pirates/Recipes
 a244c78522b02f85184d4a2dcc90382d7c0d905d data\pixelpirates\advancements\recipes\misc\cursed_bone.json
 2ef4efcd44a08a7b67ba7d4de2cd11a079fa5ed9 data\pixelpirates\advancements\recipes\combat\navy_officer_chestplate.json
 82bbc2548518ae46cbf28787c4cfff74414f946e data\pixelpirates\advancements\recipes\misc\volcanic_ember.json
@@ -114,8 +114,8 @@ e7c769fa7e26f7ab0f1b1009b551278d4a377506 data\pixelpirates\advancements\recipes\
 70f2f9e95b4479865231aa45fce0f2ec5c599d9d data\pixelpirates\recipes\soulrender.json
 1ef80de3ff4ed0e8e12e3d662cb950c1c6edd0d2 data\pixelpirates\recipes\castaway_leggings.json
 b0e8e5a7551f456693c379dac5049e818f234b14 data\pixelpirates\advancements\recipes\food\kraken_calamari_from_smelting_kraken_ink.json
-fe6fc64ebaa5caec9d221d61aa4ed52992d931a5 data\pixelpirates\recipes\powder_barge.json
 7075f421685f46cc2d15c5286384d2a0ef85edb6 data\pixelpirates\advancements\recipes\combat\depth_charge.json
+fe6fc64ebaa5caec9d221d61aa4ed52992d931a5 data\pixelpirates\recipes\powder_barge.json
 be199530e7c87ccb9ff6d86cd778cdf232df57d1 data\pixelpirates\recipes\tidewood_planks.json
 32177b1028de13fac2c573870cdb875aadd3d3e1 data\pixelpirates\recipes\corsair_helmet.json
 aea419fc64eebe70654c3c01f10639d2e6f7e0bf data\pixelpirates\recipes\boarding_sabre.json

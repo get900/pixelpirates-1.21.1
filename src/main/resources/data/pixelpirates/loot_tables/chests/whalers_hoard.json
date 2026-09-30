@@ -153,6 +153,54 @@
           ]
         }
       ]
+    },
+    {
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:tidecourt_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:tidecourt_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:tidecourt_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:tidecourt_boots"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:tidecourt_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:tidecourt_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:tidecourt_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:tidecourt_boots"
+        }
+      ]
     }
   ]
 }

@@ -284,6 +284,13 @@ public class ModCommands {
             // /ppleviathan - THE LEVIATHAN HUNT (world/leviathan). `awaken` is the Rift Seal's confirmation (any player, checked
             // there); the rest are testing: status | locate | build <site> [ruined] | do <op> [arg]
             //   ops: wake, summon, horn, bell <i>, stage <0-7>, flee, arrive, ruin <1|2>, restore <1|2>, tide <n>, drain, bane, kill, reset, act <ability>
+            // /pparmortest - boss sets: measured damage per loadout beside the nearest boss (item/BossArmor#test)
+            dispatcher.register(CommandManager.literal("pparmortest").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
+                for (String line : net.get900.pixelpirates.item.BossArmor.test(ctx.getSource().getWorld(), ctx.getSource().getPosition()))
+                    ctx.getSource().sendFeedback(() -> Text.literal(line), false);
+                return 1;
+            }));
+
             dispatcher.register(CommandManager.literal("ppleviathan")
                     .then(CommandManager.literal("awaken").executes(ctx -> net.get900.pixelpirates.world.leviathan.LeviathanHunt.awaken(ctx.getSource().getPlayerOrThrow())))
                     .then(CommandManager.literal("status").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {

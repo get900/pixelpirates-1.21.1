@@ -251,7 +251,7 @@ public final class SerpentHollow {
         // the hoard nest at the spire's foot: bones, pearls, two chests
         for (int[] p : new int[][]{{-4, 3}, {-3, 4}, {4, 3}, {3, 4}, {0, 5}})
             b.set(p[0], FLOOR + 1, p[1], r.nextBoolean() ? Blocks.BONE_BLOCK.getDefaultState() : ModBlocks.PEARL_BLOCK.getDefaultState());
-        b.chest(-2, FLOOR + 1, 4, Direction.SOUTH, "chests/phase2_treasure");
+        b.chest(-2, FLOOR + 1, 4, Direction.SOUTH, "chests/serpent_hoard");
         b.chest(2, FLOOR + 1, 4, Direction.SOUTH, "chests/phase2_treasure");
         b.chest(0, FLOOR + 1, -4, Direction.NORTH, "chests/phase2_common");
         b.set(0, FLOOR + 1, 4, Blocks.GOLD_BLOCK.getDefaultState());

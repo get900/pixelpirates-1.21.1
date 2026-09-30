@@ -194,6 +194,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.KRAKEN_SCALE_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.KRAKEN_SCALE_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.KRAKEN_SCALE_BOOTS));
+        for (int t = 1; t <= 5; t++) for (var piece : ModItems.bossSet(t)) itemModelGenerator.registerArmor((ArmorItem) piece);
 
     }
 }

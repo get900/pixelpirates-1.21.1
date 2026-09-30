@@ -223,7 +223,7 @@ public class KrakenEntity extends ModBoss {
             Vec3d to = m.subtract(p.getPos().add(0, 0.9, 0));
             double d = to.length();
             if (d < 2.8 && held == null) { swallow(sw, p); break; }
-            double pull = (0.06 + 0.06 * (1 - d / 20)) * (BossProgression.relicActive(p, ModItems.ROYAL_TIDE_SIGIL) ? 0.5 : 1);
+            double pull = (0.06 + 0.06 * (1 - d / 20)) * (BossProgression.relicActive(p, ModItems.ROYAL_TIDE_SIGIL) ? 0.5 : 1) * net.get900.pixelpirates.item.BossArmor.pullScale(p);
             p.addVelocity(to.normalize().multiply(pull));
             p.velocityModified = true;
         }
@@ -243,7 +243,7 @@ public class KrakenEntity extends ModBoss {
     private void tickHeld(ServerWorld sw) {
         if (held == null) return;
         if (!held.isAlive() || held.isRemoved()) { held = null; return; }
-        if (!held.hasVehicle() && held.squaredDistanceTo(this) < 100) held.startRiding(this, true);
+        if (!held.hasVehicle() && held.squaredDistanceTo(this) < 100 && !net.get900.pixelpirates.item.BossArmor.slipped(held)) held.startRiding(this, true);
         if (heldTicks % 10 == 0) {
             held.damage(this.getDamageSources().mobAttack(this), 2f);
             held.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 40, 0), this);
@@ -438,7 +438,7 @@ public class KrakenEntity extends ModBoss {
             double d = to.length();
             if (d < 0.5) continue;
             Vec3d in = to.normalize(), tan = new Vec3d(-in.z, 0, in.x);
-            double k = BossProgression.relicActive(p, ModItems.ROYAL_TIDE_SIGIL) ? 0.5 : 1;
+            double k = (BossProgression.relicActive(p, ModItems.ROYAL_TIDE_SIGIL) ? 0.5 : 1) * net.get900.pixelpirates.item.BossArmor.pullScale(p);
             p.addVelocity(in.x * 0.05 * k + tan.x * 0.09, 0, in.z * 0.05 * k + tan.z * 0.09);
             p.velocityModified = true;
             if (d < 5 && whirlTicks % 10 == 0) p.damage(this.getDamageSources().mobAttack(this), 4f);

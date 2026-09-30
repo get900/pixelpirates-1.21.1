@@ -761,6 +761,12 @@ powder_monkey, forgeguard, tidecourt, gallowbreaker, thalassar) are 3D, built fr
   skulls). Still protects; tooltip notes it.
 - **Verified in a real client** (photo world `build/tmp/claude/make_armorphoto.py <CUE>` + `shoot_armor.ps1`, 12 armor stands):
   every set renders, glowmasks work, fits the body, the hidden-helmet stand shows no helmet; resource reload clean.
+  Round 2 (same day, after a side-by-side with every concept): kit materials `plates` (riveted rows + seams), `scales`
+  (overlapping), `leather` (stitched), `cloth` (folds), `network` (branching ember/gold cracks), `trim` (subtle top edge);
+  helpers `pauldron` (stacked tiers hugging the shoulder), `gauntlet`, `knee`, `cuff`, `flare_cape` (layered, flared back),
+  `blade` (flat fins/feathers/crystals), `chain`, `ring`, `tentacle`. Lessons: bright trims on every plate read as stripes;
+  thin blades trimmed on both sides turn gold; outward-flared tiers look like wings. Compare sheets: concept left, model
+  right (build them from `D:\Minecraft Moddingrmorrenders` + `tools/previews/armor/<set>.png`).
   Dedicated server boots clean. NOT verified: on a moving player (walk/sneak/swim clipping of capes and spikes), elytra/
   capes overlap, first-person arm view.
 

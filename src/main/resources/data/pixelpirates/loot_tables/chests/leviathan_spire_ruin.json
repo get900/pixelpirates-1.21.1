@@ -2,6 +2,27 @@
   "type": "minecraft:chest",
   "pools": [
     {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:thalassar_boots"
+        }
+      ]
+    },
+    {
       "rolls": {
         "type": "minecraft:uniform",
         "min": 3,
@@ -88,27 +109,6 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:thalassar_helmet"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:thalassar_chestplate"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:thalassar_leggings"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:thalassar_boots"
         }
       ]
     }

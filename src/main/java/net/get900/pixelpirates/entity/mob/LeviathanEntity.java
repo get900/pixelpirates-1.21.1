@@ -95,7 +95,7 @@ public class LeviathanEntity extends ModBoss {
     private final UUID[] segs = new UUID[SEGMENTS];
     private int segMissing;
     // ---- combat
-    enum Act { CRUISE, YAWN, COIL, LASH, QUAKE, SLEEPWALK, BREACH, RAKE, LURE, GULP, BLOODTIDE, ECLIPSE_HUNT, REAR, APOCALYPSE, SPIN, WRECKRAIN, STORM, MEMORY, RETREAT, STUNNED, PINNED }
+    enum Act { CRUISE, YAWN, COIL, LASH, QUAKE, SLEEPWALK, BREACH, RAKE, LURE, GULP, BLOODTIDE, ECLIPSE_HUNT, REAR, APOCALYPSE, SPIN, WRECKRAIN, STORM, MEMORY, RETREAT, STUNNED, PINNED, SPIRE_COIL }
     private Act act = Act.CRUISE;
     private int actT, nextAbility = 80, biteCooldown;
     private Vec3d point;                                  // the action's target point (where it steers)
@@ -109,7 +109,8 @@ public class LeviathanEntity extends ModBoss {
     private int starving;
     private boolean weak;
     // phase 3
-    private int crownHits, rearCooldown = 400;
+    private int crownHits, rearCooldown = 400, perchTicks;
+    private double coilA0;
     private final Map<Integer, Float> crustHp = new HashMap<>();
     private final List<Running> tasks = new ArrayList<>();
 
@@ -174,6 +175,14 @@ public class LeviathanEntity extends ModBoss {
 
     @Override
     public boolean isPushedByFluids() { return false; }
+
+    // Its heading is scripted: vanilla's look-at-player control would tilt the head toward whoever is above it (while
+    // travelling it swam along staring straight up at the player) - it may not touch pitch or head yaw.
+    @Override
+    public int getMaxLookPitchChange() { return 0; }
+
+    @Override
+    public int getMaxHeadRotation() { return 0; }
 
     @Override
     public Box getVisibilityBoundingBox() { return getBoundingBox().expand(12); }
@@ -281,7 +290,7 @@ public class LeviathanEntity extends ModBoss {
     // =====================================================================================
     private double speed() {
         double base = switch (act) {
-            case RETREAT -> 0.95; case SPIN -> 1.0; case BREACH, SLEEPWALK -> 0.9; case COIL -> 0.8; case STUNNED, PINNED -> 0; case REAR -> 0.6;
+            case RETREAT -> 0.95; case SPIN, SPIRE_COIL -> 1.0; case BREACH, SLEEPWALK -> 0.9; case COIL -> 0.8; case STUNNED, PINNED -> 0; case REAR -> 0.6;
             default -> 0.42 + (form() - 1) * 0.08;
         };
         return base * (weak ? 0.7 : 1);
@@ -291,7 +300,7 @@ public class LeviathanEntity extends ModBoss {
     private Vec3d desire(ServerWorld sw) {
         Vec3d here = getPos();
         switch (act) {
-            case RETREAT, BREACH, SLEEPWALK, REAR, COIL, SPIN, STUNNED, PINNED -> { if (point != null) return point.subtract(here); }
+            case RETREAT, BREACH, SLEEPWALK, REAR, COIL, SPIN, STUNNED, PINNED, SPIRE_COIL -> { if (point != null) return point.subtract(here); }
             default -> { }
         }
         // cruise: a long loop round the lair, weaving up and down, drifting toward the fighters
@@ -305,13 +314,14 @@ public class LeviathanEntity extends ModBoss {
     }
 
     private void move(ServerWorld sw) {
+        if (act == Act.SPIRE_COIL && actT <= 64) return;                   // tickSpireCoil places it
         double sp = speed();
         Vec3d d = desire(sw);
         // keep inside the lair: a soft wall and a floor/ceiling
         Vec3d rel = getPos().subtract(centre);
         double horiz = Math.sqrt(rel.x * rel.x + rel.z * rel.z);
         double limit = site.equals(LeviathanRoute.RIFT) ? leash() : radius;
-        boolean free = act == Act.RETREAT || act == Act.BREACH || act == Act.REAR;
+        boolean free = act == Act.RETREAT || act == Act.BREACH || act == Act.REAR || act == Act.SPIRE_COIL;
         if (!free && horiz > limit) d = d.normalize().add(new Vec3d(-rel.x, 0, -rel.z).normalize().multiply(1.5 * (horiz - limit) / 8));
         if (!free && getY() < floorY) d = d.add(0, 1, 0);
         if (!free && getY() > surfaceY - 2 && act != Act.YAWN) d = d.add(0, -0.8, 0);
@@ -435,6 +445,8 @@ public class LeviathanEntity extends ModBoss {
         if (act == Act.CRUISE) {
             if (!fs.isEmpty() && (prey == null || this.age % 300 == 0)) prey = fs.get(this.random.nextInt(fs.size())).getUuid();
             if (form() == 3 && !fs.isEmpty() && --rearCooldown <= 0) { rear(sw); return; }
+            // nobody waits it out on the Spire: 6 s perched up there and it comes up after them
+            if (form() == 3 && perched(sw, fs)) { if (++perchTicks > 120) { spireCoil(sw); return; } } else perchTicks = 0;
             if (fs.isEmpty() || --nextAbility > 0) return;
             pickAbility(sw, fs);
             return;
@@ -450,6 +462,7 @@ public class LeviathanEntity extends ModBoss {
             case RETREAT -> tickRetreat(sw);
             case STUNNED -> tickStunned(sw);
             case PINNED -> tickPinned(sw);
+            case SPIRE_COIL -> tickSpireCoil(sw, fs);
             default -> end();
         }
     }
@@ -470,6 +483,7 @@ public class LeviathanEntity extends ModBoss {
             default -> {
                 Collections3.add(pool, Act.APOCALYPSE, 2); Collections3.add(pool, Act.SPIN, 1); Collections3.add(pool, Act.WRECKRAIN, 2);
                 Collections3.add(pool, Act.STORM, 2); Collections3.add(pool, Act.MEMORY, 2);
+                if (perched(sw, fs)) Collections3.add(pool, Act.SPIRE_COIL, 5);
             }
         }
         pool.removeIf(x -> x == lastAbility && pool.stream().anyMatch(y -> y != lastAbility));
@@ -493,6 +507,7 @@ public class LeviathanEntity extends ModBoss {
             case WRECKRAIN -> wreckRain(sw, fs);
             case STORM -> storm(sw, fs);
             case MEMORY -> memory(sw, fs);
+            case SPIRE_COIL -> spireCoil(sw);
             default -> end();
         }
     }
@@ -930,7 +945,7 @@ public class LeviathanEntity extends ModBoss {
         Vec3d dir = new Vec3d(Math.cos(ang), 0, Math.sin(ang)), side = new Vec3d(-dir.z, 0, dir.x);
         Vec3d c = new Vec3d(centre.x, surfaceY, centre.z);
         double r = radius + 4;
-        broadcast(sw, Text.literal("TIDAL APOCALYPSE - a wall of water is coming! Get above it or behind the Spire!").formatted(Formatting.RED, Formatting.BOLD), true);
+        broadcast(sw, Text.literal("TIDAL APOCALYPSE - a wall of water is coming! Dive under it or ride it out - it breaks over the Spire!").formatted(Formatting.RED, Formatting.BOLD), true);
         java.util.Set<UUID> hit = new java.util.HashSet<>();
         tasks.add(new Running((w, t) -> {
             double along = -r + Math.max(0, t - 30) * (2 * r / 60.0);
@@ -941,14 +956,63 @@ public class LeviathanEntity extends ModBoss {
             }
             if (t >= 30) for (ServerPlayerEntity p : fighters(w)) {
                 double pa = p.getPos().subtract(c).dotProduct(dir);
-                if (Math.abs(pa - along) > 2.5 || p.getY() > surfaceY + 4 || hit.contains(p.getUuid())) continue;
-                if (Math.hypot(p.getX() - centre.x, p.getZ() - centre.z) < 10) continue;               // sheltered by the Spire
+                boolean onSpire = Math.hypot(p.getX() - centre.x, p.getZ() - centre.z) < 16;       // the wave breaks right over the Spire
+                if (Math.abs(pa - along) > 2.5 || (!onSpire && p.getY() > surfaceY + 4) || hit.contains(p.getUuid())) continue;
                 hit.add(p.getUuid());
                 p.damage(getDamageSources().mobAttack(LeviathanEntity.this), 8f);
                 p.setVelocity(dir.x * 1.8, 0.5, dir.z * 1.8); p.velocityModified = true;
             }
             return t < 90;
         }));
+    }
+
+    /** Is anyone up on the Spire (more than 10 above the water, within 16 of its axis)? */
+    private boolean perched(ServerWorld sw, List<ServerPlayerEntity> fs) {
+        if (centre == null) return false;
+        for (ServerPlayerEntity p : fs) if (p.getY() > surfaceY + 10 && Math.hypot(p.getX() - centre.x, p.getZ() - centre.z) < 16) return true;
+        return false;
+    }
+
+    /** COIL THE SPIRE: it winds up the tower after whoever hides on it - rings of red climb the Spire, then it crushes
+     *  every ledge at once and flings them off into the maelstrom. */
+    private void spireCoil(ServerWorld sw) {
+        perchTicks = 0;
+        start(sw, Act.SPIRE_COIL, null);
+        triggerAnim(ACTION, "roar");
+        sw.playSound(null, getBlockPos(), SoundEvents.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, 8.0f, 0.4f);
+        broadcast(sw, Text.literal("IT COILS UP THE SPIRE - get off the tower!").formatted(Formatting.DARK_RED, Formatting.BOLD), true);
+    }
+
+    private void tickSpireCoil(ServerWorld sw, List<ServerPlayerEntity> fs) {
+        double top = SpireLayout.TOP + 2;
+        if (actT == 1) { anchorPt = getPos(); coilA0 = Math.atan2(getZ() - centre.z, getX() - centre.x); }
+        if (actT <= 64) {                                                   // scripted: it winds up the tower, 1.2 turns in 3 s
+            double t = Math.min(1, actT / 60.0), a = coilA0 + actT * 0.12;
+            Vec3d helix = new Vec3d(centre.x + Math.cos(a) * 12, surfaceY - 2 + (top - surfaceY + 2) * t, centre.z + Math.sin(a) * 12);
+            Vec3d next = actT < 12 ? anchorPt.lerp(helix, actT / 12.0) : helix;          // eases onto the spiral first
+            vel = next.subtract(getPos());
+            this.setPosition(next);
+            double h = Math.sqrt(vel.x * vel.x + vel.z * vel.z);
+            float yaw = (float) Math.toDegrees(Math.atan2(-vel.x, vel.z));
+            this.setYaw(yaw); this.setBodyYaw(yaw); this.setHeadYaw(yaw);
+            this.setPitch((float) -Math.toDegrees(Math.atan2(vel.y, h)));
+        }
+        if (actT < 60 && actT % 4 == 0) {                                   // the warning: rings climbing the tower ahead of it
+            double y = surfaceY + (top - surfaceY) * Math.min(1, (actT + 20) / 60.0);
+            for (int i = 0; i < 32; i++) { double b = i * Math.PI / 16; sw.spawnParticles(new DustParticleEffect(WARN, 2.2f), centre.x + Math.cos(b) * 11, y, centre.z + Math.sin(b) * 11, 1, 0, 0.3, 0, 0); }
+        }
+        if (actT == 60) {                                                   // THE CRUSH
+            sw.playSound(null, BlockPos.ofFloored(centre.x, top, centre.z), SoundEvents.ENTITY_WARDEN_ATTACK_IMPACT, SoundCategory.HOSTILE, 6.0f, 0.4f);
+            sw.spawnParticles(ParticleTypes.EXPLOSION, centre.x, top - 10, centre.z, 12, 6, 12, 6, 0);
+            for (ServerPlayerEntity p : fs) {
+                double r = Math.hypot(p.getX() - centre.x, p.getZ() - centre.z);
+                if (r > 16 || p.getY() < surfaceY - 2) continue;
+                p.damage(getDamageSources().mobAttack(this), 13f);
+                Vec3d out = new Vec3d(p.getX() - centre.x, 0, p.getZ() - centre.z).normalize();
+                p.setVelocity(out.x * 1.8, 0.7, out.z * 1.8); p.velocityModified = true;       // flung off into the lagoon
+            }
+        }
+        if (actT > 80) end();
     }
 
     private void spin(ServerWorld sw) {
@@ -1256,6 +1320,7 @@ public class LeviathanEntity extends ModBoss {
             case "wreckrain" -> wreckRain(sw, fs);
             case "storm" -> storm(sw, fs);
             case "memory" -> { if (!fs.isEmpty()) memory(sw, fs); }
+            case "spirecoil" -> spireCoil(sw);
             case "rear" -> rear(sw);
             case "retreat" -> retreat(sw);
             case "poison" -> poisoned(sw);

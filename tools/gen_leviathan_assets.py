@@ -199,18 +199,21 @@ def pool(lo, hi, *entries):
 
 
 P = "pixelpirates:"
+# one Mantle of Thalassar piece (boss set V, item/BossArmor) in each Leviathan lair chest
+THALASSAR = {"rolls": 1, "entries": [{"type": "minecraft:item", "name": P + "thalassar_" + n} for n in ("helmet", "chestplate", "leggings", "boots")]}
 LOOT = {
     "leviathan_rift_altar": [pool(3, 5, item("diamond", 4, 1, 3), item("prismarine_crystals", 6, 4, 10), item(P + "depth_charge", 5, 2, 4),
                                      item("gunpowder", 6, 4, 10), item(P + "pirate_coin", 8, 16, 32), item("heart_of_the_sea", 1))],
-    "leviathan_rift_hoard": [pool(1, 1, item("netherite_scrap", 3, 1, 3), item("nether_star", 1)),
+    "leviathan_rift_hoard": [pool(1, 1, item("netherite_scrap", 3, 1, 3), item("nether_star", 1)), THALASSAR,
                              pool(4, 6, item(P + "pirate_coin", 10, 32, 64), item("gold_block", 5, 1, 3), item("diamond", 4, 2, 5), item(P + "kraken_scale", 5, 3, 6),
                                   item("gunpowder", 5, 8, 16), item("enchanted_golden_apple", 1))],
-    "leviathan_gullet_wreck": [pool(3, 5, item(P + "pirate_coin", 10, 8, 24), item("gunpowder", 8, 2, 8), item(P + "chum", 5, 1, 3), item(P + "rope", 4, 2, 6),
+    "leviathan_gullet_wreck": [pool(1, 2, item(P + "powder_barge", 1)), THALASSAR,   # every wreck has barges to spare
+                               pool(3, 5, item(P + "pirate_coin", 10, 8, 24), item("gunpowder", 8, 2, 8), item(P + "chum", 5, 1, 3), item(P + "rope", 4, 2, 6),
                                        item(P + "powder_barge", 2), item(P + "cannon_ball", 4, 2, 6), item("gold_ingot", 3, 1, 4), item("bone", 5, 2, 6))],
-    "leviathan_gullet_supplies": [pool(1, 2, item(P + "powder_barge", 1)),
+    "leviathan_gullet_supplies": [pool(2, 3, item(P + "powder_barge", 1)),        # the Hunger's counter: always 2-3 barges
                                   pool(3, 5, item("gunpowder", 8, 4, 12), item(P + "chum", 7, 2, 4), item(P + "depth_charge", 4, 2, 4), item(P + "dynamite", 5, 2, 4),
                                        item(P + "hardtack", 4, 2, 6), item(P + "pirate_coin", 5, 8, 16))],
-    "leviathan_spire_ruin": [pool(3, 5, item("gunpowder", 10, 6, 16), item(P + "pirate_coin", 8, 16, 32), item("diamond", 3, 1, 3), item(P + "powder_barge", 2),
+    "leviathan_spire_ruin": [THALASSAR, pool(3, 5, item("gunpowder", 10, 6, 16), item(P + "pirate_coin", 8, 16, 32), item("diamond", 3, 1, 3), item(P + "powder_barge", 2),
                                      item("prismarine_shard", 5, 4, 10), item(P + "depth_charge", 4, 1, 3))],
     "saltmarrow_tavern": [pool(3, 6, item(P + "grog", 8, 1, 3), item("bread", 6, 2, 5), item("cooked_cod", 6, 2, 6), item(P + "hardtack", 5, 2, 6),
                                   item(P + "pirate_coin", 6, 4, 12))],

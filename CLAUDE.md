@@ -618,6 +618,20 @@ one fixed order per player (NBT `PPBossStep` = bosses beaten; old saves migrate 
       spaced by the taper (`LeviathanSegmentEntity.sizeOf`, half length 2.625 x size, 5% overlap) - a fixed 5-block
       spacing left the shrunken rear segments and the tail floating loose. Test op `do watch` = treat the route as
       watched (headless servers). Driver `build/tmp/claude/drive_leviathan_r2.py`.
+    - Round 3 (2026-09-30, user playtest): (1) CROWN OF THE DROWNED is wearable - `BossRelicItem implements Equipment`
+      (HEAD for the crown, MAINHAND for the rest), right-click puts it on, 3D elements model (ring + 8 points) rendered by
+      vanilla HeadFeatureRenderer; its powers work from any slot. (2) The head stared UP at players while travelling:
+      vanilla LookControl runs after mobTick and overrode the scripted pitch - `getMaxLookPitchChange()`/
+      `getMaxHeadRotation()` now return 0. (3) SPIRE CAMPING: the Apocalypse wave's "sheltered within 10 of the Spire"
+      covered the whole top - it now breaks OVER the Spire (anyone within 16, any height); new act SPIRE_COIL (weight 5 in
+      the pool while someone is perched = >10 above the water within 16 of the axis, forced after 6 s perched): position
+      scripted up a 12-block helix to the crown in 3 s (red rings climb ahead), then 13 dmg + flung outward for everyone on
+      the tower (`do act spirecoil`). (4) STRAY BLOCKS in structures: FeatureExclusionMixin now skips EVERY non-dungeon
+      feature (ores/kelp/trees/boulders, any depth) with origin within +10 of a Leviathan site, +6 of the grotto/chest
+      footprints and +6 of every dungeon's +-22 footprint (it only tested the origin cell, so things grew in from beside).
+      Verified: fresh Spire 722098/722098 and Rift 327860/327860 plan blocks match (were ~98.7% / 99.6%). New chunks only.
+      (5) POWDER BARGES: Gullet supplies always 2-3, every gullet wreck 1-2 (was a 2-in-48 weight) - edited in
+      `tools/gen_leviathan_assets.py` too, which now also writes the Thalassar armor pool (`THALASSAR`).
   - **Goal gotcha:** vanilla only calls `canStart` every OTHER tick (fixed parity per entity), so an `age % 10` gate can
     never line up for half the mobs - use an odd interval (the wardens never moved until this was fixed).
 - **Worldgen entity gotcha (fixed 2026-09-29):** in natural generation the ProtoChunk serialises an entity THE MOMENT

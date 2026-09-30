@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ConfiguredFeature.class)
 public abstract class FeatureExclusionMixin {
     @Shadow @Final private Feature<?> feature;
-    private static final int GEODE_PAD = 16;
+    private static final int GEODE_PAD = 16, SITE_PAD = 6;
 
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
     private void pixelpirates$skipInsideDungeons(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos origin,
@@ -45,16 +45,16 @@ public abstract class FeatureExclusionMixin {
                 cir.setReturnValue(false);
                 return;
             }
-            if (net.get900.pixelpirates.world.dungeon.GallowsGrotto.insideVolume(pctx, origin)
-                    || net.get900.pixelpirates.world.dungeon.TitansChest.insideVolume(pctx, origin)
-                    || net.get900.pixelpirates.world.leviathan.LeviathanSites.insideVolume(world.getSeed(), origin)) {
+            // Nothing natural grows in, onto or out of a built site: an origin just OUTSIDE a structure still let trees,
+            // boulders, kelp and ore blobs grow into or on top of it (user playtest 2026-09-30). So every feature whose
+            // origin is within a margin of any site is skipped, at any depth: the Leviathan's five sites (+10), the grotto
+            // and the chest (+6), and every dungeon (+6 round its +-22 footprint).
+            if (net.get900.pixelpirates.world.leviathan.LeviathanRoute.nearAnySite(world.getSeed(), origin.getX(), origin.getZ(), 10)
+                    || net.get900.pixelpirates.world.dungeon.GallowsGrotto.nearFootprint(pctx, origin, SITE_PAD)
+                    || net.get900.pixelpirates.world.dungeon.TitansChest.nearFootprint(pctx, origin, SITE_PAD)
+                    || DungeonPlacement.nearAnySite(pctx, origin, SITE_PAD)) {
                 cir.setReturnValue(false);
-                return;
             }
-        } catch (Exception ignored) { }
-        if (origin.getY() < world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, origin.getX(), origin.getZ()) - 8) return;
-        try {
-            if (DungeonPlacement.insideProtectedSite(DungeonFeature.placementContext(world, generator), origin)) cir.setReturnValue(false);
         } catch (Exception ignored) {
             // prediction must never break chunk generation - decorate normally instead
         }

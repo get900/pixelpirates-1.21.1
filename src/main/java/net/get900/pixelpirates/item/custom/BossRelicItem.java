@@ -38,7 +38,7 @@ import java.util.List;
  * ModMob.damage (TIDE_PEARL / RAZOR_TOOTH bonus damage), ModBoss (SHACKLE), ZoneHazardManager
  * (TIDE_PEARL = heat amulet, ANCHOR = sanity amulet).
  */
-public class BossRelicItem extends Item {
+public class BossRelicItem extends Item implements net.minecraft.item.Equipment {
     public enum Kind {
         /** Rackham -> Sea Serpent: fight underwater. */
         DIVING_CHARM,
@@ -74,6 +74,13 @@ public class BossRelicItem extends Item {
 
     @Override
     public boolean hasGlint(ItemStack stack) { return true; }
+
+    /** The Crown of the Drowned goes on your head (its powers work from any slot); the other relics are held. */
+    @Override
+    public net.minecraft.entity.EquipmentSlot getSlotType() { return kind == Kind.CROWN ? net.minecraft.entity.EquipmentSlot.HEAD : net.minecraft.entity.EquipmentSlot.MAINHAND; }
+
+    @Override
+    public net.minecraft.sound.SoundEvent getEquipSound() { return SoundEvents.ITEM_ARMOR_EQUIP_GOLD; }
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -135,6 +142,7 @@ public class BossRelicItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
+        if (kind == Kind.CROWN) return equipAndSwap(this, world, user, hand);          // the Crown is worn
         if (!(world instanceof ServerWorld sw)) return TypedActionResult.success(stack, true);
         if (kind == Kind.HEARTSTONE) {                                      // THE HUNT: it pulls toward the Leviathan itself
             var ls = net.get900.pixelpirates.world.leviathan.LeviathanState.get(sw);

@@ -29,7 +29,7 @@ covers where things stand right now and what to do next.
   Never touch the user's own server `D:\Minecraft Modding\server`.
 - Server driver scripts (Python, pipe commands into the server's stdin and grep the log):
   `build/tmp/claude/drive_*.py` - e.g. `drive_leviathan.py <server dir>` (full hunt, ~17 min),
-  `drive_leviathan_r2.py`, `drive_heart.py`. Copy the pattern for new tests. Watch out: only ONE driver per
+  `drive_leviathan_r2.py`, `drive_leviathan_r3.py` (Spire gen + Coil the Spire), `drive_heart.py`. Copy the pattern for new tests. Watch out: only ONE driver per
   server dir at a time (two once wrote into the same log), and `forceload add` silently fails above 256 chunks.
 - Java 17 is at `C:\Program Files\Eclipse Adoptium\jdk-17.0.15.6-hotspot\bin\java.exe` (JAVA_HOME is 21).
 - Asset generators (Python, `pip install pillow numpy`): mob models `tools/gen_mob_roster.py` + `tools/mobs/*.py`,
@@ -37,20 +37,25 @@ covers where things stand right now and what to do next.
   Leviathan assets `tools/gen_leviathan_assets.py`, previews `tools/preview_geo.py`, z-fight check
   `tools/check_zfight.py`.
 
-## 3. State right now
+## 3. State right now (updated end of 2026-09-30)
 
 - **All 10 chain bosses are overhauled**, including 9 Abyssal Heart and 10 The Leviathan (a 3-lair world hunt with
   2 ports that get destroyed). Full details in CLAUDE.md under "MOB ROSTER & BOSS LAIRS".
-- Leviathan round 2 fixes from the user's playtest are DONE and server-verified (Spire stair exit + bells on the
-  stair, no natural spawns in the three arenas via `mixin/ArenaSpawnMixin`, the Rift Seal needs the Abyssal Heart
-  beaten, the Leviathan stays visible while it swims between lairs, the tail gap).
-- **Modpack for friends** (built today, server boot-tested): `D:\Minecraft Modding\PixelPirates-Modpack\`
-  - `PixelPirates-Server.zip` / folder - Fabric 1.20.1 server + mods + config + README with a boss-testing cheat sheet
-  - `PixelPirates-Client.zip` / folder - mods + install README
+- Leviathan playtest rounds 2 AND 3 are done and server-verified (CLAUDE.md, boss 10 "Round 2" / "Round 3"):
+  Spire stair exit + bells on the stair, no natural spawns in the arenas, Rift Seal needs the Heart beaten, the
+  Leviathan stays visible between lairs, tail gap; then the wearable Crown of the Drowned, the head no longer stares
+  up while travelling, Coil the Spire + the Apocalypse wave reaching the Spire top (no camping), no stray natural
+  features in/around ANY structure (new chunks only), reliable powder barges in the Gullet.
+- **Five boss armor sets are built** (section 4).
+- **Modpack for friends - CURRENT, re-exported and boot-tested at the end of this session:**
+  `D:\Minecraft Modding\PixelPirates-Modpack\PixelPirates-Server.zip` + `PixelPirates-Client.zip` (+ unzipped folders).
+  Server README has a boss-testing cheat sheet incl. `/pparmortest`.
   - **If you change the mod, rebuild the jar and replace `pixelpirates-1.0.0.jar` in BOTH folders, then re-zip**
-    (server and clients must have the identical jar). The user and friends are about to do boss balance testing.
-- Git: the working tree has a very large amount of uncommitted work (last commit is old). Nothing was committed
-  this session. Don't commit unless the user asks.
+    (server and clients must have the identical jar; friends only need to swap that one jar).
+  - The user and friends are now BALANCE TESTING all the bosses + the armor with it. Expect feedback rounds.
+  - Worldgen fixes only apply to new chunks - tell them to start a fresh world when a change touches structures/loot.
+- Git: everything is committed on branch `pixelpirates` (latest `f72be90`). Commit when the user asks, with the
+  scratch files left out (`org/`, `data/`, `MsgFmt*`, `Capture.PNG`, `port_city_preview.png` are deliberately untracked).
 
 ## 4. Boss armor revamp - BOSS SETS DONE, old-set visual overhaul NEXT
 
@@ -65,7 +70,10 @@ Design file with the user's answers: `D:\Minecraft Modding\Boss Armor - Design.t
    user wants them kept but made to "look a lot better": generate reference images for yourself and base the looks on
    them; **custom 3D models are allowed** (GeckoLib 4.4.9 `GeoArmorRenderer`). Worn textures otherwise live in
    `assets/minecraft/textures/models/armor/<material>_layer_1/2.png` (drawn by `tools/gen_armor_layers.py`).
-3. Set-bonus gaps listed in CLAUDE.md ("NOT covered yet") if playtesting shows they matter.
+3. Set-bonus gaps listed in CLAUDE.md ("NOT covered yet": Revenant hook/noose/shackle, King maelstrom /
+   `Abilities.pull`) if playtesting shows they matter.
+5. Not yet seen in-game by anyone: the boss armor set bonuses in a real fight, the worn Crown's 3D model
+   (`models/item/crown_of_the_drowned.json`, elements + `display.head`), Coil the Spire from the player's side.
 4. The user + friends are balance-testing with the modpack; expect tuning requests (numbers live in `ModArmorMaterials`
    and `BossArmor.WARD`, bonuses in `BossArmor.modify/tick`).
 

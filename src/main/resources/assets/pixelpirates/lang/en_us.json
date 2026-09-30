@@ -855,5 +855,6 @@
   "item.pixelpirates.thalassar_helmet": "Thalassar's Eye-Helm",
   "item.pixelpirates.thalassar_chestplate": "Thalassar's Mantle",
   "item.pixelpirates.thalassar_leggings": "Thalassar's Legguards",
-  "item.pixelpirates.thalassar_boots": "Thalassar's Treads"
+  "item.pixelpirates.thalassar_boots": "Thalassar's Treads",
+  "key.pixelpirates.toggle_helmet": "Hide / Show Helmet"
 }

@@ -115,72 +115,72 @@ public class ModItems {
     public static final Item PIRATE_HELMET = registerItem("pirate_helmet",
             new ModArmorItem(ModArmorMaterials.PIRATE_ARMOR, ArmorItem.Type.HELMET, new Item.Settings()));
     public static final Item PIRATE_CHESTPLATE = registerItem("pirate_chestplate",
-            new ArmorItem(ModArmorMaterials.PIRATE_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.PIRATE_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
     public static final Item PIRATE_LEGGINGS = registerItem("pirate_leggings",
-            new ArmorItem(ModArmorMaterials.PIRATE_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.PIRATE_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item PIRATE_BOOTS = registerItem("pirate_boots",
-            new ArmorItem(ModArmorMaterials.PIRATE_ARMOR, ArmorItem.Type.BOOTS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.PIRATE_ARMOR, ArmorItem.Type.BOOTS, new Item.Settings()));
 
     // ================= REGION ARMOR SETS =================
     // Ring 1 — Castaway rags (no set bonus; it's driftwood and patched sailcloth)
     public static final Item CASTAWAY_HELMET = registerItem("castaway_helmet",
-            new ArmorItem(ModArmorMaterials.CASTAWAY, ArmorItem.Type.HELMET, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CASTAWAY, ArmorItem.Type.HELMET, new Item.Settings()));
     public static final Item CASTAWAY_CHESTPLATE = registerItem("castaway_chestplate",
-            new ArmorItem(ModArmorMaterials.CASTAWAY, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CASTAWAY, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
     public static final Item CASTAWAY_LEGGINGS = registerItem("castaway_leggings",
-            new ArmorItem(ModArmorMaterials.CASTAWAY, ArmorItem.Type.LEGGINGS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CASTAWAY, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item CASTAWAY_BOOTS = registerItem("castaway_boots",
-            new ArmorItem(ModArmorMaterials.CASTAWAY, ArmorItem.Type.BOOTS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CASTAWAY, ArmorItem.Type.BOOTS, new Item.Settings()));
 
     // Ring 2 — Navy Officer (full set: Hero of the Village — merchants respect the uniform)
     public static final Item NAVY_OFFICER_HELMET = registerItem("navy_officer_helmet",
             new ModArmorItem(ModArmorMaterials.NAVY_OFFICER, ArmorItem.Type.HELMET, new Item.Settings()));
     public static final Item NAVY_OFFICER_CHESTPLATE = registerItem("navy_officer_chestplate",
-            new ArmorItem(ModArmorMaterials.NAVY_OFFICER, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.NAVY_OFFICER, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
     public static final Item NAVY_OFFICER_LEGGINGS = registerItem("navy_officer_leggings",
-            new ArmorItem(ModArmorMaterials.NAVY_OFFICER, ArmorItem.Type.LEGGINGS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.NAVY_OFFICER, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item NAVY_OFFICER_BOOTS = registerItem("navy_officer_boots",
-            new ArmorItem(ModArmorMaterials.NAVY_OFFICER, ArmorItem.Type.BOOTS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.NAVY_OFFICER, ArmorItem.Type.BOOTS, new Item.Settings()));
 
     // Ring 3 — Corsair (full set: Speed + Jump Boost — boarding agility)
     public static final Item CORSAIR_HELMET = registerItem("corsair_helmet",
             new ModArmorItem(ModArmorMaterials.CORSAIR, ArmorItem.Type.HELMET, new Item.Settings()));
     public static final Item CORSAIR_CHESTPLATE = registerItem("corsair_chestplate",
-            new ArmorItem(ModArmorMaterials.CORSAIR, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CORSAIR, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
     public static final Item CORSAIR_LEGGINGS = registerItem("corsair_leggings",
-            new ArmorItem(ModArmorMaterials.CORSAIR, ArmorItem.Type.LEGGINGS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CORSAIR, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item CORSAIR_BOOTS = registerItem("corsair_boots",
-            new ArmorItem(ModArmorMaterials.CORSAIR, ArmorItem.Type.BOOTS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CORSAIR, ArmorItem.Type.BOOTS, new Item.Settings()));
 
     // Volcanic Isles — Ashen plate (full set: Fire Resistance)
     public static final Item ASHEN_HELMET = registerItem("ashen_helmet",
             new ModArmorItem(ModArmorMaterials.ASHEN, ArmorItem.Type.HELMET, new Item.Settings().fireproof()));
     public static final Item ASHEN_CHESTPLATE = registerItem("ashen_chestplate",
-            new ArmorItem(ModArmorMaterials.ASHEN, ArmorItem.Type.CHESTPLATE, new Item.Settings().fireproof()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.ASHEN, ArmorItem.Type.CHESTPLATE, new Item.Settings().fireproof()));
     public static final Item ASHEN_LEGGINGS = registerItem("ashen_leggings",
-            new ArmorItem(ModArmorMaterials.ASHEN, ArmorItem.Type.LEGGINGS, new Item.Settings().fireproof()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.ASHEN, ArmorItem.Type.LEGGINGS, new Item.Settings().fireproof()));
     public static final Item ASHEN_BOOTS = registerItem("ashen_boots",
-            new ArmorItem(ModArmorMaterials.ASHEN, ArmorItem.Type.BOOTS, new Item.Settings().fireproof()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.ASHEN, ArmorItem.Type.BOOTS, new Item.Settings().fireproof()));
 
     // Ring 4 — Cursed Bone (full set: Night Vision + Resistance)
     public static final Item CURSED_BONE_HELMET = registerItem("cursed_bone_helmet",
             new ModArmorItem(ModArmorMaterials.CURSED_BONE, ArmorItem.Type.HELMET, new Item.Settings()));
     public static final Item CURSED_BONE_CHESTPLATE = registerItem("cursed_bone_chestplate",
-            new ArmorItem(ModArmorMaterials.CURSED_BONE, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CURSED_BONE, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
     public static final Item CURSED_BONE_LEGGINGS = registerItem("cursed_bone_leggings",
-            new ArmorItem(ModArmorMaterials.CURSED_BONE, ArmorItem.Type.LEGGINGS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CURSED_BONE, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item CURSED_BONE_BOOTS = registerItem("cursed_bone_boots",
-            new ArmorItem(ModArmorMaterials.CURSED_BONE, ArmorItem.Type.BOOTS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.CURSED_BONE, ArmorItem.Type.BOOTS, new Item.Settings()));
 
     // Ring 5 — Kraken-Scale (full set: Conduit Power + Dolphin's Grace)
     public static final Item KRAKEN_SCALE_HELMET = registerItem("kraken_scale_helmet",
             new ModArmorItem(ModArmorMaterials.KRAKEN_SCALE, ArmorItem.Type.HELMET, new Item.Settings()));
     public static final Item KRAKEN_SCALE_CHESTPLATE = registerItem("kraken_scale_chestplate",
-            new ArmorItem(ModArmorMaterials.KRAKEN_SCALE, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.KRAKEN_SCALE, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
     public static final Item KRAKEN_SCALE_LEGGINGS = registerItem("kraken_scale_leggings",
-            new ArmorItem(ModArmorMaterials.KRAKEN_SCALE, ArmorItem.Type.LEGGINGS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.KRAKEN_SCALE, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item KRAKEN_SCALE_BOOTS = registerItem("kraken_scale_boots",
-            new ArmorItem(ModArmorMaterials.KRAKEN_SCALE, ArmorItem.Type.BOOTS, new Item.Settings()));
+            new net.get900.pixelpirates.item.custom.PixelArmorItem(ModArmorMaterials.KRAKEN_SCALE, ArmorItem.Type.BOOTS, new Item.Settings()));
 
     // BOSS SETS (item/BossArmor) - boss hoards + kills only. Index [tier][0..3] = helmet, chestplate, leggings, boots.
     public static final String[] BOSS_SET_IDS = {"", "powder_monkey", "forgeguard", "tidecourt", "gallowbreaker", "thalassar"};

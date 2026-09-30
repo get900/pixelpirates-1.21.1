@@ -49,7 +49,9 @@ covers where things stand right now and what to do next.
 - **Five boss armor sets are built** (section 4).
 - **Modpack for friends - CURRENT, re-exported and boot-tested at the end of this session:**
   `D:\Minecraft Modding\PixelPirates-Modpack\PixelPirates-Server.zip` + `PixelPirates-Client.zip` (+ unzipped folders).
-  Server README has a boss-testing cheat sheet incl. `/pparmortest`.
+  Server README has a boss-testing cheat sheet incl. `/pparmortest`. Ship blueprints + AI ship configs are NOT in the
+  jar - they load from `config/pixelpirates/{ships,ai}` (server side). Both packs carry a copy (the client one is only
+  for singleplayer; its README says to copy `config` into the game folder).
   - **If you change the mod, rebuild the jar and replace `pixelpirates-1.0.0.jar` in BOTH folders, then re-zip**
     (server and clients must have the identical jar; friends only need to swap that one jar).
   - The user and friends are now BALANCE TESTING all the bosses + the armor with it. Expect feedback rounds.
@@ -64,12 +66,9 @@ covers where things stand right now and what to do next.
 Design file with the user's answers: `D:\Minecraft Modding\Boss Armor - Design.txt`.
 
 **Still to do:**
-1. **Real art for the 5 boss sets** - today's textures are palette repaints of existing sets (`tools/gen_boss_armor.py`),
-   good enough for balance testing only. The looks are described per set in the design file.
-2. **Visual overhaul of the 6 old region sets** (castaway, navy officer, corsair, ashen, cursed bone, kraken scale) - the
-   user wants them kept but made to "look a lot better": generate reference images for yourself and base the looks on
-   them; **custom 3D models are allowed** (GeckoLib 4.4.9 `GeoArmorRenderer`). Worn textures otherwise live in
-   `assets/minecraft/textures/models/armor/<material>_layer_1/2.png` (drawn by `tools/gen_armor_layers.py`).
+1. ~~Real art for the boss sets~~ + ~~old-set overhaul~~ - DONE 2026-09-30: all 12 sets are 3D GeckoLib armor from the
+   user's concept art, with a hide-helmet toggle (H). See "3D ARMOR OVERHAUL" in CLAUDE.md. Expect the user's feedback on
+   the looks next (edit `tools/armor/sets.py`, re-run `tools/gen_armor_models.py <set>`, rebuild).
 3. Set-bonus gaps listed in CLAUDE.md ("NOT covered yet": Revenant hook/noose/shackle, King maelstrom /
    `Abilities.pull`) if playtesting shows they matter.
 5. Not yet seen in-game by anyone: the boss armor set bonuses in a real fight, the worn Crown's 3D model

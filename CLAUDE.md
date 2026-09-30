@@ -737,6 +737,33 @@ bonus), materials in `ModArmorMaterials` (toughness/knockback PER PIECE). Logic 
   II 5.4, III 4.1, IV 3.2, V 2.4; magic 8 -> 8 / 8 / 8 / 7.0 / 4.7 / 6.7 / 6.4 / 4.3; loot rolls give the right pieces.
   NOT verified: set bonuses in a real fight (slip, pulls, last stand feel), textures in game.
 
+## 3D ARMOR OVERHAUL (2026-09-30) - every set is a GeckoLib armor model
+
+All 12 armor sets (7 crafted: pirate_armor, castaway, navy_officer, corsair, ashen, cursed_bone, kraken_scale; 5 boss:
+powder_monkey, forgeguard, tidecourt, gallowbreaker, thalassar) are 3D, built from the user's ChatGPT concept sheets in
+`D:\Minecraft Moddingrmorrenders\<set>.png` (brief: `D:\Minecraft Modding\Armor Art - Concept Brief.txt`).
+- **Pipeline:** `python tools/gen_armor_models.py [set ...]` -> `geo/armor/<material>.geo.json`, `textures/armor/<material>.png`
+  (+ `_glowmask.png` only if something glows), an empty `animations/armor/<material>.animation.json`, a preview sheet
+  `tools/previews/armor/<set>.png` (on a grey mannequin) and the 4 inventory icons (32x32 renders; legs drawn apart).
+  Builders: `tools/armor/sets.py` (one function per set) on `tools/armor/kit.py` (class `AR`: the GeckoLib armor
+  skeleton, slot shells `helm/chest/arms/legs/boots`, `R()` right+mirrored-left, `rag()` torn hems, `cape()`, `strands()`,
+  `spike()`). Player space: feet y0, faces -Z, RIGHT side = -X. `spike()` rot z = lean OUTWARD (sign flipped inside -
+  every spike leaned inward before that). `tools/preview_geo.py` gained `geo_file/tex_file/only/solids/pad`.
+- **Java:** `item/custom/PixelArmorItem` (ArmorItem + GeoItem; model name = material name) is the base of every piece;
+  `ModArmorItem` (old set helmets) and `BossArmorItem` extend it; the rest are plain PixelArmorItem. The renderer
+  (`entity/client/PixelArmorRenderer`, GeoArmorRenderer + AutoGlowingGeoLayer when a glowmask exists) is handed in by the
+  client via `PixelArmorItem.CLIENT_PROVIDER` (set in PixelPiratesClient) - no client class on a dedicated server.
+  `FROST_HELM` is still a vanilla ArmorItem (pirate material, 2D layer texture). The old `models/armor/*_layer_N.png`
+  files are now unused by these items.
+- **HIDE HELMET:** `item/HelmetToggle` - H key (C2S packet `toggle_helmet`) or `/pphelmet` flags the worn head stack
+  (NBT `PPHidden`); client mixins `HelmetHideArmorMixin` (ArmorFeatureRenderer.renderArmor, HEAD slot - GeckoLib only swaps
+  the model in there, so this covers both vanilla and 3D) and `HelmetHideHeadMixin` (HeadFeatureRenderer: the Crown,
+  skulls). Still protects; tooltip notes it.
+- **Verified in a real client** (photo world `build/tmp/claude/make_armorphoto.py <CUE>` + `shoot_armor.ps1`, 12 armor stands):
+  every set renders, glowmasks work, fits the body, the hidden-helmet stand shows no helmet; resource reload clean.
+  Dedicated server boots clean. NOT verified: on a moving player (walk/sneak/swim clipping of capes and spikes), elytra/
+  capes overlap, first-person arm view.
+
 ## HOMESTEAD (2026-09-30 overnight build) - base building, economy and survival
 
 All in `homestead/` with its own registries (`HomesteadBlocks/Items/BlockEntities/Entities/Effects`, `Homestead.init()`

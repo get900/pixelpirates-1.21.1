@@ -135,6 +135,25 @@ public class PixelPiratesClient implements ClientModInitializer {
             if (musicKey.wasPressed()) ShipMusicPlayer.toggle();
         });
 
+        // 3D ARMOR: every PixelArmorItem gets its GeckoLib renderer from here (never on a dedicated server)
+        net.get900.pixelpirates.item.custom.PixelArmorItem.CLIENT_PROVIDER = net.get900.pixelpirates.entity.client.PixelArmorRenderer::provider;
+
+        // H key - hide / show the helmet you are wearing (item/HelmetToggle; it still protects you)
+        KeyBinding helmetKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key.pixelpirates.toggle_helmet",
+            InputUtil.Type.KEYSYM,
+            InputUtil.GLFW_KEY_H,
+            "category.pixelpirates"
+        ));
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (helmetKey.wasPressed())
+                if (client.player != null) ClientPlayNetworking.send(net.get900.pixelpirates.item.HelmetToggle.PACKET, net.fabricmc.fabric.api.networking.v1.PacketByteBufs.empty());
+        });
+        net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
+            if (net.get900.pixelpirates.item.HelmetToggle.hidden(stack))
+                lines.add(net.minecraft.text.Text.literal("Hidden while worn (press H to show)").formatted(net.minecraft.util.Formatting.DARK_GRAY));
+        });
+
         // Pirate Journal HUD (top-left: rank, level, XP bar, skill points)
         HudRenderCallback.EVENT.register(PirateLevelHud::render);
 

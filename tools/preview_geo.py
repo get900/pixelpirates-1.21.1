@@ -59,9 +59,12 @@ def M3(r, s=(1, 1, 1)):
     return m
 
 
-def render(mob, anim=None, t=0.0, tex_name=None, yaw=30, pitch=15, size=300, bg=(46, 52, 64)):
-    geo = json.load(open(f"{A}/geo/{mob}.geo.json"))["minecraft:geometry"][0]
-    tex = Image.open(f"{A}/textures/entity/{tex_name or mob}.png").convert("RGBA")
+def render(mob, anim=None, t=0.0, tex_name=None, yaw=30, pitch=15, size=300, bg=(46, 52, 64),
+           geo_file=None, tex_file=None, only=None, solids=(), pad=20):
+    """geo_file/tex_file: explicit paths (armor); only: draw just these bones and their children;
+    solids: extra flat-coloured boxes [(origin, size, rgb), ...] in geo space (a mannequin under armor)."""
+    geo = json.load(open(geo_file or f"{A}/geo/{mob}.geo.json"))["minecraft:geometry"][0]
+    tex = Image.open(tex_file or f"{A}/textures/entity/{tex_name or mob}.png").convert("RGBA")
     tw, th = geo["description"]["texture_width"], geo["description"]["texture_height"]
     sx, sy = tex.width / tw, tex.height / th
     tp = tex.load()
@@ -90,7 +93,35 @@ def render(mob, anim=None, t=0.0, tex_name=None, yaw=30, pitch=15, size=300, bg=
 
     cam = M3(Rx(math.radians(-pitch)) @ Ry(math.radians(-yaw)))
     polys = []
+
+    def kept(name):
+        while True:
+            if name in only: return True
+            name = bones[name].get("parent")
+            if name is None: return False
+
+    for (ox, oy, oz), (w, h, d), rgb in solids:
+        x0, x1 = -(ox + w), -ox
+        corners = {"north": [(x0, oy + h, oz), (x1, oy + h, oz), (x1, oy, oz), (x0, oy, oz)],
+                   "south": [(x0, oy + h, oz + d), (x1, oy + h, oz + d), (x1, oy, oz + d), (x0, oy, oz + d)],
+                   "east": [(x1, oy + h, oz), (x1, oy + h, oz + d), (x1, oy, oz + d), (x1, oy, oz)],
+                   "west": [(x0, oy + h, oz), (x0, oy + h, oz + d), (x0, oy, oz + d), (x0, oy, oz)],
+                   "up": [(x0, oy + h, oz), (x1, oy + h, oz), (x1, oy + h, oz + d), (x0, oy + h, oz + d)],
+                   "down": [(x0, oy, oz), (x1, oy, oz), (x1, oy, oz + d), (x0, oy, oz + d)]}
+        shade = {"north": 1.0, "south": 0.7, "east": 0.8, "west": 0.8, "up": 1.1, "down": 0.6}
+        for f, cs in corners.items():                     # split into unit cells so the depth sort holds up
+            a, b_, c_, d_ = [np.array(c, float) for c in cs]
+            nu = max(1, int(round(np.linalg.norm(b_ - a)))); nv = max(1, int(round(np.linalg.norm(d_ - a))))
+            for i in range(nu):
+                for j in range(nv):
+                    quad = [a + (b_ - a) * (i / nu) + (d_ - a) * (j / nv), a + (b_ - a) * ((i + 1) / nu) + (d_ - a) * (j / nv),
+                            a + (b_ - a) * ((i + 1) / nu) + (d_ - a) * ((j + 1) / nv), a + (b_ - a) * (i / nu) + (d_ - a) * ((j + 1) / nv)]
+                    pts = []
+                    for c in quad:
+                        q = cam @ np.array([*c, 1.0]); pts.append((-q[0], q[1], q[2]))
+                    polys.append((sum(q[2] for q in pts) / 4, pts, tuple(min(255, int(v * shade[f])) for v in rgb)))
     for b in geo["bones"]:
+        if only and not kept(b["name"]): continue
         W = xf(b["name"])
         for c in b.get("cubes", []):
             (ox, oy, oz), (w, h, d) = c["origin"], c["size"]
@@ -132,7 +163,7 @@ def render(mob, anim=None, t=0.0, tex_name=None, yaw=30, pitch=15, size=300, bg=
     allp = [q for _, pts, _ in polys for q in pts]
     minx, maxx = min(p[0] for p in allp), max(p[0] for p in allp)
     miny, maxy = min(p[1] for p in allp), max(p[1] for p in allp)
-    sc = (size - 20) / max(maxx - minx, maxy - miny, 1)
+    sc = (size - pad) / max(maxx - minx, maxy - miny, 1)
     ox_ = (size - (maxx - minx) * sc) / 2
     oy_ = (size - (maxy - miny) * sc) / 2
     img = Image.new("RGB", (size, size), bg)

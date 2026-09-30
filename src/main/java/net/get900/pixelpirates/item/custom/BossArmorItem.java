@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /** One piece of a BOSS SET (item/BossArmor): tier 1..5, fireproof, Boss Ward + the set bonus in its tooltip. */
-public class BossArmorItem extends ArmorItem {
+public class BossArmorItem extends PixelArmorItem {
     private static final String[][] BONUS = {{},
             {"Blast-Stitched:", " boss explosions -40%", " boss fire burns half as long"},
             {"Quenched & Warded:", " never set alight near a boss", " boss magic -30%", " dolphin's grace in water"},

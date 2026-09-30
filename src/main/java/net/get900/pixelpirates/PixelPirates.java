@@ -329,6 +329,7 @@ public class PixelPirates implements ModInitializer {
 		// THE LEVIATHAN HUNT: the world's one Leviathan, its flights, the ports it destroys (world/leviathan)
 		ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.world.leviathan.LeviathanHunt::tick);
 		ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.item.BossArmor::tick);        // boss set bonuses
+		net.get900.pixelpirates.item.HelmetToggle.registerServer();                                     // H: hide helmet
 		net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents.CHUNK_LOAD.register(net.get900.pixelpirates.world.leviathan.LeviathanPorts::onChunkLoad);
 		// Left-clicking a Tide Bell hammers it (the Leviathan's Last Tide)
 		net.fabricmc.fabric.api.event.player.AttackBlockCallback.EVENT.register((player, world, hand, pos, dir) -> {

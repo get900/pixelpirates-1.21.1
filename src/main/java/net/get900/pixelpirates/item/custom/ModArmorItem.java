@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 
-public class ModArmorItem extends ArmorItem {
+public class ModArmorItem extends PixelArmorItem {
     private static final Map<ArmorMaterial, List<StatusEffectInstance>> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, List<StatusEffectInstance>>())
                     .put(ModArmorMaterials.PIRATE_ARMOR,

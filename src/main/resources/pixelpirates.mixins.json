@@ -20,6 +20,8 @@
   ],
   "client": [
     "BackgroundRendererMixin",
+    "HelmetHideArmorMixin",
+    "HelmetHideHeadMixin",
     "ClientWorldParticleMixin",
     "LightmapFullbrightMixin",
     "TipsyCameraMixin"

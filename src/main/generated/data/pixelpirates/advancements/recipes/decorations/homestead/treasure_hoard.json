@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pirate_coin": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:pirate_coin"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:homestead/treasure_hoard"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_pirate_coin",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:homestead/treasure_hoard"
+    ]
+  },
+  "sends_telemetry_event": false
+}

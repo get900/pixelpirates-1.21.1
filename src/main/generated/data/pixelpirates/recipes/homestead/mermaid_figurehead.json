@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    "L": {
+      "item": "minecraft:spruce_log"
+    },
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "pattern": [
+    " P ",
+    "LHL",
+    " L "
+  ],
+  "result": {
+    "item": "pixelpirates:mermaid_figurehead"
+  },
+  "show_notification": true
+}

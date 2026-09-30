@@ -11,9 +11,12 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> NEEDS_PIRATE_TOOL = createTag("needs_pirate_tool");
         public static final TagKey<Block> INCORRECT_FOR_PIRATE_TOOL = createTag("incorrect_for_pirate_tool");
+        public static final TagKey<Block> CANNON_IMMUNE = createTag("cannon_immune");
+        // Blocks in this tag are never broken off during progressive ship structural damage
+        public static final TagKey<Block> SHIP_STRUCTURAL = createTag("ship_structural");
 
         private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(PixelPirates.MOD_ID, name));
+            return TagKey.of(RegistryKeys.BLOCK, new Identifier(PixelPirates.MOD_ID, name));
         }
     }
 
@@ -21,7 +24,7 @@ public class ModTags {
             public static final TagKey<Item> SHOOTABLE_ITEMS = createTag("shootable_items");
 
             private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, Identifier.of(PixelPirates.MOD_ID, name));
+            return TagKey.of(RegistryKeys.ITEM, new Identifier(PixelPirates.MOD_ID, name));
         }
     }
 }

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "CCF",
+    " IP",
+    "  P"
+  ],
+  "result": {
+    "item": "pixelpirates:blunderbuss"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "pixelpirates:tidewood_log"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:tidewood_planks"
+  }
+}

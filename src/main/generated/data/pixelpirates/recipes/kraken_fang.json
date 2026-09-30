@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "K": {
+      "item": "pixelpirates:kraken_scale"
+    },
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "K",
+    "R"
+  ],
+  "result": {
+    "item": "pixelpirates:kraken_fang"
+  },
+  "show_notification": true
+}

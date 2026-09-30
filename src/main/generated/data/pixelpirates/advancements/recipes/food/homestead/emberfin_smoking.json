@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_emberfin": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:emberfin"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:homestead/emberfin_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_emberfin",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:homestead/emberfin_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

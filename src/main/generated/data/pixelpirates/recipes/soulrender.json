@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "pixelpirates:cursed_bone"
+    },
+    "H": {
+      "item": "pixelpirates:rope"
+    },
+    "T": {
+      "item": "pixelpirates:cursed_bone"
+    }
+  },
+  "pattern": [
+    "T",
+    "B",
+    "H"
+  ],
+  "result": {
+    "item": "pixelpirates:soulrender"
+  },
+  "show_notification": true
+}

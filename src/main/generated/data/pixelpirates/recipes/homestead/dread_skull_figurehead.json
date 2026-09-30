@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "pixelpirates:cursed_bone"
+    },
+    "K": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "L": {
+      "item": "minecraft:dark_oak_log"
+    }
+  },
+  "pattern": [
+    " K ",
+    "LBL",
+    " L "
+  ],
+  "result": {
+    "item": "pixelpirates:dread_skull_figurehead"
+  },
+  "show_notification": true
+}

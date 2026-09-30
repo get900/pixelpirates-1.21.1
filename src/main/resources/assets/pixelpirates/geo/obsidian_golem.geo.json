@@ -1,0 +1,357 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.obsidian_golem",
+    "texture_width": 128,
+    "texture_height": 128,
+    "visible_bounds_width": 5,
+    "visible_bounds_height": 5,
+    "visible_bounds_offset": [
+     0,
+     1.0625,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "rleg",
+     "pivot": [
+      -3.5,
+      11,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -7,
+        3,
+        -3
+       ],
+       "size": [
+        7,
+        9,
+        6
+       ],
+       "uv": [
+        32,
+        20
+       ]
+      },
+      {
+       "origin": [
+        -7.5,
+        0,
+        -4.5
+       ],
+       "size": [
+        8,
+        3,
+        8
+       ],
+       "uv": [
+        0,
+        49
+       ]
+      }
+     ]
+    },
+    {
+     "name": "lleg",
+     "pivot": [
+      3.5,
+      11,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        0,
+        3,
+        -3
+       ],
+       "size": [
+        7,
+        9,
+        6
+       ],
+       "uv": [
+        58,
+        20
+       ]
+      },
+      {
+       "origin": [
+        -0.5,
+        0,
+        -4.5
+       ],
+       "size": [
+        8,
+        3,
+        8
+       ],
+       "uv": [
+        32,
+        49
+       ]
+      }
+     ]
+    },
+    {
+     "name": "body",
+     "pivot": [
+      0,
+      11,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -5,
+        11,
+        -3
+       ],
+       "size": [
+        10,
+        6,
+        6
+       ],
+       "uv": [
+        28,
+        36
+       ]
+      },
+      {
+       "origin": [
+        -8,
+        17,
+        -4.5
+       ],
+       "size": [
+        16,
+        11,
+        9
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "pivot": [
+      0,
+      28,
+      -1
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        26,
+        -6
+       ],
+       "size": [
+        8,
+        8,
+        8
+       ],
+       "uv": [
+        0,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "rarm",
+     "pivot": [
+      -11,
+      26,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -16,
+        22,
+        -4.5
+       ],
+       "size": [
+        8,
+        8,
+        9
+       ],
+       "uv": [
+        50,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -14,
+        15,
+        -2
+       ],
+       "size": [
+        4,
+        7,
+        4
+       ],
+       "uv": [
+        64,
+        49
+       ]
+      }
+     ]
+    },
+    {
+     "name": "rarm_fist",
+     "pivot": [
+      -12,
+      15,
+      0
+     ],
+     "parent": "rarm",
+     "cubes": [
+      {
+       "origin": [
+        -15.5,
+        9,
+        -3.5
+       ],
+       "size": [
+        7,
+        6,
+        7
+       ],
+       "uv": [
+        84,
+        20
+       ]
+      },
+      {
+       "origin": [
+        -15,
+        3,
+        -3
+       ],
+       "size": [
+        6,
+        6,
+        6
+       ],
+       "uv": [
+        60,
+        36
+       ]
+      }
+     ]
+    },
+    {
+     "name": "larm",
+     "pivot": [
+      11,
+      26,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        8,
+        22,
+        -4.5
+       ],
+       "size": [
+        8,
+        8,
+        9
+       ],
+       "uv": [
+        84,
+        0
+       ]
+      },
+      {
+       "origin": [
+        10,
+        15,
+        -2
+       ],
+       "size": [
+        4,
+        7,
+        4
+       ],
+       "uv": [
+        80,
+        49
+       ]
+      }
+     ]
+    },
+    {
+     "name": "larm_fist",
+     "pivot": [
+      12,
+      15,
+      0
+     ],
+     "parent": "larm",
+     "cubes": [
+      {
+       "origin": [
+        8.5,
+        9,
+        -3.5
+       ],
+       "size": [
+        7,
+        6,
+        7
+       ],
+       "uv": [
+        0,
+        36
+       ]
+      },
+      {
+       "origin": [
+        9,
+        3,
+        -3
+       ],
+       "size": [
+        6,
+        6,
+        6
+       ],
+       "uv": [
+        84,
+        36
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

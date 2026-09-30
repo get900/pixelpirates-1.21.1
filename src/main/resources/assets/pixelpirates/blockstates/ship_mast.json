@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=x": {"model": "pixelpirates:block/ship_mast_horizontal", "x": 90, "y": 90},
+    "axis=y": {"model": "pixelpirates:block/ship_mast"},
+    "axis=z": {"model": "pixelpirates:block/ship_mast_horizontal", "x": 90}
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "pixelpirates:block/ship_helm_post",
+    "wheel": "pixelpirates:block/ship_helm",
+    "post": "pixelpirates:block/ship_helm_post",
+    "brass": "minecraft:block/gold_block"
+  },
+  "elements": [
+    {
+      "from": [
+        5,
+        0,
+        6
+      ],
+      "to": [
+        11,
+        10,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#post"
+        },
+        "south": {
+          "texture": "#post"
+        },
+        "east": {
+          "texture": "#post"
+        },
+        "west": {
+          "texture": "#post"
+        },
+        "up": {
+          "texture": "#post"
+        },
+        "down": {
+          "texture": "#post"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        10,
+        5
+      ],
+      "to": [
+        12,
+        12,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#post"
+        },
+        "south": {
+          "texture": "#post"
+        },
+        "east": {
+          "texture": "#post"
+        },
+        "west": {
+          "texture": "#post"
+        },
+        "up": {
+          "texture": "#post"
+        },
+        "down": {
+          "texture": "#post"
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        9,
+        4
+      ],
+      "to": [
+        9,
+        11,
+        6
+      ],
+      "faces": {
+        "north": {
+          "texture": "#brass"
+        },
+        "south": {
+          "texture": "#brass"
+        },
+        "east": {
+          "texture": "#brass"
+        },
+        "west": {
+          "texture": "#brass"
+        },
+        "up": {
+          "texture": "#brass"
+        },
+        "down": {
+          "texture": "#brass"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        2,
+        3
+      ],
+      "to": [
+        16,
+        18,
+        4
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#wheel"
+        },
+        "south": {
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ],
+          "texture": "#wheel"
+        },
+        "east": {
+          "uv": [
+            7,
+            0,
+            8,
+            16
+          ],
+          "texture": "#wheel"
+        },
+        "west": {
+          "uv": [
+            7,
+            0,
+            8,
+            16
+          ],
+          "texture": "#wheel"
+        },
+        "up": {
+          "uv": [
+            0,
+            7,
+            16,
+            8
+          ],
+          "texture": "#wheel"
+        },
+        "down": {
+          "uv": [
+            0,
+            7,
+            16,
+            8
+          ],
+          "texture": "#wheel"
+        }
+      }
+    }
+  ]
+}

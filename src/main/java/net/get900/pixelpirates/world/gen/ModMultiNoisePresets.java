@@ -10,7 +10,7 @@ import net.minecraft.world.biome.source.MultiNoiseBiomeSourceParameterList;
 
 public class ModMultiNoisePresets {
     public static final RegistryKey<MultiNoiseBiomeSourceParameterList> OVERWORLD_PRESET =
-            RegistryKey.of(RegistryKeys.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST, Identifier.of("pixelpirates", "overworld"));
+            RegistryKey.of(RegistryKeys.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST, new Identifier("pixelpirates", "overworld"));
 
     public static void register() {
         // No-op: the JSON file provides the data, registration happens automatically.

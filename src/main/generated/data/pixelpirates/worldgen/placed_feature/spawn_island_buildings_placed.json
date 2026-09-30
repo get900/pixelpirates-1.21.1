@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:spawn_island_buildings",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    }
+  ]
+}

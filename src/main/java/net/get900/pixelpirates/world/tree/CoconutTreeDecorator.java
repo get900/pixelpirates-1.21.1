@@ -1,7 +1,6 @@
 package net.get900.pixelpirates.world.tree;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.get900.pixelpirates.block.ModBlocks;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +11,7 @@ import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 
 public class CoconutTreeDecorator extends TreeDecorator {
-    public static final MapCodec<CoconutTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(
+    public static final Codec<CoconutTreeDecorator> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                     Codec.floatRange(0.0f, 1.0f).fieldOf("chance").forGetter(d -> d.chance)
             ).apply(instance, CoconutTreeDecorator::new)

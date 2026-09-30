@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "has_sword=true": { "model": "pixelpirates:block/gallowbrand_stone" },
+    "has_sword=false": { "model": "pixelpirates:block/gallowbrand_stone" }
+  }
+}

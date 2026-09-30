@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "cooked_salted_swimmer",
+  "ingredient": {
+    "item": "pixelpirates:raw_salted_swimmer"
+  },
+  "result": "pixelpirates:cooked_salted_swimmer"
+}

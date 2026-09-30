@@ -1,0 +1,39 @@
+PIXEL PIRATES - OVERNIGHT WORK LIST
+===================================
+Delete the lines you DON'T want. Everything left in this file is what I'll build tonight.
+Sizes: S = small, M = medium, L = large.   * = my recommended overnight pick.
+You can add notes after any line, e.g.  "6. Thirst ... -- make it gentle, 20 min per bar"
+
+A. BASE BUILDING & HOMESTEADING
+1.  (L)   Claimable hideouts - plant a Jolly Roger flag to claim an island base: respawn point, marked on the map, no hostile spawns nearby, upgradeable
+2.  (M) * Pirate furniture set - captain's desk, sea chests (double storage), treasure displays, hanging nets/ropes, ship's wheel decor, cannon decor, map table, rum rack
+3.  (M)   Coin vault / treasure hoard block - store coins as a pile that grows; a big hoard gives a small luck/XP bonus at base
+4.  (M)   Dock & mooring post - moor your ship at base so it doesn't drift, slow repairs, "home port" perks
+5.  (S-M) * Palm & tropical building blocks - thatch roofing, palm walls, rope bridges, driftwood fences, woven mats
+
+B. SURVIVAL MECHANICS
+9.  (M)   Salvage & wreck diving - salvage crates on the seabed, a Salvage Hook rod that pulls loot from wrecks
+
+C. FARMING & FISHING
+11. (M) * Tropical crops - pineapple, sugarcane, citrus, cacao, peppers
+12. (M) * Rum distillery - sugarcane -> molasses -> barrel-aged rum; aged rum sells for more and gives buffs (with a drunk sway)
+13. (M-L) Fishing overhaul - new fish per ring zone, trophy fish, passive fishing net block, lobster pots, fish can be sold at an NPC we can add later.
+
+D. ECONOMY & QUALITY OF LIFE
+15. (M)   Trading post block + NPC traders - sell fish, rum, salvage and monster parts for coins; buy supplies
+16. (M)   Bounty board - daily contracts ("sink 2 navy ships", "bring 10 shark fins") for coins + reputation
+17. (S)   Spyglass upgrade - zoom plus info: ship faction, mob health, treasure glints
+18. (S-M) Compass of Desire & map marking - points to your base / last death / nearest undiscovered dungeon
+20. (M)   Logbook / codex - fills in with every mob, boss, biome and item you meet, with lore and hints
+
+E. GEAR, WEAPONS & TOOLS
+21. (M) * Flintlock pistol + blunderbuss - real ranged guns with custom 3D models, crafted shot + powder, slow reload, big hits
+22. (M)   Grappling hook - swing up masts and cliffs, pull yourself onto ships for boarding
+24. (S)   Region tool sets - cursed bone / kraken scale / volcanic ember tools with small perks (e.g. ember pickaxe auto-smelts)
+25. (M)   Ship upgrades as items - figureheads with passive buffs, sail colours/patterns, chain shot and grape shot
+
+F. NEW MOBS (NON-BOSS)
+29. (S-M) Parrot companion - tameable, sits on your shoulder, squawks warnings about ships, sharks and treasure
+
+QUESTIONS (edit the answer)
+- Anything else you want added?   ANSWER: Lets add some sort of gambling game that can take place by building a gambling table (custom 3d model) where it has roulette to start and we may expand on this later.

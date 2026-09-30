@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "pixelpirates:shrouded_dirt",
+    "pixelpirates:shell_block",
+    "pixelpirates:scorched_sand",
+    "pixelpirates:grave_silt"
+  ]
+}

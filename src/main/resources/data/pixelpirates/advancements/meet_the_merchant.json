@@ -1,0 +1,15 @@
+{
+  "display": {
+    "icon": {"item": "pixelpirates:treasure_map_common"},
+    "title": {"translate": "advancements.pixelpirates.meet_the_merchant.title"},
+    "description": {"translate": "advancements.pixelpirates.meet_the_merchant.description"},
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:into_the_shallows",
+  "criteria": {
+    "got_here": {"trigger": "minecraft:impossible"}
+  }
+}

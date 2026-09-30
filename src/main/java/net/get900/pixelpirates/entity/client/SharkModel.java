@@ -8,16 +8,16 @@ import software.bernie.geckolib.model.GeoModel;
 public class SharkModel extends GeoModel<SharkEntity> {
     @Override
     public Identifier getModelResource(SharkEntity entity) {
-        return Identifier.of(PixelPirates.MOD_ID, "geo/shark.geo.json");
+        return new Identifier(PixelPirates.MOD_ID, "geo/shark.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(SharkEntity entity) {
-        return Identifier.of(PixelPirates.MOD_ID, "textures/entity/shark.png");
+        return new Identifier(PixelPirates.MOD_ID, "textures/entity/shark.png");
     }
 
     @Override
     public Identifier getAnimationResource(SharkEntity entity) {
-        return Identifier.of(PixelPirates.MOD_ID, "animations/shark.animation.json");
+        return new Identifier(PixelPirates.MOD_ID, "animations/shark.animation.json");
     }
 }

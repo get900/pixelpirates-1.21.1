@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "kraken_calamari",
+  "ingredient": {
+    "item": "pixelpirates:kraken_ink"
+  },
+  "result": "pixelpirates:kraken_calamari"
+}

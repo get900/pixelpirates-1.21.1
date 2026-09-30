@@ -1,0 +1,330 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.anemone_eye",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 4,
+    "visible_bounds_height": 4,
+    "visible_bounds_offset": [
+     0,
+     0.8125,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5,
+        0,
+        -3
+       ],
+       "size": [
+        10,
+        6,
+        6
+       ],
+       "uv": [
+        0,
+        23
+       ]
+      }
+     ]
+    },
+    {
+     "name": "p0",
+     "pivot": [
+      -4,
+      6,
+      1
+     ],
+     "parent": "root",
+     "rotation": [
+      4,
+      0,
+      38
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5.5,
+        6,
+        -1.5
+       ],
+       "size": [
+        3,
+        15,
+        3
+       ],
+       "uv": [
+        24,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -5,
+        18,
+        -2
+       ],
+       "size": [
+        2,
+        2,
+        1
+       ],
+       "uv": [
+        48,
+        23
+       ]
+      }
+     ]
+    },
+    {
+     "name": "p1",
+     "pivot": [
+      -2,
+      6,
+      1
+     ],
+     "parent": "root",
+     "rotation": [
+      4,
+      0,
+      14
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.5,
+        6,
+        -1.5
+       ],
+       "size": [
+        3,
+        20,
+        3
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -3,
+        23,
+        -2
+       ],
+       "size": [
+        2,
+        2,
+        1
+       ],
+       "uv": [
+        54,
+        23
+       ]
+      }
+     ]
+    },
+    {
+     "name": "p2",
+     "pivot": [
+      0,
+      6,
+      1
+     ],
+     "parent": "root",
+     "rotation": [
+      4,
+      0,
+      -10
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1.5,
+        6,
+        -1.5
+       ],
+       "size": [
+        3,
+        18,
+        3
+       ],
+       "uv": [
+        12,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -1,
+        21,
+        -2
+       ],
+       "size": [
+        2,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ]
+      }
+     ]
+    },
+    {
+     "name": "p3",
+     "pivot": [
+      2,
+      6,
+      1
+     ],
+     "parent": "root",
+     "rotation": [
+      4,
+      0,
+      -32
+     ],
+     "cubes": [
+      {
+       "origin": [
+        0.5,
+        6,
+        -1.5
+       ],
+       "size": [
+        3,
+        15,
+        3
+       ],
+       "uv": [
+        36,
+        0
+       ]
+      },
+      {
+       "origin": [
+        1,
+        18,
+        -2
+       ],
+       "size": [
+        2,
+        2,
+        1
+       ],
+       "uv": [
+        6,
+        35
+       ]
+      }
+     ]
+    },
+    {
+     "name": "p4",
+     "pivot": [
+      4,
+      6,
+      1
+     ],
+     "parent": "root",
+     "rotation": [
+      4,
+      0,
+      -52
+     ],
+     "cubes": [
+      {
+       "origin": [
+        2.5,
+        6,
+        -1.5
+       ],
+       "size": [
+        3,
+        11,
+        3
+       ],
+       "uv": [
+        48,
+        0
+       ]
+      },
+      {
+       "origin": [
+        3,
+        14,
+        -2
+       ],
+       "size": [
+        2,
+        2,
+        1
+       ],
+       "uv": [
+        12,
+        35
+       ]
+      }
+     ]
+    },
+    {
+     "name": "eye",
+     "pivot": [
+      0,
+      9,
+      -2
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -3.5,
+        5,
+        -3.5
+       ],
+       "size": [
+        7,
+        7,
+        1
+       ],
+       "uv": [
+        32,
+        23
+       ]
+      },
+      {
+       "origin": [
+        -0.5,
+        3,
+        -3
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        18,
+        35
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

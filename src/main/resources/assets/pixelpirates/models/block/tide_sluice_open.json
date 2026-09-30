@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "pixelpirates:block/tide_sluice_side",
+    "side": "pixelpirates:block/tide_sluice_side",
+    "front": "pixelpirates:block/tide_sluice_front_open"
+  }
+}

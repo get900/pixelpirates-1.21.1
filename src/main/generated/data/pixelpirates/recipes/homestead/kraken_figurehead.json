@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "pixelpirates:kraken_ink"
+    },
+    "L": {
+      "item": "minecraft:spruce_log"
+    },
+    "S": {
+      "item": "pixelpirates:kraken_scale"
+    }
+  },
+  "pattern": [
+    " I ",
+    "LSL",
+    " L "
+  ],
+  "result": {
+    "item": "pixelpirates:kraken_figurehead"
+  },
+  "show_notification": true
+}

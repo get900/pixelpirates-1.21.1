@@ -1,6 +1,6 @@
 package net.get900.pixelpirates.world.tree;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import net.get900.pixelpirates.PixelPirates;
 import net.minecraft.util.Identifier;
 import net.minecraft.registry.Registries;
@@ -15,10 +15,10 @@ public class ModTreeDecorator {
     public static final TreeDecoratorType<CoconutTreeDecorator> COCONUT =
             register("coconut", CoconutTreeDecorator.CODEC);
 
-    private static <T extends TreeDecorator> TreeDecoratorType<T> register(String name, MapCodec<T> codec) {
+    private static <T extends TreeDecorator> TreeDecoratorType<T> register(String name, Codec<T> codec) {
         return Registry.register(
                 Registries.TREE_DECORATOR_TYPE,
-                Identifier.of(PixelPirates.MOD_ID, name),
+                new Identifier(PixelPirates.MOD_ID, name),
                 new TreeDecoratorType<>(codec)
         );
     }

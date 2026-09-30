@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_ingot"
+    },
+    "H": {
+      "item": "minecraft:stick"
+    },
+    "T": {
+      "item": "pixelpirates:kraken_scale"
+    }
+  },
+  "pattern": [
+    "T",
+    "B",
+    "H"
+  ],
+  "result": {
+    "item": "pixelpirates:abyssal_harpoon"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,40 @@
+{
+ "textures": {
+  "rope": "pixelpirates:block/rope",
+  "particle": "pixelpirates:block/rope"
+ },
+ "elements": [
+  {
+   "from": [
+    7,
+    0,
+    7
+   ],
+   "to": [
+    9,
+    16,
+    9
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rope"
+    },
+    "south": {
+     "texture": "#rope"
+    },
+    "east": {
+     "texture": "#rope"
+    },
+    "west": {
+     "texture": "#rope"
+    },
+    "up": {
+     "texture": "#rope"
+    },
+    "down": {
+     "texture": "#rope"
+    }
+   }
+  }
+ ]
+}

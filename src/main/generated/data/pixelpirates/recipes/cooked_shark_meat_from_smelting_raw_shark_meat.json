@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "cooked_shark_meat",
+  "ingredient": {
+    "item": "pixelpirates:raw_shark_meat"
+  },
+  "result": "pixelpirates:cooked_shark_meat"
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "pixelpirates:voidbloom_log"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:voidbloom_planks"
+  }
+}

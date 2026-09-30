@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "pixelpirates:pirate_coin"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "CGC",
+    "CCC"
+  ],
+  "result": {
+    "item": "pixelpirates:treasure_hoard"
+  },
+  "show_notification": true
+}

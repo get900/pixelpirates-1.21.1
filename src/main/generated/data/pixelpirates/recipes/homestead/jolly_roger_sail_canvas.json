@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:black_wool"
+    },
+    "K": {
+      "item": "minecraft:bone"
+    }
+  },
+  "pattern": [
+    "BB",
+    "BK"
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:jolly_roger_sail_canvas"
+  },
+  "show_notification": true
+}

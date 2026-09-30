@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:green_carpet"
+    }
+  },
+  "pattern": [
+    "GCW",
+    "PPP",
+    "S S"
+  ],
+  "result": {
+    "item": "pixelpirates:roulette_table"
+  },
+  "show_notification": true
+}

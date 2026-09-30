@@ -1,0 +1,492 @@
+{
+ "textures": {
+  "coins": "pixelpirates:block/coin_pile",
+  "gold": "minecraft:block/gold_block",
+  "cup": "minecraft:block/raw_gold_block",
+  "gem": "minecraft:block/emerald_block",
+  "wood": "minecraft:block/dark_oak_planks",
+  "particle": "pixelpirates:block/coin_pile"
+ },
+ "elements": [
+  {
+   "from": [
+    1,
+    0,
+    1
+   ],
+   "to": [
+    15,
+    1,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#wood"
+    },
+    "south": {
+     "texture": "#wood"
+    },
+    "east": {
+     "texture": "#wood"
+    },
+    "west": {
+     "texture": "#wood"
+    },
+    "up": {
+     "texture": "#wood"
+    },
+    "down": {
+     "texture": "#wood"
+    }
+   }
+  },
+  {
+   "from": [
+    2.0,
+    1,
+    2.0
+   ],
+   "to": [
+    14.0,
+    3,
+    14.0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#coins"
+    },
+    "south": {
+     "texture": "#coins"
+    },
+    "east": {
+     "texture": "#coins"
+    },
+    "west": {
+     "texture": "#coins"
+    },
+    "up": {
+     "texture": "#coins"
+    },
+    "down": {
+     "texture": "#coins"
+    }
+   }
+  },
+  {
+   "from": [
+    2.75,
+    3,
+    2.75
+   ],
+   "to": [
+    13.25,
+    5,
+    13.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#coins"
+    },
+    "south": {
+     "texture": "#coins"
+    },
+    "east": {
+     "texture": "#coins"
+    },
+    "west": {
+     "texture": "#coins"
+    },
+    "up": {
+     "texture": "#coins"
+    },
+    "down": {
+     "texture": "#coins"
+    }
+   }
+  },
+  {
+   "from": [
+    3.5,
+    5,
+    3.5
+   ],
+   "to": [
+    12.5,
+    7,
+    12.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#coins"
+    },
+    "south": {
+     "texture": "#coins"
+    },
+    "east": {
+     "texture": "#coins"
+    },
+    "west": {
+     "texture": "#coins"
+    },
+    "up": {
+     "texture": "#coins"
+    },
+    "down": {
+     "texture": "#coins"
+    }
+   }
+  },
+  {
+   "from": [
+    4.25,
+    7,
+    4.25
+   ],
+   "to": [
+    11.75,
+    9,
+    11.75
+   ],
+   "faces": {
+    "north": {
+     "texture": "#coins"
+    },
+    "south": {
+     "texture": "#coins"
+    },
+    "east": {
+     "texture": "#coins"
+    },
+    "west": {
+     "texture": "#coins"
+    },
+    "up": {
+     "texture": "#coins"
+    },
+    "down": {
+     "texture": "#coins"
+    }
+   }
+  },
+  {
+   "from": [
+    8.0,
+    9,
+    8.0
+   ],
+   "to": [
+    8.0,
+    11,
+    8.0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#coins"
+    },
+    "south": {
+     "texture": "#coins"
+    },
+    "east": {
+     "texture": "#coins"
+    },
+    "west": {
+     "texture": "#coins"
+    },
+    "up": {
+     "texture": "#coins"
+    },
+    "down": {
+     "texture": "#coins"
+    }
+   }
+  },
+  {
+   "from": [
+    6.0853587925449375,
+    1,
+    7.419720091045962
+   ],
+   "to": [
+    7.5853587925449375,
+    6.310183082396366,
+    8.919720091045962
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    3.7666564419544386,
+    1,
+    4.2515952057814665
+   ],
+   "to": [
+    5.266656441954439,
+    2.1454862663405554,
+    5.7515952057814665
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    3.166505334428638,
+    1,
+    2.088056258870669
+   ],
+   "to": [
+    4.6665053344286385,
+    2.7834516754168193,
+    3.588056258870669
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    7.137132085026757,
+    1,
+    11.89492910377551
+   ],
+   "to": [
+    8.637132085026757,
+    5.467551307157191,
+    13.39492910377551
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    5.784265711232809,
+    1,
+    6.05047735319256
+   ],
+   "to": [
+    7.284265711232809,
+    5.456548142061896,
+    7.55047735319256
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    5.261198726168599,
+    1,
+    2.735534305782682
+   ],
+   "to": [
+    6.761198726168599,
+    6.207614484531045,
+    4.235534305782682
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    8.172199559140832,
+    1,
+    3.1200982712964755
+   ],
+   "to": [
+    9.672199559140832,
+    2.3503334368995863,
+    4.6200982712964755
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    2.9462754629553505,
+    1,
+    11.589232453363275
+   ],
+   "to": [
+    4.4462754629553505,
+    2.538584327068847,
+    13.089232453363275
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    10,
+    1,
+    3
+   ],
+   "to": [
+    12,
+    5,
+    5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#cup"
+    },
+    "south": {
+     "texture": "#cup"
+    },
+    "east": {
+     "texture": "#cup"
+    },
+    "west": {
+     "texture": "#cup"
+    },
+    "up": {
+     "texture": "#cup"
+    },
+    "down": {
+     "texture": "#cup"
+    }
+   }
+  }
+ ]
+}

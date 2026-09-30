@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "clicked=false": {
+      "model": "pixelpirates:block/water_light_block"
+    },
+    "clicked=true": {
+      "model": "pixelpirates:block/water_light_block_on"
+    }
+  }
+}

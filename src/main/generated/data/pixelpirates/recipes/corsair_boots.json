@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "pixelpirates:pirate_coin"
+    },
+    "M": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "A A",
+    "M M"
+  ],
+  "result": {
+    "item": "pixelpirates:corsair_boots"
+  },
+  "show_notification": true
+}

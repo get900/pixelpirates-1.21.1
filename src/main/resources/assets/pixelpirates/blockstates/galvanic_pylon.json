@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "state=0": {
+      "model": "pixelpirates:block/galvanic_pylon"
+    },
+    "state=1": {
+      "model": "pixelpirates:block/galvanic_pylon_window"
+    },
+    "state=2": {
+      "model": "pixelpirates:block/galvanic_pylon_charged"
+    }
+  }
+}

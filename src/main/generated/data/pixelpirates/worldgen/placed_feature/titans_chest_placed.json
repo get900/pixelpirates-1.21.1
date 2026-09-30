@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:titans_chest",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    }
+  ]
+}

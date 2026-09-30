@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:coral_temple",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

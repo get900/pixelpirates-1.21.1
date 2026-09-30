@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:bloodfin_reef",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

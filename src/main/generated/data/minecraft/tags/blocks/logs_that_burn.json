@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "pixelpirates:driftwood_block",
+    "pixelpirates:shorewood_log",
+    "pixelpirates:shorewood_wood",
+    "pixelpirates:stripped_shorewood_log",
+    "pixelpirates:stripped_shorewood_wood",
+    "pixelpirates:palm_log",
+    "pixelpirates:tidewood_log",
+    "pixelpirates:wispwood_log"
+  ]
+}

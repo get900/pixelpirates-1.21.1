@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:logs_that_burn",
+    "pixelpirates:ashen_log",
+    "pixelpirates:ashen_wood",
+    "pixelpirates:stripped_ashen_log",
+    "pixelpirates:stripped_ashen_wood",
+    "pixelpirates:charred_log",
+    "pixelpirates:voidbloom_log"
+  ]
+}

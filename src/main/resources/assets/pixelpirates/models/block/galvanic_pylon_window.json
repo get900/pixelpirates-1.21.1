@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "pixelpirates:block/galvanic_pylon_window",
+    "top": "pixelpirates:block/galvanic_pylon_top",
+    "bottom": "pixelpirates:block/galvanic_pylon_top"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_parrotfish": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:parrotfish"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:homestead/parrotfish_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_parrotfish",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:homestead/parrotfish_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

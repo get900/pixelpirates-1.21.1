@@ -1,0 +1,15 @@
+{
+  "display": {
+    "icon": {"item": "pixelpirates:raw_shark_meat"},
+    "title": {"translate": "advancements.pixelpirates.shark_bait.title"},
+    "description": {"translate": "advancements.pixelpirates.shark_bait.description"},
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:into_the_shallows",
+  "criteria": {
+    "got_here": {"trigger": "minecraft:impossible"}
+  }
+}

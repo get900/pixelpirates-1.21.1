@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,loaded=false": {"model": "pixelpirates:block/ship_cannon"},
+    "facing=north,loaded=true":  {"model": "pixelpirates:block/ship_cannon"},
+    "facing=east,loaded=false":  {"model": "pixelpirates:block/ship_cannon", "y": 90},
+    "facing=east,loaded=true":   {"model": "pixelpirates:block/ship_cannon", "y": 90},
+    "facing=south,loaded=false": {"model": "pixelpirates:block/ship_cannon", "y": 180},
+    "facing=south,loaded=true":  {"model": "pixelpirates:block/ship_cannon", "y": 180},
+    "facing=west,loaded=false":  {"model": "pixelpirates:block/ship_cannon", "y": 270},
+    "facing=west,loaded=true":   {"model": "pixelpirates:block/ship_cannon", "y": 270}
+  }
+}

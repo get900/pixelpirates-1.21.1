@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:ashen_helmet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_volcanic_ember": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:volcanic_ember"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_volcanic_ember",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:ashen_helmet"
+    ]
+  },
+  "sends_telemetry_event": false
+}

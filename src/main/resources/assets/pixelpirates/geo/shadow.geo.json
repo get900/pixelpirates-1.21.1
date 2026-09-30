@@ -1,0 +1,209 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.shadow",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 4,
+    "visible_bounds_height": 4,
+    "visible_bounds_offset": [
+     0,
+     1.0,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "rleg",
+     "pivot": [
+      -2,
+      12,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        0,
+        -2
+       ],
+       "size": [
+        4,
+        12,
+        4
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "lleg",
+     "pivot": [
+      2,
+      12,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        0,
+        0,
+        -2
+       ],
+       "size": [
+        4,
+        12,
+        4
+       ],
+       "uv": [
+        16,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "body",
+     "pivot": [
+      0,
+      12,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        12,
+        -2
+       ],
+       "size": [
+        8,
+        12,
+        4
+       ],
+       "uv": [
+        32,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "pivot": [
+      0,
+      24,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -4.0,
+        24,
+        -4.0
+       ],
+       "size": [
+        8,
+        8,
+        8
+       ],
+       "uv": [
+        0,
+        16
+       ]
+      }
+     ]
+    },
+    {
+     "name": "rarm",
+     "pivot": [
+      -6.0,
+      22,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -8,
+        12,
+        -2
+       ],
+       "size": [
+        4,
+        12,
+        4
+       ],
+       "uv": [
+        32,
+        16
+       ]
+      }
+     ]
+    },
+    {
+     "name": "larm",
+     "pivot": [
+      6.0,
+      22,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        4,
+        12,
+        -2
+       ],
+       "size": [
+        4,
+        12,
+        4
+       ],
+       "uv": [
+        48,
+        16
+       ]
+      }
+     ]
+    },
+    {
+     "name": "rhand",
+     "pivot": [
+      -6.0,
+      13,
+      0
+     ],
+     "parent": "rarm"
+    },
+    {
+     "name": "lhand",
+     "pivot": [
+      6.0,
+      13,
+      0
+     ],
+     "parent": "larm"
+    }
+   ]
+  }
+ ]
+}

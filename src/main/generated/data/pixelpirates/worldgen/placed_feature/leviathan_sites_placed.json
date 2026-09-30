@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:leviathan_sites",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    }
+  ]
+}

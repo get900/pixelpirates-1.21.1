@@ -1,0 +1,15 @@
+{
+  "display": {
+    "icon": {"item": "pixelpirates:treasure_map_legendary"},
+    "title": {"translate": "advancements.pixelpirates.x_marks_the_spot.title"},
+    "description": {"translate": "advancements.pixelpirates.x_marks_the_spot.description"},
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:meet_the_merchant",
+  "criteria": {
+    "got_here": {"trigger": "minecraft:impossible"}
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:homestead/voidfin_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_voidfin": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:voidfin"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_voidfin",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:homestead/voidfin_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

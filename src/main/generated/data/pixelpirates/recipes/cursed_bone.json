@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "pixelpirates:kraken_ink"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "pixelpirates:cursed_bone"
+  }
+}

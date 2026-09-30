@@ -1,0 +1,7 @@
+{
+ "parent": "minecraft:block/template_glass_pane_side_alt",
+ "textures": {
+  "pane": "pixelpirates:block/woven_palm_screen",
+  "edge": "pixelpirates:block/woven_palm_screen_edge"
+ }
+}

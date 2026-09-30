@@ -1,0 +1,440 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.lantern_squid",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 4,
+    "visible_bounds_height": 4,
+    "visible_bounds_offset": [
+     0,
+     0.6875,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      12,
+      0
+     ]
+    },
+    {
+     "name": "head",
+     "pivot": [
+      0,
+      12,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -5,
+        12,
+        -5
+       ],
+       "size": [
+        10,
+        10,
+        10
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t0",
+     "pivot": [
+      -3,
+      12,
+      -3
+     ],
+     "parent": "head",
+     "rotation": [
+      8,
+      0,
+      -9
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        5,
+        -4
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        40,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t0b",
+     "pivot": [
+      -3,
+      5,
+      -3
+     ],
+     "parent": "t0",
+     "rotation": [
+      -6,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        -2,
+        -4
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        48,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t1",
+     "pivot": [
+      0,
+      12,
+      -3.5
+     ],
+     "parent": "head",
+     "rotation": [
+      8,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1,
+        5,
+        -4.5
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        56,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t1b",
+     "pivot": [
+      0,
+      5,
+      -3.5
+     ],
+     "parent": "t1",
+     "rotation": [
+      -6,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1,
+        -2,
+        -4.5
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        0,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t2",
+     "pivot": [
+      3,
+      12,
+      -3
+     ],
+     "parent": "head",
+     "rotation": [
+      8,
+      0,
+      9
+     ],
+     "cubes": [
+      {
+       "origin": [
+        2,
+        5,
+        -4
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        8,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t2b",
+     "pivot": [
+      3,
+      5,
+      -3
+     ],
+     "parent": "t2",
+     "rotation": [
+      -6,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        2,
+        -2,
+        -4
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        16,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t3",
+     "pivot": [
+      -3,
+      12,
+      2
+     ],
+     "parent": "head",
+     "rotation": [
+      -8,
+      0,
+      -9
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        5,
+        1
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        24,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t3b",
+     "pivot": [
+      -3,
+      5,
+      2
+     ],
+     "parent": "t3",
+     "rotation": [
+      6,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        -2,
+        1
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        32,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t4",
+     "pivot": [
+      0,
+      12,
+      2.5
+     ],
+     "parent": "head",
+     "rotation": [
+      -8,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1,
+        5,
+        1.5
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        40,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t4b",
+     "pivot": [
+      0,
+      5,
+      2.5
+     ],
+     "parent": "t4",
+     "rotation": [
+      6,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1,
+        -2,
+        1.5
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        48,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t5",
+     "pivot": [
+      3,
+      12,
+      2
+     ],
+     "parent": "head",
+     "rotation": [
+      -8,
+      0,
+      9
+     ],
+     "cubes": [
+      {
+       "origin": [
+        2,
+        5,
+        1
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        56,
+        20
+       ]
+      }
+     ]
+    },
+    {
+     "name": "t5b",
+     "pivot": [
+      3,
+      5,
+      2
+     ],
+     "parent": "t5",
+     "rotation": [
+      6,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        2,
+        -2,
+        1
+       ],
+       "size": [
+        2,
+        7,
+        2
+       ],
+       "uv": [
+        0,
+        29
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

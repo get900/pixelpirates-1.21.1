@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/captains_desk"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/captains_desk",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/captains_desk",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/captains_desk",
+   "y": 270
+  }
+ }
+}

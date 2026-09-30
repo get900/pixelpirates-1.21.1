@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "RRR",
+    "PPP"
+  ],
+  "key": {
+    "R": { "item": "pixelpirates:rope" },
+    "P": { "tag": "minecraft:planks" }
+  },
+  "result": {
+    "id": "pixelpirates:ship_waterline",
+    "count": 6
+  }
+}

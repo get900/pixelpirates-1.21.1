@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "pixelpirates:cooked_shark_meat"
+    },
+    {
+      "item": "pixelpirates:coconut"
+    },
+    {
+      "item": "pixelpirates:banana"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:pirates_stew"
+  }
+}

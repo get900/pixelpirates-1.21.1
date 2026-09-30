@@ -1,0 +1,41 @@
+{
+ "textures": {
+  "side": "pixelpirates:block/salvage_crate",
+  "top": "pixelpirates:block/salvage_crate_top",
+  "particle": "pixelpirates:block/salvage_crate"
+ },
+ "elements": [
+  {
+   "from": [
+    1,
+    0,
+    1
+   ],
+   "to": [
+    15,
+    14,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#side"
+    },
+    "south": {
+     "texture": "#side"
+    },
+    "east": {
+     "texture": "#side"
+    },
+    "west": {
+     "texture": "#side"
+    },
+    "up": {
+     "texture": "#top"
+    },
+    "down": {
+     "texture": "#top"
+    }
+   }
+  }
+ ]
+}

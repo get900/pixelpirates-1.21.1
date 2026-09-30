@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    [
+      {
+        "item": "pixelpirates:shorewood_log"
+      },
+      {
+        "item": "pixelpirates:shorewood_wood"
+      },
+      {
+        "item": "pixelpirates:stripped_shorewood_log"
+      },
+      {
+        "item": "pixelpirates:stripped_shorewood_wood"
+      }
+    ]
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:palm_planks"
+  }
+}

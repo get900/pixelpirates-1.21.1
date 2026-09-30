@@ -1,0 +1,15 @@
+{
+  "display": {
+    "icon": {"item": "pixelpirates:seafarers_token"},
+    "title": {"translate": "advancements.pixelpirates.beyond_the_reef.title"},
+    "description": {"translate": "advancements.pixelpirates.beyond_the_reef.description"},
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:monster_of_the_deep",
+  "criteria": {
+    "got_here": {"trigger": "minecraft:impossible"}
+  }
+}

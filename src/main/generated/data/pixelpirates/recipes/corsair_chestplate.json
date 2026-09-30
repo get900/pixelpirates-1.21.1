@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "pixelpirates:pirate_coin"
+    },
+    "M": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "A A",
+    "MMM",
+    "MMM"
+  ],
+  "result": {
+    "item": "pixelpirates:corsair_chestplate"
+  },
+  "show_notification": true
+}

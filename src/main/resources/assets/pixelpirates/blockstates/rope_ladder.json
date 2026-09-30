@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/rope_ladder"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/rope_ladder",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/rope_ladder",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/rope_ladder",
+   "y": 270
+  }
+ }
+}

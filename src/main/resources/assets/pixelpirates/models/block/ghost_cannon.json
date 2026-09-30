@@ -1,0 +1,9 @@
+{
+  "parent": "pixelpirates:block/ship_cannon",
+  "textures": {
+    "particle": "pixelpirates:block/ghost_cannon",
+    "iron": "pixelpirates:block/ghost_cannon",
+    "carriage": "pixelpirates:block/ghost_cannon_carriage",
+    "muzzle": "pixelpirates:block/ghost_cannon_muzzle"
+  }
+}

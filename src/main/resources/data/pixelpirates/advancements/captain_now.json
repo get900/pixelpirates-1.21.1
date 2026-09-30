@@ -1,0 +1,15 @@
+{
+  "display": {
+    "icon": {"item": "pixelpirates:ship_repair_kit"},
+    "title": {"translate": "advancements.pixelpirates.captain_now.title"},
+    "description": {"translate": "advancements.pixelpirates.captain_now.description"},
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:money_well_spent",
+  "criteria": {
+    "got_here": {"trigger": "minecraft:impossible"}
+  }
+}

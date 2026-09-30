@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "pixelpirates:charred_log"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:charred_planks"
+  }
+}

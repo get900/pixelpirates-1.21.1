@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:spruce_log"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " I ",
+    "LSL",
+    " L "
+  ],
+  "result": {
+    "item": "pixelpirates:mooring_post"
+  },
+  "show_notification": true
+}

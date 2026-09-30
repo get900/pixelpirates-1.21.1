@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:gallows_grotto",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    }
+  ]
+}

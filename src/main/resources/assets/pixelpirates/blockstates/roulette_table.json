@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "pixelpirates:block/roulette_table"
+    },
+    "facing=south": {
+      "model": "pixelpirates:block/roulette_table"
+    },
+    "facing=east": {
+      "model": "pixelpirates:block/roulette_table"
+    },
+    "facing=west": {
+      "model": "pixelpirates:block/roulette_table"
+    }
+  }
+}

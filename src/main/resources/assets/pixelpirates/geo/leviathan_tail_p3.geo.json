@@ -1,0 +1,284 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.leviathan_tail_p3",
+    "texture_width": 256,
+    "texture_height": 256,
+    "visible_bounds_width": 8,
+    "visible_bounds_height": 4,
+    "visible_bounds_offset": [
+     0,
+     0.65625,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "seg",
+     "pivot": [
+      0,
+      8,
+      -12
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -9,
+        1,
+        -14
+       ],
+       "size": [
+        18,
+        14,
+        14
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tail1",
+     "pivot": [
+      0,
+      8,
+      0
+     ],
+     "parent": "seg",
+     "cubes": [
+      {
+       "origin": [
+        -6,
+        3,
+        0
+       ],
+       "size": [
+        12,
+        10,
+        14
+       ],
+       "uv": [
+        64,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -1.5,
+        13,
+        3
+       ],
+       "size": [
+        3,
+        8,
+        3
+       ],
+       "uv": [
+        160,
+        0
+       ],
+       "pivot": [
+        0,
+        13,
+        4.5
+       ],
+       "rotation": [
+        -30,
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tail2",
+     "pivot": [
+      0,
+      8,
+      14
+     ],
+     "parent": "tail1",
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        5,
+        14
+       ],
+       "size": [
+        8,
+        6,
+        14
+       ],
+       "uv": [
+        116,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -4.5,
+        7,
+        18
+       ],
+       "size": [
+        0,
+        1,
+        3
+       ],
+       "uv": [
+        96,
+        28
+       ]
+      },
+      {
+       "origin": [
+        4,
+        7,
+        18
+       ],
+       "size": [
+        0,
+        1,
+        3
+       ],
+       "uv": [
+        102,
+        28
+       ]
+      }
+     ]
+    },
+    {
+     "name": "fluke",
+     "pivot": [
+      0,
+      8,
+      28
+     ],
+     "parent": "tail2",
+     "cubes": [
+      {
+       "origin": [
+        -14,
+        7,
+        28
+       ],
+       "size": [
+        28,
+        2,
+        8
+       ],
+       "uv": [
+        172,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -10,
+        7,
+        36
+       ],
+       "size": [
+        20,
+        2,
+        4
+       ],
+       "uv": [
+        0,
+        28
+       ]
+      },
+      {
+       "origin": [
+        -14,
+        7.5,
+        36
+       ],
+       "size": [
+        1,
+        1,
+        5
+       ],
+       "uv": [
+        48,
+        28
+       ]
+      },
+      {
+       "origin": [
+        -7,
+        7.5,
+        40
+       ],
+       "size": [
+        1,
+        1,
+        5
+       ],
+       "uv": [
+        60,
+        28
+       ]
+      },
+      {
+       "origin": [
+        7,
+        7.5,
+        40
+       ],
+       "size": [
+        1,
+        1,
+        5
+       ],
+       "uv": [
+        72,
+        28
+       ]
+      },
+      {
+       "origin": [
+        13,
+        7.5,
+        36
+       ],
+       "size": [
+        1,
+        1,
+        5
+       ],
+       "uv": [
+        84,
+        28
+       ]
+      }
+     ]
+    },
+    {
+     "name": "crust",
+     "pivot": [
+      0,
+      8,
+      0
+     ],
+     "parent": "seg"
+    }
+   ]
+  }
+ ]
+}

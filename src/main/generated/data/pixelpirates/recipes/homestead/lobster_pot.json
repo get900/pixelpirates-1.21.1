@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "S S",
+    "PSP"
+  ],
+  "result": {
+    "item": "pixelpirates:lobster_pot"
+  },
+  "show_notification": true
+}

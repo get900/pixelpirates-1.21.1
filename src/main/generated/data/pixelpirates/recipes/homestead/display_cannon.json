@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "pixelpirates:cannon_ball"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "III",
+    "ICI",
+    "P P"
+  ],
+  "result": {
+    "item": "pixelpirates:display_cannon"
+  },
+  "show_notification": true
+}

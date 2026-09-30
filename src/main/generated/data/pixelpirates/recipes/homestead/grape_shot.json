@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NGN",
+    "NLN"
+  ],
+  "result": {
+    "count": 2,
+    "item": "pixelpirates:grape_shot"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "pixelpirates:driftwood"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "DSD",
+    "DSD"
+  ],
+  "result": {
+    "count": 3,
+    "item": "pixelpirates:driftwood_fence"
+  },
+  "show_notification": true
+}

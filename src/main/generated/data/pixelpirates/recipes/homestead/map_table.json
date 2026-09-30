@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "L": {
+      "item": "minecraft:dark_oak_log"
+    },
+    "M": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "CM",
+    "SS",
+    "LL"
+  ],
+  "result": {
+    "item": "pixelpirates:map_table"
+  },
+  "show_notification": true
+}

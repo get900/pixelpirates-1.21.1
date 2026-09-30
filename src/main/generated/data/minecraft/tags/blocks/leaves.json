@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "pixelpirates:shorewood_leaves",
+    "pixelpirates:palm_leaves",
+    "pixelpirates:tidewood_leaves",
+    "pixelpirates:ember_leaves",
+    "pixelpirates:wisp_leaves",
+    "pixelpirates:voidbloom_leaves"
+  ]
+}

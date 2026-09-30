@@ -1,0 +1,121 @@
+{
+  "carvers": {},
+  "downfall": 0.0,
+  "effects": {
+    "ambient_sound": "minecraft:ambient.basalt_deltas.loop",
+    "fog_color": 4860458,
+    "foliage_color": 7028752,
+    "grass_color": 9133610,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.basalt_deltas.mood",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:ash"
+      },
+      "probability": 0.00118093
+    },
+    "sky_color": 8011840,
+    "water_color": 7224123,
+    "water_fog_color": 4857374
+  },
+  "features": [
+    [],
+    [],
+    [
+      "pixelpirates:sulfur_boulder_placed"
+    ],
+    [],
+    [
+      "pixelpirates:cinder_forge_placed",
+      "pixelpirates:obsidian_vault_placed",
+      "pixelpirates:fire_camp_placed",
+      "pixelpirates:gallows_grotto_placed",
+      "pixelpirates:titans_chest_placed",
+      "pixelpirates:leviathan_sites_placed"
+    ],
+    [],
+    [
+      "pixelpirates:scorched_sand_patch_placed",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel",
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_gold_extra",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper"
+    ],
+    [],
+    [
+      "minecraft:spring_lava"
+    ],
+    [
+      "pixelpirates:ashen_tree_placed",
+      "pixelpirates:cinder_tree_placed",
+      "minecraft:patch_dead_bush"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:skeleton",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 50
+      },
+      {
+        "type": "minecraft:zombie",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 30
+      },
+      {
+        "type": "minecraft:magma_cube",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 15
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": [
+      {
+        "type": "minecraft:squid",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 2
+      }
+    ]
+  },
+  "temperature": 1.2
+}

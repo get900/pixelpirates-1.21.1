@@ -13,10 +13,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.object.PlayState;
 
 public class RaftEntity extends BoatEntity implements GeoAnimatable {
 
@@ -25,7 +27,6 @@ public class RaftEntity extends BoatEntity implements GeoAnimatable {
     private float movementSpeed = 0.14f;
     private float targetYaw;
 
-    // ✅ Sinking / health system
     private float damage = 0f;
     private final float maxDamage = 20f;
 
@@ -50,14 +51,12 @@ public class RaftEntity extends BoatEntity implements GeoAnimatable {
 
         if (this.getWorld().isClient) return;
 
-        // ✅ Steering by passenger
         if (sailsLowered && this.hasPassengers() && this.getFirstPassenger() instanceof PlayerEntity player) {
             this.targetYaw = player.getYaw();
             float yawDiff = MathHelper.wrapDegrees(this.targetYaw - this.getYaw());
             this.setYaw(this.getYaw() + yawDiff * 0.05f);
         }
 
-        // ✅ Movement forward when sails are lowered
         if (sailsLowered) {
             Vec3d forward = this.getRotationVector().normalize().multiply(movementSpeed);
             this.move(MovementType.SELF, forward);
@@ -76,9 +75,8 @@ public class RaftEntity extends BoatEntity implements GeoAnimatable {
         this.getWorld().getOtherEntities(this, this.getBoundingBox().expand(0.1), entity ->
                 entity instanceof PlayerEntity &&
                         !entity.hasVehicle() &&
-                        entity.getY() > this.getY() + 0.1 // Make sure they're on top
+                        entity.getY() > this.getY() + 0.1
         ).forEach(entity -> {
-            // Add raft motion to standing players
             entity.addVelocity(raftVelocity.x * 0.9, 0, raftVelocity.z * 0.9);
         });
     }
@@ -111,11 +109,15 @@ public class RaftEntity extends BoatEntity implements GeoAnimatable {
         return ActionResult.PASS;
     }
 
-    // ✅ Health & sinking
+    @Override
+    protected boolean canAddPassenger(Entity passenger) {
+        return !(passenger instanceof SharkEntity) && super.canAddPassenger(passenger);
+    }
+
     public void damageRaft(float amount) {
         this.damage = Math.min(this.damage + amount, maxDamage);
         if (this.damage >= maxDamage) {
-            this.kill(); // Calls dropItems()
+            this.kill();
         }
     }
 
@@ -123,16 +125,14 @@ public class RaftEntity extends BoatEntity implements GeoAnimatable {
     public boolean damage(DamageSource source, float amount) {
         if (this.isInvulnerableTo(source)) return false;
         this.damageRaft(amount);
-        this.scheduleVelocityUpdate(); // sync with client for animation/sinking
+        this.scheduleVelocityUpdate();
         return true;
     }
 
     public float getSinkingAmount() {
-        return (damage / maxDamage) * 6f; // max 6 pixels down (0.375 blocks)
+        return (damage / maxDamage) * 6f;
     }
 
-
-    // ✅ Save/load custom NBT data
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
@@ -149,11 +149,8 @@ public class RaftEntity extends BoatEntity implements GeoAnimatable {
         targetYaw = nbt.getFloat("TargetYaw");
     }
 
-
-    // ✅ GeckoLib animation
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
-
 }

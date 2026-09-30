@@ -1,0 +1,15 @@
+{
+  "display": {
+    "icon": {"item": "pixelpirates:kraken_ink"},
+    "title": {"translate": "advancements.pixelpirates.the_abyss.title"},
+    "description": {"translate": "advancements.pixelpirates.the_abyss.description"},
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:the_cursed_seas",
+  "criteria": {
+    "got_here": {"trigger": "minecraft:impossible"}
+  }
+}

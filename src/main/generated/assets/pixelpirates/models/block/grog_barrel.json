@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "pixelpirates:block/grog_barrel_bottom",
+    "side": "pixelpirates:block/grog_barrel_side",
+    "top": "pixelpirates:block/grog_barrel_top"
+  }
+}

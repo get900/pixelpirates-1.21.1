@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "IIF",
+    "  P"
+  ],
+  "result": {
+    "item": "pixelpirates:flintlock_pistol"
+  },
+  "show_notification": true
+}

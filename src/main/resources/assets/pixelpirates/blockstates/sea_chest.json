@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/sea_chest"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/sea_chest",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/sea_chest",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/sea_chest",
+   "y": 270
+  }
+ }
+}

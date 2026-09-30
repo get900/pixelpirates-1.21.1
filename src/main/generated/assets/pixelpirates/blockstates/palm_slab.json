@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pixelpirates:block/palm_slab"
+    },
+    "type=double": {
+      "model": "pixelpirates:block/palm_planks"
+    },
+    "type=top": {
+      "model": "pixelpirates:block/palm_slab_top"
+    }
+  }
+}

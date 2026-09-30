@@ -1,14 +1,32 @@
 {
-	"required": true,
-	"package": "net.get900.pixelpirates.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"ExampleMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
-	}
+  "required": true,
+  "package": "net.get900.pixelpirates.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ExampleMixin",
+    "PathfindingCrashGuardMixin",
+    "PlayerProgressionMixin",
+    "FeatureExclusionMixin",
+    "HomesteadDropsMixin",
+    "KrakenMiningMixin",
+    "CaptainsSpyglassMixin",
+    "HideoutSpawnMixin",
+    "LairSpawnMixin",
+    "ArenaSpawnMixin",
+    "ParrotShoulderMixin",
+    "PlayerShoulderInvoker",
+    "SalvageHookBobberMixin"
+  ],
+  "client": [
+    "BackgroundRendererMixin",
+    "ClientWorldParticleMixin",
+    "LightmapFullbrightMixin",
+    "TipsyCameraMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
 }

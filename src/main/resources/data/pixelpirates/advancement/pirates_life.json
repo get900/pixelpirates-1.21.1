@@ -1,0 +1,15 @@
+{
+  "parent": "pixelpirates:root",
+  "display": {
+    "icon": { "id": "pixelpirates:dimension_key" },
+    "title": { "translate": "advancements.pixelpirates.pirates_life.title" },
+    "description": { "translate": "advancements.pixelpirates.pirates_life.description" },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "got_here": { "trigger": "minecraft:impossible" }
+  },
+  "requirements": [["got_here"]]
+}

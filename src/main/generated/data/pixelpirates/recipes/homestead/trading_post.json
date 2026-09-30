@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "C": {
+      "item": "pixelpirates:pirate_coin"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "minecraft:spruce_planks"
+    },
+    "S": {
+      "item": "minecraft:spruce_slab"
+    }
+  },
+  "pattern": [
+    "GCB",
+    "SSS",
+    "P P"
+  ],
+  "result": {
+    "item": "pixelpirates:trading_post"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,20 @@
+// 1.20.1	2026-09-30T13:14:28.9513213	Pixel Pirates/Tags for minecraft:block
+77359e211ed6a0c9b588be8ee84de34ca6135ae6 data\minecraft\tags\blocks\wooden_trapdoors.json
+5ad564db140ad48cab8f40395ac386df0c630ad4 data\minecraft\tags\blocks\leaves.json
+8f1e32cc82203767e4db0a14acb910cfd1ef135c data\minecraft\tags\blocks\wooden_fences.json
+4aa6786fbd1d293675d2703fa5c2433f19a37194 data\minecraft\tags\blocks\mineable\hoe.json
+30bc505326b5fe702c8e15d462244c0b6c8e32db data\minecraft\tags\blocks\mineable\axe.json
+89eb66a5083439f59cce975baa9e5c09297c72d5 data\minecraft\tags\blocks\planks.json
+3c2436041608bc19daffb47d1e01143080d42473 data\minecraft\tags\blocks\logs.json
+2ce5f8120dda60bcf263cbce2253995df631ac2a data\minecraft\tags\blocks\mineable\shovel.json
+d39a10191c35d3e362e66591aba931bbf9a7f991 data\minecraft\tags\blocks\saplings.json
+a4ae50aae98ef774a1601afd98422b23d65eabf6 data\minecraft\tags\blocks\wooden_slabs.json
+5e46806b1c64392fbdddb1be2b151b570a68fa5d data\pixelpirates\tags\blocks\needs_pirate_tool.json
+feacefc717b24ec26a6e53d12e3bdf6d4b704e91 data\minecraft\tags\blocks\fence_gates.json
+403ef5589cef648b05bf679761db69a901324ed4 data\minecraft\tags\blocks\wooden_stairs.json
+65a9e87fd65189ec9dc41d09cb441e9d4ea3a02e data\minecraft\tags\blocks\logs_that_burn.json
+4be291e3b3507c534fb741f848d8bcd6d94ab6a2 data\pixelpirates\tags\blocks\cannon_immune.json
+0398a02443e85f7dc1a363bda72deac4ebf8255f data\minecraft\tags\blocks\mineable\pickaxe.json
+3c2b9a722eacdaf225c337bfe8a4c633c473106d data\minecraft\tags\blocks\wooden_doors.json
+93ea2aaf0b78029444941fde50124898c435583f data\minecraft\tags\blocks\climbable.json
+9b9e46dd73b51a6713899faa59e1264647420a8d data\minecraft\tags\blocks\flower_pots.json

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "W": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "pattern": [
+    " W ",
+    "GBG",
+    "BBB"
+  ],
+  "result": {
+    "item": "pixelpirates:treasure_pedestal"
+  },
+  "show_notification": true
+}

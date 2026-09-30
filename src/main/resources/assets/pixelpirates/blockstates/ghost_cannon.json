@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "pixelpirates:block/ghost_cannon"
+    },
+    "facing=east": {
+      "model": "pixelpirates:block/ghost_cannon",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "pixelpirates:block/ghost_cannon",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "pixelpirates:block/ghost_cannon",
+      "y": 270
+    }
+  }
+}

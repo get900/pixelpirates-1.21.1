@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "R",
+    "R"
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:hanging_rope"
+  },
+  "show_notification": true
+}

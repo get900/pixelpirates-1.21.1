@@ -1,0 +1,77 @@
+{
+ "multipart": [
+  {
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_post"
+   }
+  },
+  {
+   "when": {
+    "north": "true"
+   },
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_side"
+   }
+  },
+  {
+   "when": {
+    "east": "true"
+   },
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_side",
+    "y": 90
+   }
+  },
+  {
+   "when": {
+    "south": "true"
+   },
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_side_alt"
+   }
+  },
+  {
+   "when": {
+    "west": "true"
+   },
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_side_alt",
+    "y": 90
+   }
+  },
+  {
+   "when": {
+    "north": "false"
+   },
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_noside"
+   }
+  },
+  {
+   "when": {
+    "east": "false"
+   },
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_noside_alt"
+   }
+  },
+  {
+   "when": {
+    "south": "false"
+   },
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_noside_alt",
+    "y": 90
+   }
+  },
+  {
+   "when": {
+    "west": "false"
+   },
+   "apply": {
+    "model": "pixelpirates:block/woven_palm_screen_noside",
+    "y": 270
+   }
+  }
+ ]
+}

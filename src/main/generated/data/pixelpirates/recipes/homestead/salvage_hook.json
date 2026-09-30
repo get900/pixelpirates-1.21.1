@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:string"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "  S",
+    " SL",
+    "S I"
+  ],
+  "result": {
+    "item": "pixelpirates:salvage_hook"
+  },
+  "show_notification": true
+}

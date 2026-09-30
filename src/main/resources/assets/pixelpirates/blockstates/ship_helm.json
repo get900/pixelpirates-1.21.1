@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "pixelpirates:block/ship_helm"
+    },
+    "facing=east": {
+      "model": "pixelpirates:block/ship_helm",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "pixelpirates:block/ship_helm",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "pixelpirates:block/ship_helm",
+      "y": 270
+    }
+  }
+}

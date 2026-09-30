@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/aging_cask"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/aging_cask",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/aging_cask",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/aging_cask",
+   "y": 270
+  }
+ }
+}

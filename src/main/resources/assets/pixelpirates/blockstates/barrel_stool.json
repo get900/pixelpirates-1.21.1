@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/barrel_stool"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/barrel_stool",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/barrel_stool",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/barrel_stool",
+   "y": 270
+  }
+ }
+}

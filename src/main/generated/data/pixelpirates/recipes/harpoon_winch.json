@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "H": {
+      "item": "pixelpirates:harpoon"
+    },
+    "L": {
+      "item": "minecraft:lead"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "CHC",
+    "PLP",
+    "PPP"
+  ],
+  "result": {
+    "item": "pixelpirates:harpoon_winch"
+  },
+  "show_notification": true
+}

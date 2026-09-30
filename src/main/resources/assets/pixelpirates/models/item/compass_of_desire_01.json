@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pixelpirates:item/compass_of_desire_01"
+  }
+}

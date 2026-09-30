@@ -1,0 +1,11 @@
+{
+ "variants": {
+  "axis=z": {
+   "model": "pixelpirates:block/rope_bridge"
+  },
+  "axis=x": {
+   "model": "pixelpirates:block/rope_bridge",
+   "y": 90
+  }
+ }
+}

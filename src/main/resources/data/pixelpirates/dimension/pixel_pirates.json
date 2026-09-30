@@ -1,0 +1,28 @@
+{
+  "type": "pixelpirates:pixel_pirates",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "pixelpirates:pixel_pirates_biome_source",
+      "biomes": [
+        "pixelpirates:spawn_island",
+        "pixelpirates:temperate_shallows",
+        "pixelpirates:island_thickets",
+        "pixelpirates:open_ocean",
+        "pixelpirates:coral_bay",
+        "pixelpirates:reef_edge",
+        "pixelpirates:siren_sea",
+        "pixelpirates:ash_reef",
+        "pixelpirates:boiling_basin",
+        "pixelpirates:magma_sea",
+        "pixelpirates:phantom_wake",
+        "pixelpirates:shipgrave_depths",
+        "pixelpirates:drowned_trench",
+        "pixelpirates:abyssal_rings",
+        "pixelpirates:pillar_sea",
+        "pixelpirates:maw_depths"
+      ]
+    },
+    "settings": "pixelpirates:pixel_pirates_shallows"
+  }
+}

@@ -1,0 +1,10 @@
+{
+ "variants": {
+  "waterlogged=false": {
+   "model": "pixelpirates:block/fish_trap"
+  },
+  "waterlogged=true": {
+   "model": "pixelpirates:block/fish_trap"
+  }
+ }
+}

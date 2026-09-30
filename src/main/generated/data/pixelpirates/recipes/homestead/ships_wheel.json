@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "SGS",
+    "PSP"
+  ],
+  "result": {
+    "item": "pixelpirates:ships_wheel"
+  },
+  "show_notification": true
+}

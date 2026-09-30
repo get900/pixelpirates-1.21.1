@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "pixelpirates:living_flesh",
+    "pixelpirates:flesh_vein",
+    "pixelpirates:shorewood_leaves",
+    "pixelpirates:banana_block",
+    "pixelpirates:palm_leaves",
+    "pixelpirates:tidewood_leaves",
+    "pixelpirates:ember_leaves",
+    "pixelpirates:wisp_leaves",
+    "pixelpirates:voidbloom_leaves",
+    "pixelpirates:thatch",
+    "pixelpirates:thatch_stairs",
+    "pixelpirates:thatch_slab"
+  ]
+}

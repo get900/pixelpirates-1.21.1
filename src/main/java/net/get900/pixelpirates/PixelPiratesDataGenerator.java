@@ -20,6 +20,9 @@ public class PixelPiratesDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModLootTableProvider::new);
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
+		pack.addProvider(net.get900.pixelpirates.homestead.datagen.HomesteadModelProvider::new);
+		pack.addProvider(net.get900.pixelpirates.homestead.datagen.HomesteadLootProvider::new);
+		pack.addProvider(net.get900.pixelpirates.homestead.datagen.HomesteadRecipeProvider::new);
 		pack.addProvider(ModRegistryDataGenerator::new);
 
 		pack.addProvider(ModBiomeProvider::new);

@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:serpent_trench",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

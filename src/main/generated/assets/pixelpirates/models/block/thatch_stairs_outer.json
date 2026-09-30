@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "pixelpirates:block/thatch",
+    "side": "pixelpirates:block/thatch",
+    "top": "pixelpirates:block/thatch"
+  }
+}

@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/mermaid_figurehead"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/mermaid_figurehead",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/mermaid_figurehead",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/mermaid_figurehead",
+   "y": 270
+  }
+ }
+}

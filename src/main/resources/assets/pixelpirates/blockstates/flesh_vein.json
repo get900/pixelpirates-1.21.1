@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "pixelpirates:block/flesh_vein"
+    },
+    "lit=true": {
+      "model": "pixelpirates:block/flesh_vein_lit"
+    }
+  }
+}

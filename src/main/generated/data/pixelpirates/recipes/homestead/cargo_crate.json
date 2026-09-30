@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:spruce_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "P P",
+    "SPS"
+  ],
+  "result": {
+    "count": 2,
+    "item": "pixelpirates:cargo_crate"
+  },
+  "show_notification": true
+}

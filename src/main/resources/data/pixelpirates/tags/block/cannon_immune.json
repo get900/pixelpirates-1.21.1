@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bedrock",
+    "minecraft:barrier",
+    "minecraft:obsidian",
+    "minecraft:crying_obsidian",
+    "minecraft:reinforced_deepslate"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "pixelpirates:volcanic_ember"
+    }
+  },
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "result": {
+    "item": "pixelpirates:ashen_boots"
+  },
+  "show_notification": true
+}

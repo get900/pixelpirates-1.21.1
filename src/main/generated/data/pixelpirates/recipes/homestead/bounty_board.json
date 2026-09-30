@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:spruce_planks"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "LPL",
+    "S S"
+  ],
+  "result": {
+    "item": "pixelpirates:bounty_board"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:sunken_galleon",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

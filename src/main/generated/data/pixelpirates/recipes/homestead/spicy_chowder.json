@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    [
+      {
+        "item": "minecraft:cod"
+      },
+      {
+        "item": "minecraft:salmon"
+      },
+      {
+        "item": "minecraft:cooked_cod"
+      },
+      {
+        "item": "minecraft:cooked_salmon"
+      }
+    ],
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "pixelpirates:chili_pepper"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:spicy_chowder"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "pixelpirates:rope"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "R R",
+    "RSR",
+    "R R"
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:rope_ladder"
+  },
+  "show_notification": true
+}

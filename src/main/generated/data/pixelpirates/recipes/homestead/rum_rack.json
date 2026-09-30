@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "S S",
+    "PPP"
+  ],
+  "result": {
+    "item": "pixelpirates:rum_rack"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "pixelpirates:block/harpoon_winch_top",
+    "side": "pixelpirates:block/harpoon_winch_side",
+    "front": "pixelpirates:block/harpoon_winch_front_empty"
+  }
+}

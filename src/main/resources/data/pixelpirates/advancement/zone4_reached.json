@@ -1,0 +1,16 @@
+{
+  "parent": "pixelpirates:zone3_reached",
+  "display": {
+    "icon": { "id": "pixelpirates:rusted_cutlass" },
+    "title": { "translate": "advancements.pixelpirates.zone4.title" },
+    "description": { "translate": "advancements.pixelpirates.zone4.description" },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "got_here": { "trigger": "minecraft:impossible" }
+  },
+  "requirements": [["got_here"]]
+}

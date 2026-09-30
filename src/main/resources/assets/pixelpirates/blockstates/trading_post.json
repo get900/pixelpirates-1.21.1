@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/trading_post"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/trading_post",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/trading_post",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/trading_post",
+   "y": 270
+  }
+ }
+}

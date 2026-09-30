@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "I I",
+    " I ",
+    " R "
+  ],
+  "result": {
+    "item": "pixelpirates:grappling_hook"
+  },
+  "show_notification": true
+}

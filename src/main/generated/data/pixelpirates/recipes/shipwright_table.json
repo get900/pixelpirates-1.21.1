@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "PCP",
+    "P P"
+  ],
+  "result": {
+    "item": "pixelpirates:shipwright_table"
+  },
+  "show_notification": true
+}

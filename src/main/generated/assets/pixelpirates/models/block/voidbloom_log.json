@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pixelpirates:block/voidbloom_log_top",
+    "side": "pixelpirates:block/voidbloom_log"
+  }
+}

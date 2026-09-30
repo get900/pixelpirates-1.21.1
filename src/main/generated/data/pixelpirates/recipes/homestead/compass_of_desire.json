@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "GEG",
+    "RCR",
+    "GAG"
+  ],
+  "result": {
+    "item": "pixelpirates:compass_of_desire"
+  },
+  "show_notification": true
+}

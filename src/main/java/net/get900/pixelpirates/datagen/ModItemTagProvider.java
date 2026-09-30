@@ -35,6 +35,15 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.SHOVELS)
                 .add(ModItems.BROKEN_SHOVEL);
 
+        getOrCreateTagBuilder(ItemTags.PLANKS)
+                .add(ModBlocks.PALM_PLANKS.asItem())
+                .add(ModBlocks.TIDEWOOD_PLANKS.asItem())
+                .add(ModBlocks.CHARRED_PLANKS.asItem())
+                .add(ModBlocks.WISPWOOD_PLANKS.asItem())
+                .add(ModBlocks.VOIDBLOOM_PLANKS.asItem());
+
+        net.get900.pixelpirates.homestead.datagen.HomesteadTags.items(this::getOrCreateTagBuilder);
+
         getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)
                 .add(ModItems.PIRATE_HELMET)
                 .add(ModItems.PIRATE_CHESTPLATE)

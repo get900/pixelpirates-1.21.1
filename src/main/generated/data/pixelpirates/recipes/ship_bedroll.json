@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "pixelpirates:tattered_cloth"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "WWW"
+  ],
+  "result": {
+    "item": "pixelpirates:ship_bedroll"
+  },
+  "show_notification": true
+}

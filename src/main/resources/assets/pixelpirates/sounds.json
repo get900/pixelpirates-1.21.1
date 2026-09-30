@@ -1,0 +1,1804 @@
+{
+  "music.halyard_song": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/halyard_song",
+        "stream": true
+      }
+    ]
+  },
+  "music.hauled_by_the_tide": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/hauled_by_the_tide",
+        "stream": true
+      }
+    ]
+  },
+  "music.hold_the_line": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/hold_the_line",
+        "stream": true
+      }
+    ]
+  },
+  "music.pirates_hollow": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/pirates_hollow",
+        "stream": true
+      }
+    ]
+  },
+  "music.stormbound_horizon": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/stormbound_horizon",
+        "stream": true
+      }
+    ]
+  },
+  "music.the_krakens_battle": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/the_krakens_battle",
+        "stream": true
+      }
+    ]
+  },
+  "music.the_krakens_call": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/the_krakens_call",
+        "stream": true
+      }
+    ]
+  },
+  "music.the_rising_crime": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/the_rising_crime",
+        "stream": true
+      }
+    ]
+  },
+  "music.the_rising_tide": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/the_rising_tide",
+        "stream": true
+      }
+    ]
+  },
+  "music.the_rising_vibe": {
+    "sounds": [
+      {
+        "name": "pixelpirates:music/the_rising_vibe",
+        "stream": true
+      }
+    ]
+  },
+  "entity.siren.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.siren.ambient",
+    "sounds": [
+      "pixelpirates:mob/siren/ambient1",
+      "pixelpirates:mob/siren/ambient2",
+      "pixelpirates:mob/siren/ambient3"
+    ]
+  },
+  "entity.siren.song": {
+    "subtitle": "subtitles.pixelpirates.entity.siren.song",
+    "sounds": [
+      {
+        "name": "pixelpirates:mob/siren/song1",
+        "attenuation_distance": 32
+      },
+      {
+        "name": "pixelpirates:mob/siren/song2",
+        "attenuation_distance": 32
+      }
+    ]
+  },
+  "entity.siren.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.siren.hurt",
+    "sounds": [
+      "pixelpirates:mob/siren/hurt1",
+      "pixelpirates:mob/siren/hurt2"
+    ]
+  },
+  "entity.siren.death": {
+    "subtitle": "subtitles.pixelpirates.entity.siren.death",
+    "sounds": [
+      "pixelpirates:mob/siren/death"
+    ]
+  },
+  "entity.siren.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.siren.attack",
+    "sounds": [
+      "pixelpirates:mob/siren/attack1",
+      "pixelpirates:mob/siren/attack2"
+    ]
+  },
+  "entity.coral_jelly.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_jelly.ambient",
+    "sounds": [
+      "pixelpirates:mob/coral_jelly/ambient1",
+      "pixelpirates:mob/coral_jelly/ambient2",
+      "pixelpirates:mob/coral_jelly/ambient3"
+    ]
+  },
+  "entity.coral_jelly.sting": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_jelly.sting",
+    "sounds": [
+      "pixelpirates:mob/coral_jelly/sting1",
+      "pixelpirates:mob/coral_jelly/sting2"
+    ]
+  },
+  "entity.coral_jelly.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_jelly.hurt",
+    "sounds": [
+      "pixelpirates:mob/coral_jelly/hurt1",
+      "pixelpirates:mob/coral_jelly/hurt2"
+    ]
+  },
+  "entity.coral_jelly.death": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_jelly.death",
+    "sounds": [
+      "pixelpirates:mob/coral_jelly/death"
+    ]
+  },
+  "entity.magma_brute.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.magma_brute.ambient",
+    "sounds": [
+      "pixelpirates:mob/magma_brute/ambient1",
+      "pixelpirates:mob/magma_brute/ambient2",
+      "pixelpirates:mob/magma_brute/ambient3"
+    ]
+  },
+  "entity.magma_brute.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.magma_brute.hurt",
+    "sounds": [
+      "pixelpirates:mob/magma_brute/hurt1",
+      "pixelpirates:mob/magma_brute/hurt2"
+    ]
+  },
+  "entity.magma_brute.death": {
+    "subtitle": "subtitles.pixelpirates.entity.magma_brute.death",
+    "sounds": [
+      "pixelpirates:mob/magma_brute/death"
+    ]
+  },
+  "entity.magma_brute.slam": {
+    "subtitle": "subtitles.pixelpirates.entity.magma_brute.slam",
+    "sounds": [
+      "pixelpirates:mob/magma_brute/slam1",
+      "pixelpirates:mob/magma_brute/slam2"
+    ]
+  },
+  "entity.magma_brute.step": {
+    "subtitle": "subtitles.pixelpirates.entity.magma_brute.step",
+    "sounds": [
+      "pixelpirates:mob/magma_brute/step1",
+      "pixelpirates:mob/magma_brute/step2",
+      "pixelpirates:mob/magma_brute/step3"
+    ]
+  },
+  "entity.magma_brute.roar": {
+    "subtitle": "subtitles.pixelpirates.entity.magma_brute.roar",
+    "sounds": [
+      "pixelpirates:mob/magma_brute/roar1",
+      "pixelpirates:mob/magma_brute/roar2"
+    ]
+  },
+  "entity.mimic.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.mimic.ambient",
+    "sounds": [
+      "pixelpirates:mob/mimic/ambient1",
+      "pixelpirates:mob/mimic/ambient2"
+    ]
+  },
+  "entity.mimic.awaken": {
+    "subtitle": "subtitles.pixelpirates.entity.mimic.awaken",
+    "sounds": [
+      "pixelpirates:mob/mimic/awaken"
+    ]
+  },
+  "entity.mimic.bite": {
+    "subtitle": "subtitles.pixelpirates.entity.mimic.bite",
+    "sounds": [
+      "pixelpirates:mob/mimic/bite1",
+      "pixelpirates:mob/mimic/bite2"
+    ]
+  },
+  "entity.mimic.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.mimic.hurt",
+    "sounds": [
+      "pixelpirates:mob/mimic/hurt1",
+      "pixelpirates:mob/mimic/hurt2"
+    ]
+  },
+  "entity.mimic.death": {
+    "subtitle": "subtitles.pixelpirates.entity.mimic.death",
+    "sounds": [
+      "pixelpirates:mob/mimic/death"
+    ]
+  },
+  "entity.abyssal_angler.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_angler.ambient",
+    "sounds": [
+      "pixelpirates:mob/abyssal_angler/ambient1",
+      "pixelpirates:mob/abyssal_angler/ambient2",
+      "pixelpirates:mob/abyssal_angler/ambient3"
+    ]
+  },
+  "entity.abyssal_angler.lure": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_angler.lure",
+    "sounds": [
+      "pixelpirates:mob/abyssal_angler/lure"
+    ]
+  },
+  "entity.abyssal_angler.bite": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_angler.bite",
+    "sounds": [
+      "pixelpirates:mob/abyssal_angler/bite1",
+      "pixelpirates:mob/abyssal_angler/bite2"
+    ]
+  },
+  "entity.abyssal_angler.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_angler.hurt",
+    "sounds": [
+      "pixelpirates:mob/abyssal_angler/hurt1",
+      "pixelpirates:mob/abyssal_angler/hurt2"
+    ]
+  },
+  "entity.abyssal_angler.death": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_angler.death",
+    "sounds": [
+      "pixelpirates:mob/abyssal_angler/death"
+    ]
+  },
+  "entity.shark.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.shark.ambient",
+    "sounds": [
+      "pixelpirates:mob/shark/ambient1",
+      "pixelpirates:mob/shark/ambient2"
+    ]
+  },
+  "entity.shark.bite": {
+    "subtitle": "subtitles.pixelpirates.entity.shark.bite",
+    "sounds": [
+      "pixelpirates:mob/shark/bite1",
+      "pixelpirates:mob/shark/bite2"
+    ]
+  },
+  "entity.shark.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.shark.hurt",
+    "sounds": [
+      "pixelpirates:mob/shark/hurt1",
+      "pixelpirates:mob/shark/hurt2"
+    ]
+  },
+  "entity.shark.death": {
+    "subtitle": "subtitles.pixelpirates.entity.shark.death",
+    "sounds": [
+      "pixelpirates:mob/shark/death"
+    ]
+  },
+  "entity.shark.breach": {
+    "subtitle": "subtitles.pixelpirates.entity.shark.breach",
+    "sounds": [
+      "pixelpirates:mob/shark/breach"
+    ]
+  },
+  "entity.chest_crab.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.chest_crab.ambient",
+    "sounds": [
+      "pixelpirates:mob/chest_crab/ambient1",
+      "pixelpirates:mob/chest_crab/ambient2"
+    ]
+  },
+  "entity.chest_crab.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.chest_crab.hurt",
+    "sounds": [
+      "pixelpirates:mob/chest_crab/hurt1",
+      "pixelpirates:mob/chest_crab/hurt2"
+    ]
+  },
+  "entity.chest_crab.death": {
+    "subtitle": "subtitles.pixelpirates.entity.chest_crab.death",
+    "sounds": [
+      "pixelpirates:mob/chest_crab/death"
+    ]
+  },
+  "entity.chest_crab.step": {
+    "subtitle": "subtitles.pixelpirates.entity.chest_crab.step",
+    "sounds": [
+      "pixelpirates:mob/chest_crab/step1",
+      "pixelpirates:mob/chest_crab/step2"
+    ]
+  },
+  "entity.chest_crab.hide": {
+    "subtitle": "subtitles.pixelpirates.entity.chest_crab.hide",
+    "sounds": [
+      "pixelpirates:mob/chest_crab/hide"
+    ]
+  },
+  "entity.chest_crab.coin": {
+    "subtitle": "subtitles.pixelpirates.entity.chest_crab.coin",
+    "sounds": [
+      "pixelpirates:mob/chest_crab/coin1",
+      "pixelpirates:mob/chest_crab/coin2"
+    ]
+  },
+  "entity.lava_crab.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_crab.ambient",
+    "sounds": [
+      "pixelpirates:mob/lava_crab/ambient1",
+      "pixelpirates:mob/lava_crab/ambient2"
+    ]
+  },
+  "entity.lava_crab.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_crab.hurt",
+    "sounds": [
+      "pixelpirates:mob/lava_crab/hurt1",
+      "pixelpirates:mob/lava_crab/hurt2"
+    ]
+  },
+  "entity.lava_crab.death": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_crab.death",
+    "sounds": [
+      "pixelpirates:mob/lava_crab/death"
+    ]
+  },
+  "entity.lava_crab.step": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_crab.step",
+    "sounds": [
+      "pixelpirates:mob/lava_crab/step1",
+      "pixelpirates:mob/lava_crab/step2"
+    ]
+  },
+  "entity.castaway.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.castaway.ambient",
+    "sounds": [
+      "pixelpirates:mob/castaway/ambient1",
+      "pixelpirates:mob/castaway/ambient2",
+      "pixelpirates:mob/castaway/ambient3"
+    ]
+  },
+  "entity.castaway.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.castaway.hurt",
+    "sounds": [
+      "pixelpirates:mob/castaway/hurt1",
+      "pixelpirates:mob/castaway/hurt2"
+    ]
+  },
+  "entity.castaway.death": {
+    "subtitle": "subtitles.pixelpirates.entity.castaway.death",
+    "sounds": [
+      "pixelpirates:mob/castaway/death"
+    ]
+  },
+  "entity.castaway.drink": {
+    "subtitle": "subtitles.pixelpirates.entity.castaway.drink",
+    "sounds": [
+      "pixelpirates:mob/castaway/drink"
+    ]
+  },
+  "entity.castaway.throw": {
+    "subtitle": "subtitles.pixelpirates.entity.castaway.throw",
+    "sounds": [
+      "pixelpirates:mob/castaway/throw1",
+      "pixelpirates:mob/castaway/throw2"
+    ]
+  },
+  "entity.cursed_monkey.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.cursed_monkey.ambient",
+    "sounds": [
+      "pixelpirates:mob/cursed_monkey/ambient1",
+      "pixelpirates:mob/cursed_monkey/ambient2",
+      "pixelpirates:mob/cursed_monkey/ambient3"
+    ]
+  },
+  "entity.cursed_monkey.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.cursed_monkey.hurt",
+    "sounds": [
+      "pixelpirates:mob/cursed_monkey/hurt1",
+      "pixelpirates:mob/cursed_monkey/hurt2"
+    ]
+  },
+  "entity.cursed_monkey.death": {
+    "subtitle": "subtitles.pixelpirates.entity.cursed_monkey.death",
+    "sounds": [
+      "pixelpirates:mob/cursed_monkey/death"
+    ]
+  },
+  "entity.cursed_monkey.step": {
+    "subtitle": "subtitles.pixelpirates.entity.cursed_monkey.step",
+    "sounds": [
+      "pixelpirates:mob/cursed_monkey/step1",
+      "pixelpirates:mob/cursed_monkey/step2"
+    ]
+  },
+  "entity.map_merchant.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.map_merchant.ambient",
+    "sounds": [
+      "pixelpirates:mob/map_merchant/ambient1",
+      "pixelpirates:mob/map_merchant/ambient2",
+      "pixelpirates:mob/map_merchant/ambient3"
+    ]
+  },
+  "entity.map_merchant.trade": {
+    "subtitle": "subtitles.pixelpirates.entity.map_merchant.trade",
+    "sounds": [
+      "pixelpirates:mob/map_merchant/trade"
+    ]
+  },
+  "entity.map_merchant.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.map_merchant.hurt",
+    "sounds": [
+      "pixelpirates:mob/map_merchant/hurt1",
+      "pixelpirates:mob/map_merchant/hurt2"
+    ]
+  },
+  "entity.map_merchant.death": {
+    "subtitle": "subtitles.pixelpirates.entity.map_merchant.death",
+    "sounds": [
+      "pixelpirates:mob/map_merchant/death"
+    ]
+  },
+  "entity.pirate_crew.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.pirate_crew.ambient",
+    "sounds": [
+      "pixelpirates:mob/pirate_crew/ambient1",
+      "pixelpirates:mob/pirate_crew/ambient2",
+      "pixelpirates:mob/pirate_crew/ambient3"
+    ]
+  },
+  "entity.pirate_crew.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.pirate_crew.hurt",
+    "sounds": [
+      "pixelpirates:mob/pirate_crew/hurt1",
+      "pixelpirates:mob/pirate_crew/hurt2"
+    ]
+  },
+  "entity.pirate_crew.death": {
+    "subtitle": "subtitles.pixelpirates.entity.pirate_crew.death",
+    "sounds": [
+      "pixelpirates:mob/pirate_crew/death"
+    ]
+  },
+  "entity.ship_captain.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.ship_captain.ambient",
+    "sounds": [
+      "pixelpirates:mob/ship_captain/ambient1",
+      "pixelpirates:mob/ship_captain/ambient2",
+      "pixelpirates:mob/ship_captain/ambient3"
+    ]
+  },
+  "entity.ship_captain.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.ship_captain.hurt",
+    "sounds": [
+      "pixelpirates:mob/ship_captain/hurt1",
+      "pixelpirates:mob/ship_captain/hurt2"
+    ]
+  },
+  "entity.ship_captain.death": {
+    "subtitle": "subtitles.pixelpirates.entity.ship_captain.death",
+    "sounds": [
+      "pixelpirates:mob/ship_captain/death"
+    ]
+  },
+  "entity.raft_pirate.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.raft_pirate.ambient",
+    "sounds": [
+      "pixelpirates:mob/raft_pirate/ambient1",
+      "pixelpirates:mob/raft_pirate/ambient2"
+    ]
+  },
+  "entity.raft_pirate.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.raft_pirate.hurt",
+    "sounds": [
+      "pixelpirates:mob/raft_pirate/hurt1",
+      "pixelpirates:mob/raft_pirate/hurt2"
+    ]
+  },
+  "entity.raft_pirate.death": {
+    "subtitle": "subtitles.pixelpirates.entity.raft_pirate.death",
+    "sounds": [
+      "pixelpirates:mob/raft_pirate/death"
+    ]
+  },
+  "entity.raft_pirate.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.raft_pirate.attack",
+    "sounds": [
+      "pixelpirates:mob/raft_pirate/attack"
+    ]
+  },
+  "entity.raft_pirate.special": {
+    "subtitle": "subtitles.pixelpirates.entity.raft_pirate.special",
+    "sounds": [
+      "pixelpirates:mob/raft_pirate/special"
+    ]
+  },
+  "entity.captain_rackham.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.captain_rackham.ambient",
+    "sounds": [
+      "pixelpirates:mob/captain_rackham/ambient1",
+      "pixelpirates:mob/captain_rackham/ambient2"
+    ]
+  },
+  "entity.captain_rackham.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.captain_rackham.hurt",
+    "sounds": [
+      "pixelpirates:mob/captain_rackham/hurt1",
+      "pixelpirates:mob/captain_rackham/hurt2"
+    ]
+  },
+  "entity.captain_rackham.death": {
+    "subtitle": "subtitles.pixelpirates.entity.captain_rackham.death",
+    "sounds": [
+      "pixelpirates:mob/captain_rackham/death"
+    ]
+  },
+  "entity.captain_rackham.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.captain_rackham.attack",
+    "sounds": [
+      "pixelpirates:mob/captain_rackham/attack"
+    ]
+  },
+  "entity.captain_rackham.special": {
+    "subtitle": "subtitles.pixelpirates.entity.captain_rackham.special",
+    "sounds": [
+      "pixelpirates:mob/captain_rackham/special"
+    ]
+  },
+  "entity.bloodfin.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.bloodfin.ambient",
+    "sounds": [
+      "pixelpirates:mob/bloodfin/ambient1",
+      "pixelpirates:mob/bloodfin/ambient2"
+    ]
+  },
+  "entity.bloodfin.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.bloodfin.hurt",
+    "sounds": [
+      "pixelpirates:mob/bloodfin/hurt1",
+      "pixelpirates:mob/bloodfin/hurt2"
+    ]
+  },
+  "entity.bloodfin.death": {
+    "subtitle": "subtitles.pixelpirates.entity.bloodfin.death",
+    "sounds": [
+      "pixelpirates:mob/bloodfin/death"
+    ]
+  },
+  "entity.bloodfin.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.bloodfin.attack",
+    "sounds": [
+      "pixelpirates:mob/bloodfin/attack"
+    ]
+  },
+  "entity.bloodfin.special": {
+    "subtitle": "subtitles.pixelpirates.entity.bloodfin.special",
+    "sounds": [
+      "pixelpirates:mob/bloodfin/special"
+    ]
+  },
+  "entity.sea_serpent.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.sea_serpent.ambient",
+    "sounds": [
+      "pixelpirates:mob/sea_serpent/ambient1",
+      "pixelpirates:mob/sea_serpent/ambient2"
+    ]
+  },
+  "entity.sea_serpent.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.sea_serpent.hurt",
+    "sounds": [
+      "pixelpirates:mob/sea_serpent/hurt1",
+      "pixelpirates:mob/sea_serpent/hurt2"
+    ]
+  },
+  "entity.sea_serpent.death": {
+    "subtitle": "subtitles.pixelpirates.entity.sea_serpent.death",
+    "sounds": [
+      "pixelpirates:mob/sea_serpent/death"
+    ]
+  },
+  "entity.sea_serpent.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.sea_serpent.attack",
+    "sounds": [
+      "pixelpirates:mob/sea_serpent/attack"
+    ]
+  },
+  "entity.sea_serpent.special": {
+    "subtitle": "subtitles.pixelpirates.entity.sea_serpent.special",
+    "sounds": [
+      "pixelpirates:mob/sea_serpent/special"
+    ]
+  },
+  "entity.kraken_tentacle.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_tentacle.ambient",
+    "sounds": [
+      "pixelpirates:mob/kraken_tentacle/ambient1",
+      "pixelpirates:mob/kraken_tentacle/ambient2"
+    ]
+  },
+  "entity.kraken_tentacle.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_tentacle.hurt",
+    "sounds": [
+      "pixelpirates:mob/kraken_tentacle/hurt1",
+      "pixelpirates:mob/kraken_tentacle/hurt2"
+    ]
+  },
+  "entity.kraken_tentacle.death": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_tentacle.death",
+    "sounds": [
+      "pixelpirates:mob/kraken_tentacle/death"
+    ]
+  },
+  "entity.kraken_tentacle.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_tentacle.attack",
+    "sounds": [
+      "pixelpirates:mob/kraken_tentacle/attack"
+    ]
+  },
+  "entity.kraken_tentacle.special": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_tentacle.special",
+    "sounds": [
+      "pixelpirates:mob/kraken_tentacle/special"
+    ]
+  },
+  "entity.kraken.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken.ambient",
+    "sounds": [
+      "pixelpirates:mob/kraken/ambient1",
+      "pixelpirates:mob/kraken/ambient2"
+    ]
+  },
+  "entity.kraken.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken.hurt",
+    "sounds": [
+      "pixelpirates:mob/kraken/hurt1",
+      "pixelpirates:mob/kraken/hurt2"
+    ]
+  },
+  "entity.kraken.death": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken.death",
+    "sounds": [
+      "pixelpirates:mob/kraken/death"
+    ]
+  },
+  "entity.kraken.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken.attack",
+    "sounds": [
+      "pixelpirates:mob/kraken/attack"
+    ]
+  },
+  "entity.kraken.special": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken.special",
+    "sounds": [
+      "pixelpirates:mob/kraken/special"
+    ]
+  },
+  "entity.reefback_fish.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.reefback_fish.ambient",
+    "sounds": [
+      "pixelpirates:mob/reefback_fish/ambient1",
+      "pixelpirates:mob/reefback_fish/ambient2"
+    ]
+  },
+  "entity.reefback_fish.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.reefback_fish.hurt",
+    "sounds": [
+      "pixelpirates:mob/reefback_fish/hurt1",
+      "pixelpirates:mob/reefback_fish/hurt2"
+    ]
+  },
+  "entity.reefback_fish.death": {
+    "subtitle": "subtitles.pixelpirates.entity.reefback_fish.death",
+    "sounds": [
+      "pixelpirates:mob/reefback_fish/death"
+    ]
+  },
+  "entity.reefback_fish.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.reefback_fish.attack",
+    "sounds": [
+      "pixelpirates:mob/reefback_fish/attack"
+    ]
+  },
+  "entity.reefback_fish.special": {
+    "subtitle": "subtitles.pixelpirates.entity.reefback_fish.special",
+    "sounds": [
+      "pixelpirates:mob/reefback_fish/special"
+    ]
+  },
+  "entity.void_squid.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.void_squid.ambient",
+    "sounds": [
+      "pixelpirates:mob/void_squid/ambient1",
+      "pixelpirates:mob/void_squid/ambient2"
+    ]
+  },
+  "entity.void_squid.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.void_squid.hurt",
+    "sounds": [
+      "pixelpirates:mob/void_squid/hurt1",
+      "pixelpirates:mob/void_squid/hurt2"
+    ]
+  },
+  "entity.void_squid.death": {
+    "subtitle": "subtitles.pixelpirates.entity.void_squid.death",
+    "sounds": [
+      "pixelpirates:mob/void_squid/death"
+    ]
+  },
+  "entity.void_squid.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.void_squid.attack",
+    "sounds": [
+      "pixelpirates:mob/void_squid/attack"
+    ]
+  },
+  "entity.void_squid.special": {
+    "subtitle": "subtitles.pixelpirates.entity.void_squid.special",
+    "sounds": [
+      "pixelpirates:mob/void_squid/special"
+    ]
+  },
+  "entity.molten_warlord.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.molten_warlord.ambient",
+    "sounds": [
+      "pixelpirates:mob/molten_warlord/ambient1",
+      "pixelpirates:mob/molten_warlord/ambient2"
+    ]
+  },
+  "entity.molten_warlord.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.molten_warlord.hurt",
+    "sounds": [
+      "pixelpirates:mob/molten_warlord/hurt1",
+      "pixelpirates:mob/molten_warlord/hurt2"
+    ]
+  },
+  "entity.molten_warlord.death": {
+    "subtitle": "subtitles.pixelpirates.entity.molten_warlord.death",
+    "sounds": [
+      "pixelpirates:mob/molten_warlord/death"
+    ]
+  },
+  "entity.molten_warlord.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.molten_warlord.attack",
+    "sounds": [
+      "pixelpirates:mob/molten_warlord/attack"
+    ]
+  },
+  "entity.molten_warlord.special": {
+    "subtitle": "subtitles.pixelpirates.entity.molten_warlord.special",
+    "sounds": [
+      "pixelpirates:mob/molten_warlord/special"
+    ]
+  },
+  "entity.obsidian_golem.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.obsidian_golem.ambient",
+    "sounds": [
+      "pixelpirates:mob/obsidian_golem/ambient1",
+      "pixelpirates:mob/obsidian_golem/ambient2"
+    ]
+  },
+  "entity.obsidian_golem.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.obsidian_golem.hurt",
+    "sounds": [
+      "pixelpirates:mob/obsidian_golem/hurt1",
+      "pixelpirates:mob/obsidian_golem/hurt2"
+    ]
+  },
+  "entity.obsidian_golem.death": {
+    "subtitle": "subtitles.pixelpirates.entity.obsidian_golem.death",
+    "sounds": [
+      "pixelpirates:mob/obsidian_golem/death"
+    ]
+  },
+  "entity.obsidian_golem.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.obsidian_golem.attack",
+    "sounds": [
+      "pixelpirates:mob/obsidian_golem/attack"
+    ]
+  },
+  "entity.obsidian_golem.special": {
+    "subtitle": "subtitles.pixelpirates.entity.obsidian_golem.special",
+    "sounds": [
+      "pixelpirates:mob/obsidian_golem/special"
+    ]
+  },
+  "entity.flame_sprite.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.flame_sprite.ambient",
+    "sounds": [
+      "pixelpirates:mob/flame_sprite/ambient1",
+      "pixelpirates:mob/flame_sprite/ambient2"
+    ]
+  },
+  "entity.flame_sprite.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.flame_sprite.hurt",
+    "sounds": [
+      "pixelpirates:mob/flame_sprite/hurt1",
+      "pixelpirates:mob/flame_sprite/hurt2"
+    ]
+  },
+  "entity.flame_sprite.death": {
+    "subtitle": "subtitles.pixelpirates.entity.flame_sprite.death",
+    "sounds": [
+      "pixelpirates:mob/flame_sprite/death"
+    ]
+  },
+  "entity.flame_sprite.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.flame_sprite.attack",
+    "sounds": [
+      "pixelpirates:mob/flame_sprite/attack"
+    ]
+  },
+  "entity.flame_sprite.special": {
+    "subtitle": "subtitles.pixelpirates.entity.flame_sprite.special",
+    "sounds": [
+      "pixelpirates:mob/flame_sprite/special"
+    ]
+  },
+  "entity.ember_wraith.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.ember_wraith.ambient",
+    "sounds": [
+      "pixelpirates:mob/ember_wraith/ambient1",
+      "pixelpirates:mob/ember_wraith/ambient2"
+    ]
+  },
+  "entity.ember_wraith.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.ember_wraith.hurt",
+    "sounds": [
+      "pixelpirates:mob/ember_wraith/hurt1",
+      "pixelpirates:mob/ember_wraith/hurt2"
+    ]
+  },
+  "entity.ember_wraith.death": {
+    "subtitle": "subtitles.pixelpirates.entity.ember_wraith.death",
+    "sounds": [
+      "pixelpirates:mob/ember_wraith/death"
+    ]
+  },
+  "entity.ember_wraith.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.ember_wraith.attack",
+    "sounds": [
+      "pixelpirates:mob/ember_wraith/attack"
+    ]
+  },
+  "entity.ember_wraith.special": {
+    "subtitle": "subtitles.pixelpirates.entity.ember_wraith.special",
+    "sounds": [
+      "pixelpirates:mob/ember_wraith/special"
+    ]
+  },
+  "entity.lava_scorpion.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_scorpion.ambient",
+    "sounds": [
+      "pixelpirates:mob/lava_scorpion/ambient1",
+      "pixelpirates:mob/lava_scorpion/ambient2"
+    ]
+  },
+  "entity.lava_scorpion.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_scorpion.hurt",
+    "sounds": [
+      "pixelpirates:mob/lava_scorpion/hurt1",
+      "pixelpirates:mob/lava_scorpion/hurt2"
+    ]
+  },
+  "entity.lava_scorpion.death": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_scorpion.death",
+    "sounds": [
+      "pixelpirates:mob/lava_scorpion/death"
+    ]
+  },
+  "entity.lava_scorpion.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_scorpion.attack",
+    "sounds": [
+      "pixelpirates:mob/lava_scorpion/attack"
+    ]
+  },
+  "entity.lava_scorpion.special": {
+    "subtitle": "subtitles.pixelpirates.entity.lava_scorpion.special",
+    "sounds": [
+      "pixelpirates:mob/lava_scorpion/special"
+    ]
+  },
+  "entity.fire_pirate.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.fire_pirate.ambient",
+    "sounds": [
+      "pixelpirates:mob/fire_pirate/ambient1",
+      "pixelpirates:mob/fire_pirate/ambient2"
+    ]
+  },
+  "entity.fire_pirate.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.fire_pirate.hurt",
+    "sounds": [
+      "pixelpirates:mob/fire_pirate/hurt1",
+      "pixelpirates:mob/fire_pirate/hurt2"
+    ]
+  },
+  "entity.fire_pirate.death": {
+    "subtitle": "subtitles.pixelpirates.entity.fire_pirate.death",
+    "sounds": [
+      "pixelpirates:mob/fire_pirate/death"
+    ]
+  },
+  "entity.fire_pirate.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.fire_pirate.attack",
+    "sounds": [
+      "pixelpirates:mob/fire_pirate/attack"
+    ]
+  },
+  "entity.fire_pirate.special": {
+    "subtitle": "subtitles.pixelpirates.entity.fire_pirate.special",
+    "sounds": [
+      "pixelpirates:mob/fire_pirate/special"
+    ]
+  },
+  "entity.skeleton_pirate.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.skeleton_pirate.ambient",
+    "sounds": [
+      "pixelpirates:mob/skeleton_pirate/ambient1",
+      "pixelpirates:mob/skeleton_pirate/ambient2"
+    ]
+  },
+  "entity.skeleton_pirate.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.skeleton_pirate.hurt",
+    "sounds": [
+      "pixelpirates:mob/skeleton_pirate/hurt1",
+      "pixelpirates:mob/skeleton_pirate/hurt2"
+    ]
+  },
+  "entity.skeleton_pirate.death": {
+    "subtitle": "subtitles.pixelpirates.entity.skeleton_pirate.death",
+    "sounds": [
+      "pixelpirates:mob/skeleton_pirate/death"
+    ]
+  },
+  "entity.skeleton_pirate.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.skeleton_pirate.attack",
+    "sounds": [
+      "pixelpirates:mob/skeleton_pirate/attack"
+    ]
+  },
+  "entity.skeleton_pirate.special": {
+    "subtitle": "subtitles.pixelpirates.entity.skeleton_pirate.special",
+    "sounds": [
+      "pixelpirates:mob/skeleton_pirate/special"
+    ]
+  },
+  "entity.ghost_shark.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_shark.ambient",
+    "sounds": [
+      "pixelpirates:mob/ghost_shark/ambient1",
+      "pixelpirates:mob/ghost_shark/ambient2"
+    ]
+  },
+  "entity.ghost_shark.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_shark.hurt",
+    "sounds": [
+      "pixelpirates:mob/ghost_shark/hurt1",
+      "pixelpirates:mob/ghost_shark/hurt2"
+    ]
+  },
+  "entity.ghost_shark.death": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_shark.death",
+    "sounds": [
+      "pixelpirates:mob/ghost_shark/death"
+    ]
+  },
+  "entity.ghost_shark.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_shark.attack",
+    "sounds": [
+      "pixelpirates:mob/ghost_shark/attack"
+    ]
+  },
+  "entity.ghost_shark.special": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_shark.special",
+    "sounds": [
+      "pixelpirates:mob/ghost_shark/special"
+    ]
+  },
+  "entity.chained_revenant.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.chained_revenant.ambient",
+    "sounds": [
+      "pixelpirates:mob/chained_revenant/ambient1",
+      "pixelpirates:mob/chained_revenant/ambient2"
+    ]
+  },
+  "entity.chained_revenant.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.chained_revenant.hurt",
+    "sounds": [
+      "pixelpirates:mob/chained_revenant/hurt1",
+      "pixelpirates:mob/chained_revenant/hurt2"
+    ]
+  },
+  "entity.chained_revenant.death": {
+    "subtitle": "subtitles.pixelpirates.entity.chained_revenant.death",
+    "sounds": [
+      "pixelpirates:mob/chained_revenant/death"
+    ]
+  },
+  "entity.chained_revenant.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.chained_revenant.attack",
+    "sounds": [
+      "pixelpirates:mob/chained_revenant/attack"
+    ]
+  },
+  "entity.chained_revenant.special": {
+    "subtitle": "subtitles.pixelpirates.entity.chained_revenant.special",
+    "sounds": [
+      "pixelpirates:mob/chained_revenant/special"
+    ]
+  },
+  "entity.drowned_hands.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_hands.ambient",
+    "sounds": [
+      "pixelpirates:mob/drowned_hands/ambient1",
+      "pixelpirates:mob/drowned_hands/ambient2"
+    ]
+  },
+  "entity.drowned_hands.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_hands.hurt",
+    "sounds": [
+      "pixelpirates:mob/drowned_hands/hurt1",
+      "pixelpirates:mob/drowned_hands/hurt2"
+    ]
+  },
+  "entity.drowned_hands.death": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_hands.death",
+    "sounds": [
+      "pixelpirates:mob/drowned_hands/death"
+    ]
+  },
+  "entity.drowned_hands.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_hands.attack",
+    "sounds": [
+      "pixelpirates:mob/drowned_hands/attack"
+    ]
+  },
+  "entity.drowned_hands.special": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_hands.special",
+    "sounds": [
+      "pixelpirates:mob/drowned_hands/special"
+    ]
+  },
+  "entity.trident_skeleton.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.trident_skeleton.ambient",
+    "sounds": [
+      "pixelpirates:mob/trident_skeleton/ambient1",
+      "pixelpirates:mob/trident_skeleton/ambient2"
+    ]
+  },
+  "entity.trident_skeleton.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.trident_skeleton.hurt",
+    "sounds": [
+      "pixelpirates:mob/trident_skeleton/hurt1",
+      "pixelpirates:mob/trident_skeleton/hurt2"
+    ]
+  },
+  "entity.trident_skeleton.death": {
+    "subtitle": "subtitles.pixelpirates.entity.trident_skeleton.death",
+    "sounds": [
+      "pixelpirates:mob/trident_skeleton/death"
+    ]
+  },
+  "entity.trident_skeleton.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.trident_skeleton.attack",
+    "sounds": [
+      "pixelpirates:mob/trident_skeleton/attack"
+    ]
+  },
+  "entity.trident_skeleton.special": {
+    "subtitle": "subtitles.pixelpirates.entity.trident_skeleton.special",
+    "sounds": [
+      "pixelpirates:mob/trident_skeleton/special"
+    ]
+  },
+  "entity.ghost_captain.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_captain.ambient",
+    "sounds": [
+      "pixelpirates:mob/ghost_captain/ambient1",
+      "pixelpirates:mob/ghost_captain/ambient2"
+    ]
+  },
+  "entity.ghost_captain.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_captain.hurt",
+    "sounds": [
+      "pixelpirates:mob/ghost_captain/hurt1",
+      "pixelpirates:mob/ghost_captain/hurt2"
+    ]
+  },
+  "entity.ghost_captain.death": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_captain.death",
+    "sounds": [
+      "pixelpirates:mob/ghost_captain/death"
+    ]
+  },
+  "entity.ghost_captain.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_captain.attack",
+    "sounds": [
+      "pixelpirates:mob/ghost_captain/attack"
+    ]
+  },
+  "entity.ghost_captain.special": {
+    "subtitle": "subtitles.pixelpirates.entity.ghost_captain.special",
+    "sounds": [
+      "pixelpirates:mob/ghost_captain/special"
+    ]
+  },
+  "entity.phantom_pirate.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.phantom_pirate.ambient",
+    "sounds": [
+      "pixelpirates:mob/phantom_pirate/ambient1",
+      "pixelpirates:mob/phantom_pirate/ambient2"
+    ]
+  },
+  "entity.phantom_pirate.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.phantom_pirate.hurt",
+    "sounds": [
+      "pixelpirates:mob/phantom_pirate/hurt1",
+      "pixelpirates:mob/phantom_pirate/hurt2"
+    ]
+  },
+  "entity.phantom_pirate.death": {
+    "subtitle": "subtitles.pixelpirates.entity.phantom_pirate.death",
+    "sounds": [
+      "pixelpirates:mob/phantom_pirate/death"
+    ]
+  },
+  "entity.phantom_pirate.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.phantom_pirate.attack",
+    "sounds": [
+      "pixelpirates:mob/phantom_pirate/attack"
+    ]
+  },
+  "entity.phantom_pirate.special": {
+    "subtitle": "subtitles.pixelpirates.entity.phantom_pirate.special",
+    "sounds": [
+      "pixelpirates:mob/phantom_pirate/special"
+    ]
+  },
+  "entity.abyss_crab.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_crab.ambient",
+    "sounds": [
+      "pixelpirates:mob/abyss_crab/ambient1",
+      "pixelpirates:mob/abyss_crab/ambient2"
+    ]
+  },
+  "entity.abyss_crab.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_crab.hurt",
+    "sounds": [
+      "pixelpirates:mob/abyss_crab/hurt1",
+      "pixelpirates:mob/abyss_crab/hurt2"
+    ]
+  },
+  "entity.abyss_crab.death": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_crab.death",
+    "sounds": [
+      "pixelpirates:mob/abyss_crab/death"
+    ]
+  },
+  "entity.abyss_crab.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_crab.attack",
+    "sounds": [
+      "pixelpirates:mob/abyss_crab/attack"
+    ]
+  },
+  "entity.abyss_crab.special": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_crab.special",
+    "sounds": [
+      "pixelpirates:mob/abyss_crab/special"
+    ]
+  },
+  "entity.abyssal_king.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_king.ambient",
+    "sounds": [
+      "pixelpirates:mob/abyssal_king/ambient1",
+      "pixelpirates:mob/abyssal_king/ambient2"
+    ]
+  },
+  "entity.abyssal_king.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_king.hurt",
+    "sounds": [
+      "pixelpirates:mob/abyssal_king/hurt1",
+      "pixelpirates:mob/abyssal_king/hurt2"
+    ]
+  },
+  "entity.abyssal_king.death": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_king.death",
+    "sounds": [
+      "pixelpirates:mob/abyssal_king/death"
+    ]
+  },
+  "entity.abyssal_king.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_king.attack",
+    "sounds": [
+      "pixelpirates:mob/abyssal_king/attack"
+    ]
+  },
+  "entity.abyssal_king.special": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_king.special",
+    "sounds": [
+      "pixelpirates:mob/abyssal_king/special"
+    ]
+  },
+  "entity.brain_fish.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.brain_fish.ambient",
+    "sounds": [
+      "pixelpirates:mob/brain_fish/ambient1",
+      "pixelpirates:mob/brain_fish/ambient2"
+    ]
+  },
+  "entity.brain_fish.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.brain_fish.hurt",
+    "sounds": [
+      "pixelpirates:mob/brain_fish/hurt1",
+      "pixelpirates:mob/brain_fish/hurt2"
+    ]
+  },
+  "entity.brain_fish.death": {
+    "subtitle": "subtitles.pixelpirates.entity.brain_fish.death",
+    "sounds": [
+      "pixelpirates:mob/brain_fish/death"
+    ]
+  },
+  "entity.brain_fish.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.brain_fish.attack",
+    "sounds": [
+      "pixelpirates:mob/brain_fish/attack"
+    ]
+  },
+  "entity.brain_fish.special": {
+    "subtitle": "subtitles.pixelpirates.entity.brain_fish.special",
+    "sounds": [
+      "pixelpirates:mob/brain_fish/special"
+    ]
+  },
+  "entity.abyssal_centipede.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_centipede.ambient",
+    "sounds": [
+      "pixelpirates:mob/abyssal_centipede/ambient1",
+      "pixelpirates:mob/abyssal_centipede/ambient2"
+    ]
+  },
+  "entity.abyssal_centipede.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_centipede.hurt",
+    "sounds": [
+      "pixelpirates:mob/abyssal_centipede/hurt1",
+      "pixelpirates:mob/abyssal_centipede/hurt2"
+    ]
+  },
+  "entity.abyssal_centipede.death": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_centipede.death",
+    "sounds": [
+      "pixelpirates:mob/abyssal_centipede/death"
+    ]
+  },
+  "entity.abyssal_centipede.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_centipede.attack",
+    "sounds": [
+      "pixelpirates:mob/abyssal_centipede/attack"
+    ]
+  },
+  "entity.abyssal_centipede.special": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_centipede.special",
+    "sounds": [
+      "pixelpirates:mob/abyssal_centipede/special"
+    ]
+  },
+  "entity.shadow.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.shadow.ambient",
+    "sounds": [
+      "pixelpirates:mob/shadow/ambient1",
+      "pixelpirates:mob/shadow/ambient2"
+    ]
+  },
+  "entity.shadow.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.shadow.hurt",
+    "sounds": [
+      "pixelpirates:mob/shadow/hurt1",
+      "pixelpirates:mob/shadow/hurt2"
+    ]
+  },
+  "entity.shadow.death": {
+    "subtitle": "subtitles.pixelpirates.entity.shadow.death",
+    "sounds": [
+      "pixelpirates:mob/shadow/death"
+    ]
+  },
+  "entity.shadow.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.shadow.attack",
+    "sounds": [
+      "pixelpirates:mob/shadow/attack"
+    ]
+  },
+  "entity.shadow.special": {
+    "subtitle": "subtitles.pixelpirates.entity.shadow.special",
+    "sounds": [
+      "pixelpirates:mob/shadow/special"
+    ]
+  },
+  "entity.coral_whale.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_whale.ambient",
+    "sounds": [
+      "pixelpirates:mob/coral_whale/ambient1",
+      "pixelpirates:mob/coral_whale/ambient2"
+    ]
+  },
+  "entity.coral_whale.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_whale.hurt",
+    "sounds": [
+      "pixelpirates:mob/coral_whale/hurt1",
+      "pixelpirates:mob/coral_whale/hurt2"
+    ]
+  },
+  "entity.coral_whale.death": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_whale.death",
+    "sounds": [
+      "pixelpirates:mob/coral_whale/death"
+    ]
+  },
+  "entity.coral_whale.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_whale.attack",
+    "sounds": [
+      "pixelpirates:mob/coral_whale/attack"
+    ]
+  },
+  "entity.coral_whale.special": {
+    "subtitle": "subtitles.pixelpirates.entity.coral_whale.special",
+    "sounds": [
+      "pixelpirates:mob/coral_whale/special"
+    ]
+  },
+  "entity.luminous_isopod.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.luminous_isopod.ambient",
+    "sounds": [
+      "pixelpirates:mob/luminous_isopod/ambient1",
+      "pixelpirates:mob/luminous_isopod/ambient2"
+    ]
+  },
+  "entity.luminous_isopod.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.luminous_isopod.hurt",
+    "sounds": [
+      "pixelpirates:mob/luminous_isopod/hurt1",
+      "pixelpirates:mob/luminous_isopod/hurt2"
+    ]
+  },
+  "entity.luminous_isopod.death": {
+    "subtitle": "subtitles.pixelpirates.entity.luminous_isopod.death",
+    "sounds": [
+      "pixelpirates:mob/luminous_isopod/death"
+    ]
+  },
+  "entity.luminous_isopod.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.luminous_isopod.attack",
+    "sounds": [
+      "pixelpirates:mob/luminous_isopod/attack"
+    ]
+  },
+  "entity.luminous_isopod.special": {
+    "subtitle": "subtitles.pixelpirates.entity.luminous_isopod.special",
+    "sounds": [
+      "pixelpirates:mob/luminous_isopod/special"
+    ]
+  },
+  "entity.deep_lurker.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.deep_lurker.ambient",
+    "sounds": [
+      "pixelpirates:mob/deep_lurker/ambient1",
+      "pixelpirates:mob/deep_lurker/ambient2"
+    ]
+  },
+  "entity.deep_lurker.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.deep_lurker.hurt",
+    "sounds": [
+      "pixelpirates:mob/deep_lurker/hurt1",
+      "pixelpirates:mob/deep_lurker/hurt2"
+    ]
+  },
+  "entity.deep_lurker.death": {
+    "subtitle": "subtitles.pixelpirates.entity.deep_lurker.death",
+    "sounds": [
+      "pixelpirates:mob/deep_lurker/death"
+    ]
+  },
+  "entity.deep_lurker.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.deep_lurker.attack",
+    "sounds": [
+      "pixelpirates:mob/deep_lurker/attack"
+    ]
+  },
+  "entity.deep_lurker.special": {
+    "subtitle": "subtitles.pixelpirates.entity.deep_lurker.special",
+    "sounds": [
+      "pixelpirates:mob/deep_lurker/special"
+    ]
+  },
+  "entity.corrupted_diver.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.corrupted_diver.ambient",
+    "sounds": [
+      "pixelpirates:mob/corrupted_diver/ambient1",
+      "pixelpirates:mob/corrupted_diver/ambient2"
+    ]
+  },
+  "entity.corrupted_diver.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.corrupted_diver.hurt",
+    "sounds": [
+      "pixelpirates:mob/corrupted_diver/hurt1",
+      "pixelpirates:mob/corrupted_diver/hurt2"
+    ]
+  },
+  "entity.corrupted_diver.death": {
+    "subtitle": "subtitles.pixelpirates.entity.corrupted_diver.death",
+    "sounds": [
+      "pixelpirates:mob/corrupted_diver/death"
+    ]
+  },
+  "entity.corrupted_diver.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.corrupted_diver.attack",
+    "sounds": [
+      "pixelpirates:mob/corrupted_diver/attack"
+    ]
+  },
+  "entity.corrupted_diver.special": {
+    "subtitle": "subtitles.pixelpirates.entity.corrupted_diver.special",
+    "sounds": [
+      "pixelpirates:mob/corrupted_diver/special"
+    ]
+  },
+  "entity.abyss_eel.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_eel.ambient",
+    "sounds": [
+      "pixelpirates:mob/abyss_eel/ambient1",
+      "pixelpirates:mob/abyss_eel/ambient2"
+    ]
+  },
+  "entity.abyss_eel.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_eel.hurt",
+    "sounds": [
+      "pixelpirates:mob/abyss_eel/hurt1",
+      "pixelpirates:mob/abyss_eel/hurt2"
+    ]
+  },
+  "entity.abyss_eel.death": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_eel.death",
+    "sounds": [
+      "pixelpirates:mob/abyss_eel/death"
+    ]
+  },
+  "entity.abyss_eel.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_eel.attack",
+    "sounds": [
+      "pixelpirates:mob/abyss_eel/attack"
+    ]
+  },
+  "entity.abyss_eel.special": {
+    "subtitle": "subtitles.pixelpirates.entity.abyss_eel.special",
+    "sounds": [
+      "pixelpirates:mob/abyss_eel/special"
+    ]
+  },
+  "entity.crystal_golem.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.crystal_golem.ambient",
+    "sounds": [
+      "pixelpirates:mob/crystal_golem/ambient1",
+      "pixelpirates:mob/crystal_golem/ambient2"
+    ]
+  },
+  "entity.crystal_golem.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.crystal_golem.hurt",
+    "sounds": [
+      "pixelpirates:mob/crystal_golem/hurt1",
+      "pixelpirates:mob/crystal_golem/hurt2"
+    ]
+  },
+  "entity.crystal_golem.death": {
+    "subtitle": "subtitles.pixelpirates.entity.crystal_golem.death",
+    "sounds": [
+      "pixelpirates:mob/crystal_golem/death"
+    ]
+  },
+  "entity.crystal_golem.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.crystal_golem.attack",
+    "sounds": [
+      "pixelpirates:mob/crystal_golem/attack"
+    ]
+  },
+  "entity.crystal_golem.special": {
+    "subtitle": "subtitles.pixelpirates.entity.crystal_golem.special",
+    "sounds": [
+      "pixelpirates:mob/crystal_golem/special"
+    ]
+  },
+  "entity.drowned_sailor.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_sailor.ambient",
+    "sounds": [
+      "pixelpirates:mob/drowned_sailor/ambient1",
+      "pixelpirates:mob/drowned_sailor/ambient2"
+    ]
+  },
+  "entity.drowned_sailor.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_sailor.hurt",
+    "sounds": [
+      "pixelpirates:mob/drowned_sailor/hurt1",
+      "pixelpirates:mob/drowned_sailor/hurt2"
+    ]
+  },
+  "entity.drowned_sailor.death": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_sailor.death",
+    "sounds": [
+      "pixelpirates:mob/drowned_sailor/death"
+    ]
+  },
+  "entity.drowned_sailor.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_sailor.attack",
+    "sounds": [
+      "pixelpirates:mob/drowned_sailor/attack"
+    ]
+  },
+  "entity.drowned_sailor.special": {
+    "subtitle": "subtitles.pixelpirates.entity.drowned_sailor.special",
+    "sounds": [
+      "pixelpirates:mob/drowned_sailor/special"
+    ]
+  },
+  "entity.jelly_skull.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.jelly_skull.ambient",
+    "sounds": [
+      "pixelpirates:mob/jelly_skull/ambient1",
+      "pixelpirates:mob/jelly_skull/ambient2"
+    ]
+  },
+  "entity.jelly_skull.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.jelly_skull.hurt",
+    "sounds": [
+      "pixelpirates:mob/jelly_skull/hurt1",
+      "pixelpirates:mob/jelly_skull/hurt2"
+    ]
+  },
+  "entity.jelly_skull.death": {
+    "subtitle": "subtitles.pixelpirates.entity.jelly_skull.death",
+    "sounds": [
+      "pixelpirates:mob/jelly_skull/death"
+    ]
+  },
+  "entity.jelly_skull.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.jelly_skull.attack",
+    "sounds": [
+      "pixelpirates:mob/jelly_skull/attack"
+    ]
+  },
+  "entity.jelly_skull.special": {
+    "subtitle": "subtitles.pixelpirates.entity.jelly_skull.special",
+    "sounds": [
+      "pixelpirates:mob/jelly_skull/special"
+    ]
+  },
+  "entity.anemone_eye.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.anemone_eye.ambient",
+    "sounds": [
+      "pixelpirates:mob/anemone_eye/ambient1",
+      "pixelpirates:mob/anemone_eye/ambient2"
+    ]
+  },
+  "entity.anemone_eye.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.anemone_eye.hurt",
+    "sounds": [
+      "pixelpirates:mob/anemone_eye/hurt1",
+      "pixelpirates:mob/anemone_eye/hurt2"
+    ]
+  },
+  "entity.anemone_eye.death": {
+    "subtitle": "subtitles.pixelpirates.entity.anemone_eye.death",
+    "sounds": [
+      "pixelpirates:mob/anemone_eye/death"
+    ]
+  },
+  "entity.anemone_eye.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.anemone_eye.attack",
+    "sounds": [
+      "pixelpirates:mob/anemone_eye/attack"
+    ]
+  },
+  "entity.anemone_eye.special": {
+    "subtitle": "subtitles.pixelpirates.entity.anemone_eye.special",
+    "sounds": [
+      "pixelpirates:mob/anemone_eye/special"
+    ]
+  },
+  "entity.void_manta.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.void_manta.ambient",
+    "sounds": [
+      "pixelpirates:mob/void_manta/ambient1",
+      "pixelpirates:mob/void_manta/ambient2"
+    ]
+  },
+  "entity.void_manta.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.void_manta.hurt",
+    "sounds": [
+      "pixelpirates:mob/void_manta/hurt1",
+      "pixelpirates:mob/void_manta/hurt2"
+    ]
+  },
+  "entity.void_manta.death": {
+    "subtitle": "subtitles.pixelpirates.entity.void_manta.death",
+    "sounds": [
+      "pixelpirates:mob/void_manta/death"
+    ]
+  },
+  "entity.void_manta.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.void_manta.attack",
+    "sounds": [
+      "pixelpirates:mob/void_manta/attack"
+    ]
+  },
+  "entity.void_manta.special": {
+    "subtitle": "subtitles.pixelpirates.entity.void_manta.special",
+    "sounds": [
+      "pixelpirates:mob/void_manta/special"
+    ]
+  },
+  "entity.abyssal_heart.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_heart.ambient",
+    "sounds": [
+      "pixelpirates:mob/abyssal_heart/ambient1",
+      "pixelpirates:mob/abyssal_heart/ambient2"
+    ]
+  },
+  "entity.abyssal_heart.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_heart.hurt",
+    "sounds": [
+      "pixelpirates:mob/abyssal_heart/hurt1",
+      "pixelpirates:mob/abyssal_heart/hurt2"
+    ]
+  },
+  "entity.abyssal_heart.death": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_heart.death",
+    "sounds": [
+      "pixelpirates:mob/abyssal_heart/death"
+    ]
+  },
+  "entity.abyssal_heart.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_heart.attack",
+    "sounds": [
+      "pixelpirates:mob/abyssal_heart/attack"
+    ]
+  },
+  "entity.abyssal_heart.special": {
+    "subtitle": "subtitles.pixelpirates.entity.abyssal_heart.special",
+    "sounds": [
+      "pixelpirates:mob/abyssal_heart/special"
+    ]
+  },
+  "entity.lantern_squid.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.lantern_squid.ambient",
+    "sounds": [
+      "pixelpirates:mob/lantern_squid/ambient1",
+      "pixelpirates:mob/lantern_squid/ambient2"
+    ]
+  },
+  "entity.lantern_squid.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.lantern_squid.hurt",
+    "sounds": [
+      "pixelpirates:mob/lantern_squid/hurt1",
+      "pixelpirates:mob/lantern_squid/hurt2"
+    ]
+  },
+  "entity.lantern_squid.death": {
+    "subtitle": "subtitles.pixelpirates.entity.lantern_squid.death",
+    "sounds": [
+      "pixelpirates:mob/lantern_squid/death"
+    ]
+  },
+  "entity.lantern_squid.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.lantern_squid.attack",
+    "sounds": [
+      "pixelpirates:mob/lantern_squid/attack"
+    ]
+  },
+  "entity.lantern_squid.special": {
+    "subtitle": "subtitles.pixelpirates.entity.lantern_squid.special",
+    "sounds": [
+      "pixelpirates:mob/lantern_squid/special"
+    ]
+  },
+  "entity.leviathan.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.leviathan.ambient",
+    "sounds": [
+      "pixelpirates:mob/leviathan/ambient1",
+      "pixelpirates:mob/leviathan/ambient2"
+    ]
+  },
+  "entity.leviathan.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.leviathan.hurt",
+    "sounds": [
+      "pixelpirates:mob/leviathan/hurt1",
+      "pixelpirates:mob/leviathan/hurt2"
+    ]
+  },
+  "entity.leviathan.death": {
+    "subtitle": "subtitles.pixelpirates.entity.leviathan.death",
+    "sounds": [
+      "pixelpirates:mob/leviathan/death"
+    ]
+  },
+  "entity.leviathan.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.leviathan.attack",
+    "sounds": [
+      "pixelpirates:mob/leviathan/attack"
+    ]
+  },
+  "entity.leviathan.special": {
+    "subtitle": "subtitles.pixelpirates.entity.leviathan.special",
+    "sounds": [
+      "pixelpirates:mob/leviathan/special"
+    ]
+  },
+  "entity.tide_warden.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.tide_warden.ambient",
+    "sounds": [
+      "pixelpirates:mob/tide_warden/ambient1",
+      "pixelpirates:mob/tide_warden/ambient2"
+    ]
+  },
+  "entity.tide_warden.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.tide_warden.hurt",
+    "sounds": [
+      "pixelpirates:mob/tide_warden/hurt1",
+      "pixelpirates:mob/tide_warden/hurt2"
+    ]
+  },
+  "entity.tide_warden.death": {
+    "subtitle": "subtitles.pixelpirates.entity.tide_warden.death",
+    "sounds": [
+      "pixelpirates:mob/tide_warden/death"
+    ]
+  },
+  "entity.tide_warden.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.tide_warden.attack",
+    "sounds": [
+      "pixelpirates:mob/tide_warden/attack"
+    ]
+  },
+  "entity.tide_warden.special": {
+    "subtitle": "subtitles.pixelpirates.entity.tide_warden.special",
+    "sounds": [
+      "pixelpirates:mob/tide_warden/special"
+    ]
+  },
+  "entity.kraken_arm.ambient": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_arm.ambient",
+    "sounds": [
+      "pixelpirates:mob/kraken_arm/ambient1",
+      "pixelpirates:mob/kraken_arm/ambient2"
+    ]
+  },
+  "entity.kraken_arm.hurt": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_arm.hurt",
+    "sounds": [
+      "pixelpirates:mob/kraken_arm/hurt1",
+      "pixelpirates:mob/kraken_arm/hurt2"
+    ]
+  },
+  "entity.kraken_arm.death": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_arm.death",
+    "sounds": [
+      "pixelpirates:mob/kraken_arm/death"
+    ]
+  },
+  "entity.kraken_arm.attack": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_arm.attack",
+    "sounds": [
+      "pixelpirates:mob/kraken_arm/attack"
+    ]
+  },
+  "entity.kraken_arm.special": {
+    "subtitle": "subtitles.pixelpirates.entity.kraken_arm.special",
+    "sounds": [
+      "pixelpirates:mob/kraken_arm/special"
+    ]
+  }
+}

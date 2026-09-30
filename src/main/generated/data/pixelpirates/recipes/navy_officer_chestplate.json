@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "pixelpirates:tattered_cloth"
+    },
+    "M": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "A A",
+    "MMM",
+    "MMM"
+  ],
+  "result": {
+    "item": "pixelpirates:navy_officer_chestplate"
+  },
+  "show_notification": true
+}

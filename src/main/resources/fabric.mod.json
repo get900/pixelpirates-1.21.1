@@ -23,9 +23,6 @@
 		],
 		"client": [
 			"net.get900.pixelpirates.PixelPiratesClient"
-		],
-		"terrablender": [
-			"net.get900.pixelpirates.world.biome.ModTerrablenderAPI"
 		]
 	},
 	"custom_worldgen": true,
@@ -37,11 +34,10 @@
 		"pixelpirates.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.16.14",
-		"minecraft": "~1.21.1",
-		"java": ">=21",
-		"fabric-api": "*",
-		"geckolib": ">=4.7.6"
+		"fabricloader": ">=0.14.0",
+		"minecraft": ">=1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
 	},
 	"suggests": {
 		"another-mod": "*"

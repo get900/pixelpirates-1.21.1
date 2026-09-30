@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    [
+      {
+        "item": "minecraft:cod"
+      },
+      {
+        "item": "minecraft:salmon"
+      },
+      {
+        "item": "minecraft:tropical_fish"
+      }
+    ],
+    {
+      "item": "pixelpirates:lime"
+    },
+    {
+      "item": "pixelpirates:chili_pepper"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:ceviche"
+  }
+}

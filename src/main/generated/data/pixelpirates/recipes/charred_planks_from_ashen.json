@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    [
+      {
+        "item": "pixelpirates:ashen_log"
+      },
+      {
+        "item": "pixelpirates:ashen_wood"
+      },
+      {
+        "item": "pixelpirates:stripped_ashen_log"
+      },
+      {
+        "item": "pixelpirates:stripped_ashen_wood"
+      }
+    ]
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:charred_planks"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "carvers": {},
+  "downfall": 0.3,
+  "effects": {
+    "fog_color": 11061488,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "sky_color": 6991103,
+    "water_color": 2059220,
+    "water_fog_color": 938152
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "pixelpirates:sunken_galleon_placed",
+      "pixelpirates:bloodfin_reef_placed",
+      "pixelpirates:gallows_grotto_placed",
+      "pixelpirates:titans_chest_placed",
+      "pixelpirates:leviathan_sites_placed"
+    ],
+    [],
+    [
+      "pixelpirates:shell_patch_placed",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel",
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper"
+    ],
+    [],
+    [],
+    [
+      "minecraft:seagrass_deep",
+      "minecraft:kelp_cold"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [
+      {
+        "type": "minecraft:cod",
+        "maxCount": 6,
+        "minCount": 3,
+        "weight": 12
+      }
+    ],
+    "water_creature": [
+      {
+        "type": "minecraft:squid",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 4
+      },
+      {
+        "type": "minecraft:dolphin",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 3
+      }
+    ]
+  },
+  "temperature": 0.5
+}

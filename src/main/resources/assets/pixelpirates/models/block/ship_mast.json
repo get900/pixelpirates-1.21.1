@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pixelpirates:block/ship_mast_top",
+    "side": "pixelpirates:block/ship_mast"
+  }
+}

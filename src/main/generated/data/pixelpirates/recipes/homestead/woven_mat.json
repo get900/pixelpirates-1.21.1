@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "T": {
+      "item": "pixelpirates:thatch"
+    }
+  },
+  "pattern": [
+    "TT"
+  ],
+  "result": {
+    "count": 3,
+    "item": "pixelpirates:woven_mat"
+  },
+  "show_notification": true
+}

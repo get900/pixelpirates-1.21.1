@@ -1,0 +1,50 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "idle": {
+   "animation_length": 1.0,
+   "bones": {
+    "root": {
+     "rotation": {
+      "0": [
+       0.0,
+       0.0,
+       0.0
+      ],
+      "1.0": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "loop": true
+  },
+  "spin": {
+   "animation_length": 0.35,
+   "bones": {
+    "root": {
+     "rotation": {
+      "0": [
+       0.0,
+       0.0,
+       0.0
+      ],
+      "0.175": [
+       -180.0,
+       0.0,
+       0.0
+      ],
+      "0.35": [
+       -360.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "loop": true
+  }
+ }
+}

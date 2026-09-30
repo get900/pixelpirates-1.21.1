@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:barrel"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "pattern": [
+    "GBG",
+    "GTG",
+    "SSS"
+  ],
+  "result": {
+    "item": "pixelpirates:powder_barge"
+  },
+  "show_notification": true
+}

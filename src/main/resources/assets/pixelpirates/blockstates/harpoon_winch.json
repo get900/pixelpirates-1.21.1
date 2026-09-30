@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,loaded=true": {
+      "model": "pixelpirates:block/harpoon_winch"
+    },
+    "facing=north,loaded=false": {
+      "model": "pixelpirates:block/harpoon_winch_empty"
+    },
+    "facing=east,loaded=true": {
+      "model": "pixelpirates:block/harpoon_winch",
+      "y": 90
+    },
+    "facing=east,loaded=false": {
+      "model": "pixelpirates:block/harpoon_winch_empty",
+      "y": 90
+    },
+    "facing=south,loaded=true": {
+      "model": "pixelpirates:block/harpoon_winch",
+      "y": 180
+    },
+    "facing=south,loaded=false": {
+      "model": "pixelpirates:block/harpoon_winch_empty",
+      "y": 180
+    },
+    "facing=west,loaded=true": {
+      "model": "pixelpirates:block/harpoon_winch",
+      "y": 270
+    },
+    "facing=west,loaded=false": {
+      "model": "pixelpirates:block/harpoon_winch_empty",
+      "y": 270
+    }
+  }
+}

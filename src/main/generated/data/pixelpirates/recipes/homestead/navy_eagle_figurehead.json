@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "item": "minecraft:spruce_log"
+    }
+  },
+  "pattern": [
+    " F ",
+    "LGL",
+    " L "
+  ],
+  "result": {
+    "item": "pixelpirates:navy_eagle_figurehead"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,loaded=false,ringing=false": {
+      "model": "pixelpirates:block/watchers_horn"
+    },
+    "facing=north,loaded=true,ringing=false": {
+      "model": "pixelpirates:block/watchers_horn"
+    },
+    "facing=north,loaded=false,ringing=true": {
+      "model": "pixelpirates:block/watchers_horn"
+    },
+    "facing=north,loaded=true,ringing=true": {
+      "model": "pixelpirates:block/watchers_horn"
+    },
+    "facing=east,loaded=false,ringing=false": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 90
+    },
+    "facing=east,loaded=true,ringing=false": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 90
+    },
+    "facing=east,loaded=false,ringing=true": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 90
+    },
+    "facing=east,loaded=true,ringing=true": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 90
+    },
+    "facing=south,loaded=false,ringing=false": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 180
+    },
+    "facing=south,loaded=true,ringing=false": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 180
+    },
+    "facing=south,loaded=false,ringing=true": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 180
+    },
+    "facing=south,loaded=true,ringing=true": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 180
+    },
+    "facing=west,loaded=false,ringing=false": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 270
+    },
+    "facing=west,loaded=true,ringing=false": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 270
+    },
+    "facing=west,loaded=false,ringing=true": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 270
+    },
+    "facing=west,loaded=true,ringing=true": {
+      "model": "pixelpirates:block/watchers_horn",
+      "y": 270
+    }
+  }
+}

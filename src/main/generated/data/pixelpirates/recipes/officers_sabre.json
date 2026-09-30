@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_ingot"
+    },
+    "H": {
+      "item": "minecraft:gold_nugget"
+    },
+    "T": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "T",
+    "B",
+    "H"
+  ],
+  "result": {
+    "item": "pixelpirates:officers_sabre"
+  },
+  "show_notification": true
+}

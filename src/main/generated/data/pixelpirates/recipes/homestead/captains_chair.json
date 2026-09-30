@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "item": "minecraft:stick"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "W": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "pattern": [
+    "PG ",
+    "PWP",
+    "L L"
+  ],
+  "result": {
+    "item": "pixelpirates:captains_chair"
+  },
+  "show_notification": true
+}

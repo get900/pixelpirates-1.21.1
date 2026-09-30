@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "R R",
+    "PPP"
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:rope_bridge"
+  },
+  "show_notification": true
+}

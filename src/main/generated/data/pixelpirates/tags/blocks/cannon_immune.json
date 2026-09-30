@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "pixelpirates:blast_rubble",
+    "pixelpirates:fort_cannon",
+    "pixelpirates:serpent_ward",
+    "pixelpirates:quench_valve",
+    "pixelpirates:tide_sluice",
+    "pixelpirates:manacle_anchor",
+    "pixelpirates:heart_valve",
+    "pixelpirates:galvanic_pylon"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "pixelpirates:kraken_scale"
+    },
+    "H": {
+      "item": "minecraft:gold_ingot"
+    },
+    "T": {
+      "item": "pixelpirates:kraken_scale"
+    }
+  },
+  "pattern": [
+    "T",
+    "B",
+    "H"
+  ],
+  "result": {
+    "item": "pixelpirates:stormcaller"
+  },
+  "show_notification": true
+}

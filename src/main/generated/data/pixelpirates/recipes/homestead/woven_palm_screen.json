@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "T": {
+      "item": "pixelpirates:thatch"
+    }
+  },
+  "pattern": [
+    "TST",
+    "TST"
+  ],
+  "result": {
+    "count": 8,
+    "item": "pixelpirates:woven_palm_screen"
+  },
+  "show_notification": true
+}

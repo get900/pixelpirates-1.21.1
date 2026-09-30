@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/golden_marlin_trophy"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/golden_marlin_trophy",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/golden_marlin_trophy",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/golden_marlin_trophy",
+   "y": 270
+  }
+ }
+}

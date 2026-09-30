@@ -1,0 +1,248 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.flame_sprite",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 5,
+    "visible_bounds_height": 4,
+    "visible_bounds_offset": [
+     0,
+     0.6875,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      6,
+      0
+     ]
+    },
+    {
+     "name": "flame",
+     "pivot": [
+      0,
+      8,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -7,
+        6,
+        1
+       ],
+       "size": [
+        14,
+        16,
+        0
+       ],
+       "uv": [
+        24,
+        0
+       ]
+      },
+      {
+       "origin": [
+        0,
+        6,
+        -6
+       ],
+       "size": [
+        0,
+        14,
+        12
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "pivot": [
+      0,
+      8,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        6,
+        -4
+       ],
+       "size": [
+        8,
+        7,
+        8
+       ],
+       "uv": [
+        0,
+        26
+       ]
+      },
+      {
+       "origin": [
+        -2,
+        4,
+        -3
+       ],
+       "size": [
+        4,
+        2,
+        5
+       ],
+       "uv": [
+        12,
+        41
+       ]
+      }
+     ]
+    },
+    {
+     "name": "rarm",
+     "pivot": [
+      -4,
+      9,
+      0
+     ],
+     "parent": "head",
+     "cubes": [
+      {
+       "origin": [
+        -7,
+        5,
+        -1.5
+       ],
+       "size": [
+        3,
+        5,
+        3
+       ],
+       "uv": [
+        32,
+        26
+       ],
+       "pivot": [
+        -4,
+        9,
+        0
+       ],
+       "rotation": [
+        0,
+        0,
+        30
+       ]
+      }
+     ]
+    },
+    {
+     "name": "larm",
+     "pivot": [
+      4,
+      9,
+      0
+     ],
+     "parent": "head",
+     "cubes": [
+      {
+       "origin": [
+        4,
+        5,
+        -1.5
+       ],
+       "size": [
+        3,
+        5,
+        3
+       ],
+       "uv": [
+        44,
+        26
+       ],
+       "pivot": [
+        4,
+        9,
+        0
+       ],
+       "rotation": [
+        0,
+        0,
+        -30
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tail",
+     "pivot": [
+      0,
+      4,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -1.5,
+        -1,
+        -1.5
+       ],
+       "size": [
+        3,
+        5,
+        3
+       ],
+       "uv": [
+        0,
+        41
+       ]
+      },
+      {
+       "origin": [
+        -1,
+        -4,
+        -1
+       ],
+       "size": [
+        2,
+        3,
+        2
+       ],
+       "uv": [
+        30,
+        41
+       ]
+      },
+      {
+       "origin": [
+        0,
+        -6,
+        -0.5
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        38,
+        41
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

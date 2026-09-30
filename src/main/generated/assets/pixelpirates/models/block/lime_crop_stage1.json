@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "pixelpirates:block/lime_crop_stage1"
+  }
+}

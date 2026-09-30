@@ -1,0 +1,172 @@
+{
+ "textures": {
+  "coins": "pixelpirates:block/coin_pile",
+  "gold": "minecraft:block/gold_block",
+  "cup": "minecraft:block/raw_gold_block",
+  "gem": "minecraft:block/emerald_block",
+  "wood": "minecraft:block/dark_oak_planks",
+  "particle": "pixelpirates:block/coin_pile"
+ },
+ "elements": [
+  {
+   "from": [
+    1,
+    0,
+    1
+   ],
+   "to": [
+    15,
+    1,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#wood"
+    },
+    "south": {
+     "texture": "#wood"
+    },
+    "east": {
+     "texture": "#wood"
+    },
+    "west": {
+     "texture": "#wood"
+    },
+    "up": {
+     "texture": "#wood"
+    },
+    "down": {
+     "texture": "#wood"
+    }
+   }
+  },
+  {
+   "from": [
+    2.0,
+    1,
+    2.0
+   ],
+   "to": [
+    14.0,
+    3,
+    14.0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#coins"
+    },
+    "south": {
+     "texture": "#coins"
+    },
+    "east": {
+     "texture": "#coins"
+    },
+    "west": {
+     "texture": "#coins"
+    },
+    "up": {
+     "texture": "#coins"
+    },
+    "down": {
+     "texture": "#coins"
+    }
+   }
+  },
+  {
+   "from": [
+    2.75,
+    3,
+    2.75
+   ],
+   "to": [
+    13.25,
+    5,
+    13.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#coins"
+    },
+    "south": {
+     "texture": "#coins"
+    },
+    "east": {
+     "texture": "#coins"
+    },
+    "west": {
+     "texture": "#coins"
+    },
+    "up": {
+     "texture": "#coins"
+    },
+    "down": {
+     "texture": "#coins"
+    }
+   }
+  },
+  {
+   "from": [
+    5.8102068999577146,
+    1,
+    4.307191863104752
+   ],
+   "to": [
+    7.3102068999577146,
+    2.3320734486282704,
+    5.807191863104752
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  },
+  {
+   "from": [
+    11.13833434772713,
+    1,
+    7.77939025285932
+   ],
+   "to": [
+    12.63833434772713,
+    3.3802653146305346,
+    9.27939025285932
+   ],
+   "faces": {
+    "north": {
+     "texture": "#gold"
+    },
+    "south": {
+     "texture": "#gold"
+    },
+    "east": {
+     "texture": "#gold"
+    },
+    "west": {
+     "texture": "#gold"
+    },
+    "up": {
+     "texture": "#gold"
+    },
+    "down": {
+     "texture": "#gold"
+    }
+   }
+  }
+ ]
+}

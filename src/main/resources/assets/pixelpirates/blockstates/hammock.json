@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "pixelpirates:block/hammock"},
+    "facing=east":  {"model": "pixelpirates:block/hammock", "y": 90},
+    "facing=south": {"model": "pixelpirates:block/hammock", "y": 180},
+    "facing=west":  {"model": "pixelpirates:block/hammock", "y": 270}
+  }
+}

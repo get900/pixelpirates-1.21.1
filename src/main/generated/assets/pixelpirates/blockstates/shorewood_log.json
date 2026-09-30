@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "pixelpirates:block/shorewood_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "pixelpirates:block/shorewood_log"
+    },
+    "axis=z": {
+      "model": "pixelpirates:block/shorewood_log_horizontal",
+      "x": 90
+    }
+  }
+}

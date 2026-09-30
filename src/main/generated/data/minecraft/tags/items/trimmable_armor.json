@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "pixelpirates:pirate_helmet",
+    "pixelpirates:pirate_chestplate",
+    "pixelpirates:pirate_leggings",
+    "pixelpirates:pirate_boots"
+  ]
+}

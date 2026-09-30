@@ -2,7 +2,6 @@ package net.get900.pixelpirates.entity.goal;
 
 import net.get900.pixelpirates.entity.custom.SharkEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -10,9 +9,10 @@ import net.minecraft.util.math.Vec3d;
 import java.util.EnumSet;
 
 public class SharkAttackGoal extends Goal {
+
     private final SharkEntity shark;
     private LivingEntity target;
-    private int cooldown = 0;
+    private int attackCooldown = 0;
 
     public SharkAttackGoal(SharkEntity shark) {
         this.shark = shark;
@@ -22,43 +22,70 @@ public class SharkAttackGoal extends Goal {
     @Override
     public boolean canStart() {
         LivingEntity potential = shark.getTarget();
-        return potential instanceof net.minecraft.entity.player.PlayerEntity && potential.isTouchingWater();
+        if (!(potential instanceof net.minecraft.entity.player.PlayerEntity player)) return false;
+        if (!potential.isAlive() || !potential.isTouchingWater()) return false;
+        if (!shark.isTouchingWater()) return false;
+
+        // Shark Ward: per-level chance the shark decides to ignore this player
+        int sharkWardLvl = net.get900.pixelpirates.world.PirateLevelManager.getSkillLevel(player, "shark_ward");
+        if (sharkWardLvl > 0 && shark.getRandom().nextFloat() < sharkWardLvl * 0.10f) return false;
+
+        target = potential;
+        return true;
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        if (target == null || !target.isAlive()) return false;
+        // Never pursue out of the shark's own element, no matter how tempting the target
+        if (!shark.isTouchingWater()) return false;
+        // Keep chasing even if they briefly leave water (jump back onto raft etc.) for 1s
+        return target.isTouchingWater() || attackCooldown > 0;
     }
 
     @Override
     public void start() {
-        this.target = shark.getTarget();
+        target = shark.getTarget();
+        attackCooldown = 0;
+    }
+
+    @Override
+    public void stop() {
+        target = null;
+        shark.setTarget(null);
     }
 
     @Override
     public void tick() {
         if (target == null || !target.isAlive()) return;
-
-        if (cooldown > 0) {
-            cooldown--;
-            return;
-        }
+        if (attackCooldown > 0) { attackCooldown--; }
 
         Vec3d toTarget = target.getPos().subtract(shark.getPos());
         double distance = toTarget.length();
-        Vec3d direction = toTarget.normalize();
+        Vec3d direction = distance > 0 ? toTarget.normalize() : Vec3d.ZERO;
 
-        // Smooth yaw turning
-        double targetYaw = Math.toDegrees(Math.atan2(-direction.x, direction.z));
-        float smoothedYaw = shark.getYaw() + MathHelper.wrapDegrees((float) targetYaw - shark.getYaw()) * 0.1f;
-        shark.setYaw(smoothedYaw);
-        shark.setBodyYaw(smoothedYaw);
+        // Smooth yaw tracking — faster when close (closing in for the bite)
+        float turnRate = distance < 6 ? 0.25f : 0.12f;
+        float targetYaw = (float) Math.toDegrees(Math.atan2(-direction.x, direction.z));
+        shark.setYaw(shark.getYaw() + MathHelper.wrapDegrees(targetYaw - shark.getYaw()) * turnRate);
+        shark.setBodyYaw(shark.getYaw());
 
-        // Always charge forward
-        float speed = shark.getChaseSpeed();
-        Vec3d velocity = direction.multiply(speed);
-        shark.setVelocity(velocity);
-        shark.move(MovementType.SELF, velocity);
+        // Pitch down toward target if it's below (player swimming deeper)
+        float targetPitch = (float)(-Math.toDegrees(Math.atan2(direction.y, Math.sqrt(direction.x*direction.x + direction.z*direction.z))));
+        shark.setPitch(shark.getPitch() + MathHelper.wrapDegrees(targetPitch - shark.getPitch()) * 0.15f);
 
-        // Bite if close enough
-        if (shark.distanceTo(target) < 2.5f) {
+        // Burst speed when close, cruise speed otherwise
+        float spd = distance < 8 ? 0.28f : 0.18f;
+        // swim() clamps this against the shoreline — a player standing in the shallows
+        // cannot bait the shark up the beach
+        shark.swim(direction.multiply(spd));
+
+        // Bite when in range
+        if (attackCooldown == 0 && shark.distanceTo(target) < 2.5f) {
+            shark.triggerAttackAnimation();
             shark.tryAttack(target);
-            cooldown = 40 + shark.getRandom().nextInt(60); // Wait 2–5s before another swoop
+            // Vary cooldown so multiple sharks don't bite simultaneously
+            attackCooldown = 35 + shark.getRandom().nextInt(45);
         }
     }
 }

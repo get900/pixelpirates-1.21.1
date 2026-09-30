@@ -2,6 +2,7 @@ package net.get900.pixelpirates.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
+import net.get900.pixelpirates.world.biome.hub.HubBiomes;
 import net.get900.pixelpirates.world.biome.phase1.Phase1Biomes;
 import net.get900.pixelpirates.world.biome.phase2.Phase2Biomes;
 import net.get900.pixelpirates.world.biome.phase3.Phase3Biomes;
@@ -18,6 +19,7 @@ public class ModBiomeProvider extends FabricDynamicRegistryProvider {
 
     @Override
     public void configure(RegistryWrapper.WrapperLookup lookup, Entries entries) {
+        HubBiomes.register(entries, lookup);
         Phase1Biomes.register(entries, lookup);
         Phase2Biomes.register(entries, lookup);
         Phase3Biomes.register(entries, lookup);

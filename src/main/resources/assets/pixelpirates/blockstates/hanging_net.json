@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/hanging_net"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/hanging_net",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/hanging_net",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/hanging_net",
+   "y": 270
+  }
+ }
+}

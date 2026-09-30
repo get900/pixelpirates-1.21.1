@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:smugglers_grotto",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

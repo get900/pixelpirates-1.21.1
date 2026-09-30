@@ -1,0 +1,10 @@
+{
+ "variants": {
+  "waterlogged=false": {
+   "model": "pixelpirates:block/lobster_pot"
+  },
+  "waterlogged=true": {
+   "model": "pixelpirates:block/lobster_pot"
+  }
+ }
+}

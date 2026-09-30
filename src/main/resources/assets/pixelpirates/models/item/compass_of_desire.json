@@ -1,0 +1,206 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pixelpirates:item/compass_of_desire_16"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "angle": 0.0
+      },
+      "model": "pixelpirates:item/compass_of_desire_16"
+    },
+    {
+      "predicate": {
+        "angle": 0.015625
+      },
+      "model": "pixelpirates:item/compass_of_desire_17"
+    },
+    {
+      "predicate": {
+        "angle": 0.046875
+      },
+      "model": "pixelpirates:item/compass_of_desire_18"
+    },
+    {
+      "predicate": {
+        "angle": 0.078125
+      },
+      "model": "pixelpirates:item/compass_of_desire_19"
+    },
+    {
+      "predicate": {
+        "angle": 0.109375
+      },
+      "model": "pixelpirates:item/compass_of_desire_20"
+    },
+    {
+      "predicate": {
+        "angle": 0.140625
+      },
+      "model": "pixelpirates:item/compass_of_desire_21"
+    },
+    {
+      "predicate": {
+        "angle": 0.171875
+      },
+      "model": "pixelpirates:item/compass_of_desire_22"
+    },
+    {
+      "predicate": {
+        "angle": 0.203125
+      },
+      "model": "pixelpirates:item/compass_of_desire_23"
+    },
+    {
+      "predicate": {
+        "angle": 0.234375
+      },
+      "model": "pixelpirates:item/compass_of_desire_24"
+    },
+    {
+      "predicate": {
+        "angle": 0.265625
+      },
+      "model": "pixelpirates:item/compass_of_desire_25"
+    },
+    {
+      "predicate": {
+        "angle": 0.296875
+      },
+      "model": "pixelpirates:item/compass_of_desire_26"
+    },
+    {
+      "predicate": {
+        "angle": 0.328125
+      },
+      "model": "pixelpirates:item/compass_of_desire_27"
+    },
+    {
+      "predicate": {
+        "angle": 0.359375
+      },
+      "model": "pixelpirates:item/compass_of_desire_28"
+    },
+    {
+      "predicate": {
+        "angle": 0.390625
+      },
+      "model": "pixelpirates:item/compass_of_desire_29"
+    },
+    {
+      "predicate": {
+        "angle": 0.421875
+      },
+      "model": "pixelpirates:item/compass_of_desire_30"
+    },
+    {
+      "predicate": {
+        "angle": 0.453125
+      },
+      "model": "pixelpirates:item/compass_of_desire_31"
+    },
+    {
+      "predicate": {
+        "angle": 0.484375
+      },
+      "model": "pixelpirates:item/compass_of_desire_00"
+    },
+    {
+      "predicate": {
+        "angle": 0.515625
+      },
+      "model": "pixelpirates:item/compass_of_desire_01"
+    },
+    {
+      "predicate": {
+        "angle": 0.546875
+      },
+      "model": "pixelpirates:item/compass_of_desire_02"
+    },
+    {
+      "predicate": {
+        "angle": 0.578125
+      },
+      "model": "pixelpirates:item/compass_of_desire_03"
+    },
+    {
+      "predicate": {
+        "angle": 0.609375
+      },
+      "model": "pixelpirates:item/compass_of_desire_04"
+    },
+    {
+      "predicate": {
+        "angle": 0.640625
+      },
+      "model": "pixelpirates:item/compass_of_desire_05"
+    },
+    {
+      "predicate": {
+        "angle": 0.671875
+      },
+      "model": "pixelpirates:item/compass_of_desire_06"
+    },
+    {
+      "predicate": {
+        "angle": 0.703125
+      },
+      "model": "pixelpirates:item/compass_of_desire_07"
+    },
+    {
+      "predicate": {
+        "angle": 0.734375
+      },
+      "model": "pixelpirates:item/compass_of_desire_08"
+    },
+    {
+      "predicate": {
+        "angle": 0.765625
+      },
+      "model": "pixelpirates:item/compass_of_desire_09"
+    },
+    {
+      "predicate": {
+        "angle": 0.796875
+      },
+      "model": "pixelpirates:item/compass_of_desire_10"
+    },
+    {
+      "predicate": {
+        "angle": 0.828125
+      },
+      "model": "pixelpirates:item/compass_of_desire_11"
+    },
+    {
+      "predicate": {
+        "angle": 0.859375
+      },
+      "model": "pixelpirates:item/compass_of_desire_12"
+    },
+    {
+      "predicate": {
+        "angle": 0.890625
+      },
+      "model": "pixelpirates:item/compass_of_desire_13"
+    },
+    {
+      "predicate": {
+        "angle": 0.921875
+      },
+      "model": "pixelpirates:item/compass_of_desire_14"
+    },
+    {
+      "predicate": {
+        "angle": 0.953125
+      },
+      "model": "pixelpirates:item/compass_of_desire_15"
+    },
+    {
+      "predicate": {
+        "angle": 0.984375
+      },
+      "model": "pixelpirates:item/compass_of_desire_16"
+    }
+  ]
+}

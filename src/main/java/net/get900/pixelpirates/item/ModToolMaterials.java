@@ -1,31 +1,37 @@
 package net.get900.pixelpirates.item;
 
 import com.google.common.base.Suppliers;
-import net.get900.pixelpirates.util.ModTags;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagKey;
 
 import java.util.Objects;
 import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
-    PIRATE(ModTags.Blocks.INCORRECT_FOR_PIRATE_TOOL, 600, 7.0F, 3.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.ROPE}));
+    PIRATE(2, 600, 7.0F, 3.0F, 15, () -> Ingredient.ofItems(ModItems.ROPE)),
+    // Ring 1 — salvage-grade gear
+    CASTAWAY(1, 200, 5.0F, 1.5F, 8, () -> Ingredient.ofItems(ModItems.DRIFTWOOD)),
+    // Ring 2 — navy/merchant forged steel
+    NAVAL(2, 750, 6.5F, 4.0F, 16, () -> Ingredient.ofItems(net.minecraft.item.Items.IRON_INGOT)),
+    // Ring 3 — corsair gold-worked steel
+    CORSAIR(3, 1200, 7.5F, 5.0F, 18, () -> Ingredient.ofItems(ModItems.PIRATE_COIN)),
+    // Volcanic isles — ember-forged
+    VOLCANIC(3, 1500, 8.0F, 5.5F, 15, () -> Ingredient.ofItems(ModItems.VOLCANIC_EMBER)),
+    // Ring 4 — cursed bone
+    CURSED(3, 1600, 8.0F, 6.0F, 20, () -> Ingredient.ofItems(ModItems.CURSED_BONE)),
+    // Ring 5 — abyssal kraken-scale
+    ABYSSAL(4, 2000, 9.0F, 7.0F, 22, () -> Ingredient.ofItems(ModItems.KRAKEN_SCALE));
 
-    private final TagKey<Block> inverseTag;
+    private final int miningLevel;
     private final int itemDurability;
     private final float miningSpeed;
     private final float attackDamage;
     private final int enchantability;
     private final Supplier<Ingredient> repairIngredient;
 
-    private ModToolMaterials(final TagKey<Block> inverseTag, final int itemDurability, final float miningSpeed, final float attackDamage, final int enchantability, final Supplier<Ingredient> repairIngredient) {
-        this.inverseTag = inverseTag;
+    ModToolMaterials(int miningLevel, int itemDurability, float miningSpeed, float attackDamage,
+                     int enchantability, Supplier<Ingredient> repairIngredient) {
+        this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;
         this.attackDamage = attackDamage;
@@ -34,27 +40,21 @@ public enum ModToolMaterials implements ToolMaterial {
         this.repairIngredient = Suppliers.memoize(repairIngredient::get);
     }
 
-    public int getDurability() {
-        return this.itemDurability;
-    }
+    @Override
+    public int getDurability() { return itemDurability; }
 
-    public float getMiningSpeedMultiplier() {
-        return this.miningSpeed;
-    }
+    @Override
+    public float getMiningSpeedMultiplier() { return miningSpeed; }
 
-    public float getAttackDamage() {
-        return this.attackDamage;
-    }
+    @Override
+    public float getAttackDamage() { return attackDamage; }
 
-    public TagKey<Block> getInverseTag() {
-        return this.inverseTag;
-    }
+    @Override
+    public int getMiningLevel() { return miningLevel; }
 
-    public int getEnchantability() {
-        return this.enchantability;
-    }
+    @Override
+    public int getEnchantability() { return enchantability; }
 
-    public Ingredient getRepairIngredient() {
-        return (Ingredient)this.repairIngredient.get();
-    }
+    @Override
+    public Ingredient getRepairIngredient() { return repairIngredient.get(); }
 }

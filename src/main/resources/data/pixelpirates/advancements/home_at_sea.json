@@ -1,0 +1,15 @@
+{
+  "display": {
+    "icon": {"item": "pixelpirates:ship_bedroll"},
+    "title": {"translate": "advancements.pixelpirates.home_at_sea.title"},
+    "description": {"translate": "advancements.pixelpirates.home_at_sea.description"},
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:money_well_spent",
+  "criteria": {
+    "got_here": {"trigger": "minecraft:impossible"}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "RR",
+    "RR"
+  ],
+  "result": {
+    "item": "pixelpirates:rope_coil"
+  },
+  "show_notification": true
+}

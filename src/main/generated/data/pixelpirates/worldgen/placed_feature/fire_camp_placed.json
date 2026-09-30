@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:fire_camp",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

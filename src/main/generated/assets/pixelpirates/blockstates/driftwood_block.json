@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "pixelpirates:block/driftwood_block_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "pixelpirates:block/driftwood_block"
+    },
+    "axis=z": {
+      "model": "pixelpirates:block/driftwood_block_horizontal",
+      "x": 90
+    }
+  }
+}

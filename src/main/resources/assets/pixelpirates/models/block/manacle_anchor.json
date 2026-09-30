@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "pixelpirates:block/manacle_anchor_side",
+    "side": "pixelpirates:block/manacle_anchor_side",
+    "front": "pixelpirates:block/manacle_anchor_front"
+  }
+}

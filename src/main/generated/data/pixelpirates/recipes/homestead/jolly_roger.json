@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:black_wool"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SBB",
+    "SBB",
+    "S  "
+  ],
+  "result": {
+    "item": "pixelpirates:jolly_roger"
+  },
+  "show_notification": true
+}

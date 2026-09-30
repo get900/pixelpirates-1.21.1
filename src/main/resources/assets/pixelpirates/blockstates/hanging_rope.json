@@ -1,0 +1,10 @@
+{
+ "variants": {
+  "end=false": {
+   "model": "pixelpirates:block/hanging_rope"
+  },
+  "end=true": {
+   "model": "pixelpirates:block/hanging_rope_end"
+  }
+ }
+}

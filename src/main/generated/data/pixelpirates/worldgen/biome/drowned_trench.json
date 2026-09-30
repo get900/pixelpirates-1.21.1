@@ -1,0 +1,118 @@
+{
+  "carvers": {},
+  "downfall": 0.0,
+  "effects": {
+    "additions_sound": {
+      "sound": "minecraft:ambient.soul_sand_valley.additions",
+      "tick_chance": 0.0222
+    },
+    "ambient_sound": "minecraft:ambient.soul_sand_valley.loop",
+    "fog_color": 658448,
+    "foliage_color": 1054728,
+    "grass_color": 2108442,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.soul_sand_valley.mood",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:white_ash"
+      },
+      "probability": 0.0155
+    },
+    "sky_color": 1052704,
+    "water_color": 1711150,
+    "water_fog_color": 658454
+  },
+  "features": [
+    [],
+    [],
+    [
+      "pixelpirates:soul_barnacle_placed"
+    ],
+    [],
+    [
+      "pixelpirates:revenant_crypt_placed",
+      "pixelpirates:drowned_graveyard_placed",
+      "pixelpirates:gallows_grotto_placed",
+      "pixelpirates:titans_chest_placed",
+      "pixelpirates:leviathan_sites_placed"
+    ],
+    [],
+    [
+      "pixelpirates:grave_silt_patch_placed",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel",
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper"
+    ],
+    [],
+    [],
+    [
+      "pixelpirates:shrouded_tree_placed",
+      "pixelpirates:wispwood_tree_placed",
+      "minecraft:patch_grass_taiga",
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal",
+      "minecraft:seagrass_deep_cold",
+      "minecraft:kelp_cold"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:drowned",
+        "maxCount": 6,
+        "minCount": 4,
+        "weight": 70
+      },
+      {
+        "type": "minecraft:zombie",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 20
+      },
+      {
+        "type": "minecraft:skeleton",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.0
+}

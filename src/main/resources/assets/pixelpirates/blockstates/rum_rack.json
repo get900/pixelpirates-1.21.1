@@ -1,0 +1,109 @@
+{
+ "variants": {
+  "facing=north,bottles=0": {
+   "model": "pixelpirates:block/rum_rack_0"
+  },
+  "facing=north,bottles=1": {
+   "model": "pixelpirates:block/rum_rack_1"
+  },
+  "facing=north,bottles=2": {
+   "model": "pixelpirates:block/rum_rack_2"
+  },
+  "facing=north,bottles=3": {
+   "model": "pixelpirates:block/rum_rack_3"
+  },
+  "facing=north,bottles=4": {
+   "model": "pixelpirates:block/rum_rack_4"
+  },
+  "facing=north,bottles=5": {
+   "model": "pixelpirates:block/rum_rack_5"
+  },
+  "facing=north,bottles=6": {
+   "model": "pixelpirates:block/rum_rack_6"
+  },
+  "facing=east,bottles=0": {
+   "model": "pixelpirates:block/rum_rack_0",
+   "y": 90
+  },
+  "facing=east,bottles=1": {
+   "model": "pixelpirates:block/rum_rack_1",
+   "y": 90
+  },
+  "facing=east,bottles=2": {
+   "model": "pixelpirates:block/rum_rack_2",
+   "y": 90
+  },
+  "facing=east,bottles=3": {
+   "model": "pixelpirates:block/rum_rack_3",
+   "y": 90
+  },
+  "facing=east,bottles=4": {
+   "model": "pixelpirates:block/rum_rack_4",
+   "y": 90
+  },
+  "facing=east,bottles=5": {
+   "model": "pixelpirates:block/rum_rack_5",
+   "y": 90
+  },
+  "facing=east,bottles=6": {
+   "model": "pixelpirates:block/rum_rack_6",
+   "y": 90
+  },
+  "facing=south,bottles=0": {
+   "model": "pixelpirates:block/rum_rack_0",
+   "y": 180
+  },
+  "facing=south,bottles=1": {
+   "model": "pixelpirates:block/rum_rack_1",
+   "y": 180
+  },
+  "facing=south,bottles=2": {
+   "model": "pixelpirates:block/rum_rack_2",
+   "y": 180
+  },
+  "facing=south,bottles=3": {
+   "model": "pixelpirates:block/rum_rack_3",
+   "y": 180
+  },
+  "facing=south,bottles=4": {
+   "model": "pixelpirates:block/rum_rack_4",
+   "y": 180
+  },
+  "facing=south,bottles=5": {
+   "model": "pixelpirates:block/rum_rack_5",
+   "y": 180
+  },
+  "facing=south,bottles=6": {
+   "model": "pixelpirates:block/rum_rack_6",
+   "y": 180
+  },
+  "facing=west,bottles=0": {
+   "model": "pixelpirates:block/rum_rack_0",
+   "y": 270
+  },
+  "facing=west,bottles=1": {
+   "model": "pixelpirates:block/rum_rack_1",
+   "y": 270
+  },
+  "facing=west,bottles=2": {
+   "model": "pixelpirates:block/rum_rack_2",
+   "y": 270
+  },
+  "facing=west,bottles=3": {
+   "model": "pixelpirates:block/rum_rack_3",
+   "y": 270
+  },
+  "facing=west,bottles=4": {
+   "model": "pixelpirates:block/rum_rack_4",
+   "y": 270
+  },
+  "facing=west,bottles=5": {
+   "model": "pixelpirates:block/rum_rack_5",
+   "y": 270
+  },
+  "facing=west,bottles=6": {
+   "model": "pixelpirates:block/rum_rack_6",
+   "y": 270
+  }
+ }
+}

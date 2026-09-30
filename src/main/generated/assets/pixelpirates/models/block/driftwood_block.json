@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pixelpirates:block/driftwood_block_top",
+    "side": "pixelpirates:block/driftwood_block"
+  }
+}

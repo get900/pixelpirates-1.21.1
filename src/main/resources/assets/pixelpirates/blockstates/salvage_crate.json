@@ -1,0 +1,34 @@
+{
+ "variants": {
+  "facing=north,waterlogged=true": {
+   "model": "pixelpirates:block/salvage_crate"
+  },
+  "facing=north,waterlogged=false": {
+   "model": "pixelpirates:block/salvage_crate"
+  },
+  "facing=east,waterlogged=true": {
+   "model": "pixelpirates:block/salvage_crate",
+   "y": 90
+  },
+  "facing=east,waterlogged=false": {
+   "model": "pixelpirates:block/salvage_crate",
+   "y": 90
+  },
+  "facing=south,waterlogged=true": {
+   "model": "pixelpirates:block/salvage_crate",
+   "y": 180
+  },
+  "facing=south,waterlogged=false": {
+   "model": "pixelpirates:block/salvage_crate",
+   "y": 180
+  },
+  "facing=west,waterlogged=true": {
+   "model": "pixelpirates:block/salvage_crate",
+   "y": 270
+  },
+  "facing=west,waterlogged=false": {
+   "model": "pixelpirates:block/salvage_crate",
+   "y": 270
+  }
+ }
+}

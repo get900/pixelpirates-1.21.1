@@ -93,6 +93,28 @@ each every 12-16 days (avg 14), never two on one day (the user's "spread out"). 
 - Test: `/pptown event fishing` (moves the clock into the window). VERIFIED in a client: start, Finn leading, beating his
   own best, the sundown result; the mixin applies. NOT tested: a player's catch being weighed (needs a real cast).
 
+## The regatta (2026-10-05) - `Regatta` + AiShipController racing mode
+- Calendar day, 5 pm (`/pptown event regatta`, `/pptown regatta stop`). The town's three boats line up ABREAST on the
+  start line off the grand pier (x -24/0/24, z 215, bows +Z at the turn): Commodore Pettigrew's HMS Swift (navy_cutter),
+  Finn Gale's Herring Lass (merchant_lugger, Coral Reef livery), Lazlo Quick's Midnight Eel (pirate_cutter, Midnight
+  Raider). No faction crew - each skipper stands at the helm (`Regatta.skippers` keeps them there; ashore at the end).
+  Keelbreaker II on all three. Players whose own ship is within 150 of the start at the gun race too.
+- Course: out to the TURNING BUOY (0,295), back across the line between the finish posts (x +-42, z 212). Block-display
+  buoys + red glow; calls in chat (rounding order, finishing places), player position on the action bar; 40/15/5 coins.
+  The town watches from the quay edge and the grand pier, cheering.
+- AiShipData.racing: full sail for raceTarget, no targets/guns/idle despawn, never targeted by other AI, never dropped
+  as "missing" (a just-assembled ship can be absent from VS2's id map). Racers spawn with `ShipSpawner.spawn(.., margin 6)`
+  - the normal 50-block clearance would not allow side by side.
+- STEERING FINDING (measured from the logs, all three cutters): a POSITIVE turn input swings the bow AWAY from the side
+  `cross2d(fwd, toTarget)` points to - `raceInputs` flips it. GhostShipEncounter found the same for the Dutchman.
+  The ordinary AI (`computeInputs` APPROACH/BROADSIDE/RETREAT) does NOT flip - check this first when balancing the ship
+  battles (they may be turning away from their targets).
+- Deep water: `SpawnIslandTerrain` DEEP_* - beyond r 1.58 (clear of the piers) the floor drops to y50, back to the zone
+  floor by r 2.4. New chunks only.
+- VERIFIED in a client 2026-10-05: three ships abreast, all rounded the buoy, the Midnight Eel won. Test world note: the
+  `ppshot` test world is restored from `build/tmp/claude/ppshot_clean` before each run (`fresh_ppshot.sh`) - killing a
+  test client mid-run left stale VS2 ship data that stopped new ships loading.
+
 ## Fort security (2026-10-05)
 - New guards (models `tools/mobs/townsfolk.py`, Governor's Guard in Armada blue via `soldier(coat=GUARD_BLUE)`):
   pell + quayle (the Residence gate sentry boxes 25/35,71,-51), crane (the guardroom duty desk 22,71,-67), ruddock

@@ -18,6 +18,15 @@ import java.util.List;
 public class ShipSpawner {
 
     public static ServerShip spawn(ServerWorld world, ShipSchematic schematic, BlockPos origin) throws Exception {
+        return spawn(world, schematic, origin, 50);
+    }
+
+    /**
+     * {@code margin}: the clear water demanded round the new hull. 50 for anything that may meet a MOVING ship; the
+     * regatta lines its racers up side by side with a small one - they are spawned one after another and lie still at
+     * the line, and the per-block pre-scan below still refuses any overlap.
+     */
+    public static ServerShip spawn(ServerWorld world, ShipSchematic schematic, BlockPos origin, int margin) throws Exception {
         // Pre-flight: reject if any loaded VS2 ship's world-space AABB overlaps the schematic
         // placement volume. VS2's assembleToShip fails with IllegalStateException (Collectors.toMap
         // duplicate key) when it finds blocks that are simultaneously registered to an existing
@@ -39,7 +48,7 @@ public class ShipSpawner {
             }
             // Expand by 10 blocks to absorb VS2 physics-thread movement between this check
             // and the assembleToShip call (VS2 runs physics concurrently with the server thread).
-            AABBd spawnBox = new AABBd(minX - 50, minY - 50, minZ - 50, maxX + 50, maxY + 50, maxZ + 50);
+            AABBd spawnBox = new AABBd(minX - margin, minY - margin, minZ - margin, maxX + margin, maxY + margin, maxZ + margin);
             if (ValkyrienSkies.getShipsIntersecting(world, spawnBox).iterator().hasNext()) {
                 throw new Exception("Spawn location overlaps an existing ship — try a different position");
             }

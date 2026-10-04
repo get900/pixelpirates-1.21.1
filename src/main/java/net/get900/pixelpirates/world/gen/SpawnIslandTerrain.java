@@ -91,7 +91,18 @@ public final class SpawnIslandTerrain {
      */
     public static double apply(double x, double z, double baseY) {
         double r = radius(x, z);
-        if (r >= EDGE_R) return baseY;
+        if (r >= DEEP_R) return baseY;
+
+        // THE DEEP WATER round the island (2026-10-05, the user: the seas off the harbour were so shallow the regatta
+        // ships ran aground): from DEEP_START - clear of the island's shelf and the harbour (the grand pier's landing
+        // reaches r 1.55; the piers' piles are drawn to the old floor) - the floor drops to DEEP_Y over DROP and rises
+        // back to the zone floor by DEEP_R. The regatta course (r 1.6-1.95) lies in it. It only ever deepens. New chunks only.
+        if (r >= EDGE_R) {
+            if (r < DEEP_START) return baseY;
+            double down = lerp(fade(Math.min(1, (r - DEEP_START) / DROP)), baseY, DEEP_Y);
+            double up = fade(Math.max(0, Math.min(1, (r - (DEEP_R - 0.3)) / 0.3)));
+            return Math.min(baseY, lerp(up, down, baseY));
+        }
 
         double islandY = surfaceY(x, z, r, baseY);
         if (r <= BEACH_R) return islandY;
@@ -100,6 +111,9 @@ public final class SpawnIslandTerrain {
         double t = fade((EDGE_R - r) / (EDGE_R - BEACH_R));
         return lerp(t, baseY, islandY);
     }
+
+    /** The deep water round the island: floor at most this, out to this normalized radius. */
+    private static final double DEEP_Y = 50.0, DEEP_START = 1.58, DROP = 0.08, DEEP_R = 2.4;
 
     /** Island surface height (only meaningful for r < EDGE_R). */
     public static double surfaceY(double x, double z, double r, double baseY) {

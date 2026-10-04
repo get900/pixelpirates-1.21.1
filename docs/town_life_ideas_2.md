@@ -7,7 +7,7 @@ Everything from part 1 that you said yes to is BUILT (see the list at the end). 
 ## Town events
 - [No] **The Wavebreak Gazette**: the crier sells a newspaper (a written book) with the week's real news - who won at
       chess, weddings, boss kills, the best catch, new paintings, who was lost at sea.
-- [Yes] **Regatta**: once in a while a boat race round buoys in the harbour; townsfolk line the quay and cheer; you can
+- [Yes - BUILT 2026-10-05, see docs/townsfolk.md "The regatta"] **Regatta**: once in a while a boat race round buoys in the harbour; townsfolk line the quay and cheer; you can
       enter your own ship for a prize.
 - [Yes - BUILT 2026-10-05, see docs/townsfolk.md] **Fishing contest**: Finn challenges the town - biggest fish by sundown wins a trophy (players can enter).
 - [Yes] **The Governor's Ball**: a formal dance at the fort - everyone in their best, a string quartet, the Governor's

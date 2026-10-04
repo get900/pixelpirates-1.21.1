@@ -186,7 +186,7 @@ public final class TownEvents {
     }
 
     // ------------------------------------------------------------------ decorations (display entities: nothing in the world changes)
-    private static void display(ServerWorld w, BlockState s, double x, double y, double z, float scale, String tag) {
+    static void display(ServerWorld w, BlockState s, double x, double y, double z, float scale, String tag) {
         NbtCompound n = new NbtCompound();
         n.putString("id", "minecraft:block_display");
         n.put("block_state", NbtHelper.fromBlockState(s));
@@ -208,7 +208,7 @@ public final class TownEvents {
 
     private static NbtList floats(float... v) { NbtList l = new NbtList(); for (float f : v) l.add(NbtFloat.of(f)); return l; }
 
-    private static void clear(ServerWorld w, String tag, BlockPos c, int r) {
+    static void clear(ServerWorld w, String tag, BlockPos c, int r) {
         for (Entity e : w.getEntitiesByClass(net.minecraft.entity.decoration.DisplayEntity.BlockDisplayEntity.class, new Box(c).expand(r, 16, r),
                 d -> d.getCommandTags().contains(tag))) e.discard();
     }

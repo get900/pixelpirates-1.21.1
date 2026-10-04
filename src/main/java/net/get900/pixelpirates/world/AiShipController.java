@@ -105,6 +105,11 @@ public class AiShipController {
         // Bell sound — ships ring periodically so players can navigate toward them.
         public int bellTimer = 20 + (int)(Math.random() * 580);
 
+        /** THE REGATTA (homestead/town/Regatta): a racer sails for raceTarget at full sail and never fights. */
+        public boolean racing = false;
+        public Vec3d raceTarget = null;
+        public float raceSkill = 1f;
+
         public String       blueprintName = "";
         public AiShipConfig config        = AiShipConfig.DEFAULTS;
         public Faction      faction       = Faction.PIRATES;
@@ -212,8 +217,10 @@ public class AiShipController {
             AiShipData data = entry.getValue();
 
             LoadedServerShip ship = allShips.get(data.shipId);
+            if (ship == null) ship = loaded(data.world, data.shipId);              // a just-assembled ship can be missing from the id map a moment
             if (ship == null) {
-                if (++data.missingTicks > GRACE_TICKS) {
+                if (data.racing && data.missingTicks % 100 == 0) LOGGER.warn("[Regatta] racer {} not loaded ({} ticks)", data.shipId, data.missingTicks);
+                if (++data.missingTicks > GRACE_TICKS && !data.racing) {
                     LOGGER.warn("[AI] Ship {} missing — deregistering", data.shipId);
                     ShipSteeringManager.SHIP_INPUTS.remove(data.shipId);
                     it.remove();
@@ -259,6 +266,14 @@ public class AiShipController {
                 data.crewSpawned = true;
             }
             if (data.crewSpawned) keepCrewAboard(ship, data);
+
+            // ── A regatta racer: no targets, no guns, no idle despawn - just the next buoy ──
+            if (data.racing) {
+                if (data.stateTicks == 1) LOGGER.info("[Regatta] racer {} ({}) under AI race control", data.shipId, data.blueprintName);
+                ShipSteeringManager.SHIP_INPUTS.put(data.shipId, raceInputs(data, shipFwd, shipPos));
+                data.prevShipPos = new Vector3d(shipPos);
+                continue;
+            }
 
             // ── Idle despawn (8 min = 9600 ticks with no target) ─────────────
             if (data.state == AiState.PATROL && targetInfo == null) {
@@ -373,7 +388,7 @@ public class AiShipController {
             long otherId = other.getKey();
             if (otherId == data.shipId) continue;
             AiShipData otherData = other.getValue();
-            if (otherData.world != data.world) continue;
+            if (otherData.world != data.world || otherData.racing) continue;           // nobody fires on a regatta racer
             if (!data.faction.isEnemyFaction(otherData.faction)) continue;
             LoadedServerShip otherShip = allShips.get(otherId);
             if (otherShip == null) continue;
@@ -459,6 +474,65 @@ public class AiShipController {
         // that bow clockwise-from-above, i.e. AWAY from a target the cross product says to turn toward - flip it.
         if (GhostShipEncounter.isDutchman(data.blueprintName)) turn = -turn;
         return new float[]{fwd * data.config.speedMult, turn, sprint};
+    }
+
+    /** Full sail for the next buoy; ease off in a hard turn so she comes round instead of sliding past. */
+    private static float[] raceInputs(AiShipData data, Vector3d shipFwd, Vector3d shipPos) {
+        if (data.raceTarget == null) return new float[]{0f, 0f, 0f};
+        Vector3d to = dir2d(data.raceTarget.x - shipPos.x, data.raceTarget.z - shipPos.z);
+        double cross = cross2d(shipFwd, to), dot = dot2d(shipFwd, to);
+        float raw = (float) (cross * 1.8);
+        float turn = Math.signum(raw) * Math.min(Math.abs(raw) * (1f + data.stuckBoost), 1.0f);
+        if (dot < 0) turn = cross >= 0 ? 1f : -1f;                                       // it's behind us: hard over
+        // MEASURED 2026-10-05 (regatta logs, all three cutters): a positive turn input swings the bow AWAY from the side
+        // the cross product points to - the same thing GhostShipEncounter found for the Dutchman - so flip it.
+        turn = -turn;
+        float fwd = (dot > 0.6 ? 1.0f : dot > 0 ? 0.6f : 0.35f) * data.raceSkill;         // ease off to come about tighter
+        float sprint = dot > 0.85 ? 1f : 0f;
+        return new float[]{fwd * data.config.speedMult, turn, sprint};
+    }
+
+    /** A loaded ship by id, or null. */
+    public static LoadedServerShip loaded(ServerWorld world, long shipId) {
+        VsiServerShipWorld sw = VSGameUtilsKt.getShipObjectWorld(world);
+        return sw == null ? null : sw.getLoadedShips().getById(shipId);
+    }
+
+    /** World -> ship space for a loaded ship (null if it isn't loaded). */
+    public static Vector3d toShip(ServerWorld world, long shipId, Vector3d worldPos) {
+        LoadedServerShip s = loaded(world, shipId);
+        return s == null ? null : s.getTransform().getWorldToShip().transformPosition(worldPos, new Vector3d());
+    }
+
+    /** Ship -> world space for a loaded ship (null if it isn't loaded). */
+    public static Vector3d toWorld(ServerWorld world, long shipId, Vector3d shipPos) {
+        LoadedServerShip s = loaded(world, shipId);
+        return s == null ? null : s.getTransform().getShipToWorld().transformPosition(shipPos, new Vector3d());
+    }
+
+    /** The world position of a loaded ship, or null. */
+    public static Vector3d shipPos(ServerWorld world, long shipId) {
+        VsiServerShipWorld sw = VSGameUtilsKt.getShipObjectWorld(world);
+        if (sw == null) return null;
+        LoadedServerShip s = sw.getLoadedShips().getById(shipId);
+        return s == null ? null : new Vector3d(s.getTransform().getPositionInWorld());
+    }
+
+    /** Spawn an AI ship from a blueprint at {@code origin} (bow +Z) and register it; its ship id. Throws if the spot is taken. */
+    public static long spawn(ServerWorld world, String blueprint, net.minecraft.util.math.BlockPos origin, int margin) throws Exception {
+        ShipSchematic schematic = ShipSchematic.load(blueprint);
+        org.valkyrienskies.core.api.ships.ServerShip ship = ShipSpawner.spawn(world, schematic, origin, margin);
+        org.joml.Matrix4d worldToShip = new org.joml.Matrix4d(ship.getTransform().getShipToWorld()).invert();
+        List<Vector3d> cannons = new ArrayList<>();
+        for (ShipSchematic.Entry e : schematic.getEntries()) {
+            net.minecraft.block.BlockState bs = ShipSchematic.restoreState(e.stateNbt());
+            if (bs != null && bs.isOf(net.get900.pixelpirates.block.ModBlocks.SHIP_CANNON)) {
+                net.minecraft.util.math.BlockPos wp = origin.add(e.relPos());
+                cannons.add(worldToShip.transformPosition(new Vector3d(wp.getX() + 0.5, wp.getY() + 0.5, wp.getZ() + 0.5), new Vector3d()));
+            }
+        }
+        registerAiShip(ship.getId(), world, cannons, blueprint);
+        return ship.getId();
     }
 
     // ── Cannon firing ─────────────────────────────────────────────────────────

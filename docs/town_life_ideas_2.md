@@ -5,54 +5,54 @@ Everything from part 1 that you said yes to is BUILT (see the list at the end). 
 
 ---------------------------------------------------------------------------------------------------------------------
 ## Town events
-- [ ] **The Wavebreak Gazette**: the crier sells a newspaper (a written book) with the week's real news - who won at
+- [No] **The Wavebreak Gazette**: the crier sells a newspaper (a written book) with the week's real news - who won at
       chess, weddings, boss kills, the best catch, new paintings, who was lost at sea.
-- [ ] **Regatta**: once in a while a boat race round buoys in the harbour; townsfolk line the quay and cheer; you can
+- [Yes] **Regatta**: once in a while a boat race round buoys in the harbour; townsfolk line the quay and cheer; you can
       enter your own ship for a prize.
-- [ ] **Fishing contest**: Finn challenges the town - biggest fish by sundown wins a trophy (players can enter).
-- [ ] **The Governor's Ball**: a formal dance at the fort - everyone in their best, a string quartet, the Governor's
+- [Yes] **Fishing contest**: Finn challenges the town - biggest fish by sundown wins a trophy (players can enter).
+- [Yes] **The Governor's Ball**: a formal dance at the fort - everyone in their best, a string quartet, the Governor's
       speech. Invitations go to players with good Armada standing.
-- [ ] **Quiz night at the Grog Barrel**: Rufus asks pirate trivia in chat; first right answer wins a round of drinks.
-- [ ] **Stargazing night**: Ptolemy at the Ridge Lookout with a meteor shower (shooting-star particles); he names a
+- [No] **Quiz night at the Grog Barrel**: Rufus asks pirate trivia in chat; first right answer wins a round of drinks.
+- [No] **Stargazing night**: Ptolemy at the Ridge Lookout with a meteor shower (shooting-star particles); he names a
       star after you if you're there.
-- [ ] **Storm night at the lighthouse**: a big storm, Silas needs help keeping the light going (bring him oil/glowstone),
+- [No] **Storm night at the lighthouse**: a big storm, Silas needs help keeping the light going (bring him oil/glowstone),
       otherwise a ship wrecks on the rocks and the town has to rescue the crew.
-- [ ] **A ship limps in**: a damaged merchant ship drifts into the harbour; townsfolk rush to the quay with bandages
+- [Yes] **A ship limps in**: a damaged merchant ship drifts into the harbour; townsfolk rush to the quay with bandages
       and ropes (the doctor patches the crew up).
-- [ ] **Harvest festival**: once a "season" the chapel collects food; the farmers, the miller and the cider maker bring
-      their best; a big feast in the plaza.
-- [ ] **Ghost stories**: on foggy nights the townsfolk gather round the tavern hearth; sometimes a "ghost" is seen
+- [Yes] **Harvest festival**: once a "season" the chapel collects food; the farmers, the miller and the cider maker bring
+      their best; a big feast in the plaza with temporary setup tables.
+- [No] **Ghost stories**: on foggy nights the townsfolk gather round the tavern hearth; sometimes a "ghost" is seen
       on the quay (a harmless glowing figure that vanishes).
-- [ ] **Hourly bells**: the chapel bell strikes the hour across the town.
+- [No] **Hourly bells**: the chapel bell strikes the hour across the town.
 
 ## Games + competitions
-- [ ] **The Chess League**: a ranking board on the Chess Green - every townsperson and player who plays has a rating;
+- [Yes] **The Chess League**: a ranking board on the Chess Green - every townsperson and player who plays has a rating;
       a monthly tournament with a champion.
-- [ ] **Arm-wrestling with Brannoc**: a quick timing mini-game at a tavern table; beat him for bragging rights.
-- [ ] **Darts**: the tavern's dartboard becomes playable (throw darts at it, the regulars keep score).
-- [ ] **A new card game**: e.g. "Pirate's Gambit" at the den's card table, against the regulars.
-- [ ] **Puppet show**: Gideon puts on a puppet show in the park for the children (and anyone watching).
+- [No] **Arm-wrestling with Brannoc**: a quick timing mini-game at a tavern table; beat him for bragging rights.
+- [Yes] **Darts**: the tavern's dartboard becomes playable (throw darts at it, the regulars keep score) and regulars can play against eachother.
+- [No] **A new card game**: e.g. "Pirate's Gambit" at the den's card table, against the regulars.
+- [No] **Puppet show**: Gideon puts on a puppet show in the park for the children (and anyone watching).
 
 ## You + the town
-- [ ] **Your own house in town**: buy the empty townhouse (#30) - furnish it, the neighbours visit, hang your paintings.
-- [ ] **Letters**: townsfolk send you letters (to a mailbox at your house / the harbourmaster) - thanks for gifts,
+- [No] **Your own house in town**: buy the empty townhouse (#30) - furnish it, the neighbours visit, hang your paintings.
+- [No] **Letters**: townsfolk send you letters (to a mailbox at your house / the harbourmaster) - thanks for gifts,
       invitations to weddings and festivals, a pressed flower from Molly.
-- [ ] **Apprenticeships**: spend time learning from Brannoc, Isadora or Gideon to unlock special recipes
+- [No] **Apprenticeships**: spend time learning from Brannoc, Isadora or Gideon to unlock special recipes
       (a smith's stamp, rare paints, a clockwork toy).
-- [ ] **Key to the City**: when most of the town counts you as a friend, the Governor gives you the Key to Wavebreak
+- [No] **Key to the City**: when most of the town counts you as a friend, the Governor gives you the Key to Wavebreak
       (and a statue of you appears in the plaza).
-- [ ] **Bless my ship**: Father Anselm blesses your ship at the quay (a small lucky bonus + a ceremony with the bells).
-- [ ] **Rumours that lead somewhere**: Zora, Seraphine and the crier drop hints that mark real places on your map
+- [ No **Bless my ship**: Father Anselm blesses your ship at the quay (a small lucky bonus + a ceremony with the bells).
+- [No] **Rumours that lead somewhere**: Zora, Seraphine and the crier drop hints that mark real places on your map
       (a hidden treasure, an unvisited wreck).
 
 ## More people + creatures
-- [ ] **Crews ashore**: when AI ships are in the harbour their sailors come ashore and drink in the tavern.
-- [ ] **A rival captain**: a swaggering NPC captain who challenges you to races and duels, and boasts in the tavern.
-- [ ] **Prisoners in the fort's stocks**: captured pirates you can pay to bail out (some join the town afterwards).
-- [ ] **A street magician** in the plaza (card tricks, a vanishing parrot), and a **flower seller**.
-- [ ] **The town grows with you**: new people move in after you beat bosses (a monster hunter after the Kraken, a
+- [Yes] **Crews ashore**: when AI ships are in the harbour their sailors come ashore and drink in the tavern.
+- [No] **A rival captain**: a swaggering NPC captain who challenges you to races and duels, and boasts in the tavern.
+- [No] **Prisoners in the fort's stocks**: captured pirates you can pay to bail out (some join the town afterwards).
+- [No] **A street magician** in the plaza (card tricks, a vanishing parrot), and a **flower seller**.
+- [No] **The town grows with you**: new people move in after you beat bosses (a monster hunter after the Kraken, a
       treasure appraiser after the Titan's Chest...).
-- [ ] **More animals**: stray cats from the cattery wandering the streets, a dog that barks at night, pigeons in the
+- [No] **More animals**: stray cats from the cattery wandering the streets, a dog that barks at night, pigeons in the
       plaza, crabs on the beach.
 
 ## Your notes

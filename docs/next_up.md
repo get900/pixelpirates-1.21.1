@@ -6,14 +6,15 @@ Town ideas have their own list with the details: `docs/town_life_ideas_2.md` (24
 
 ---------------------------------------------------------------------------------------------------------------------
 ## A. Loose ends (small, already half there)
-- [ ] **Client smoke test**: I launch the client once, load the island and read the log for model/animation/texture
+- [x] **Client smoke test** (DONE 2026-10-05: 82 entity types + 45 townsfolk rendered clean; fixed 2 chess models
+      with missing textures; `tools/check_assets.py` now checks every model's textures): I launch the client once, load the island and read the log for model/animation/texture
       errors in everything new (36 townsfolk, parrots, liveries, cats, tattoos, chess, paintings). This is a log check;
       you'd still do the real testing yourself.
-- [ ] **Tidy the repo root**: `MsgFmt.java`, `MsgFmt2.java`, `main`, `org/`, `data/` (VS2 leftovers), `Capture.PNG`,
+- [x] **Tidy the repo root** (DONE: leftovers deleted, pictures moved to tools/previews/): `MsgFmt.java`, `MsgFmt2.java`, `main`, `org/`, `data/` (VS2 leftovers), `Capture.PNG`,
       `port_city_preview.png` - delete, or move the pictures to `tools/previews/`.
-- [ ] **Push to GitHub** (yours - needs your sign-in): commits 8cb918f .. c67c49f are local only.
-- [ ] **Relic recipes**: removing the nether star from 4 relic recipes needs replacement ingredients.
-- [ ] **Fort security**: the Governor's fortress guardroom is furnished but has no guards/duty yet.
+- [ ] **Push to GitHub** (yours - needs your sign-in): everything since 8cb918f is local only.
+- [x] **Relic recipes** (was already done with the materials ladder - only the doc was stale): removing the nether star from 4 relic recipes needs replacement ingredients.
+- [x] **Fort security** (DONE: 4 new guards + the Garrison watch, see docs/townsfolk.md): the Governor's fortress guardroom is furnished but has no guards/duty yet.
 
 ## B. Town life (pick from `docs/town_life_ideas_2.md`) - the ones that fit what's already built
 - [ ] **Hourly bells**: the chapel bell strikes the hour across town (bells already exist - cheap).

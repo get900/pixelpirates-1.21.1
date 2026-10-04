@@ -47,7 +47,7 @@ def street_lamp():
 
 def trophy():
     m = BM("chess_trophy", {"gold": "minecraft:block/gold_block", "base": "minecraft:block/polished_blackstone",
-                            "ivory": "pixelpirates:entity/chess_ivory", "particle": "minecraft:block/gold_block"})
+                            "ivory": "pixelpirates:block/chess_ivory", "particle": "minecraft:block/gold_block"})
     m.box([4, 0, 4], [12, 2, 12], all="#base")
     m.box([5, 2, 5], [11, 3, 11], all="#gold")
     m.box([7, 3, 7], [9, 6, 9], all="#gold")                                     # the stem

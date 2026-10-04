@@ -1,7 +1,7 @@
 {
  "textures": {
   "stone": "minecraft:block/polished_andesite",
-  "trim": "minecraft:block/smooth_quartz",
+  "trim": "minecraft:block/quartz_block_bottom",
   "clock": "pixelpirates:block/chess_clock",
   "wood": "minecraft:block/dark_oak_planks",
   "brass": "minecraft:block/gold_block",

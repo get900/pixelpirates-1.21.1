@@ -191,7 +191,7 @@ run dedicated server, `execute in pixelpirates:pixel_pirates run forceload add <
   (x28..32 z-72..-68, chandelier, flag mast to y105). PORTICO south (6 quartz columns x23..37 z-57, pediment with the
   anchor + gold). Inside: ENTRANCE HALL x26..34 (marble chequer, grand quartz stair z-66..-71 to the landing z-72..-78,
   side galleries x26-27/33-34 with balustrades, chandelier, busts, GOVERNOR_PORTRAIT); west: STATE DINING (z-78..-71) +
-  GUARDROOM (z-69..-62, duty desk, weapon racks - security later); east: BALLROOM (chandeliers, organ console, sofas).
+  GUARDROOM (z-69..-62, duty desk, weapon racks - Sergeant Crane on duty, see docs/townsfolk.md "Fort security"); east: BALLROOM (chandeliers, organ console, sofas).
   Upstairs: GOVERNOR'S SUITE (west, door onto the orangery terrace), LIBRARY (east, door onto the kitchen terrace),
   STRONGROOM (iron door at (35,77,-66) + button on the gallery side). Pavilions: ORANGERY x12..17 (glass) and KITCHEN
   x43..49, both z-76..-64 with balustraded roof terraces. Grounds x12..53 z-88..-49: SEA_GOD_STATUE fountain (30,-52),

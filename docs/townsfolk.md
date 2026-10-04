@@ -60,6 +60,15 @@ x100/102) and the Green (pedestal -30,79,-118, stands -31/-20,79,-114); swings i
   marco (market days only - TownEvents.present).
 - Test: `/pptown event festival|wedding|memorial|party`, `/pptown friend <id>`.
 
+## Fort security (2026-10-05)
+- New guards (models `tools/mobs/townsfolk.py`, Governor's Guard in Armada blue via `soldier(coat=GUARD_BLUE)`):
+  pell + quayle (the Residence gate sentry boxes 25/35,71,-51), crane (the guardroom duty desk 22,71,-67), ruddock
+  (the fortress gate passage -81,89,-120). Day posts, sleep in the guardhouse.
+- `Garrison` (ticked from TownLife): a player with Iron Armada rep < 0 on the Residence grounds or in the Fortress is
+  told "Halt!" by the nearest guard on duty (awake, within 48), then teleported out of the gate 100 ticks later.
+  Asleep/absent guards = no challenge (sneaking in at night works). The Governor's PARDON ends it.
+- VERIFIED in a client 2026-10-05 (scripted, Pell at his post): Halt -> 5 s -> marched out, no repeat warning.
+
 ## Verified
 Dedicated test server (2026-10-04): spawn, the whole day cycle, tavern seats + den tables, chess pairs on both boards,
 easel paintings hung at home, the service (preacher, organist, pews), market keepers at the inn + in inn beds.

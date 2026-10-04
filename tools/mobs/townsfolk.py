@@ -999,9 +999,10 @@ def lazlo(seed):                                  # Lazlo Quick, a smuggler: dar
     return finish(m, a, "look_around")
 
 
-def soldier(name, seed, skin, hair, eye, rank, extra=None, **fk):
-    """The fort garrison: red coats, white cross-belts, a shako; their rank in the trim."""
-    TUNIC = C("#a01818", "#8e1414")
+def soldier(name, seed, skin, hair, eye, rank, extra=None, coat=("#a01818", "#8e1414"), **fk):
+    """The fort garrison: red coats, white cross-belts, a shako; their rank in the trim. The Governor's Guard wear
+    Armada blue (coat=GUARD_BLUE)."""
+    TUNIC = C(*coat)
     m, a = person(name, seed, skin=skin, hair=hair, eye=eye, hair_style="crop", top=bands(TUNIC, (0, 1, C("#f0f0ec"))),
                   sleeve=TUNIC, legs=C("#ece8dc"), boots="#141414", cuffs="#f0f0ec", belt="#f0f0ec", facekw=fk)
     t = a["top"]
@@ -1046,6 +1047,33 @@ def finch(seed):                                  # Private Finch: dark skin, a 
     return finish(m, a, "look_around", hold=[-10, 0, 0])
 
 
+GUARD_BLUE = ("#1e3a78", "#182f62")
+
+
+def pell(seed):                                   # Private Pell, Governor's Guard: lanky, a long nose, sandy hair
+    def ex(m, a):
+        m.cube("head", [-0.5, a["top"] + 2.5, -5.2], [1, 2, 1], noise(FAIR))
+    m, a = soldier("folk_pell", seed, FAIR, "#c8a868", "#4a6a8a", "#f0f0ec", ex, coat=GUARD_BLUE)
+    return finish(m, a, "look_around", hold=[-10, 0, 0])
+
+
+def quayle(seed):                                 # Private Quayle, Governor's Guard: round-faced, rosy, black hair
+    m, a = soldier("folk_quayle", seed, OLIVE, "#1a1412", "#3a2a1a", "#f0f0ec", None, coat=GUARD_BLUE, rosy="#d0806a")
+    return finish(m, a, "yawn", hold=[-10, 0, 0])
+
+
+def crane(seed):                                  # Sergeant Crane, Governor's Guard: grey, mutton-chops, the keys
+    def ex(m, a):
+        m.cube("body", [3.6, 9, -2.6], [1.5, 2, 0.6], C("#c8a040"), art={"sides": A("g.\n.g", g="#f0d070")})   # the strongroom keys
+    m, a = soldier("folk_crane", seed, WEATHER, "#9a9a96", "#3a4a5a", "#e0c050", ex, coat=GUARD_BLUE, stache="#9a9a96", wrinkles=True)
+    return finish(m, a, "cross_arms", hold=[-10, 0, 0])
+
+
+def ruddock(seed):                                # Corporal Ruddock, Fort Garrison: stocky, red beard, a scar
+    m, a = soldier("folk_ruddock", seed, TAN, "#a04a20", "#4a3a2a", "#f0f0ec", None, beard="#a04a20", scar="#7a4a3a")
+    return finish(m, a, "pocketwatch", hold=[-10, 0, 0])
+
+
 def tom(seed):                                    # Tom, a foundling at the inn: patched clothes, a kite
     m, a = kid("folk_tom", seed, skin=BROWN, hair="#1a1210", eye="#3a2a1a", hair_style="curly", top=over(C("#4a6a8a"), spots("#8a6a4a", 0.06, size=2)),
                legs=C("#5a4a3a"), boots="#3a2414", facekw=dict(rosy="#a85a4a"))
@@ -1086,7 +1114,7 @@ CHARACTERS = {"polly": polly, "snip": snip, "inka": inka, "agatha": agatha, "isa
               "finn": finn, "nell": nell, "jack": jack, "pettigrew": pettigrew, "rosalind": rosalind, "dan": dan,
               "ptolemy": ptolemy, "hal": hal, "morwenna": morwenna, "harmonia": harmonia, "pip": pip, "molly": molly,
               "tobias": tobias, "ginny": ginny, "brask": brask, "agnes": agnes, "seraphine": seraphine,
-              "elias": elias, "lazlo": lazlo, "ashby": ashby, "hale": hale, "dobbs": dobbs, "finch": finch, "tom": tom,
+              "elias": elias, "lazlo": lazlo, "ashby": ashby, "hale": hale, "dobbs": dobbs, "finch": finch, "pell": pell, "quayle": quayle, "crane": crane, "ruddock": ruddock, "tom": tom,
               "bella": bella, "marco": marco}
 
 MOBS = {"folk_" + k: v for k, v in CHARACTERS.items()}

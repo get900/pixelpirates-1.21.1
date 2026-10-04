@@ -106,6 +106,7 @@ public final class Townsfolk {
     /** Where the lodgers sleep when it isn't the inn: the soldiers in the Guardhouse barracks; Lazlo sleeps by day in a
      *  market keeper's inn bed (they're out at their booths then). */
     static final Map<String, String> BED_POOL = Map.of("ashby", "guardhouse", "dobbs", "guardhouse", "brask", "guardhouse",
+            "pell", "guardhouse", "quayle", "guardhouse", "crane", "guardhouse", "ruddock", "guardhouse",
             "lazlo", "share:trader_quartermaster");
 
     /** What each likes as a gift (TownTalk "Give a gift"): a liked item is worth much more friendship. */
@@ -479,6 +480,29 @@ public final class Townsfolk {
                 "I drum the watch at the fort. Out here I just carry the lantern. It's quieter.",
                 "The harbour at night is the best thing in the world. Black water, gold lights. Don't fall in.",
                 "Corporal Hale snores on his feet. I've seen it.");
+        // ---- FORT SECURITY (2026-10-05): the Governor's Guard at the Residence + the fortress gate (Garrison challenges
+        // anyone the Armada counts an enemy). Posts: the two sentry boxes inside the Residence gate, the guardroom's
+        // duty desk, the mouth of the fortress gate passage.
+        add("pell", "Private Pell", "of the Governor's Guard", INN, p(25, 71, -51), WorkStyle.STAND,
+                EnumSet.of(Hobby.DRINK, Hobby.GAMBLE), Service.NONE, NO_SHOP,
+                "Residence grounds, captain. Admire the fountain from this side of the gate, if you would.",
+                "Quayle and I have stood in these boxes so long the pigeons think we're statues.",
+                "If the Armada's got a quarrel with you, I'm the quarrel's first step. Nothing personal.");
+        add("quayle", "Private Quayle", "of the Governor's Guard", INN, p(35, 71, -51), WorkStyle.STAND,
+                EnumSet.of(Hobby.DRINK, Hobby.STROLL), Service.NONE, NO_SHOP,
+                "Mind the lions. The left one bit a lieutenant. Well. Someone carved a tooth on it. Same thing.",
+                "Pell talks in his sleep. On duty. Standing up.",
+                "The Governor walks the garden at dusk. We salute the roses, just to be safe.");
+        add("crane", "Sergeant Crane", "of the Governor's Guard", INN, p(22, 71, -67), WorkStyle.STAND,
+                EnumSet.of(Hobby.CHESS, Hobby.DRINK), Service.NONE, NO_SHOP,
+                "Duty roster, visitors' book, the keys to the strongroom. The keys stay with me.",
+                "Wanted captains get one warning on these grounds. I write down how long they took to leave.",
+                "Twenty years in the Armada and the worst wound I took was from a quill.");
+        add("ruddock", "Corporal Ruddock", "of the Fort Garrison", INN, p(-81, 89, -120), WorkStyle.STAND,
+                EnumSet.of(Hobby.GAMBLE, Hobby.DRINK), Service.NONE, NO_SHOP,
+                "Fortress gate. State your business. ...That'll do. Mind the portcullis, it sticks.",
+                "Every gun on those bastions knows the face of every pirate the Governor's angry with.",
+                "I count the ships in the harbour every morning. Then I count them again. Old habit.");
         add("tom", "Tom", "a Foundling at the Inn", INN, p(-70, 71, -30), WorkStyle.PLAY, 1000, 9000, 14500, 23500,
                 EnumSet.of(Hobby.PLAY, Hobby.STROLL), Service.NONE, NO_SHOP,
                 "Martha took us in when our ship went down. She makes the best pies in the world.",
@@ -541,6 +565,10 @@ public final class Townsfolk {
         likes("hale", HomesteadItems.ALE, net.minecraft.item.Items.COOKED_BEEF);
         likes("dobbs", net.minecraft.item.Items.COOKIE, net.minecraft.item.Items.BREAD);
         likes("finch", net.minecraft.item.Items.NOTE_BLOCK, net.minecraft.item.Items.BREAD);
+        likes("pell", HomesteadItems.ALE, net.minecraft.item.Items.COOKIE);
+        likes("quayle", net.minecraft.item.Items.POPPY, HomesteadItems.ALE);
+        likes("crane", net.minecraft.item.Items.BOOK, HomesteadItems.SPICED_WINE);
+        likes("ruddock", net.minecraft.item.Items.COOKED_BEEF, HomesteadItems.ALE);
         likes("marco", net.minecraft.item.Items.EMERALD, net.minecraft.item.Items.GOLD_INGOT);
     }
 

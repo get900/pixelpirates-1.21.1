@@ -56,6 +56,34 @@ def check_model(ref, seen, who):
         check_model(o["model"], seen, who)
 
 
+def vanilla_textures():
+    """Texture paths in the Minecraft client jar (Loom's cache), or None if it isn't there."""
+    import glob, os, zipfile
+    for j in glob.glob(os.path.expanduser("~/.gradle/caches/fabric-loom/1.20.1/minecraft-client*.jar")):
+        names = zipfile.ZipFile(j).namelist()
+        return {n[len("assets/minecraft/textures/"):-4] for n in names if n.startswith("assets/minecraft/textures/") and n.endswith(".png")}
+    return None
+
+
+def check_all_model_textures():
+    """Every block/item model file (registered or not): a baked model can only use textures in the block atlas
+    (block/ or item/ folders - an entity/ texture shows as missing), and a minecraft: texture must really exist
+    (minecraft:block/smooth_quartz does not - it's quartz_block_bottom). Both bit the chess set 2026-10-05."""
+    vanilla = vanilla_textures()
+    for d in ASSET_DIRS:
+        for p in sorted((d / "models").rglob("*.json")):
+            m = json.loads(p.read_text(encoding="utf-8-sig"))
+            for k, t in (m.get("textures") or {}).items():
+                if t.startswith("#"):
+                    continue
+                tns, tp = t.split(":", 1) if ":" in t else ("minecraft", t)
+                who = f"model {p.relative_to(d).as_posix()} texture {k} -> {t}"
+                if tns == "pixelpirates" and not tp.startswith(("block/", "item/")):
+                    problems.append(f"{who}: not in the block atlas (move it under textures/block/)")
+                if tns == "minecraft" and vanilla is not None and tp not in vanilla and not tp.startswith("trims/"):   # trims are built at load
+                    problems.append(f"{who}: no such vanilla texture")
+
+
 def scan(java_root):
     blocks, items = set(), set()
     for f in Path(java_root).rglob("*.java"):
@@ -95,7 +123,8 @@ if __name__ == "__main__":
             check_model(f"pixelpirates:item/{name}", set(), f"item {name}")
         if f"item.pixelpirates.{name}" not in LANG and f"block.pixelpirates.{name}" not in LANG:
             problems.append(f"item {name}: no lang")
-    print(f"checked {len(blocks)} blocks, {len(items)} items")
+    check_all_model_textures()
+    print(f"checked {len(blocks)} blocks, {len(items)} items, every model's textures")
     for p in problems:
         print("  PROBLEM", p)
     sys.exit(1 if problems else 0)

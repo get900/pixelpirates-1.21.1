@@ -134,8 +134,8 @@
   barrel, campfire/smoker shark + swimmer) now live in ModRecipeProvider. `structure/pirate_port_01.nbt` is still in
   the singular folder (referenced by Phase1Biomes) - check whether it ever loaded.
 - **No enchantments** in loot (all enchanted books removed). FROZEN_SEEKER (Java enchantment, zone hazards + fog) still
-  exists - decide its fate. Diamonds removed from the early chests the user marked; the full diamond/netherite/nether
-  star removal waits for the materials design (4 relic recipes need replacements).
+  exists - decide its fate. Diamonds/netherite/nether stars are gone from every loot table, drop and recipe (done with the
+  materials ladder - the relic recipes now use mod materials, see `docs/gear.md`).
 - **Drops:** sharks (`loot_tables/entities/shark.json`: 1-3 meat, cooked if burning, 4% chum), salted swimmer is a
   phase 1/2 catch, pirate crew add cannon balls / repair kit 5% / a low weapon 8%, chest crabs give a doubloon when
   rummaged and nothing on death, mimics no coins, salvage hook no nuggets (iron/coal instead), no nautilus in pots,

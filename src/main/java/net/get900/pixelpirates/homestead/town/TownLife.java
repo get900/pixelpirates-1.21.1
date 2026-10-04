@@ -114,6 +114,7 @@ public final class TownLife {
             TownEvents.tick(w);
             gulls(w);
             watchChallenges(w);
+            Garrison.tick(w);
         });
         // a captain lost at sea: their name on the memorial roll + a memorial service in the chapel next morning
         net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {

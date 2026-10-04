@@ -35,6 +35,7 @@ def grain(base, seed, size=64, streak=True):
 
 def textures():
     save(grain((236, 224, 196), 1), "entity/chess_ivory.png")
+    save(grain((236, 224, 196), 1), "block/chess_ivory.png")   # block models need it in the block atlas (chess trophy)
     save(grain((46, 34, 30), 2), "entity/chess_ebony.png")
     board = Image.new("RGBA", (16, 16))
     for y in range(16):
@@ -99,7 +100,7 @@ def table():
 
 
 def pedestal():
-    m = BM("giant_chess", {"stone": "minecraft:block/polished_andesite", "trim": "minecraft:block/smooth_quartz", "clock": "pixelpirates:block/chess_clock",
+    m = BM("giant_chess", {"stone": "minecraft:block/polished_andesite", "trim": "minecraft:block/quartz_block_bottom", "clock": "pixelpirates:block/chess_clock",
                            "wood": "minecraft:block/dark_oak_planks", "brass": "minecraft:block/gold_block", "particle": "minecraft:block/polished_andesite"})
     m.box([3, 0, 3], [13, 2, 13], all="#trim")
     m.box([4, 2, 4], [12, 10, 12], all="#stone")

@@ -2,7 +2,7 @@
  "textures": {
   "gold": "minecraft:block/gold_block",
   "base": "minecraft:block/polished_blackstone",
-  "ivory": "pixelpirates:entity/chess_ivory",
+  "ivory": "pixelpirates:block/chess_ivory",
   "particle": "minecraft:block/gold_block"
  },
  "elements": [

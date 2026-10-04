@@ -93,6 +93,8 @@ public final class BossProgression {
     public static void onBossKilled(ServerPlayerEntity p, int index, int unlocksZone) {
         if (index < 0) return;
         Step step = CHAIN.get(index);
+        net.get900.pixelpirates.util.AdvancementHelper.grant(p, "boss_" + step.boss());   // tools/gen_advancements.py
+        net.get900.pixelpirates.world.PirateXp.boss(p, index, progress(p) == index);        // pirate XP: big on the first kill
         net.get900.pixelpirates.item.BossArmor.onBossKilled(p, index);     // a boss-set piece they don't own yet
         boolean advanced = progress(p) == index;
         if (advanced) {
@@ -111,7 +113,7 @@ public final class BossProgression {
             p.sendMessage(Text.literal("[~] The Leviathan's Rift has opened. The Heartstone will lead you to it.")
                     .formatted(Formatting.DARK_AQUA, Formatting.BOLD), false);
         } else if (nxt != null) {
-            p.sendMessage(Text.literal("[~] Next: " + capitalise(nxt.name()) + " - right-click your relic to find its lair.")
+            p.sendMessage(Text.literal("[~] New pages in your Chronicle: " + capitalise(nxt.name()) + ". Right-click your relic to find its lair.")
                     .formatted(Formatting.AQUA), false);
         } else {
             p.sendMessage(Text.literal("[X] The Leviathan is slain. Every sea is yours, Captain.")
@@ -137,7 +139,10 @@ public final class BossProgression {
 
     /** Carries the relic AND its power answers (not silenced). Use for combat effects; {@link #has} for ownership. */
     public static boolean relicActive(PlayerEntity p, Item item) {
-        return has(p, item) && !relicsSilenced(p);
+        if (relicsSilenced(p)) return false;
+        if (has(p, item)) return true;
+        Item weapon = net.get900.pixelpirates.item.RelicWeapons.weaponOf(item);    // or the relic weapon forged from it
+        return weapon != null && has(p, weapon);
     }
 
     /** True if the player carries the item anywhere in their inventory (hotbar, main, offhand, armor). */

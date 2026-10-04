@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "pixelpirates:grog"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "PP ",
+    "PGP",
+    "PPP"
+  ],
+  "result": {
+    "item": "pixelpirates:grog_barrel"
+  },
+  "show_notification": true
+}

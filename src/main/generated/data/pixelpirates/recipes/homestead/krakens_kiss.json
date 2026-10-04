@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "pixelpirates:aged_rum"
+    },
+    {
+      "item": "pixelpirates:kraken_ink"
+    },
+    {
+      "item": "pixelpirates:lime"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:krakens_kiss"
+  }
+}

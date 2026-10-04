@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "pixelpirates:crown_of_the_drowned"
+    },
+    {
+      "item": "pixelpirates:stormcaller"
+    },
+    {
+      "item": "pixelpirates:leviathan_scale"
+    },
+    {
+      "item": "pixelpirates:leviathan_scale"
+    },
+    {
+      "item": "pixelpirates:leviathan_scale"
+    },
+    {
+      "item": "pixelpirates:leviathan_scale"
+    },
+    {
+      "item": "pixelpirates:tidal_core"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:tidefathers_wrath"
+  }
+}

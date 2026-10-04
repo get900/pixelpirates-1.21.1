@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:grappling_hook"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.swing_aboard.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.swing_aboard.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:gone_fishing",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:grappling_hook"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

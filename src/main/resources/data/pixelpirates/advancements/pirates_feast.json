@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:salmagundi"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.pirates_feast.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.pirates_feast.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:ship_cook",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:salmagundi"
+          ]
+        }
+      }
+    }
+  }
+}

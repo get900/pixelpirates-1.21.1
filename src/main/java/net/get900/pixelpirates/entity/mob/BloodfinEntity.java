@@ -214,7 +214,7 @@ public class BloodfinEntity extends ModBoss {
             broadcast(sw, Text.literal("The harpoon glances off - the Bloodfin is wary of the lines (" + (wary / 20 + 1) + " s)").formatted(Formatting.GRAY), true);
             return;
         }
-        if (by instanceof PlayerEntity p && !BossProgression.eligible(p, chainIndex())) return;
+        if (by instanceof PlayerEntity p && !fights(p)) return;
         hooks.add(new Hook(winch.toImmutable(), Math.max(4, Math.sqrt(squaredDistanceTo(Vec3d.ofCenter(winch))) + 1)));
         if (hooks.size() == 1) thrashTicks = 120;
         updateHookSlow();

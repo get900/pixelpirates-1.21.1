@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "pixelpirates:raw_lava_crab_claw"
+  },
+  "result": "pixelpirates:cooked_lava_crab_claw"
+}

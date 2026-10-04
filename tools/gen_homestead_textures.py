@@ -1313,7 +1313,7 @@ def write_sheet():
     sheet.save(Path(__file__).parent / "homestead_sheet.png")
 
 
-BUILDERS = [build_crops, build_food, build_rum, build_building, build_furniture, build_guns, build_tools, build_hoard, build_fish, build_salvage, build_bounty, build_nav, build_hideout, build_grapple, build_ship, build_logbook, build_roulette]
+BUILDERS = [build_crops, build_food, build_rum, build_building, build_furniture, build_guns, build_tools, build_hoard, build_fish, build_salvage, build_bounty, build_nav, build_hideout, build_grapple, build_ship, build_roulette]   # build_logbook: replaced by the Weathered Chronicle (gen_chronicle_art.py)
 
 if __name__ == "__main__":
     for b in BUILDERS:

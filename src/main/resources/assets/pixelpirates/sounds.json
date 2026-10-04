@@ -1800,5 +1800,14 @@
     "sounds": [
       "pixelpirates:mob/kraken_arm/special"
     ]
+  },
+  "block.organ.diapason": {
+    "sounds": [
+      {
+        "name": "pixelpirates:block/organ/diapason",
+        "attenuation_distance": 48
+      }
+    ],
+    "subtitle": "subtitles.pixelpirates.organ"
   }
 }

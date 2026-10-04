@@ -1,7 +1,6 @@
 package net.get900.pixelpirates.item.custom;
 
 import net.get900.pixelpirates.PixelPirates;
-import net.get900.pixelpirates.item.ModItems;
 import net.get900.pixelpirates.world.dimension.ModDimensions;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.block.BarrelBlock;
@@ -41,11 +40,13 @@ public class DimensionKeyItem extends Item {
 
         ServerPlayerEntity player = (ServerPlayerEntity) user;
         MinecraftServer server = player.getServer();
+        ItemStack key = user.getStackInHand(hand);
 
         if (player.getWorld().getRegistryKey().equals(ModDimensions.PIXEL_PIRATES_WORLD)) {
             // Return to overworld spawn
             ServerWorld overworld = server.getWorld(World.OVERWORLD);
             BlockPos spawn = overworld.getSpawnPos();
+            key.decrement(1);                                              // the key is spent on use
             int surfaceY = overworld.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, spawn.getX(), spawn.getZ());
             player.teleport(overworld, spawn.getX() + 0.5, surfaceY, spawn.getZ() + 0.5,
                     Set.of(), player.getYaw(), player.getPitch());
@@ -58,6 +59,8 @@ public class DimensionKeyItem extends Item {
                 return TypedActionResult.fail(user.getStackInHand(hand));
             }
 
+            // The key is spent on use (before the inventory is packed away, so it isn't stored either)
+            key.decrement(1);
             // Save overworld position, store inventory, clear, then teleport
             ServerWorld overworld = server.getWorld(World.OVERWORLD);
             storeInventoryInBarrels(player, overworld);
@@ -68,7 +71,7 @@ public class DimensionKeyItem extends Item {
             grantAdvancement(player, PIRATES_LIFE_ADV);
         }
 
-        return TypedActionResult.success(user.getStackInHand(hand));
+        return TypedActionResult.success(key);
     }
 
     // ---------- inventory storage ----------
@@ -99,9 +102,8 @@ public class DimensionKeyItem extends Item {
         fillBarrel(overworld, pos1, items, 0,  27, name + "'s Belongings (1/2)");
         fillBarrel(overworld, pos2, items, 27, 54, name + "'s Belongings (2/2)");
 
-        // Wipe inventory, then give back one key so they can return
+        // Wipe the inventory (the used key is already gone - it is consumed on use)
         player.getInventory().clear();
-        player.getInventory().insertStack(new ItemStack(ModItems.DIMENSION_KEY));
 
         player.sendMessage(Text.literal(
                 "§aYour belongings are stored in barrels at §e" + pos1.toShortString() + "§a in the overworld."), false);

@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/chapel_altar"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/chapel_altar",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/chapel_altar",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/chapel_altar",
+   "y": 270
+  }
+ }
+}

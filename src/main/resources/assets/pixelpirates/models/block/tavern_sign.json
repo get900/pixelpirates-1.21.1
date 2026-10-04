@@ -1,0 +1,298 @@
+{
+ "textures": {
+  "board": "pixelpirates:block/tavern_sign_board",
+  "iron": "minecraft:block/anvil",
+  "wood": "minecraft:block/dark_oak_log",
+  "particle": "minecraft:block/dark_oak_planks"
+ },
+ "elements": [
+  {
+   "from": [
+    5.5,
+    9,
+    15
+   ],
+   "to": [
+    10.5,
+    16,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#iron"
+    },
+    "south": {
+     "texture": "#iron"
+    },
+    "east": {
+     "texture": "#iron"
+    },
+    "west": {
+     "texture": "#iron"
+    },
+    "up": {
+     "texture": "#iron"
+    },
+    "down": {
+     "texture": "#iron"
+    }
+   }
+  },
+  {
+   "from": [
+    7,
+    13,
+    -6
+   ],
+   "to": [
+    9,
+    14.5,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#iron"
+    },
+    "south": {
+     "texture": "#iron"
+    },
+    "east": {
+     "texture": "#iron",
+     "uv": [
+      0,
+      1.5,
+      16,
+      3
+     ]
+    },
+    "west": {
+     "texture": "#iron",
+     "uv": [
+      10,
+      1.5,
+      16,
+      3
+     ]
+    },
+    "up": {
+     "texture": "#iron",
+     "uv": [
+      7,
+      10,
+      9,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#iron",
+     "uv": [
+      7,
+      0,
+      9,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    7.5,
+    14.5,
+    -6
+   ],
+   "to": [
+    8.5,
+    15,
+    -5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#iron"
+    },
+    "south": {
+     "texture": "#iron"
+    },
+    "east": {
+     "texture": "#iron",
+     "uv": [
+      16,
+      1,
+      16,
+      1.5
+     ]
+    },
+    "west": {
+     "texture": "#iron",
+     "uv": [
+      10,
+      1,
+      11,
+      1.5
+     ]
+    },
+    "up": {
+     "texture": "#iron",
+     "uv": [
+      7.5,
+      10,
+      8.5,
+      11
+     ]
+    },
+    "down": {
+     "texture": "#iron",
+     "uv": [
+      7.5,
+      16,
+      8.5,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    7.75,
+    11,
+    -3.5
+   ],
+   "to": [
+    8.25,
+    13,
+    -3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#iron"
+    },
+    "south": {
+     "texture": "#iron"
+    },
+    "east": {
+     "texture": "#iron",
+     "uv": [
+      16,
+      3,
+      16,
+      5
+     ]
+    },
+    "west": {
+     "texture": "#iron",
+     "uv": [
+      12.5,
+      3,
+      13,
+      5
+     ]
+    },
+    "up": {
+     "texture": "#iron",
+     "uv": [
+      7.75,
+      12.5,
+      8.25,
+      13
+     ]
+    },
+    "down": {
+     "texture": "#iron",
+     "uv": [
+      7.75,
+      16,
+      8.25,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    7.75,
+    11,
+    12
+   ],
+   "to": [
+    8.25,
+    13,
+    12.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#iron"
+    },
+    "south": {
+     "texture": "#iron"
+    },
+    "east": {
+     "texture": "#iron"
+    },
+    "west": {
+     "texture": "#iron"
+    },
+    "up": {
+     "texture": "#iron"
+    },
+    "down": {
+     "texture": "#iron"
+    }
+   }
+  },
+  {
+   "from": [
+    7.5,
+    1,
+    -5
+   ],
+   "to": [
+    8.5,
+    11,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#wood"
+    },
+    "south": {
+     "texture": "#wood"
+    },
+    "east": {
+     "texture": "#board",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#board",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#wood",
+     "uv": [
+      7.5,
+      11,
+      8.5,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#wood",
+     "uv": [
+      7.5,
+      1,
+      8.5,
+      16
+     ]
+    }
+   }
+  }
+ ]
+}

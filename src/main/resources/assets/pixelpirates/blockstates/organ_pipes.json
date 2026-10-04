@@ -1,0 +1,34 @@
+{
+ "variants": {
+  "facing=north,top=false": {
+   "model": "pixelpirates:block/organ_pipes"
+  },
+  "facing=north,top=true": {
+   "model": "pixelpirates:block/organ_pipes_top"
+  },
+  "facing=east,top=false": {
+   "model": "pixelpirates:block/organ_pipes",
+   "y": 90
+  },
+  "facing=east,top=true": {
+   "model": "pixelpirates:block/organ_pipes_top",
+   "y": 90
+  },
+  "facing=south,top=false": {
+   "model": "pixelpirates:block/organ_pipes",
+   "y": 180
+  },
+  "facing=south,top=true": {
+   "model": "pixelpirates:block/organ_pipes_top",
+   "y": 180
+  },
+  "facing=west,top=false": {
+   "model": "pixelpirates:block/organ_pipes",
+   "y": 270
+  },
+  "facing=west,top=true": {
+   "model": "pixelpirates:block/organ_pipes_top",
+   "y": 270
+  }
+ }
+}

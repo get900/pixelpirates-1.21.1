@@ -1,0 +1,60 @@
+{
+  "elements": [
+    {"title": "The Seas"},
+    {"img": "palms", "w": 60},
+    {"p": "Five seas circle Wavebreak Port. A seal keeps each outer sea closed until you kill the beast that guards the one before it. If you try to sail past a sealed border, the sea pushes you back."},
+
+    {"page": "spread"},
+    {"img": "sea_1", "w": 138},
+    {"h": "I. The Starter Seas"},
+    {"p": "Warm shallows, jungle islands called the Island Thickets, and deep Open Ocean where sharks hunt. Banana and coconut palms grow on the islands. Castaways live on the beaches; cursed monkeys and crabs live in the jungle."},
+    {"page": "next"},
+    {"h": "Places of note"},
+    {"img": "place_rackhams_hold", "w": 138, "caption": "Rackham's Hold"},
+    {"p": "Smugglers' Grottos hidden under boulders, Tidewater Shrines, and Sunken Galleons (some run aground and still stick out of the waves)."},
+
+    {"page": "spread"},
+    {"if": "!met:2", "torn": "The chart of the second sea is missing. Kill Captain Rackham."},
+    {"if": "met:2", "img": "sea_2", "w": 138},
+    {"if": "met:2", "h": "II. The Merchant Seas"},
+    {"if": "met:2", "p": "Coral Bay, the Reef Edge and the Siren Sea. Coral jellies drift in bright swarms and sting. SIRENS sing to pull sailors in. A helmet halves their song; a turtle shell blocks it completely."},
+    {"if": "met:2", "p": "The Coral Temple is here, and so is the Serpent's stone gate."},
+
+    {"page": "spread"},
+    {"if": "!met:3 & met:2", "torn": "The chart of the third sea is charred. Kill the Sea Serpent."},
+    {"if": "!met:2", "torn": "The chart of the third sea is charred. Keep hunting."},
+    {"if": "met:3", "img": "sea_3", "w": 138},
+    {"if": "met:3", "h": "III. The Volcanic Seas"},
+    {"if": "met:3", "p": "The Ash Reef, the Boiling Basin and the Magma Sea. The WATER HERE SCALDS; a Tide Pearl or a Heat Amulet protects you. Magma Brutes slam the ground (water and rain hurt them), and lava crabs set you on fire."},
+    {"if": "met:3", "p": "Look for the Obsidian Vault, the fire pirates' camps, and the Cinder Citadel."},
+
+    {"page": "spread"},
+    {"if": "!met:4 & met:3", "torn": "The chart of the fourth sea is blank except for a drowned man's thumbprint. Kill the Molten Warlord."},
+    {"if": "!met:3", "torn": "The chart of the fourth sea is blank except for a drowned man's thumbprint. Keep hunting."},
+    {"if": "met:4", "img": "sea_4", "w": 138},
+    {"if": "met:4", "h": "IV. The Cursed Seas"},
+    {"if": "met:4", "p": "Phantom Wake, the Shipgrave Depths and the Drowned Trench. Lightning, fog and the drowned. Some of the chests in the Drowned Graveyard are MIMICS, so don't get too close."},
+    {"if": "met:4", "img": "wreck", "w": 138},
+
+    {"page": "spread"},
+    {"if": "!met:5 & met:4", "torn": "The last chart ends in a black edge. Kill the Ghost Captain."},
+    {"if": "!met:4", "torn": "The last chart ends in a black edge. Keep hunting."},
+    {"if": "met:5", "img": "sea_5", "w": 138},
+    {"if": "met:5", "h": "V. The Abyss"},
+    {"if": "met:5", "p": "The Abyssal Rings, the Pillar Sea and the Maw Depths: the edge of the world. MADNESS creeps in out here; the Spectral Anchor or a Sanity Amulet keeps your mind clear. Abyssal Anglers flash their lures to blind you, then lunge."},
+    {"if": "met:5", "p": "The Luminous Grotto glows down in the dark."},
+
+    {"page": "spread"},
+    {"title": "Creatures of Note"},
+    {"img": "shark", "w": 70},
+    {"h": "Sharks"},
+    {"p": "They live in the open water of the Starter Seas and breach to bite. Don't swim far from your ship."},
+    {"page": "next"},
+    {"img": "monkey", "w": 46},
+    {"h": "Cursed Monkeys"},
+    {"p": "Thieves. They snatch items and run into the trees."},
+    {"img": "skeleton", "w": 40},
+    {"h": "The Drowned Crews"},
+    {"p": "Dead pirates who still sail. In the outer seas you'll find more of them than living ones."}
+  ]
+}

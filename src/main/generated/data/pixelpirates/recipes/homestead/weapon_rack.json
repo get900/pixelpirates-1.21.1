@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_sword"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:spruce_slab"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "WIW",
+    "SSS"
+  ],
+  "result": {
+    "item": "pixelpirates:weapon_rack"
+  },
+  "show_notification": true
+}

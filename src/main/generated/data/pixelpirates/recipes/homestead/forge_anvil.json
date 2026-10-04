@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:anvil"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:oak_log"
+    }
+  },
+  "pattern": [
+    "III",
+    " A ",
+    " L "
+  ],
+  "result": {
+    "item": "pixelpirates:forge_anvil"
+  },
+  "show_notification": true
+}

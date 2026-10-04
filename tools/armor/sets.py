@@ -69,11 +69,11 @@ def powder_monkey():
     BREECH = over(cloth(["#2e2a28", "#3c3634", "#4a4440"]), spots("#3f6f68", 0.04, size=2), speckle("#5a3a24", 0.05))
     m.cube(H, [-5, 30, -5], [10, 3, 10], LEATH, art={"north": A(["RRRRRRRRRR", "RRRRRRRRRR", "LLLLLLLLLL"], R="#8a1c1c", L="#4c3220")})
     m.cube(H, [-5.5, 29.5, -5.5], [11, 2, 11], RED)
-    m.cube(H, [-5.5, 22.5, 4.5], [11, 7, 1], TEAL, art=m.rag([11, 7, 1], 2))
+    m.hang(H, [-5.5, 22.5, 4.5], [11, 7, 1], TEAL, [0, 29.5, 5], kind="cape", art=m.rag([11, 7, 1], 2))
     m.R(H, [-5.5, 23.5, -2.5], [1, 6, 7], TEAL, art=m.rag([1, 6, 7], 2))
     m.cube(H, [-1.5, 28.5, 5.25], [3, 3, 2], RED)
     for k, (x, L, r) in enumerate([(-1.5, 7, [12, 0, 10]), (0.5, 6, [10, 0, -8]), (-0.5, 8, [15, 0, 0])]):
-        m.cube(H, [x, 29 - L, 5.75], [1, L, 1], RED, rot=r, pivot=[x, 29, 6])
+        m.hang(H, [x, 29 - L, 5.75], [1, L, 1], RED, [x, 29, 6], rot=r)
     m.chest(TARP)
     m.cube(B, [-4.5, 23.25, -3.5], [9, 2, 7], LEATH)
     m.cube(B, [-1, 13, -4.25], [2, 15, 1], LEATH, rot=[0, 0, -38], pivot=[0, 18.5, -3.75])
@@ -88,7 +88,7 @@ def powder_monkey():
     m.cube(B, [4.75, 10.5, -1.5], [1, 1, 1], BRASS)
     m.cube(B, [-5.75, 10, -2], [2, 3, 3], RED)
     for k, (z, L) in enumerate([(-1.5, 9), (0, 11), (1.5, 8)]):
-        m.cube(B, [-5.75, 10 - L, z - 0.5], [1, L, 1], RED, art=m.rag([1, L, 1], 2), rot=[0, 0, 4 + k * 3], pivot=[-5.25, 10, z])
+        m.hang(B, [-5.75, 10 - L, z - 0.5], [1, L, 1], RED, [-5.25, 10, z], art=m.rag([1, L, 1], 2), rot=[0, 0, 4 + k * 3])
     m.arms(bands(SOOT, (7, 13, over(LEATH, spots("#d2a84a", 0.05)))))
     m.pauldron([TARP, over(LEATH, trim("#b8902e"))], tiers=2, flare=6)
     m.gauntlet(over(LEATH, trim("#b8902e", top=True, bottom=False)), h=3, y0=11)
@@ -286,14 +286,14 @@ def pirate_armor():
     m.cube(H, [-5, 27.5, -5], [10, 3, 10], RED, art={"north": A(["R" * 10, "R" * 10, "_" * 10], R="#9a2020")})
     m.cube(H, [-1.5, 26, 5.25], [3, 3, 1], RED)
     for k, (x, L) in enumerate([(-1.5, 6), (-0.25, 8), (1, 5)]):
-        m.cube(H, [x, 27 - L, 5.5], [1, L, 1], RED, rot=[10, 0, (k - 1) * 8], pivot=[x, 27, 5.5])
+        m.hang(H, [x, 27 - L, 5.5], [1, L, 1], RED, [x, 27, 5.5], rot=[10, 0, (k - 1) * 8])
     m.chest(WAIST, art={"north": A.at(10, 14, {**{(x, y): "S" for x in (4, 5) for y in range(2, 14)}, (4, 0): "S", (5, 0): "S",
                                               (3, 1): "S", (6, 1): "S", (4, 1): "S", (5, 1): "S"}, S="#e6dfd0")})
     m.cube(B, [-1, 12.5, -4], [2, 15, 1], leather(["#4a2c18", "#5a3620"]), rot=[0, 0, 35], pivot=[0, 19, -3.5])
     m.cube(B, [-1, 12.5, -4.25], [2, 15, 1], leather(["#4a2c18", "#5a3620"]), rot=[0, 0, -35], pivot=[0, 19, -3.75])
     belt(m, leather(["#3a2416", "#4a2e1c"]), "#d2a84a", h=3, y=11)
     for k, (z, L) in enumerate([(-1.5, 8), (0, 10), (1.5, 7)]):
-        m.cube(B, [4.75, 11 - L, z - 0.5], [1, L, 1], RED, art=m.rag([1, L, 1], 2), rot=[0, 0, -(4 + k * 3)], pivot=[5.25, 11, z])
+        m.hang(B, [4.75, 11 - L, z - 0.5], [1, L, 1], RED, [5.25, 11, z], art=m.rag([1, L, 1], 2), rot=[0, 0, -(4 + k * 3)])
     m.cube(B, [-5.25, 6.5, -2], [2, 3, 2], BRASS, art={"north": A(["BB", "LL", "BB"], B="#7a5a1e", L="!ffd060")})
     m.arms(STRIPE)
     m.gauntlet(over(WAIST, spots("#d2a84a", 0.12)), h=3)
@@ -320,10 +320,10 @@ def castaway():
         for i in range(8):
             x = -8 + i * 2 + 0.5
             L = 2 + (i * 7 + side * 3) % 3
-            if side == 0: m.cube(H, [x, 30.5 - L, -8.25], [1, L, 1], PALM)
-            if side == 1: m.cube(H, [x, 30.5 - L, 7.25], [1, L, 1], PALM)
-            if side == 2: m.cube(H, [-8.25, 30.5 - L, x], [1, L, 1], PALM)
-            if side == 3: m.cube(H, [7.25, 30.5 - L, x], [1, L, 1], PALM)
+            if side == 0: m.hang(H, [x, 30.5 - L, -8.25], [1, L, 1], PALM, [x + 0.5, 30.5, -7.75], kind="fringe")
+            if side == 1: m.hang(H, [x, 30.5 - L, 7.25], [1, L, 1], PALM, [x + 0.5, 30.5, 7.75], kind="fringe")
+            if side == 2: m.hang(H, [-8.25, 30.5 - L, x], [1, L, 1], PALM, [-7.75, 30.5, x + 0.5], kind="fringe")
+            if side == 3: m.hang(H, [7.25, 30.5 - L, x], [1, L, 1], PALM, [7.75, 30.5, x + 0.5], kind="fringe")
     m.cube(H, [-5, 23, -5.25], [10, 4, 1], GREEN)
     m.R(H, [-5, 23, -5], [1, 4, 10], GREEN)
     m.chest(SAIL)
@@ -331,8 +331,8 @@ def castaway():
     m.cube(B, [-1, 13, -3.75], [1, 12, 1], ROPE, rot=[0, 0, 30], pivot=[0, 19, -3.5])
     m.cube(B, [0, 13, -3.75], [1, 12, 1], ROPE, rot=[0, 0, -30], pivot=[0, 19, -3.5])
     m.cube(B, [-5.5, 11.5, -3.5], [11, 2, 7], ROPE)
-    m.cube(B, [-5, 3.5, -3.5], [10, 8, 1], SAIL, art=m.rag([10, 8, 1], 4))
-    m.cube(B, [-5, 3.5, 2.75], [10, 8, 1], SAIL, art=m.rag([10, 8, 1], 4))
+    m.hang(B, [-5, 3.5, -3.5], [10, 8, 1], SAIL, [0, 11.5, -3], kind="skirt", art=m.rag([10, 8, 1], 4))
+    m.hang(B, [-5, 3.5, 2.75], [10, 8, 1], SAIL, [0, 11.5, 3.25], kind="skirt", art=m.rag([10, 8, 1], 4))
     m.arms(bands(SAIL, (7, 8, ROPE), (9, 10, ROPE), (11, 12, ROPE)))
     m.pauldron(WOOD, tiers=3, flare=10, width=8, depth=8)
     m.gauntlet(ROPE, h=2, y0=13)

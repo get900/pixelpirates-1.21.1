@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/cattery_counter"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/cattery_counter",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/cattery_counter",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/cattery_counter",
+   "y": 270
+  }
+ }
+}

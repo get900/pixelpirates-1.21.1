@@ -1,0 +1,207 @@
+{
+ "textures": {
+  "leather": "minecraft:block/brown_terracotta",
+  "rim": "minecraft:block/dark_oak_planks",
+  "die": "pixelpirates:block/die",
+  "particle": "minecraft:block/brown_terracotta"
+ },
+ "elements": [
+  {
+   "from": [
+    5,
+    0,
+    5
+   ],
+   "to": [
+    10,
+    5,
+    10
+   ],
+   "faces": {
+    "north": {
+     "texture": "#leather"
+    },
+    "south": {
+     "texture": "#leather"
+    },
+    "east": {
+     "texture": "#leather"
+    },
+    "west": {
+     "texture": "#leather"
+    },
+    "up": {
+     "texture": "#leather"
+    },
+    "down": {
+     "texture": "#leather"
+    }
+   }
+  },
+  {
+   "from": [
+    4.6,
+    4.5,
+    4.6
+   ],
+   "to": [
+    10.4,
+    5.5,
+    10.4
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rim"
+    },
+    "south": {
+     "texture": "#rim"
+    },
+    "east": {
+     "texture": "#rim"
+    },
+    "west": {
+     "texture": "#rim"
+    },
+    "up": {
+     "texture": "#rim"
+    },
+    "down": {
+     "texture": "#rim"
+    }
+   }
+  },
+  {
+   "from": [
+    10.5,
+    0,
+    6
+   ],
+   "to": [
+    12.5,
+    2,
+    8
+   ],
+   "faces": {
+    "north": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#die"
+    }
+   }
+  },
+  {
+   "from": [
+    8,
+    0,
+    10.5
+   ],
+   "to": [
+    10,
+    2,
+    12.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#die",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#die"
+    }
+   },
+   "rotation": {
+    "origin": [
+     9,
+     1,
+     11.5
+    ],
+    "axis": "y",
+    "angle": 22.5
+   }
+  }
+ ]
+}

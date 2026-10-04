@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "pixelpirates:crab_claw"
+    },
+    {
+      "item": "pixelpirates:crab_claw"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "pixelpirates:crab_cakes"
+  }
+}

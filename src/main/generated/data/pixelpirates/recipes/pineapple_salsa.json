@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "pixelpirates:pineapple"
+    },
+    {
+      "item": "pixelpirates:chili_pepper"
+    },
+    {
+      "item": "pixelpirates:lime"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:pineapple_salsa"
+  }
+}

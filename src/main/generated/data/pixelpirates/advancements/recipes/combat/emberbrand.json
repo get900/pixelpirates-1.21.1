@@ -1,28 +1,28 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "pixelpirates:emberbrand"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_volcanic_ember": {
+    "has_obsidian_shard": {
       "conditions": {
         "items": [
           {
             "items": [
-              "pixelpirates:volcanic_ember"
+              "pixelpirates:obsidian_shard"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:emberbrand"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_volcanic_ember",
+      "has_obsidian_shard",
       "has_the_recipe"
     ]
   ],

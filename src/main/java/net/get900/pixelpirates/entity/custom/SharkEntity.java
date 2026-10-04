@@ -235,6 +235,10 @@ public class SharkEntity extends PathAwareEntity implements GeoEntity {
 
     // ---------- spawning ----------
 
+    /** MobEntity's default refuses any box containing fluid, so natural spawns of a swimmer always failed (like WaterCreatureEntity). */
+    @Override
+    public boolean canSpawn(net.minecraft.world.WorldView world) { return world.doesNotIntersectEntities(this); }
+
     public static boolean canSpawn(EntityType<? extends SharkEntity> type, ServerWorldAccess world,
                                    SpawnReason reason, BlockPos pos, net.minecraft.util.math.random.Random random) {
         // Y-level removed: custom terrain can have shallow oceans where seaLevel-2 never passes

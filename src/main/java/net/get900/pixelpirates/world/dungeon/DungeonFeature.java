@@ -27,17 +27,36 @@ public class DungeonFeature extends Feature<DefaultFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<DefaultFeatureConfig> ctx) {
         StructureWorldAccess world = ctx.getWorld();
-        if (!DungeonPlacement.isCandidate(type, placementContext(world, ctx.getGenerator()), new net.minecraft.util.math.ChunkPos(ctx.getOrigin()))) return false;
+        DungeonPlacement.Context pctx = placementContext(world, ctx.getGenerator());
+        if (!DungeonPlacement.isCandidate(type, pctx, new net.minecraft.util.math.ChunkPos(ctx.getOrigin()))) return false;
         BlockPos c = DungeonBuilder.chunkCentre(ctx.getOrigin());
-        int top = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, c.getX(), c.getZ()) - 1;
+        boolean islet = type.site() == Dungeons.Site.ISLET || type.site() == Dungeons.Site.COAST;
+        // ISLET + COAST are fixed-height: the beach sits at sea level + 1 whatever the (already vetted) ground below
+        int top = islet ? pctx.seaLevel() + 1 : world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, c.getX(), c.getZ()) - 1;
         BlockPos origin = new BlockPos(c.getX(), top, c.getZ());
         int depth = waterDepth(world, origin);
-        if (type.site() == Dungeons.Site.LAND ? !SmugglersGrottoFeature.validSite(world, origin) : depth < type.minDepth()) return false;
+        if (!islet && (type.site() == Dungeons.Site.LAND ? !landSiteOk(world, origin) : depth < type.minDepth())) return false;
+        BlockRotation rot = type.site() == Dungeons.Site.ISLET ? DungeonPlacement.seawardRotation(pctx, c.getX(), c.getZ())
+                : type.site() == Dungeons.Site.COAST ? DungeonPlacement.coastRotation(pctx, c.getX(), c.getZ())
+                : BlockRotation.random(ctx.getRandom());
+        if (rot == null) return false;                                                       // (cannot happen: placement vetted it)
         try {
-            type.builder().build(new DungeonBuilder(world, origin, BlockRotation.random(ctx.getRandom()), ctx.getRandom()), depth);
+            type.builder().build(new DungeonBuilder(world, origin, rot, ctx.getRandom()), depth);
         } catch (Exception e) {
             PixelPirates.LOGGER.error("[Dungeon] {} failed at {}", type.id(), origin, e);
             return false;
+        }
+        return true;
+    }
+
+    /** LAND sites: dry, roughly flat land above sea level. */
+    static boolean landSiteOk(StructureWorldAccess world, BlockPos o) {
+        if (o.getY() < world.getSeaLevel() + 1) return false;
+        if (!world.getFluidState(o.up()).isEmpty() || !world.getBlockState(o).isSolidBlock(world, o)) return false;
+        for (int[] d : new int[][]{{4, 4}, {-4, 4}, {4, -4}, {-4, -4}}) {
+            int h = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, o.getX() + d[0], o.getZ() + d[1]) - 1;
+            if (Math.abs(h - o.getY()) > 3) return false;
+            if (!world.getFluidState(new BlockPos(o.getX() + d[0], h + 1, o.getZ() + d[1])).isEmpty()) return false;
         }
         return true;
     }

@@ -46,6 +46,9 @@ public final class AdminTestState {
     /** Players with clear sight: no zone fog/particles/hazards, no darkness/blindness/nausea, night vision. */
     public static final Set<java.util.UUID> clearSight = java.util.concurrent.ConcurrentHashMap.newKeySet();
 
+    /** Players who see every page of the Weathered Chronicle (world/Chronicle). */
+    public static final Set<java.util.UUID> chronicleAll = java.util.concurrent.ConcurrentHashMap.newKeySet();
+
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     public static int effectiveSpawnRate() {

@@ -39,6 +39,9 @@ public class CannonBallEntity extends ThrownItemEntity {
     private boolean chainShot;
 
     public void setChainShot() { chainShot = true; }
+    /** The spawn island's fortress guns: the blast only hurts players (never the town's villagers, traders or pets). */
+    private boolean playersOnly;
+    public void setPlayersOnly() { playersOnly = true; }
     private float fortDamage = 6f;
     private int maxLifetime = MAX_LIFETIME;
 
@@ -108,6 +111,7 @@ public class CannonBallEntity extends ThrownItemEntity {
         if (target.equals(owner)) return;
         if (fortShot && (target instanceof net.get900.pixelpirates.entity.mob.ModMob || target instanceof PirateCrewEntity
                 || target instanceof CannonBallEntity)) return;          // the fort's own garrison
+        if (playersOnly && !(target instanceof net.minecraft.entity.player.PlayerEntity)) return;
         if (!this.getWorld().isClient && fortShot) {
             fortBlast();
             return;
@@ -142,7 +146,8 @@ public class CannonBallEntity extends ThrownItemEntity {
                 2.0f, 0.9f + this.random.nextFloat() * 0.2f);
         double r = 3.0;
         for (LivingEntity e : sw.getEntitiesByClass(LivingEntity.class, this.getBoundingBox().expand(r),
-                e -> e.isAlive() && !(e instanceof net.get900.pixelpirates.entity.mob.ModMob) && !(e instanceof PirateCrewEntity))) {
+                e -> e.isAlive() && !(e instanceof net.get900.pixelpirates.entity.mob.ModMob) && !(e instanceof PirateCrewEntity)
+                        && (!playersOnly || e instanceof net.minecraft.entity.player.PlayerEntity))) {
             double d = e.getPos().add(0, e.getHeight() * 0.5, 0).distanceTo(this.getPos());
             if (d > r) continue;
             float dmg = (float) (fortDamage * (1.0 - 0.6 * d / r));
@@ -177,7 +182,8 @@ public class CannonBallEntity extends ThrownItemEntity {
             if (hitPos != null) {
                 Ship ship = ValkyrienSkies.getShipManagingBlock(sw, hitPos.getX(), hitPos.getY(), hitPos.getZ());
                 if (ship != null) {
-                    ShipHealthState.get(sw).damage(sw, ship.getId(), hitPos, HULL_DAMAGE);
+                    ShipHealthState.get(sw).damage(sw, ship.getId(), hitPos,
+                            (int) Math.round(HULL_DAMAGE * net.get900.pixelpirates.world.SkillEffects.hullMult(net.get900.pixelpirates.world.SkillEffects.playerOf(getOwner()))));
                 }
             }
         }

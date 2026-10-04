@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:widows_lantern_hospice",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

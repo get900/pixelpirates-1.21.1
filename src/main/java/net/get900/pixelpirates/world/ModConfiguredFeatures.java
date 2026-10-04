@@ -1,5 +1,13 @@
 package net.get900.pixelpirates.world;
 
+import net.minecraft.world.gen.foliage.CherryFoliagePlacer;
+import net.minecraft.world.gen.foliage.BushFoliagePlacer;
+import net.minecraft.world.gen.foliage.RandomSpreadFoliagePlacer;
+import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
+import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
+import net.minecraft.world.gen.trunk.CherryTrunkPlacer;
+import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
+import net.minecraft.world.gen.trunk.BendingTrunkPlacer;
 import net.get900.pixelpirates.PixelPirates;
 import net.get900.pixelpirates.block.ModBlocks;
 import net.get900.pixelpirates.world.gen.ModFeatures;
@@ -72,17 +80,22 @@ public class ModConfiguredFeatures {
 
         //Phase 1
         register(context, DRIFTWOOD_BLOCK_KEY, Feature.BLOCK_PILE, new BlockPileFeatureConfig(BlockStateProvider.of(ModBlocks.DRIFTWOOD_BLOCK)));
-        TreeFeatureConfig shorewoodTreeConfig = new TreeFeatureConfig.Builder(
-                BlockStateProvider.of(ModBlocks.SHOREWOOD_LOG),
-                new StraightTrunkPlacer(5, 2, 1),
-                BlockStateProvider.of(ModBlocks.SHOREWOOD_LEAVES.getDefaultState().with(Properties.PERSISTENT, true)),
-                new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
-                new TwoLayersFeatureSize(1, 0, 1))
-                .decorators(List.of(new BananaTreeDecorator(0.2f), new CoconutTreeDecorator(0.1f), new BeehiveTreeDecorator(0.05f)))
-                .ignoreVines().build();
-
-        ConfiguredFeature<?, ?> shorewoodTreeFeature = new ConfiguredFeature<>(Feature.TREE, shorewoodTreeConfig);
-        context.register((RegistryKey<ConfiguredFeature<?, ?>>)(Object) SHOREWOOD_TREE_KEY, shorewoodTreeFeature);
+        // TREE VARIANTS (2026-10-01, "they all look the same"): every signature tree key is now a random pick of three
+        // shapes (variants(...)). Placed-feature keys are unchanged, so the feature-order rule is untouched.
+        var shoreLog = BlockStateProvider.of(ModBlocks.SHOREWOOD_LOG);
+        var shoreLeaves = BlockStateProvider.of(ModBlocks.SHOREWOOD_LEAVES.getDefaultState().with(Properties.PERSISTENT, true));
+        List<net.minecraft.world.gen.treedecorator.TreeDecorator> fruit =
+                List.of(new BananaTreeDecorator(0.06f), new CoconutTreeDecorator(0.04f), new BeehiveTreeDecorator(0.05f));
+        context.register((RegistryKey<ConfiguredFeature<?, ?>>)(Object) SHOREWOOD_TREE_KEY, variants(
+                new TreeFeatureConfig.Builder(shoreLog, new StraightTrunkPlacer(5, 2, 1), shoreLeaves,
+                        new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
+                        new TwoLayersFeatureSize(1, 0, 1)).decorators(fruit).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(shoreLog, new LargeOakTrunkPlacer(8, 4, 0), shoreLeaves,          // great shorewood
+                        new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
+                        new TwoLayersFeatureSize(0, 0, 0, java.util.OptionalInt.of(4))).decorators(fruit).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(shoreLog, new StraightTrunkPlacer(3, 1, 0), shoreLeaves,         // squat and wide
+                        new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), 2),
+                        new TwoLayersFeatureSize(1, 0, 1)).decorators(fruit).ignoreVines().build()));
 
         //Phase 3
         TreeFeatureConfig ashenTreeConfig = new TreeFeatureConfig.Builder(
@@ -130,40 +143,73 @@ public class ModConfiguredFeatures {
 
         // ===== Phase trees v2 — every phase gets a signature tree with a real canopy =====
         // Phase 1: tall bare trunk, high tight canopy — reads as a palm on the beaches
-        register(context, PALM_TREE_KEY, Feature.TREE, new TreeFeatureConfig.Builder(
-                BlockStateProvider.of(ModBlocks.PALM_LOG),
-                new StraightTrunkPlacer(6, 3, 0),
-                BlockStateProvider.of(ModBlocks.PALM_LEAVES.getDefaultState().with(Properties.PERSISTENT, true)),
-                new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 2),
-                new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build());
+        var palmLog = BlockStateProvider.of(ModBlocks.PALM_LOG);
+        var palmLeaves = BlockStateProvider.of(ModBlocks.PALM_LEAVES.getDefaultState().with(Properties.PERSISTENT, true));
+        List<net.minecraft.world.gen.treedecorator.TreeDecorator> coconuts = List.of(new CoconutTreeDecorator(0.08f));
+        context.register(PALM_TREE_KEY, variants(
+                new TreeFeatureConfig.Builder(palmLog, new StraightTrunkPlacer(6, 3, 0), palmLeaves,
+                        new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 2),
+                        new TwoLayersFeatureSize(1, 0, 1)).decorators(coconuts).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(palmLog, new BendingTrunkPlacer(6, 2, 1, 4, UniformIntProvider.create(1, 2)), palmLeaves,   // curved
+                        new AcaciaFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0)),
+                        new TwoLayersFeatureSize(1, 0, 1)).decorators(coconuts).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(palmLog, new BendingTrunkPlacer(4, 1, 1, 3, ConstantIntProvider.create(1)), palmLeaves,     // leaning
+                        new RandomSpreadFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), ConstantIntProvider.create(2), 40),
+                        new TwoLayersFeatureSize(1, 0, 1)).decorators(coconuts).ignoreVines().build()));
         // Phase 2: forked trunk with a flat acacia-style canopy — windswept reef tree
-        register(context, TIDEWOOD_TREE_KEY, Feature.TREE, new TreeFeatureConfig.Builder(
-                BlockStateProvider.of(ModBlocks.TIDEWOOD_LOG),
-                new ForkingTrunkPlacer(5, 2, 2),
-                BlockStateProvider.of(ModBlocks.TIDEWOOD_LEAVES.getDefaultState().with(Properties.PERSISTENT, true)),
-                new AcaciaFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0)),
-                new TwoLayersFeatureSize(1, 0, 2)).ignoreVines().build());
+        var tideLog = BlockStateProvider.of(ModBlocks.TIDEWOOD_LOG);
+        var tideLeaves = BlockStateProvider.of(ModBlocks.TIDEWOOD_LEAVES.getDefaultState().with(Properties.PERSISTENT, true));
+        context.register(TIDEWOOD_TREE_KEY, variants(
+                new TreeFeatureConfig.Builder(tideLog, new ForkingTrunkPlacer(5, 2, 2), tideLeaves,
+                        new AcaciaFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0)),
+                        new TwoLayersFeatureSize(1, 0, 2)).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(tideLog, new ForkingTrunkPlacer(7, 2, 3), tideLeaves,              // big windswept
+                        new AcaciaFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0)),
+                        new TwoLayersFeatureSize(1, 0, 2)).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(tideLog, new StraightTrunkPlacer(3, 1, 0), tideLeaves,             // low reef bush
+                        new BushFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(1), 2),
+                        new TwoLayersFeatureSize(0, 0, 0)).ignoreVines().build()));
         // Phase 3: charred trunk crowned in glowing embers
-        register(context, CINDER_TREE_KEY, Feature.TREE, new TreeFeatureConfig.Builder(
-                BlockStateProvider.of(ModBlocks.CHARRED_LOG),
-                new StraightTrunkPlacer(5, 2, 1),
-                BlockStateProvider.of(ModBlocks.EMBER_LEAVES.getDefaultState().with(Properties.PERSISTENT, true)),
-                new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
-                new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build());
+        var cinderLog = BlockStateProvider.of(ModBlocks.CHARRED_LOG);
+        var cinderLeaves = BlockStateProvider.of(ModBlocks.EMBER_LEAVES.getDefaultState().with(Properties.PERSISTENT, true));
+        context.register(CINDER_TREE_KEY, variants(
+                new TreeFeatureConfig.Builder(cinderLog, new StraightTrunkPlacer(5, 2, 1), cinderLeaves,
+                        new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
+                        new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(cinderLog, new BendingTrunkPlacer(5, 2, 1, 3, UniformIntProvider.create(1, 2)), cinderLeaves,  // heat-bent
+                        new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 2),
+                        new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(cinderLog, new LargeOakTrunkPlacer(7, 3, 0), cinderLeaves,            // tall and sparse
+                        new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 3),
+                        new TwoLayersFeatureSize(0, 0, 0, java.util.OptionalInt.of(4))).ignoreVines().build()));
         // Phase 4: tall pale trunk with faint glowing wisp foliage
-        register(context, WISPWOOD_TREE_KEY, Feature.TREE, new TreeFeatureConfig.Builder(
-                BlockStateProvider.of(ModBlocks.WISPWOOD_LOG),
-                new StraightTrunkPlacer(7, 3, 1),
-                BlockStateProvider.of(ModBlocks.WISP_LEAVES.getDefaultState().with(Properties.PERSISTENT, true)),
-                new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(1), 3),
-                new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build());
+        var wispLog = BlockStateProvider.of(ModBlocks.WISPWOOD_LOG);
+        var wispLeaves = BlockStateProvider.of(ModBlocks.WISP_LEAVES.getDefaultState().with(Properties.PERSISTENT, true));
+        context.register(WISPWOOD_TREE_KEY, variants(
+                new TreeFeatureConfig.Builder(wispLog, new StraightTrunkPlacer(7, 3, 1), wispLeaves,
+                        new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(1), 3),
+                        new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(wispLog, new StraightTrunkPlacer(9, 3, 2), wispLeaves,             // ghostly spire
+                        new SpruceFoliagePlacer(UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 1), UniformIntProvider.create(3, 5)),
+                        new TwoLayersFeatureSize(2, 0, 2)).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(wispLog, new BendingTrunkPlacer(6, 2, 2, 4, UniformIntProvider.create(1, 3)), wispLeaves,   // weeping
+                        new RandomSpreadFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 60),
+                        new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build()));
         // Phase 5: short alien tree glowing violet in the abyss
-        register(context, VOIDBLOOM_TREE_KEY, Feature.TREE, new TreeFeatureConfig.Builder(
-                BlockStateProvider.of(ModBlocks.VOIDBLOOM_LOG),
-                new StraightTrunkPlacer(4, 2, 0),
-                BlockStateProvider.of(ModBlocks.VOIDBLOOM_LEAVES.getDefaultState().with(Properties.PERSISTENT, true)),
-                new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
-                new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build());
+        var voidLog = BlockStateProvider.of(ModBlocks.VOIDBLOOM_LOG);
+        var voidLeaves = BlockStateProvider.of(ModBlocks.VOIDBLOOM_LEAVES.getDefaultState().with(Properties.PERSISTENT, true));
+        context.register(VOIDBLOOM_TREE_KEY, variants(
+                new TreeFeatureConfig.Builder(voidLog, new StraightTrunkPlacer(4, 2, 0), voidLeaves,
+                        new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
+                        new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(voidLog, new CherryTrunkPlacer(6, 1, 0, ConstantIntProvider.create(2),          // branching bloom
+                        UniformIntProvider.create(2, 4), UniformIntProvider.create(-4, -3), UniformIntProvider.create(-1, 0)), voidLeaves,
+                        new CherryFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(0), ConstantIntProvider.create(5),
+                                0.25f, 0.5f, 0.17f, 0.33f),
+                        new TwoLayersFeatureSize(1, 0, 2)).ignoreVines().build(),
+                new TreeFeatureConfig.Builder(voidLog, new StraightTrunkPlacer(3, 1, 0), voidLeaves,             // mushroom cap
+                        new AcaciaFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0)),
+                        new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build()));
 
         // ===== Ambient decoration — boulders =====
         register(context, TIDE_POOL_ROCK_KEY, Feature.FOREST_ROCK,
@@ -201,6 +247,14 @@ public class ModConfiguredFeatures {
 
     //TemperateShallows
     @SuppressWarnings("unchecked")
+    /** A random pick of tree shapes (equal odds) - the tree variants. */
+    private static ConfiguredFeature<?, ?> variants(TreeFeatureConfig... shapes) {
+        List<net.minecraft.registry.entry.RegistryEntry<net.minecraft.world.gen.feature.PlacedFeature>> entries = new java.util.ArrayList<>();
+        for (TreeFeatureConfig c : shapes) entries.add(net.minecraft.world.gen.feature.PlacedFeatures.createEntry(Feature.TREE, c));
+        return new ConfiguredFeature<>(Feature.SIMPLE_RANDOM_SELECTOR,
+                new net.minecraft.world.gen.feature.SimpleRandomFeatureConfig(net.minecraft.registry.entry.RegistryEntryList.of(entries)));
+    }
+
     public static final RegistryKey<ConfiguredFeature<TreeFeatureConfig, ?>> SHOREWOOD_TREE_KEY =
             (RegistryKey<ConfiguredFeature<TreeFeatureConfig, ?>>)(Object)
                     RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE,

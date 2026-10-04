@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:candle"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "III"
+  ],
+  "result": {
+    "item": "pixelpirates:votive_rack"
+  },
+  "show_notification": true
+}

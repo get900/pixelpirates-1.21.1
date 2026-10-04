@@ -12,8 +12,18 @@ public class ModFoodComponents {
     public static final FoodComponent RAW_SALTED_SWIMMER = new FoodComponent.Builder().hunger(2).saturationModifier(0.3F)
             .statusEffect(new StatusEffectInstance(StatusEffects.HUNGER, 200, 0), 0.4f).build();
     public static final FoodComponent COOKED_SALTED_SWIMMER = new FoodComponent.Builder().hunger(5).saturationModifier(0.3F).build();
-    public static final FoodComponent BANANA = new FoodComponent.Builder().hunger(2).saturationModifier(0.1F).build();
-    public static final FoodComponent COCONUT = new FoodComponent.Builder().hunger(2).saturationModifier(0.1F).build();
+    // Playtest 2026-09-30: "bananas need to be better" - a fast snack with a small heal (Regen II 4 s ~ 1.5 hearts)
+    public static final FoodComponent BANANA = new FoodComponent.Builder().hunger(4).saturationModifier(0.5F).snack()
+            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 80, 1), 1.0f).build();
+    public static final FoodComponent COCONUT = new FoodComponent.Builder().hunger(3).saturationModifier(0.4F).build();
+
+    // Early-game food + healing (all from the starter islands)
+    public static final FoodComponent ROASTED_BANANA = new FoodComponent.Builder().hunger(6).saturationModifier(0.7f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0), 1.0f).build();
+    /** Drunk from a bottle (DrinkItem): the heal itself is the item's onDrink. */
+    public static final FoodComponent COCONUT_WATER = new FoodComponent.Builder().hunger(2).saturationModifier(0.3f).alwaysEdible().build();
+    public static final FoodComponent ISLAND_SKEWER = new FoodComponent.Builder().hunger(9).saturationModifier(0.8f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 120, 0), 1.0f).build();
 
     // Galley cooking
     public static final FoodComponent BANANA_BREAD = new FoodComponent.Builder().hunger(6).saturationModifier(0.6f).build();

@@ -1,1 +1,7 @@
-﻿{"variants":{"":{"model":"pixelpirates:block/treasure_block"}}}
+{
+ "variants": {
+  "": {
+   "model": "pixelpirates:block/treasure_block"
+  }
+ }
+}

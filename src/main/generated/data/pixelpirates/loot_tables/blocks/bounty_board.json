@@ -5,6 +5,13 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
+          "block": "pixelpirates:bounty_board",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "part": "1"
+          }
+        },
+        {
           "condition": "minecraft:survives_explosion"
         }
       ],

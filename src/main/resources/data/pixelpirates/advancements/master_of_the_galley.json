@@ -1,0 +1,152 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:coconut_curry"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.master_of_the_galley.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.master_of_the_galley.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:pirates_feast",
+  "criteria": {
+    "banana_pudding": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:banana_pudding"
+          ]
+        }
+      }
+    },
+    "seaweed_salad": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:seaweed_salad"
+          ]
+        }
+      }
+    },
+    "shark_jerky": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:shark_jerky"
+          ]
+        }
+      }
+    },
+    "fish_and_chips": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:fish_and_chips"
+          ]
+        }
+      }
+    },
+    "coconut_curry": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:coconut_curry"
+          ]
+        }
+      }
+    },
+    "key_lime_pie": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:key_lime_pie"
+          ]
+        }
+      }
+    },
+    "scurvy_tonic": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:scurvy_tonic"
+          ]
+        }
+      }
+    },
+    "parrotfish_poke": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:parrotfish_poke"
+          ]
+        }
+      }
+    },
+    "ember_eel_skewer": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:ember_eel_skewer"
+          ]
+        }
+      }
+    },
+    "anglerfry_chowder": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:anglerfry_chowder"
+          ]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "banana_pudding"
+    ],
+    [
+      "seaweed_salad"
+    ],
+    [
+      "shark_jerky"
+    ],
+    [
+      "fish_and_chips"
+    ],
+    [
+      "coconut_curry"
+    ],
+    [
+      "key_lime_pie"
+    ],
+    [
+      "scurvy_tonic"
+    ],
+    [
+      "parrotfish_poke"
+    ],
+    [
+      "ember_eel_skewer"
+    ],
+    [
+      "anglerfry_chowder"
+    ]
+  ]
+}

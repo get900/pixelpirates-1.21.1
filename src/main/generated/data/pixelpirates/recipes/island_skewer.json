@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "pixelpirates:banana"
+    },
+    [
+      {
+        "item": "minecraft:cooked_cod"
+      },
+      {
+        "item": "minecraft:cooked_salmon"
+      },
+      {
+        "item": "pixelpirates:cooked_shark_meat"
+      },
+      {
+        "item": "pixelpirates:cooked_salted_swimmer"
+      },
+      {
+        "item": "pixelpirates:cooked_fish_fillet"
+      }
+    ]
+  ],
+  "result": {
+    "item": "pixelpirates:island_skewer"
+  }
+}

@@ -30,9 +30,35 @@ public class ShipwrightBlock extends Block {
 
     private static final double SEARCH_RADIUS = 150.0;
 
+    /** The drafting table (tools/gen_shipwright_model.py) turns to face whoever places it. */
+    public static final net.minecraft.state.property.DirectionProperty FACING = net.minecraft.state.property.Properties.HORIZONTAL_FACING;
+    private static final net.minecraft.util.shape.VoxelShape SHAPE = net.minecraft.util.shape.VoxelShapes.union(
+            net.minecraft.block.Block.createCuboidShape(0, 12, 0, 16, 16, 16),
+            net.minecraft.block.Block.createCuboidShape(1, 0, 1, 3, 12, 3), net.minecraft.block.Block.createCuboidShape(13, 0, 1, 15, 12, 3),
+            net.minecraft.block.Block.createCuboidShape(1, 0, 13, 3, 12, 15), net.minecraft.block.Block.createCuboidShape(13, 0, 13, 15, 12, 15),
+            net.minecraft.block.Block.createCuboidShape(2.5, 4.5, 2.5, 13.5, 5.5, 13.5));
+
     public ShipwrightBlock(Settings settings) {
         super(settings);
+        setDefaultState(getStateManager().getDefaultState().with(FACING, net.minecraft.util.math.Direction.NORTH));
     }
+
+    @Override
+    protected void appendProperties(net.minecraft.state.StateManager.Builder<net.minecraft.block.Block, BlockState> builder) { builder.add(FACING); }
+
+    @Override
+    public BlockState getPlacementState(net.minecraft.item.ItemPlacementContext ctx) {
+        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, net.minecraft.util.BlockRotation rotation) { return state.with(FACING, rotation.rotate(state.get(FACING))); }
+
+    @Override
+    public BlockState mirror(BlockState state, net.minecraft.util.BlockMirror mirror) { return state.rotate(mirror.getRotation(state.get(FACING))); }
+
+    @Override
+    public net.minecraft.util.shape.VoxelShape getOutlineShape(BlockState state, net.minecraft.world.BlockView world, BlockPos pos, net.minecraft.block.ShapeContext ctx) { return SHAPE; }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player,

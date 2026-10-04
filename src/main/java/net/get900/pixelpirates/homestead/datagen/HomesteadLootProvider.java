@@ -27,6 +27,8 @@ public class HomesteadLootProvider extends FabricBlockLootTableProvider {
         crop(done, HomesteadBlocks.LIME_CROP, HomesteadItems.LIME, HomesteadItems.LIME_SEEDS);
         crop(done, HomesteadBlocks.CHILI_CROP, HomesteadItems.CHILI_PEPPER, HomesteadItems.CHILI_SEEDS);
         HomesteadLoot.custom(this, done);
+        stacked(done, HomesteadBlocks.TANKARD, net.get900.pixelpirates.homestead.tavern.TavernDecor.COUNT3, 3);
+        stacked(done, HomesteadBlocks.SPIRIT_BOTTLES, net.get900.pixelpirates.homestead.tavern.TavernDecor.COUNT4, 4);
         for (Block b : HomesteadBlocks.OWNED) if (!done.contains(b) && b.asItem() != net.minecraft.item.Items.AIR) addDrop(b);
     }
 
@@ -34,6 +36,17 @@ public class HomesteadLootProvider extends FabricBlockLootTableProvider {
         done.add(crop);
         addDrop(crop, cropDrops(crop, product, seeds, BlockStatePropertyLootCondition.builder(crop)
                 .properties(StatePredicate.Builder.create().exactMatch(CropBlock.AGE, 7))));
+    }
+
+    /** Tankards / bottles: drop as many as are stacked on the block. */
+    private void stacked(Set<Block> done, Block b, net.minecraft.state.property.IntProperty count, int max) {
+        done.add(b);
+        var entry = net.minecraft.loot.entry.ItemEntry.builder(b);
+        for (int n = 2; n <= max; n++)
+            entry.apply(net.minecraft.loot.function.SetCountLootFunction.builder(net.minecraft.loot.provider.number.ConstantLootNumberProvider.create(n))
+                    .conditionally(BlockStatePropertyLootCondition.builder(b).properties(StatePredicate.Builder.create().exactMatch(count, n))));
+        addDrop(b, net.minecraft.loot.LootTable.builder().pool(net.minecraft.loot.LootPool.builder()
+                .rolls(net.minecraft.loot.provider.number.ConstantLootNumberProvider.create(1)).with(applyExplosionDecay(b, entry))));
     }
 
     // helpers the HomesteadLoot hooks can reach

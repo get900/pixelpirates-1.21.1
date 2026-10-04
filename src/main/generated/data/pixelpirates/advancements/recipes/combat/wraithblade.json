@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_kraken_ink": {
+    "has_ectoplasm": {
       "conditions": {
         "items": [
           {
             "items": [
-              "pixelpirates:kraken_ink"
+              "pixelpirates:ectoplasm"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_kraken_ink",
+      "has_ectoplasm",
       "has_the_recipe"
     ]
   ],

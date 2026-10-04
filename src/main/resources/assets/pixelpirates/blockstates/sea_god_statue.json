@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/sea_god_statue"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/sea_god_statue",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/sea_god_statue",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/sea_god_statue",
+   "y": 270
+  }
+ }
+}

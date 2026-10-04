@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/crown_anchor_table"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/crown_anchor_table",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/crown_anchor_table",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/crown_anchor_table",
+   "y": 270
+  }
+ }
+}

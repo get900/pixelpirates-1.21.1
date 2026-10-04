@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * What the port pays for things, in pirate coins per item. One table for the traders' buy offers (by trader kind) and
+ * What the port pays for things, in DOUBLOONS per item. One table for the traders' buy offers (by trader kind) and
  * the Trading Post counter (which pays 75%).
  */
 public final class Prices {
@@ -33,9 +33,11 @@ public final class Prices {
         put(HomesteadItems.GHOSTFIN, 5, F); put(HomesteadItems.BONEFISH, 4, F); put(HomesteadItems.ANGLERFRY, 6, F); put(HomesteadItems.VOIDFIN, 6, F);
         put(HomesteadItems.LOBSTER, 2, F); put(HomesteadItems.CRAB_CLAW, 1, F); put(ModItems.RAW_SHARK_MEAT, 2, F);
         put(HomesteadBlocks.GOLDEN_MARLIN_TROPHY, 40, F); put(HomesteadBlocks.GHOST_SWORDFISH_TROPHY, 60, F); put(HomesteadBlocks.COELACANTH_TROPHY, 90, F);
+        put(HomesteadBlocks.SHARK_TROPHY, 30, F); put(HomesteadBlocks.REEFBACK_TROPHY, 40, F); put(HomesteadBlocks.LAVA_CRAB_TROPHY, 50, F);
+        put(HomesteadBlocks.GHOST_SHARK_TROPHY, 60, F); put(HomesteadBlocks.ANGLER_TROPHY, 75, F); put(HomesteadBlocks.ABYSS_EEL_TROPHY, 75, F);
         put(HomesteadItems.RAW_RUM, 4, B); put(HomesteadItems.AGED_RUM, 12, B); put(HomesteadItems.VINTAGE_RUM, 32, B);
         put(HomesteadItems.MOLASSES, 1, B); put(HomesteadItems.PINEAPPLE, 1, B); put(HomesteadItems.LIME, 1, B); put(HomesteadItems.CHILI_PEPPER, 1, B);
-        put(ModItems.BANANA, 1, B); put(ModItems.COCONUT, 1, B);
+        // bananas and coconuts are NOT bought (2026-10-01): they regrow by themselves and were a free money tap
         put(ModItems.CURSED_BONE, 3, C); put(ModItems.KRAKEN_SCALE, 8, C); put(ModItems.VOLCANIC_EMBER, 4, C); put(ModItems.KRAKEN_INK, 3, C);
         put(ModItems.BLOODFIN_FLESH, 5, C); put(Items.NAUTILUS_SHELL, 6, C); put(ModItems.TATTERED_CLOTH, 1, C); put(Items.PRISMARINE_SHARD, 1, C);
         put(Items.HEART_OF_THE_SEA, 64, C);

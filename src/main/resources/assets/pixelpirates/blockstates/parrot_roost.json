@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/parrot_roost"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/parrot_roost",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/parrot_roost",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/parrot_roost",
+   "y": 270
+  }
+ }
+}

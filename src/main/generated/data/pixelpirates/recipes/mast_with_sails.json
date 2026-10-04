@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "pixelpirates:mast"
+    },
+    "S": {
+      "item": "pixelpirates:sail"
+    }
+  },
+  "pattern": [
+    "SMS",
+    "SMS",
+    " M "
+  ],
+  "result": {
+    "item": "pixelpirates:mast_with_sails"
+  },
+  "show_notification": true
+}

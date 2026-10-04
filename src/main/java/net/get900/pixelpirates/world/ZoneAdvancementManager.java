@@ -16,15 +16,6 @@ public class ZoneAdvancementManager {
         // Always grant root on dimension entry
         AdvancementHelper.grant(player, "root");
 
-        int zone = PlayerProgressionManager.getZoneAt(player.getPos());
-
-        if (zone >= 1) AdvancementHelper.grant(player, "into_the_shallows");
-
-        // Brave the Waves: standing in zone 2 while holding a Seafarer's Token
-        if (zone >= 2 && PlayerProgressionManager.hasSeafarersToken(player)) {
-            AdvancementHelper.grant(player, "brave_the_waves");
-        }
-
         // Full pirate kit: all four armour pieces equipped
         if (player.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.PIRATE_HELMET)
                 && player.getEquippedStack(EquipmentSlot.CHEST).isOf(ModItems.PIRATE_CHESTPLATE)

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:pirate_coin",
+          "name": "pixelpirates:coin",
           "weight": 20,
           "functions": [
             {
@@ -86,7 +86,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:abyssal_pearl",
           "weight": 6,
           "functions": [
             {
@@ -94,7 +94,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 2
+                "max": 3
               }
             }
           ]

@@ -1,0 +1,19 @@
+{
+  "elements": [
+    {"title": "Ship's Log"},
+    {"img": "chapter_log", "w": 138},
+    {"quote": "Leave room in the log. The sea isn't finished with you yet."},
+
+    {"page": "next"},
+    {"h": "The Captain"},
+    {"dyn": "captain"},
+
+    {"page": "next"},
+    {"h": "Standing"},
+    {"dyn": "standing"},
+
+    {"page": "next"},
+    {"h": "Charted Treasure"},
+    {"dyn": "treasure"}
+  ]
+}

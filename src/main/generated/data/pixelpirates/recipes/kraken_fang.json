@@ -2,16 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "K": {
-      "item": "pixelpirates:kraken_scale"
+    "B": {
+      "item": "pixelpirates:abyssal_pearl"
     },
-    "R": {
+    "H": {
       "item": "pixelpirates:rope"
+    },
+    "T": {
+      "item": "pixelpirates:kraken_scale"
     }
   },
   "pattern": [
-    "K",
-    "R"
+    "T",
+    "B",
+    "H"
   ],
   "result": {
     "item": "pixelpirates:kraken_fang"

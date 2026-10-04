@@ -85,6 +85,11 @@ public class BossRelicItem extends Item implements net.minecraft.item.Equipment 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (world.isClient || !(entity instanceof PlayerEntity p) || p.age % 10 != 0) return;
+        passive(kind, p, world);
+    }
+
+    /** The relic's passive for this player (the relic itself, or the relic weapon forged from it - item/RelicWeapons). */
+    public static void passive(Kind kind, PlayerEntity p, World world) {
         boolean wet = p.isSubmergedInWater();
         if (BossProgression.relicsSilenced(p)) {          // the Abyssal Heart drowns them out: only the charm's breath remains
             if (kind == Kind.DIVING_CHARM && p.isTouchingWater()) give(p, StatusEffects.WATER_BREATHING, 0);
@@ -144,24 +149,34 @@ public class BossRelicItem extends Item implements net.minecraft.item.Equipment 
         ItemStack stack = user.getStackInHand(hand);
         if (kind == Kind.CROWN) return equipAndSwap(this, world, user, hand);          // the Crown is worn
         if (!(world instanceof ServerWorld sw)) return TypedActionResult.success(stack, true);
+        user.getItemCooldownManager().set(this, LOCATE_COOLDOWN);
+        locate(this, sw, user);
+        return TypedActionResult.success(stack);
+    }
+
+    /** Point the way to the lair this relic leads to (the Heartstone tracks the Leviathan during the hunt). */
+    public static void locate(BossRelicItem relic, ServerWorld sw, PlayerEntity user) {
+        World world = sw;
+        Kind kind = relic.kind;
         if (kind == Kind.HEARTSTONE) {                                      // THE HUNT: it pulls toward the Leviathan itself
             var ls = net.get900.pixelpirates.world.leviathan.LeviathanState.get(sw);
             if (ls.stage != net.get900.pixelpirates.world.leviathan.LeviathanState.SLEEPING) {
-                user.getItemCooldownManager().set(this, LOCATE_COOLDOWN);
                 net.minecraft.util.math.Vec3d at = net.get900.pixelpirates.world.leviathan.LeviathanHunt.whereIsIt(sw);
-                if (at == null) { user.sendMessage(Text.literal("The Heartstone is quiet. It is over.").formatted(Formatting.GRAY), true); return TypedActionResult.success(stack); }
+                if (at == null) { user.sendMessage(Text.literal("The Heartstone is quiet. It is over.").formatted(Formatting.GRAY), true); return; }
                 int dx = (int) (at.x - user.getX()), dz = (int) (at.z - user.getZ());
                 int dist = (int) Math.sqrt((double) dx * dx + (double) dz * dz);
                 user.sendMessage(Text.literal("The Heartstone pulls " + compass(dx, dz) + " - toward the Leviathan (" + dist + " blocks, "
                         + net.get900.pixelpirates.world.leviathan.LeviathanState.STAGE_NAMES[ls.stage] + ")").formatted(Formatting.DARK_AQUA), true);
                 world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_WARDEN_HEARTBEAT, SoundCategory.PLAYERS, 1.0f, 0.5f);
-                return TypedActionResult.success(stack);
+                return;
             }
         }
-        BossProgression.Step target = BossProgression.targetOf(this);
+        BossProgression.Step target = BossProgression.targetOf(relic);
         var type = target == null ? null : Dungeons.byId(target.lair());
-        user.getItemCooldownManager().set(this, LOCATE_COOLDOWN);
-        if (type == null) return TypedActionResult.pass(stack);
+        if (type == null) {
+            user.sendMessage(Text.literal("It points nowhere - there is nothing left to hunt.").formatted(Formatting.GRAY), true);
+            return;
+        }
         var gen = sw.getChunkManager().getChunkGenerator();
         var ctx = new DungeonPlacement.Context(sw.getSeed(), gen, sw.getChunkManager().getNoiseConfig(), sw, gen.getSeaLevel());
         BlockPos from = user.getBlockPos();
@@ -169,7 +184,7 @@ public class BossRelicItem extends Item implements net.minecraft.item.Equipment 
         if (hit == null) {
             user.sendMessage(Text.literal("The relic is cold here - " + target.name() + " does not dwell in these waters.")
                     .formatted(Formatting.GRAY), true);
-            return TypedActionResult.success(stack);
+            return;
         }
         int dx = hit.getX() - from.getX(), dz = hit.getZ() - from.getZ();
         int dist = (int) Math.sqrt((double) dx * dx + (double) dz * dz);
@@ -177,7 +192,6 @@ public class BossRelicItem extends Item implements net.minecraft.item.Equipment 
                 + " waits " + dist + " blocks " + compass(dx, dz) + " (" + hit.getX() + ", " + hit.getZ() + ")")
                 .formatted(Formatting.AQUA), false);
         world.playSound(null, user.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.PLAYERS, 1.0f, 0.7f);
-        return TypedActionResult.success(stack);
     }
 
     private static String compass(int dx, int dz) {

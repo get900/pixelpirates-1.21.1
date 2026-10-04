@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "pixelpirates:broken_shackle"
+    },
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "pixelpirates:cursed_bone"
+    },
+    {
+      "item": "pixelpirates:cursed_bone"
+    },
+    {
+      "item": "pixelpirates:lost_soul"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:chainbreaker"
+  }
+}

@@ -65,21 +65,16 @@ public final class VanillaBiomeExtras {
                     OceanPlacedFeatures.SEA_PICKLE,
                     OceanPlacedFeatures.KELP_WARM, OceanPlacedFeatures.KELP_COLD));
 
-    /** Always-on geology: seabed disks + the full vanilla ore set (the dimension had no ores). */
+    /** Always-on geology: seabed disks + stone variety. NO ORES (2026-10-01, user decision): mining is not what this mod
+     *  is about - iron, gold, copper and coal come from salvage, loot and the port traders instead. ORDER still lists the
+     *  ore features so the canonical order never changes; nothing selects them. */
     private static final Set<RegistryKey<PlacedFeature>> BASE = Set.of(
             MiscPlacedFeatures.DISK_SAND, MiscPlacedFeatures.DISK_CLAY, MiscPlacedFeatures.DISK_GRAVEL,
             OrePlacedFeatures.ORE_DIRT, OrePlacedFeatures.ORE_GRAVEL,
             OrePlacedFeatures.ORE_GRANITE_UPPER, OrePlacedFeatures.ORE_GRANITE_LOWER,
             OrePlacedFeatures.ORE_DIORITE_UPPER, OrePlacedFeatures.ORE_DIORITE_LOWER,
             OrePlacedFeatures.ORE_ANDESITE_UPPER, OrePlacedFeatures.ORE_ANDESITE_LOWER,
-            OrePlacedFeatures.ORE_TUFF,
-            OrePlacedFeatures.ORE_COAL_UPPER, OrePlacedFeatures.ORE_COAL_LOWER,
-            OrePlacedFeatures.ORE_IRON_UPPER, OrePlacedFeatures.ORE_IRON_MIDDLE, OrePlacedFeatures.ORE_IRON_SMALL,
-            OrePlacedFeatures.ORE_GOLD, OrePlacedFeatures.ORE_GOLD_LOWER,
-            OrePlacedFeatures.ORE_REDSTONE, OrePlacedFeatures.ORE_REDSTONE_LOWER,
-            OrePlacedFeatures.ORE_DIAMOND, OrePlacedFeatures.ORE_DIAMOND_LARGE, OrePlacedFeatures.ORE_DIAMOND_BURIED,
-            OrePlacedFeatures.ORE_LAPIS, OrePlacedFeatures.ORE_LAPIS_BURIED,
-            OrePlacedFeatures.ORE_COPPER);
+            OrePlacedFeatures.ORE_TUFF);
 
     public enum Profile {
         /** Spawn island: gentle tropical flora + warm shallows. */
@@ -97,9 +92,8 @@ public final class VanillaBiomeExtras {
         REEF(Set.of(VegetationPlacedFeatures.FLOWER_WARM, VegetationPlacedFeatures.PATCH_GRASS_NORMAL,
                 OceanPlacedFeatures.WARM_OCEAN_VEGETATION, OceanPlacedFeatures.SEAGRASS_DEEP_WARM,
                 OceanPlacedFeatures.SEA_PICKLE)),
-        /** Phase 3 volcanic: dead brush, lava springs, extra gold in the rock. */
-        VOLCANIC(Set.of(VegetationPlacedFeatures.PATCH_DEAD_BUSH, MiscPlacedFeatures.SPRING_LAVA,
-                OrePlacedFeatures.ORE_GOLD_EXTRA)),
+        /** Phase 3 volcanic: dead brush, lava springs. */
+        VOLCANIC(Set.of(VegetationPlacedFeatures.PATCH_DEAD_BUSH, MiscPlacedFeatures.SPRING_LAVA)),
         /** Phase 4 cursed seas: gloomy ferns, mushrooms, cold kelp. */
         CURSED(Set.of(VegetationPlacedFeatures.PATCH_GRASS_TAIGA, VegetationPlacedFeatures.BROWN_MUSHROOM_NORMAL,
                 VegetationPlacedFeatures.RED_MUSHROOM_NORMAL, OceanPlacedFeatures.SEAGRASS_DEEP_COLD,

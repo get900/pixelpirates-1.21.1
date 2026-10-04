@@ -101,15 +101,15 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "pixelpirates:ectoplasm",
           "weight": 8,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
+                "min": 2,
+                "max": 4
               }
             }
           ]
@@ -122,7 +122,12 @@
         {
           "type": "minecraft:item",
           "name": "pixelpirates:cursed_bone_helmet",
-          "weight": 2
+          "weight": 2,
+          "functions": [
+            {
+              "function": "pixelpirates:frozen_seeker"
+            }
+          ]
         },
         {
           "type": "minecraft:item",

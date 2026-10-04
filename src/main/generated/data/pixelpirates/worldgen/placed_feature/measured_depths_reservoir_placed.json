@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:measured_depths_reservoir",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

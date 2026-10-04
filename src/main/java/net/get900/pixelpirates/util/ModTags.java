@@ -14,6 +14,9 @@ public class ModTags {
         public static final TagKey<Block> CANNON_IMMUNE = createTag("cannon_immune");
         // Blocks in this tag are never broken off during progressive ship structural damage
         public static final TagKey<Block> SHIP_STRUCTURAL = createTag("ship_structural");
+        // Natural seabed a Keelbreaker hull grinds through (world/KeelBreaker): soft = level I, rock = level II
+        public static final TagKey<Block> KEEL_SOFT = createTag("keel_soft");
+        public static final TagKey<Block> KEEL_ROCK = createTag("keel_rock");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, new Identifier(PixelPirates.MOD_ID, name));

@@ -9,4 +9,11 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface PlayerShoulderInvoker {
     @Invoker("dropShoulderEntities")
     void pixelpirates$dropShoulderEntities();
+
+    /** Kraken's Pet (parrot types phase 3): taken off the shoulder while it is away, put back when it returns. */
+    @Invoker("setShoulderEntityLeft")
+    void pixelpirates$setShoulderLeft(net.minecraft.nbt.NbtCompound nbt);
+
+    @Invoker("setShoulderEntityRight")
+    void pixelpirates$setShoulderRight(net.minecraft.nbt.NbtCompound nbt);
 }

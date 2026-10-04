@@ -132,6 +132,21 @@ public final class HomesteadBlocks {
     public static final Block GHOST_SWORDFISH_TROPHY = trophy("ghost_swordfish_trophy");
     public static final Block COELACANTH_TROPHY = trophy("coelacanth_trophy");
 
+    // MOB TROPHIES (2026-10-01): the creature's own model mounted on a plaque - rare kill drops (MobTrophyBlock)
+    static Block mobTrophy(String name, net.get900.pixelpirates.homestead.trophy.MobTrophyBlock.Mount m) {
+        return block(name, new net.get900.pixelpirates.homestead.trophy.MobTrophyBlock(AbstractBlock.Settings.create().mapColor(MapColor.BROWN)
+                .strength(1.0f).sounds(BlockSoundGroup.WOOD).nonOpaque(), m), true);
+    }
+    private static net.get900.pixelpirates.homestead.trophy.MobTrophyBlock.Mount mount(String mob, float scale, float cy, float cz, float depth, boolean profile, String idle) {
+        return new net.get900.pixelpirates.homestead.trophy.MobTrophyBlock.Mount(mob, scale, 0, cy, cz, depth, profile, idle);
+    }
+    public static final Block SHARK_TROPHY = mobTrophy("shark_trophy", mount("shark", 0.37f, 4.2f, 6.5f, 0.18f, true, "swim"));
+    public static final Block REEFBACK_TROPHY = mobTrophy("reefback_trophy", mount("reefback_fish", 0.45f, 10f, -0.5f, 0.13f, true, "idle"));
+    public static final Block LAVA_CRAB_TROPHY = mobTrophy("lava_crab_trophy", mount("lava_crab", 0.36f, 7.85f, -1f, 0.23f, false, "idle"));
+    public static final Block GHOST_SHARK_TROPHY = mobTrophy("ghost_shark_trophy", mount("ghost_shark", 0.33f, 10.5f, 1.5f, 0.23f, true, "idle"));
+    public static final Block ANGLER_TROPHY = mobTrophy("angler_trophy", mount("abyssal_angler", 0.44f, 11.25f, 4.25f, 0.14f, true, "idle"));
+    public static final Block ABYSS_EEL_TROPHY = mobTrophy("abyss_eel_trophy", mount("abyss_eel", 0.19f, 5.5f, 24.5f, 0.39f, true, "idle"));
+
     // ================================================================== #9 SALVAGE
     public static final Block SALVAGE_CRATE = block("salvage_crate", new net.get900.pixelpirates.homestead.salvage.SalvageCrateBlock(wood().strength(2.0f)), true);
 
@@ -160,6 +175,97 @@ public final class HomesteadBlocks {
 
     // ================================================================== EXTRA: ROULETTE
     public static final Block ROULETTE_TABLE = block("roulette_table", new net.get900.pixelpirates.homestead.roulette.RouletteTableBlock(wood().strength(2.5f)), true);
+
+    // ================================================================== THE GROG BARREL (2026-10-01): tavern games + decor
+    static AbstractBlock.Settings glassware() { return AbstractBlock.Settings.create().mapColor(MapColor.BROWN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque(); }
+    public static final Block TAVERN_SIGN = block("tavern_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block CHANDLERY_SIGN = block("chandlery_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block BAKERY_SIGN = block("bakery_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block HARBOUR_SIGN = block("harbour_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block WAREHOUSE_SIGN = block("warehouse_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block DISTILLERY_SIGN = block("distillery_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block FISH_SIGN = block("fish_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block INN_SIGN = block("inn_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    // the aviary perch (2026-10-03): a jungle branch out from a wall, wall at the back (+z); tagged LOGS so wild parrots fly onto it
+    public static final Block PERCH_BRANCH = block("perch_branch", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.5f).nonOpaque(), true, b(6.5, 6, 0, 9.5, 9, 16), b(5, 5, 15, 11, 10, 16)), true);
+    // the PARROT ROOST (parrot types phase 4): opens your parrot collection (homestead/parrot/ParrotCollection)
+    public static final Block PARROT_ROOST = block("parrot_roost", new net.get900.pixelpirates.homestead.parrot.ParrotRoostBlock(wood().strength(1.5f).nonOpaque()), true);
+    // the harbour (homestead/harbour/HarbourDues): dues ledger, berth bollards, the dues board
+    public static final Block DUES_LEDGER = block("dues_ledger", new net.get900.pixelpirates.homestead.harbour.HarbourBlocks.DuesLedger(wood().strength(2.0f)), true);
+    public static final Block BERTH_BOLLARD = block("berth_bollard", new net.get900.pixelpirates.homestead.harbour.HarbourBlocks.BerthBollard(
+            AbstractBlock.Settings.create().mapColor(MapColor.BLACK).strength(3.0f, 6.0f).sounds(BlockSoundGroup.METAL).nonOpaque()), true);
+    public static final Block DUES_BOARD = block("dues_board", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(0, 0, 14, 16, 16, 16)), true);
+    public static final Block DOCK_SIGN = block("dock_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    // the chapel (homestead/chapel): pews, the bell rope, the organ, and its furnishings
+    static AbstractBlock.Settings stoneDecor() { return AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).strength(2.0f, 6.0f).sounds(BlockSoundGroup.STONE).nonOpaque(); }
+    public static final Block CHAPEL_PEW = block("chapel_pew", new net.get900.pixelpirates.homestead.chapel.ChapelBlocks.Pew(wood().strength(2.0f)), true);
+    public static final Block BELL_ROPE = block("bell_rope", new net.get900.pixelpirates.homestead.chapel.ChapelBlocks.BellRope(
+            AbstractBlock.Settings.create().mapColor(MapColor.BROWN).strength(0.5f).sounds(BlockSoundGroup.WOOL).nonOpaque().noCollision()), true);
+    public static final Block ORGAN_CONSOLE = block("organ_console", new net.get900.pixelpirates.homestead.chapel.ChapelBlocks.OrganConsole(wood().strength(2.5f)), true);
+    public static final Block ORGAN_PIPES = block("organ_pipes", new net.get900.pixelpirates.homestead.chapel.ChapelBlocks.OrganPipes(
+            AbstractBlock.Settings.create().mapColor(MapColor.GOLD).strength(2.5f).sounds(BlockSoundGroup.METAL).nonOpaque()), true);
+    public static final Block CHAPEL_ALTAR = block("chapel_altar", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(stoneDecor(), true, b(0, 0, 2, 16, 15, 14)), true);
+    public static final Block ALTAR_CROSS = block("altar_cross", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(
+            AbstractBlock.Settings.create().mapColor(MapColor.GOLD).strength(1.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), false, b(5, 0, 6, 11, 16, 10)), true);
+    public static final Block WALL_CROSS = block("wall_cross", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(3, 1, 14, 13, 15, 16)), true);
+    public static final Block CANDELABRA = block("candelabra", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(
+            AbstractBlock.Settings.create().mapColor(MapColor.GOLD).strength(1.0f).sounds(BlockSoundGroup.METAL).nonOpaque().luminance(s -> 13), false, b(4, 0, 4, 12, 16, 12)), true);
+    public static final Block VOTIVE_RACK = block("votive_rack", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(
+            AbstractBlock.Settings.create().mapColor(MapColor.IRON_GRAY).strength(1.5f).sounds(BlockSoundGroup.METAL).nonOpaque().luminance(s -> 11), true, b(0, 0, 4, 16, 12, 12)), true);
+    public static final Block BAPTISMAL_FONT = block("baptismal_font", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(stoneDecor(), true, b(1, 0, 1, 15, 14, 15)), true);
+    public static final Block HYMN_BOARD = block("hymn_board", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(2, 0, 14, 14, 16, 16)), true);
+    public static final Block MEMORIAL_PLAQUE = block("memorial_plaque", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(stoneDecor(), false, b(1, 3, 15, 15, 13, 16)), true);
+    public static final Block VOTIVE_SHIP = block("votive_ship", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(0.5f), false, b(2, 2, 4, 14, 16, 12)), true);
+    // the governor's residence (tools/gen_manor_assets.py): marble statues, urns, chandeliers, the portrait
+    static AbstractBlock.Settings marble() { return AbstractBlock.Settings.create().mapColor(MapColor.WHITE).strength(3.0f, 6.0f).sounds(BlockSoundGroup.CALCITE).nonOpaque().requiresTool(); }
+    public static final Block GOVERNOR_STATUE = block("governor_statue", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(marble(), true, b(2, 0, 3, 14, 16, 13)), true);
+    public static final Block LION_STATUE = block("lion_statue", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(marble(), true, b(1, 0, 1, 15, 16, 15)), true);
+    public static final Block SEA_GOD_STATUE = block("sea_god_statue", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(marble(), true, b(1, 0, 2, 15, 16, 14)), true);
+    public static final Block MARBLE_BUST = block("marble_bust", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(marble(), true, b(4, 0, 4, 12, 16, 12)), true);
+    public static final Block GARDEN_URN = block("garden_urn", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(marble(), true, b(3, 0, 3, 13, 14, 13)), true);
+    public static final Block CRYSTAL_CHANDELIER = block("crystal_chandelier", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(
+            AbstractBlock.Settings.create().mapColor(MapColor.GOLD).strength(0.8f).sounds(BlockSoundGroup.AMETHYST_BLOCK).nonOpaque().noCollision().luminance(s -> 15), false, b(1, 0, 1, 15, 16, 15)), true);
+    public static final Block GOVERNOR_PORTRAIT = block("governor_portrait", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(0.8f), false, b(0, 0, 15, 16, 16, 16)), true);
+    // the watch house (tools/gen_watch_assets.py): its hanging sign, wanted posters, weapon racks
+    public static final Block WATCH_SIGN = block("watch_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block WANTED_POSTER = block("wanted_poster", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(0.5f), false, b(0, 0, 15, 16, 16, 16)), true);
+    public static final Block WEAPON_RACK = block("weapon_rack", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.5f), false, b(0, 0, 12, 16, 16, 16)), true);
+    // the forge (homestead/forge, tools/gen_forge_assets.py): hearth, anvil, bellows, the pattern board, the smithy sign
+    public static final Block FORGE_HEARTH = block("forge_hearth", new net.get900.pixelpirates.homestead.forge.ForgeHearthBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.DARK_RED).strength(3.5f, 6.0f).sounds(BlockSoundGroup.STONE).requiresTool().luminance(s -> s.get(net.get900.pixelpirates.homestead.forge.ForgeHearthBlock.FUEL) > 0 ? 13 : 0)), true);
+    public static final Block FORGE_ANVIL = block("forge_anvil", new net.get900.pixelpirates.homestead.forge.ForgeAnvilBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.IRON_GRAY).strength(5.0f, 1200.0f).sounds(BlockSoundGroup.ANVIL).requiresTool().nonOpaque(), b(0, 0, 3, 16, 16, 13)), true);
+    public static final Block BELLOWS = block("bellows", new net.get900.pixelpirates.homestead.forge.BellowsBlock(wood().strength(1.5f), b(1, 0, 2, 15, 10, 14)), true);
+    public static final Block PATTERN_BOARD = block("pattern_board", new net.get900.pixelpirates.homestead.forge.PatternBoardBlock(wood().strength(1.0f), b(0, 0, 14, 16, 16, 16)), true);
+    // props (tools/gen_props_assets.py): the telescope on its tripod, a sea chart framed for the wall
+    public static final Block TELESCOPE = block("telescope", new net.get900.pixelpirates.homestead.furniture.TelescopeBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.ORANGE).strength(1.5f).sounds(BlockSoundGroup.COPPER).nonOpaque(), b(2, 0, 2, 14, 16, 14)), true);
+    // ships in bottles (gen_props_assets.py bottles, 2026-10-04): the glassblower's wares - sloop / brig / galleon, the ghost ship from loot only
+    static Block shipInBottle(String kind, int light) {
+        return block("ship_in_bottle_" + kind, new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(glassware().luminance(s -> light), true, b(1, 0, 4, 16, 8, 12)), true);
+    }
+    public static final Block SHIP_IN_BOTTLE_SLOOP = shipInBottle("sloop", 0);
+    public static final Block SHIP_IN_BOTTLE_BRIG = shipInBottle("brig", 0);
+    public static final Block SHIP_IN_BOTTLE_GALLEON = shipInBottle("galleon", 0);
+    public static final Block SHIP_IN_BOTTLE_GHOST = shipInBottle("ghost", 6);
+    // the tattooist's chair (townhouse #33, homestead/tattoo): use it to get inked
+    // the ship's-cat keeper's counter (townhouse #36, homestead/cat/Cattery): buy one of today's cats
+    public static final Block CATTERY_COUNTER = block("cattery_counter", new net.get900.pixelpirates.homestead.cat.CatteryCounterBlock(wood().strength(2.0f)), true);
+    /** Captain Wren's music box - the Beach Wreck's easter egg (homestead/wreck, not craftable). */
+    public static final Block WREN_MUSIC_BOX = block("wren_music_box", new net.get900.pixelpirates.homestead.wreck.MusicBoxBlock(wood().strength(1.0f).nonOpaque()), true);
+    public static final Block TATTOO_CHAIR = block("tattoo_chair", new net.get900.pixelpirates.homestead.tattoo.TattooChairBlock(wood().strength(2.0f)), true);
+    public static final Block SEA_CHART = block("sea_chart", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(0.8f), false, b(0, 0, 15, 16, 16, 16)), true);
+    public static final Block PARK_SIGN = block("park_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block SMITHY_SIGN = block("smithy_sign", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(6, 2, 0, 10, 16, 16)), true);
+    public static final Block DRINKS_MENU = block("drinks_menu", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(0, 0, 14, 16, 16, 16)), true);
+    public static final Block TANKARD = block("tankard", new net.get900.pixelpirates.homestead.tavern.TavernDecor.Tankards(wood().strength(0.5f)), true);
+    public static final Block SPIRIT_BOTTLES = block("spirit_bottles", new net.get900.pixelpirates.homestead.tavern.TavernDecor.Bottles(glassware()), true);
+    public static final Block TAVERN_KEG = block("tavern_keg", new net.get900.pixelpirates.homestead.tavern.TavernDecor.Keg(wood().strength(2.0f)), true);
+    public static final Block DICE_CUP = block("dice_cup", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(0.5f), true, b(4, 0, 4, 12, 6, 12)), true);
+    public static final Block LIARS_DICE_TABLE = block("liars_dice_table", new net.get900.pixelpirates.homestead.tavern.GameTableBlock(wood().strength(2.5f),
+            net.get900.pixelpirates.homestead.tavern.LiarsDiceBlockEntity::new, () -> HomesteadBlockEntities.LIARS_DICE, b(0, 0, 0, 16, 15, 16)), true);
+    public static final Block CROWN_ANCHOR_TABLE = block("crown_anchor_table", new net.get900.pixelpirates.homestead.tavern.GameTableBlock(wood().strength(2.5f),
+            net.get900.pixelpirates.homestead.tavern.CrownAnchorBlockEntity::new, () -> HomesteadBlockEntities.CROWN_ANCHOR, b(0, 0, 0, 16, 15, 16)), true);
 
     public static void init() {}
 }

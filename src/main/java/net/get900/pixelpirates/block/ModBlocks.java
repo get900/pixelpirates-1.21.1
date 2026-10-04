@@ -43,7 +43,7 @@ public class ModBlocks {
                     .sounds(BlockSoundGroup.WOOL)));
 
     public static final Block SHIPWRIGHT_TABLE = registerBlock("shipwright_table",
-            new ShipwrightBlock(AbstractBlock.Settings.create().strength(3.5f)
+            new ShipwrightBlock(AbstractBlock.Settings.create().strength(3.5f).nonOpaque()
                     .requiresTool().sounds(BlockSoundGroup.WOOD)));
 
     public static final Block SHIP_CANNON = registerBlock("ship_cannon",
@@ -111,6 +111,14 @@ public class ModBlocks {
     public static final Block TIDE_BELL = registerBlock("tide_bell", leviathanBlock(net.get900.pixelpirates.block.custom.LeviathanBlock.Kind.BELL, 6, MapColor.GOLD));
     public static final Block BANE_BALLISTA = registerBlock("bane_ballista", leviathanBlock(net.get900.pixelpirates.block.custom.LeviathanBlock.Kind.BALLISTA, 4, MapColor.BROWN));
     public static final Block WATCHERS_HORN = registerBlock("watchers_horn", leviathanBlock(net.get900.pixelpirates.block.custom.LeviathanBlock.Kind.HORN, 4, MapColor.PALE_YELLOW));
+
+    // ---- Wreckers' Beacon props (the wreckers_beacon layout). Hand-authored models in resources/, kept out of datagen.
+    public static final Block WRECKERS_SIGNAL_LANTERN = registerBlock("wreckers_signal_lantern",
+            new net.get900.pixelpirates.block.custom.PropBlock(AbstractBlock.Settings.copy(Blocks.COPPER_BLOCK).strength(2.0f)
+                    .luminance(state -> 15).nonOpaque(), Block.createCuboidShape(1, 0, 1, 15, 16, 15)));
+    public static final Block ROPE_BOLLARD = registerBlock("rope_bollard",
+            new net.get900.pixelpirates.block.custom.PropBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).strength(1.5f).nonOpaque(),
+                    net.minecraft.util.shape.VoxelShapes.union(Block.createCuboidShape(2, 0, 2, 14, 2, 14), Block.createCuboidShape(3, 2, 3, 13, 14, 13))));
 
     private static Block leviathanBlock(net.get900.pixelpirates.block.custom.LeviathanBlock.Kind kind, int light, MapColor color) {
         return new net.get900.pixelpirates.block.custom.LeviathanBlock(kind, AbstractBlock.Settings.create().strength(-1.0f, 3600000.0f)
@@ -192,7 +200,8 @@ public class ModBlocks {
     public static final Block BANANA_BLOCK = registerBlock("banana_block",
             new HangingFruitBlock(Block.createCuboidShape(2, 3, 2, 14, 16, 14),
                     AbstractBlock.Settings.create().strength(0.3f).nonOpaque().noCollision()
-                            .sounds(BlockSoundGroup.AZALEA_LEAVES).mapColor(MapColor.YELLOW)));
+                            .sounds(BlockSoundGroup.AZALEA_LEAVES).mapColor(MapColor.YELLOW),
+                    () -> net.get900.pixelpirates.item.ModItems.BANANA));   // pick with right-click, regrows
     public static final Block COCONUT_BLOCK = registerBlock("coconut_block",
             new HangingFruitBlock(Block.createCuboidShape(4, 4, 4, 12, 16, 12),
                     AbstractBlock.Settings.create().strength(0.5f).nonOpaque()
@@ -267,13 +276,15 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.create().strength(3.0f, 3.0f).requiresTool().sounds(BlockSoundGroup.AMETHYST_BLOCK)));
     // Decorative blocks
     public static final Block ANCHOR_BLOCK = registerBlock("anchor_block",
-            new AnchorBlock(AbstractBlock.Settings.create().strength(2.0f, 6.0f).requiresTool().sounds(BlockSoundGroup.STONE)));
+            new AnchorBlock(AbstractBlock.Settings.create().strength(2.0f, 6.0f).requiresTool().sounds(BlockSoundGroup.ANVIL).nonOpaque()));
     public static final Block SWORD_BLOCK = registerBlock("sword_block",
             new Block(AbstractBlock.Settings.create().strength(2.0f, 6.0f).requiresTool().sounds(BlockSoundGroup.STONE)));
-    public static final Block TREASURE_BLOCK = registerBlock("treasure_block",
-            new Block(AbstractBlock.Settings.create().strength(2.0f, 6.0f).requiresTool().sounds(BlockSoundGroup.WOOD)));
+    public static final Block TREASURE_BLOCK = registerBlock("treasure_block",                  // lair treasure: one free reel spin each
+            new net.get900.pixelpirates.block.custom.TreasureBlock(AbstractBlock.Settings.create().strength(2.0f, 6.0f).requiresTool().sounds(BlockSoundGroup.WOOD).nonOpaque()));
+    /** An open sea chart lying on a table (3D model, tools/gen_props_assets.py); framed on a wall it's HomesteadBlocks.SEA_CHART. */
     public static final Block MAP_BLOCK = registerBlock("map_block",
-            new Block(AbstractBlock.Settings.create().strength(1.5f, 3.0f).sounds(BlockSoundGroup.WOOD)));
+            new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(AbstractBlock.Settings.create().strength(0.5f, 1.0f).sounds(BlockSoundGroup.WOOD).nonOpaque(),
+                    true, new double[]{0, 0, 0, 16, 2, 16}));
     public static final Block PIRATE_DIARY_BLOCK = registerBlock("pirate_diary_block",
             new Block(AbstractBlock.Settings.create().strength(1.5f, 3.0f).sounds(BlockSoundGroup.WOOD)));
     // Wood / planks types
@@ -442,41 +453,7 @@ public class ModBlocks {
 
         PixelPirates.LOGGER.info("Registered all mod blocks for " + PixelPirates.MOD_ID);
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(fabricItemGroupEntries -> {
-            fabricItemGroupEntries.add(ModBlocks.DRIFTWOOD_BLOCK);
-        });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(fabricItemGroupEntries -> {
-            fabricItemGroupEntries.add(ModBlocks.GROG_BARREL);
-            fabricItemGroupEntries.add(ModBlocks.SHIP_HELM);
-            fabricItemGroupEntries.add(ModBlocks.SHIP_MAST);
-            fabricItemGroupEntries.add(ModBlocks.SHIP_CANNON);
-            fabricItemGroupEntries.add(ModBlocks.FORT_CANNON);
-            fabricItemGroupEntries.add(ModBlocks.BLAST_RUBBLE);
-            fabricItemGroupEntries.add(ModBlocks.SERPENT_WARD);
-            fabricItemGroupEntries.add(ModBlocks.QUENCH_VALVE);
-            fabricItemGroupEntries.add(ModBlocks.TIDE_SLUICE);
-            fabricItemGroupEntries.add(ModBlocks.HARPOON_WINCH);
-            fabricItemGroupEntries.add(ModBlocks.MANACLE_ANCHOR);
-            fabricItemGroupEntries.add(ModBlocks.LIVING_FLESH);
-            fabricItemGroupEntries.add(ModBlocks.FLESH_VEIN);
-            fabricItemGroupEntries.add(ModBlocks.HEART_VALVE);
-            fabricItemGroupEntries.add(ModBlocks.GALVANIC_PYLON);
-            fabricItemGroupEntries.add(ModBlocks.RIFT_SEAL);
-            fabricItemGroupEntries.add(ModBlocks.ANCHOR_WINCH);
-            fabricItemGroupEntries.add(ModBlocks.TIDE_BELL);
-            fabricItemGroupEntries.add(ModBlocks.BANE_BALLISTA);
-            fabricItemGroupEntries.add(ModBlocks.WATCHERS_HORN);
-            fabricItemGroupEntries.add(ModBlocks.GHOSTWOOD_LOG);
-            fabricItemGroupEntries.add(ModBlocks.GHOSTWOOD_PLANKS);
-            fabricItemGroupEntries.add(ModBlocks.SPECTRAL_SAIL);
-            fabricItemGroupEntries.add(ModBlocks.GHOST_CANNON);
-            fabricItemGroupEntries.add(ModBlocks.GHOST_MAST);
-            fabricItemGroupEntries.add(ModBlocks.PHANTOM_BUOY);
-            fabricItemGroupEntries.add(ModBlocks.HAMMOCK);
-            fabricItemGroupEntries.add(ModBlocks.SHIP_BEDROLL);
-            fabricItemGroupEntries.add(ModBlocks.SHIPWRIGHT_TABLE);
-            fabricItemGroupEntries.add(ModBlocks.SHIP_WATERLINE);
-        });
+        // mod blocks are listed in item/ModCreativeTabs
 
     }
 }

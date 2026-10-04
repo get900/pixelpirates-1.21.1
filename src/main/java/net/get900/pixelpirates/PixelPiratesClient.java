@@ -50,6 +50,7 @@ public class PixelPiratesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         net.get900.pixelpirates.homestead.client.HomesteadClient.init();
+        net.get900.pixelpirates.client.TreasureFx.register();                 // the treasure block's fireworks
         // GeckoLib 3D cutlass renderer — must register before any item rendering occurs
         CutlassItemRenderer cutlassRenderer = new CutlassItemRenderer();
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.CUTLASS, cutlassRenderer::render);
@@ -100,6 +101,9 @@ public class PixelPiratesClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.SLOOP, SloopEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.DYNAMITE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.DEPTH_CHARGE, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.TIDE_ARROW, net.get900.pixelpirates.entity.client.RelicProjectileRenderers.TideArrow::new);
+        EntityRendererRegistry.register(ModEntities.SPECTRAL_SHOT, ctx -> new FlyingItemEntityRenderer<>(ctx, 1.4f, true));
+        EntityRendererRegistry.register(ModEntities.THROWN_RELIC, net.get900.pixelpirates.entity.client.RelicProjectileRenderers.Thrown::new);
         EntityRendererRegistry.register(ModEntities.THROWN_GALLOWBRAND, net.get900.pixelpirates.entity.client.ThrownGallowbrandRenderer::new);
         EntityRendererRegistry.register(ModEntities.HARPOON, ctx -> new net.get900.pixelpirates.entity.client.HarpoonGeoRenderer<>(ctx, 1.0f));
         EntityRendererRegistry.register(ModEntities.KRAKEN_HARPOON, ctx -> new net.get900.pixelpirates.entity.client.HarpoonGeoRenderer<>(ctx, 1.6f));
@@ -111,6 +115,7 @@ public class PixelPiratesClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BANE_BOLT, ctx -> new net.get900.pixelpirates.entity.client.HarpoonGeoRenderer<>(ctx, 5.0f));
         net.get900.pixelpirates.client.LeviathanClient.register();
         EntityRendererRegistry.register(ModEntities.CHUM, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.INK_BOMB, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.REVENANT_PART, net.get900.pixelpirates.entity.client.RevenantPartRenderer::new);
         EntityRendererRegistry.register(ModEntities.THROWN_KNIFE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.CANNON_BALL, CannonBallEntityRenderer::new);
@@ -131,6 +136,7 @@ public class PixelPiratesClient implements ClientModInitializer {
             InputUtil.GLFW_KEY_N,
             "category.pixelpirates"
         ));
+        ClientTickEvents.END_CLIENT_TICK.register(PirateLevelingClient::tickSwim);       // Deep Diver
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (musicKey.wasPressed()) ShipMusicPlayer.toggle();
         });
@@ -164,6 +170,11 @@ public class PixelPiratesClient implements ClientModInitializer {
             boolean clear = buf.readBoolean();
             client.execute(() -> net.get900.pixelpirates.world.ZoneEffectsClient.clearSight = clear);
         });
+        // The Weathered Chronicle: the server sends the reader's page state, the book opens on arrival
+        ClientPlayNetworking.registerGlobalReceiver(ModNetworking.S2C_CHRONICLE, (client, handler, buf, responseSender) -> {
+            var data = net.get900.pixelpirates.client.screen.ChronicleScreen.read(buf);
+            client.execute(() -> client.setScreen(new net.get900.pixelpirates.client.screen.ChronicleScreen(data)));
+        });
         net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.DISCONNECT.register(
                 (handler, client) -> net.get900.pixelpirates.world.ZoneEffectsClient.clearSight = false);
         ClientPlayNetworking.registerGlobalReceiver(ModNetworking.RADAR_UPDATE, (client, handler, buf, responseSender) -> {
@@ -181,7 +192,8 @@ public class PixelPiratesClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(ModNetworking.OPEN_MAP_MERCHANT, (client, handler, buf, responseSender) -> {
             boolean hasRadar = buf.readBoolean();
             int coins = buf.readInt();
-            client.execute(() -> client.setScreen(new MapMerchantScreen(hasRadar, coins)));
+            int claimed = buf.readInt();
+            client.execute(() -> client.setScreen(new MapMerchantScreen(hasRadar, coins, claimed)));
         });
 
         // Ship music: server validates ship presence and sends back the track index to play
@@ -224,7 +236,8 @@ public class PixelPiratesClient implements ClientModInitializer {
                 int   count  = PirateLevelingSystem.ALL_SKILLS.size();
                 int[] skills = new int[count];
                 for (int i = 0; i < count; i++) skills[i] = buf.readInt();
-                client.execute(() -> PirateLevelingClient.update(level, xp, points, skills));
+                int bosses = buf.isReadable() ? buf.readInt() : 0;
+                client.execute(() -> { PirateLevelingClient.bossesBeaten = bosses; PirateLevelingClient.update(level, xp, points, skills); });
             }
         );
 
@@ -244,8 +257,11 @@ public class PixelPiratesClient implements ClientModInitializer {
                 int  mastCount = buf.readInt();
                 int[] levels   = new int[net.get900.pixelpirates.world.ShipUpgrades.ALL.size()];
                 for (int i = 0; i < levels.length; i++) levels[i] = buf.readInt();
+                int livery = buf.readVarInt();
+                int[] liveries = new int[net.get900.pixelpirates.world.livery.Livery.ALL.size()];
+                for (int i = 0; i < liveries.length; i++) liveries[i] = buf.readByte();
                 client.execute(() -> client.setScreen(
-                    new ShipwrightScreen(blueprints, shipId, hp, maxHp, mastCount, levels)));
+                    new ShipwrightScreen(blueprints, shipId, hp, maxHp, mastCount, levels, livery, liveries)));
             }
         );
 

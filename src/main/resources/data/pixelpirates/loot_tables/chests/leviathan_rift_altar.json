@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:abyssal_pearl",
           "weight": 4,
           "functions": [
             {

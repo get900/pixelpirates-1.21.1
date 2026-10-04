@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:smooth_stone"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "SWS",
+    " S ",
+    "SSS"
+  ],
+  "result": {
+    "item": "pixelpirates:baptismal_font"
+  },
+  "show_notification": true
+}

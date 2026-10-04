@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "RLR",
+    "RLR",
+    "RLR"
+  ],
+  "result": {
+    "count": 3,
+    "item": "pixelpirates:ship_mast"
+  },
+  "show_notification": true
+}

@@ -150,10 +150,28 @@ public class ModEntities {
             Registries.ENTITY_TYPE, new Identifier(PixelPirates.MOD_ID, "thrown_gallowbrand"),
             FabricEntityTypeBuilder.<net.get900.pixelpirates.entity.custom.ThrownGallowbrandEntity>create(SpawnGroup.MISC, net.get900.pixelpirates.entity.custom.ThrownGallowbrandEntity::new)
                     .dimensions(EntityDimensions.fixed(0.6f, 0.6f)).trackRangeBlocks(96).trackedUpdateRate(20).build());
+    // relic weapon projectiles (item/RelicWeapons)
+    public static final EntityType<net.get900.pixelpirates.entity.custom.TideArrowEntity> TIDE_ARROW = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(PixelPirates.MOD_ID, "tide_arrow"),
+            FabricEntityTypeBuilder.<net.get900.pixelpirates.entity.custom.TideArrowEntity>create(SpawnGroup.MISC, net.get900.pixelpirates.entity.custom.TideArrowEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeBlocks(64).trackedUpdateRate(20).build());
+    public static final EntityType<net.get900.pixelpirates.entity.custom.SpectralShotEntity> SPECTRAL_SHOT = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(PixelPirates.MOD_ID, "spectral_shot"),
+            FabricEntityTypeBuilder.<net.get900.pixelpirates.entity.custom.SpectralShotEntity>create(SpawnGroup.MISC, net.get900.pixelpirates.entity.custom.SpectralShotEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeBlocks(96).trackedUpdateRate(10).build());
+    public static final EntityType<net.get900.pixelpirates.entity.custom.ThrownRelicEntity> THROWN_RELIC = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(PixelPirates.MOD_ID, "thrown_relic"),
+            FabricEntityTypeBuilder.<net.get900.pixelpirates.entity.custom.ThrownRelicEntity>create(SpawnGroup.MISC, net.get900.pixelpirates.entity.custom.ThrownRelicEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeBlocks(96).trackedUpdateRate(20).build());
     public static final EntityType<net.get900.pixelpirates.entity.custom.ChumEntity> CHUM = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(PixelPirates.MOD_ID, "chum"),
             FabricEntityTypeBuilder.<net.get900.pixelpirates.entity.custom.ChumEntity>create(SpawnGroup.MISC, net.get900.pixelpirates.entity.custom.ChumEntity::new)
                     .dimensions(EntityDimensions.fixed(0.35f, 0.35f)).trackRangeBlocks(64).trackedUpdateRate(10).build());
+
+    public static final EntityType<net.get900.pixelpirates.entity.custom.InkBombEntity> INK_BOMB = Registry.register(
+            Registries.ENTITY_TYPE, new Identifier(PixelPirates.MOD_ID, "ink_bomb"),
+            FabricEntityTypeBuilder.<net.get900.pixelpirates.entity.custom.InkBombEntity>create(SpawnGroup.MISC, net.get900.pixelpirates.entity.custom.InkBombEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.3f, 0.3f)).trackRangeBlocks(64).trackedUpdateRate(10).build());
 
     public static final EntityType<ThrownKnifeEntity> THROWN_KNIFE = Registry.register(
             Registries.ENTITY_TYPE,

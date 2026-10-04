@@ -40,7 +40,19 @@ public class PixelArmorItem extends ArmorItem implements GeoItem {
     public Supplier<Object> getRenderProvider() { return renderProvider; }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) { }
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        // loose parts (capes, tails, tentacles, chains, fins) sway in the "idle" clip (tools/armor/kit.py `moving`);
+        // it plays faster the faster the wearer moves, so capes stream behind a running player
+        controllers.add(new software.bernie.geckolib.core.animation.AnimationController<>(this, "sway", 4, state -> {
+            net.minecraft.entity.Entity e = state.getData(software.bernie.geckolib.constant.DataTickets.ENTITY);
+            double v = e == null ? 0 : Math.hypot(e.getX() - e.prevX, e.getZ() - e.prevZ);
+            state.getController().setAnimationSpeed(1 + Math.min(2.5, v * 9));
+            return state.setAndContinue(SWAY);
+        }));
+    }
+
+    private static final software.bernie.geckolib.core.animation.RawAnimation SWAY =
+            software.bernie.geckolib.core.animation.RawAnimation.begin().thenLoop("idle");
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() { return cache; }

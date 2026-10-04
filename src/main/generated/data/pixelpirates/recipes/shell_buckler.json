@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "pixelpirates:crab_shell"
+    },
+    "D": {
+      "item": "pixelpirates:driftwood"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CDC",
+    " C "
+  ],
+  "result": {
+    "item": "pixelpirates:shell_buckler"
+  },
+  "show_notification": true
+}

@@ -45,13 +45,6 @@ public class PlayerProgressionManager {
         if (zone > current) {
             ((PlayerProgressionComponent) player).pp_setUnlockedZone(zone);
             player.sendMessage(Text.literal("§aZone " + zone + " unlocked! Safe travels, pirate."), false);
-            switch (zone) {
-                case 1 -> AdvancementHelper.grant(player, "into_the_shallows");
-                case 2 -> AdvancementHelper.grant(player, "beyond_the_reef");
-                case 3 -> AdvancementHelper.grant(player, "the_pirate_seas");
-                case 4 -> AdvancementHelper.grant(player, "the_cursed_seas");
-                case 5 -> AdvancementHelper.grant(player, "the_abyss");
-            }
         }
     }
 
@@ -78,10 +71,9 @@ public class PlayerProgressionManager {
             // Zone 1 gate: must commission a ship at the port first
             applyWaveEffect(player, "§9Commission a ship at the port — you can't brave the open seas alone!");
         } else if (currentZone == 2) {
-            // Zone 2 uses wave deterrent — Seafarer's Token grants temporary access
-            if (!hasSeafarersToken(player)) {
-                applyWaveEffect(player, "§9Violent waves push you back!");
-            }
+            // Zone 2 uses wave deterrent. The Seafarer's Token no longer lets you through (2026-10-01): zones open only
+            // through the boss chain; the token is becoming a rare late-game currency instead.
+            applyWaveEffect(player, "§9Violent waves push you back!");
         } else {
             // Zones 3+ still teleport back
             pushBackToZone(player, unlocked);

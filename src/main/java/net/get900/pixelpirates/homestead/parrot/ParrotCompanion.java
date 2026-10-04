@@ -51,6 +51,26 @@ public final class ParrotCompanion {
 
     private static boolean isParrot(NbtCompound n) { return n != null && "minecraft:parrot".equals(n.getString("id")); }
 
+    /** Phase 4: your ACTIVE parrot - only one at a time gives its type ability: the left shoulder's, else the right's,
+     *  else the nearest of your parrots following you (tamed, not sitting) within 16. Its type id, or null for none. */
+    public static String activeType(PlayerEntity p) {
+        String t = ParrotCollection.type(p.getShoulderEntityLeft());
+        if (t == null) t = ParrotCollection.type(p.getShoulderEntityRight());
+        if (t != null) return t;
+        net.minecraft.entity.passive.ParrotEntity f = follower(p);
+        return f == null ? null : ParrotTypes.of(f).id();
+    }
+
+    /** The nearest of the player's own parrots following them (not sitting) within 16, or null. */
+    public static net.minecraft.entity.passive.ParrotEntity follower(PlayerEntity p) {
+        return p.getWorld().getEntitiesByClass(net.minecraft.entity.passive.ParrotEntity.class, p.getBoundingBox().expand(16),
+                        b -> b.isAlive() && b.isTamed() && p.getUuid().equals(b.getOwnerUuid()) && !b.isSitting())
+                .stream().min(java.util.Comparator.comparingDouble(b -> b.squaredDistanceTo(p))).orElse(null);
+    }
+
+    /** The player's active parrot is of this type (ParrotTypes id). */
+    public static boolean active(PlayerEntity p, String type) { return type.equals(activeType(p)); }
+
     public static void register() {
         // wild parrots in the tropical island jungle (CREATURE is the parrot's own group; its canSpawn needs no darkness)
         net.fabricmc.fabric.api.biome.v1.BiomeModifications.addSpawn(
@@ -59,8 +79,13 @@ public final class ParrotCompanion {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             long t = server.getTicks();
             for (ServerPlayerEntity p : server.getPlayerManager().getPlayerList()) {
+                if (t % 40 == 5 && active(p, "ember_macaw")) {                           // EMBER MACAW: fire resistance
+                    var fr = p.getStatusEffect(StatusEffects.FIRE_RESISTANCE);
+                    if (fr == null || fr.getDuration() < 100) p.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 220, 0, true, false, true));
+                }
                 if (!hasParrot(p)) {
                     SNEAK.remove(p.getUuid());
+                    if (t % 10 == 3 && active(p, "cockatoo")) lookout(p, t);             // a following cockatoo keeps watch too
                     continue;
                 }
                 setDown(p);
@@ -88,7 +113,8 @@ public final class ParrotCompanion {
     private static void lookout(ServerPlayerEntity p, long t) {
         Map<Integer, Long> warned = WARNED.computeIfAbsent(p.getUuid(), k -> new HashMap<>());
         warned.values().removeIf(v -> v < t - 400);
-        for (MobEntity m : p.getServerWorld().getEntitiesByClass(MobEntity.class, p.getBoundingBox().expand(14),
+        double range = active(p, "cockatoo") ? 24 : 14;                                    // COCKATOO: a louder lookout
+        for (MobEntity m : p.getServerWorld().getEntitiesByClass(MobEntity.class, p.getBoundingBox().expand(range),
                 e -> e instanceof HostileEntity && e.isAlive() && e.getTarget() == p)) {
             if (warned.containsKey(m.getId())) continue;
             warned.put(m.getId(), t);
@@ -100,6 +126,18 @@ public final class ParrotCompanion {
                     .append(m.getDisplayName().copy().formatted(Formatting.WHITE)), true);
             return;                                                         // one squawk at a time
         }
+    }
+
+    /** GILDED PARROT (phase 2): opening a loot chest for the first time, it may spot a few extra coins in it. */
+    public static void gildedFind(ServerPlayerEntity p, net.minecraft.inventory.Inventory chest) {
+        if (!active(p, "gilded_parrot") || p.getRandom().nextFloat() >= 0.35f) return;
+        int n = 3 + p.getRandom().nextInt(8);
+        net.minecraft.item.ItemStack coins = new net.minecraft.item.ItemStack(net.get900.pixelpirates.item.ModItems.COIN, n);
+        for (int i = 0; i < chest.size() && !coins.isEmpty(); i++)
+            if (chest.getStack(i).isEmpty()) { chest.setStack(i, coins); coins = net.minecraft.item.ItemStack.EMPTY; }
+        if (!coins.isEmpty()) p.giveItemStack(coins);
+        p.getServerWorld().playSound(null, p.getX(), p.getY() + 1.6, p.getZ(), SoundEvents.ENTITY_PARROT_AMBIENT, SoundCategory.NEUTRAL, 1f, 1.8f);
+        p.sendMessage(Text.literal("*SQUAWK* Shiny! Your Gilded Parrot spots " + n + " extra coins.").formatted(Formatting.GOLD), true);
     }
 
     private static void treasure(ServerPlayerEntity p) {

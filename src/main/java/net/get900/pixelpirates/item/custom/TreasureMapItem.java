@@ -23,9 +23,9 @@ import java.util.Random;
 public class TreasureMapItem extends Item {
 
     public enum Tier {
-        COMMON    ("Common",    5,  200, 1200),
-        RARE      ("Rare",      15, 2000, 4000),
-        LEGENDARY ("Legendary", 30, 4000, 6500);
+        COMMON    ("Common",    10, 200, 1200),
+        RARE      ("Rare",      30, 2000, 4000),
+        LEGENDARY ("Legendary", 75, 4000, 6500);
 
         public final String label;
         public final int cost;
@@ -70,7 +70,7 @@ public class TreasureMapItem extends Item {
 
         sw.setBlockState(chestPos, Blocks.CHEST.getDefaultState());
         if (sw.getBlockEntity(chestPos) instanceof ChestBlockEntity chest) {
-            fillChest(chest, rng);
+            fillChest(chest, rng, user);
         }
 
         // Direction hint — no exact coordinates
@@ -106,13 +106,14 @@ public class TreasureMapItem extends Item {
         return "Northwest";
     }
 
-    private void fillChest(ChestBlockEntity chest, Random rng) {
+    private void fillChest(ChestBlockEntity chest, Random rng, PlayerEntity user) {
         List<TreasureLoot.LootEntry> pool = switch (tier) {
             case COMMON    -> TreasureLoot.COMMON;
             case RARE      -> TreasureLoot.RARE;
             case LEGENDARY -> TreasureLoot.LEGENDARY;
         };
-        List<ItemStack> loot = TreasureLoot.roll(pool, rng);
+        List<ItemStack> loot = TreasureLoot.roll(pool, rng, user.getServer() == null ? java.util.Set.of()
+                : net.get900.pixelpirates.homestead.parrot.ParrotCollection.owned(user.getServer(), user.getUuid()));
         for (int i = 0; i < loot.size() && i < 27; i++) {
             chest.setStack(i, loot.get(i));
         }

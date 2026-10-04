@@ -26,7 +26,8 @@ import java.util.UUID;
 
 public class CannonBlockEntity extends BlockEntity {
 
-    private static final int    MAX_CHARGE      = 60;   // ticks to full power (3 s)
+    private static final int    MAX_CHARGE      = 60;   // ticks to full power (3 s), less with Quick Hands
+    private int chargeMax = MAX_CHARGE;                   // this charge's length (the charger's Quick Hands)
     private static final int    AUTO_FIRE_AT    = 100;  // ticks before auto-fire if player delays
     private static final double BASE_SPEED      = 2.5;  // blocks/tick at full power
     private static final double MIN_POWER       = 0.35; // fraction at zero charge
@@ -67,7 +68,7 @@ public class CannonBlockEntity extends BlockEntity {
             return;
         }
 
-        float progress = Math.min((float) be.chargeTick / MAX_CHARGE, 1.0f);
+        float progress = Math.min((float) be.chargeTick / be.chargeMax, 1.0f);
 
         // Action-bar charge indicator
         owner.sendMessage(buildBar(progress), true);
@@ -91,6 +92,7 @@ public class CannonBlockEntity extends BlockEntity {
     // ── Public API ────────────────────────────────────────────────────────────
 
     public void startCharge(PlayerEntity player) {
+        chargeMax = Math.max(20, (int) Math.round(MAX_CHARGE * net.get900.pixelpirates.world.SkillEffects.reloadMult(player)));
         chargeTick = 1;
         ownerUUID  = player.getUuid();
         markDirty();
@@ -99,7 +101,7 @@ public class CannonBlockEntity extends BlockEntity {
     public boolean isCharging() { return chargeTick > 0; }
 
     public float getCurrentPower() {
-        float t = Math.min((float) chargeTick / MAX_CHARGE, 1.0f);
+        float t = Math.min((float) chargeTick / chargeMax, 1.0f);
         return (float) (MIN_POWER + (1.0 - MIN_POWER) * t);
     }
 

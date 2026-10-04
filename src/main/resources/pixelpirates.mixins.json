@@ -5,6 +5,8 @@
   "mixins": [
     "ExampleMixin",
     "PathfindingCrashGuardMixin",
+    "LootChestXpMixin",
+    "AdvancementXpMixin",
     "PlayerProgressionMixin",
     "FeatureExclusionMixin",
     "HomesteadDropsMixin",
@@ -15,8 +17,15 @@
     "ArenaSpawnMixin",
     "BossArmorDamageMixin",
     "ParrotShoulderMixin",
+    "ParrotTypeMixin",
+    "CatCoatMixin",
+    "TameableOwnerMixin",
+    "MobPossessionMixin",
     "PlayerShoulderInvoker",
-    "SalvageHookBobberMixin"
+    "SalvageHookBobberMixin",
+    "ShipBuildLimitMixin",
+    "LootableContainerAccessor",
+    "SealedHoardLootMixin"
   ],
   "client": [
     "BackgroundRendererMixin",
@@ -24,7 +33,11 @@
     "HelmetHideHeadMixin",
     "ClientWorldParticleMixin",
     "LightmapFullbrightMixin",
-    "TipsyCameraMixin"
+    "TipsyCameraMixin",
+    "MerchantScreenSkinMixin",
+    "PressableWidgetSkinMixin",
+    "ParrotTextureMixin",
+    "ShoulderParrotTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

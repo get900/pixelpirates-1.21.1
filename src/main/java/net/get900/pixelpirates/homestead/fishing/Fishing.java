@@ -67,6 +67,8 @@ public final class Fishing {
                 var p5 = inBiomes(ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.PILLAR_SEA, ModBiomeKeys.MAW_DEPTHS);
                 table.modifyPools(pool -> pool
                         .with(fish(HomesteadItems.PARROTFISH, 40, p1)).with(fish(HomesteadItems.RED_SNAPPER, 35, p1)).with(fish(HomesteadItems.MAHI_MAHI, 25, p1))
+                        // the salted swimmer had no source at all - a common catch in the starter and reef seas
+                        .with(fish(net.get900.pixelpirates.item.ModItems.RAW_SALTED_SWIMMER, 35, p1)).with(fish(net.get900.pixelpirates.item.ModItems.RAW_SALTED_SWIMMER, 20, p2))
                         .with(fish(HomesteadItems.LIONFISH, 40, p2)).with(fish(HomesteadItems.MOONFISH, 30, p2))
                         .with(fish(HomesteadItems.EMBERFIN, 40, p3)).with(fish(HomesteadItems.LAVA_EEL, 30, p3))
                         .with(fish(HomesteadItems.GHOSTFIN, 40, p4)).with(fish(HomesteadItems.BONEFISH, 30, p4))

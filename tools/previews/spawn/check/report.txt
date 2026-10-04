@@ -1,0 +1,553 @@
+SPAWN ISLAND BUILD CHECK - 525 issue(s): {CLASH=4, DIAGONAL=366, FLOAT=134, SUPPORT=21}
+
+== (outside every building) (347)
+  DIAGONAL   -43  77  -158  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -59  75  -157  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -45  77  -157  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -41  77  -157  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -87  74  -156  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -61  75  -156  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -57  75  -156  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -22  77  -156  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -89  74  -155  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -85  74  -155  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -46  77  -155  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -40  77  -155  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -24  77  -155  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -20  77  -155  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -45  78  -155  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -99  73  -154  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -62  75  -154  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -56  75  -154  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -61  76  -154  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -44  78  -154  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -101  73  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -97  73  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -90  74  -153  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -84  74  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -89  75  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -60  76  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    71  76  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -45  77  -153  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -41  77  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -25  77  -153  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -19  77  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -43  78  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -24  78  -153  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -88  75  -152  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -61  75  -152  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -57  75  -152  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -59  76  -152  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    69  76  -152  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    73  76  -152  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -43  77  -152  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -23  78  -152  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -102  73  -151  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -96  73  -151  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -101  74  -151  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -89  74  -151  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -85  74  -151  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -87  75  -151  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -59  75  -151  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT      -24  77  -151  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -20  77  -151  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -22  78  -151  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -100  74  -150  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -87  74  -150  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       68  76  -150  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    74  76  -150  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -22  77  -150  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    69  77  -150  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -101  73  -149  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -97  73  -149  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -99  74  -149  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    70  77  -149  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -99  73  -148  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       69  76  -148  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    73  76  -148  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    71  77  -148  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       71  76  -147  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    35  82  -146  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    33  82  -145  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    37  82  -145  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -63  76  -144  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -29  78  -144  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    43  81  -144  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -65  76  -143  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -61  76  -143  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -31  78  -143  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -27  78  -143  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    41  81  -143  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    45  81  -143  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       32  82  -143  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    38  82  -143  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    33  83  -143  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    34  83  -142  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -66  76  -141  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -60  76  -141  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -65  77  -141  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -32  78  -141  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -26  78  -141  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -31  79  -141  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       40  81  -141  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    46  81  -141  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       33  82  -141  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    37  82  -141  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    41  82  -141  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    35  83  -141  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -64  77  -140  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -30  79  -140  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       35  82  -140  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    42  82  -140  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -65  76  -139  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -61  76  -139  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -63  77  -139  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -31  78  -139  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -27  78  -139  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -29  79  -139  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       41  81  -139  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    45  81  -139  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    43  82  -139  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -63  76  -138  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT      -29  78  -138  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   107  78  -138  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       43  81  -138  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   105  78  -137  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   109  78  -137  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      104  78  -135  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   110  78  -135  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   105  79  -135  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   106  79  -134  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   142  70  -133  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      105  78  -133  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   109  78  -133  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   107  79  -133  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    92  81  -133  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   140  70  -132  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   144  70  -132  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      107  78  -132  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    90  81  -132  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    94  81  -132  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   104  80  -131  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      139  70  -130  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   145  70  -130  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   140  71  -130  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   102  80  -130  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   106  80  -130  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       89  81  -130  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    95  81  -130  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    90  82  -130  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   141  71  -129  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    79  79  -129  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    91  82  -129  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      140  70  -128  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   144  70  -128  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   142  71  -128  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    77  79  -128  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    81  79  -128  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      101  80  -128  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   107  80  -128  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       90  81  -128  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    94  81  -128  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   102  81  -128  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    92  82  -128  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      142  70  -127  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       92  81  -127  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   103  81  -127  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       76  79  -126  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    82  79  -126  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    77  80  -126  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      102  80  -126  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   106  80  -126  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   104  81  -126  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   146  73  -125  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    78  80  -125  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      104  80  -125  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   144  73  -124  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   148  73  -124  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       77  79  -124  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    81  79  -124  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    79  80  -124  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    86  82  -124  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    60  83  -124  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       79  79  -123  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    84  82  -123  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    88  82  -123  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    58  83  -123  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    62  83  -123  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      143  73  -122  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   149  73  -122  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   144  74  -122  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   145  74  -121  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       83  82  -121  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    89  82  -121  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       57  83  -121  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    63  83  -121  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    84  83  -121  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    58  84  -121  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      144  73  -120  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   148  73  -120  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   146  74  -120  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    85  83  -120  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    59  84  -120  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      146  73  -119  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       84  82  -119  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    88  82  -119  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       58  83  -119  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    62  83  -119  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    86  83  -119  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    60  84  -119  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    95  86  -119  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       86  82  -118  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       60  83  -118  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    93  86  -118  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    97  86  -118  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   143  75  -112  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   145  75  -111  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -146  74  -110  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -148  74  -109  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -144  74  -109  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   146  75  -109  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   142  76  -108  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -149  74  -107  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL  -143  74  -107  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -148  75  -107  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   145  75  -107  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   143  76  -107  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -147  75  -106  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      143  75  -106  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT     -148  74  -105  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL  -144  74  -105  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -146  75  -105  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -146  74  -104  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -85  75   -84  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   123  75   -84  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -87  75   -83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -83  75   -83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   121  75   -83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   125  75   -83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -88  75   -81  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -82  75   -81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      120  75   -81  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   126  75   -81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -87  76   -81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   121  76   -81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -86  76   -80  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   122  76   -80  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -87  75   -79  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -83  75   -79  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      121  75   -79  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   125  75   -79  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -85  76   -79  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   123  76   -79  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -85  75   -78  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT      123  75   -78  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -99  75   -77  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -101  75   -76  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -97  75   -76  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -102  75   -74  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -96  75   -74  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -101  76   -74  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -100  76   -73  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -101  75   -72  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -97  75   -72  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -99  76   -72  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -99  75   -71  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   115  75   -70  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   113  75   -69  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   117  75   -69  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -83  73   -68  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -124  74   -68  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   124  75   -68  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -85  73   -67  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -81  73   -67  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -126  74   -67  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -122  74   -67  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      112  75   -67  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   118  75   -67  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   122  75   -67  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   126  75   -67  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   113  76   -67  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   114  76   -66  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -86  73   -65  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -80  73   -65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -127  74   -65  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL  -121  74   -65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -85  74   -65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -126  75   -65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      113  75   -65  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   117  75   -65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      121  75   -65  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   127  75   -65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   115  76   -65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   122  76   -65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -84  74   -64  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -125  75   -64  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      115  75   -64  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   123  76   -64  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -85  73   -63  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -81  73   -63  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -126  74   -63  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL  -122  74   -63  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -83  74   -63  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -124  75   -63  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      122  75   -63  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   126  75   -63  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   124  76   -63  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -83  73   -62  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT     -124  74   -62  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT      124  75   -62  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   116  73   -60  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   114  73   -59  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   118  73   -59  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      113  73   -57  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   119  73   -57  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   114  74   -57  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   115  74   -56  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      114  73   -55  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   118  73   -55  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   116  74   -55  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      116  73   -54  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    29  75   -37  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    27  75   -36  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    31  75   -36  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       26  75   -34  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    32  75   -34  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    27  76   -34  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    28  76   -33  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       27  75   -32  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    31  75   -32  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    29  76   -32  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       29  75   -31  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    93  71    -4  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    91  71    -3  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    95  71    -3  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       90  71    -1  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    96  71    -1  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    91  72    -1  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    92  72     0  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       91  71     1  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    95  71     1  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    93  72     1  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       93  71     2  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   125  72    20  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   126  72    22  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   125  72    24  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -131  72    36  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -133  72    37  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -129  72    37  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -134  72    39  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL  -128  72    39  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -133  73    39  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -132  73    40  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -133  72    41  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL  -129  72    41  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL  -131  73    41  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT     -131  72    42  1 block(s) touching nothing, e.g. pp:palm_leaves
+  SUPPORT      5  85  -138  lantern hangs from nothing
+  CLASH      -29  77  -122  North Paths <- Countryside : dirt_path -> dirt  x32
+  CLASH      -10  79  -122  North Paths <- Countryside : dirt_path -> air  x9
+  CLASH       -9  78  -122  North Paths <- Countryside : dirt -> grass_block  x6
+
+== #2 Terrace Stairs (11)
+  DIAGONAL   -13  72    -5  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -15  72    -4  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -11  72    -4  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -16  72    -2  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -10  72    -2  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -15  73    -2  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -14  73    -1  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -15  72     0  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -11  72     0  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -13  73     0  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -13  72     1  1 block(s) touching nothing, e.g. pp:palm_leaves
+
+== #3 Quay & Harbour (59)
+  DIAGONAL   -33  70    80  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -76  72    80  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -10  72    80  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -35  70    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -31  70    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL     8  71    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -78  72    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -74  72    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -12  72    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    -8  72    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -36  70    83  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -30  70    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -35  71    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT        7  71    83  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    13  71    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       25  71    83  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    31  71    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -79  72    83  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -73  72    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -13  72    83  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    -7  72    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL     8  72    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    26  72    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -78  73    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -12  73    83  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -34  71    84  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL     9  72    84  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    27  72    84  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -77  73    84  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -11  73    84  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -35  70    85  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -31  70    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -33  71    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT        8  71    85  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    12  71    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       26  71    85  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    30  71    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -78  72    85  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -74  72    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -12  72    85  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    -8  72    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    10  72    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    28  72    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -76  73    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -10  73    85  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -33  70    86  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       10  71    86  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       28  71    86  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT      -76  72    86  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT      -10  72    86  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    -1  76    89  1 block(s) joined only by an edge/corner, e.g. waxed_weathered_cut_copper
+  DIAGONAL     1  76    89  1 block(s) joined only by an edge/corner, e.g. waxed_weathered_cut_copper
+  FLOAT        0  77    89  1 block(s) touching nothing, e.g. waxed_weathered_cut_copper
+  DIAGONAL   -70  67    92  2 block(s) joined only by an edge/corner, e.g. spruce_planks
+  DIAGONAL   -70  71    92  2 block(s) joined only by an edge/corner, e.g. spruce_planks
+  DIAGONAL   -70  67    96  2 block(s) joined only by an edge/corner, e.g. spruce_planks
+  DIAGONAL   -70  71    96  2 block(s) joined only by an edge/corner, e.g. spruce_planks
+  SUPPORT     45  69    85  lantern hangs from nothing
+  CLASH       33  63    97  Quay & Harbour <- Harbour Boats : mossy_stone_bricks -> air  x1
+
+== #5 Shipwright Yard (10)
+  DIAGONAL    68  86    85  3 block(s) joined only by an edge/corner, e.g. blue_wall_banner
+  DIAGONAL    76  86    85  3 block(s) joined only by an edge/corner, e.g. blue_wall_banner
+  DIAGONAL    69  87    86  2 block(s) joined only by an edge/corner, e.g. dark_oak_planks
+  DIAGONAL    74  87    86  2 block(s) joined only by an edge/corner, e.g. dark_oak_planks
+  DIAGONAL    71  71   109  1 block(s) joined only by an edge/corner, e.g. stripped_spruce_log
+  DIAGONAL    73  71   109  1 block(s) joined only by an edge/corner, e.g. stripped_spruce_log
+  DIAGONAL    70  76   109  1 block(s) joined only by an edge/corner, e.g. stripped_spruce_log
+  DIAGONAL    74  76   109  1 block(s) joined only by an edge/corner, e.g. stripped_spruce_log
+  SUPPORT     66  82   104  lantern hangs from nothing
+  SUPPORT     78  82   104  lantern hangs from nothing
+
+== #6 Wavebreak Bazaar (30)
+  DIAGONAL   -24  73    16  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    24  73    16  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -26  74    19  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    22  74    19  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -25  74    20  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    23  74    20  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -26  73    21  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -22  73    21  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       22  73    21  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    26  73    21  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -24  74    21  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    24  74    21  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -24  73    22  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       24  73    22  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   -24  73    38  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    24  73    38  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -26  73    39  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -22  73    39  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    22  73    39  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    26  73    39  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -26  74    41  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    22  74    41  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -25  74    42  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    23  74    42  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   -24  74    43  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    24  74    43  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      -24  73    44  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT       24  73    44  1 block(s) touching nothing, e.g. pp:palm_leaves
+  SUPPORT    -19  69    18  pp:hanging_net hangs from nothing
+  SUPPORT    -13  69    18  pp:hanging_net hangs from nothing
+
+== #10 Bakery (9)
+  DIAGONAL    86  71    14  27 block(s) joined only by an edge/corner, e.g. yellow_wool
+  DIAGONAL   123  72    19  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   121  72    20  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      120  72    22  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   121  73    22  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   122  73    23  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      121  72    24  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   123  73    24  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      123  72    25  1 block(s) touching nothing, e.g. pp:palm_leaves
+
+== #12 Warehouse (east) (1)
+  SUPPORT    -42  69    64  lantern hangs from nothing
+
+== #14 Fish Market (17)
+  FLOAT       13  71    67  2 block(s) touching nothing, e.g. lantern
+  FLOAT       19  71    67  2 block(s) touching nothing, e.g. lantern
+  FLOAT       25  71    67  2 block(s) touching nothing, e.g. lantern
+  FLOAT       31  71    67  2 block(s) touching nothing, e.g. lantern
+  DIAGONAL    10  71    80  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    28  71    80  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    12  71    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    26  71    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    30  71    81  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  SUPPORT     19  71    69  pp:hanging_net hangs from nothing
+  SUPPORT     25  71    69  pp:hanging_net hangs from nothing
+  SUPPORT     31  71    69  pp:hanging_net hangs from nothing
+  SUPPORT     38  69    66  pp:hanging_net hangs from nothing
+  SUPPORT     39  69    66  pp:hanging_net hangs from nothing
+  SUPPORT     40  69    66  pp:hanging_net hangs from nothing
+  SUPPORT     41  69    66  pp:hanging_net hangs from nothing
+  SUPPORT     42  69    66  pp:hanging_net hangs from nothing
+
+== #15 Dock Office (12)
+  DIAGONAL   124  69    60  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   122  69    61  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   126  69    61  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      121  69    63  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   127  69    63  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   122  70    63  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   123  70    64  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      122  69    65  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   126  69    65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   124  70    65  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      124  69    66  1 block(s) touching nothing, e.g. pp:palm_leaves
+  SUPPORT    115  68    93  pp:dues_board on west has nothing behind it
+
+== #16 Chapel (1)
+  SUPPORT    -25  73   -49  lantern hangs from nothing
+
+== #17 Manor (3)
+  DIAGONAL    29  97   -71  26 block(s) joined only by an edge/corner, e.g. waxed_weathered_cut_copper
+  SUPPORT     24  80   -58  lantern hangs from nothing
+  SUPPORT     36  80   -58  lantern hangs from nothing
+
+== #19 Smithy (2)
+  SUPPORT     48  74   -27  potted_red_tulip stands on nothing
+  SUPPORT     48  74   -25  potted_azalea_bush stands on nothing
+
+== #42 Gatehouse (23)
+  FLOAT       92  86  -116  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    98  86  -116  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    93  87  -116  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    94  87  -115  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       93  86  -114  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL    97  86  -114  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL    95  87  -114  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT       95  86  -113  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   141  75  -111  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   132  79  -110  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      140  75  -109  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   141  76  -109  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   130  79  -109  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   134  79  -109  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      141  75  -107  1 block(s) touching nothing, e.g. pp:palm_leaves
+  FLOAT      129  79  -107  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   135  79  -107  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   130  80  -107  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   131  80  -106  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      130  79  -105  1 block(s) touching nothing, e.g. pp:palm_leaves
+  DIAGONAL   134  79  -105  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  DIAGONAL   132  80  -105  1 block(s) joined only by an edge/corner, e.g. pp:palm_leaves
+  FLOAT      132  79  -104  1 block(s) touching nothing, e.g. pp:palm_leaves
+

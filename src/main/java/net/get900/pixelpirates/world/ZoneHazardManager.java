@@ -52,15 +52,15 @@ public class ZoneHazardManager {
     }
 
     // Called every 40 ticks (2 seconds) — apply creeping madness effects without sanity amulet.
-    // Frozen Seeker reduces effect chance: level 1 = 50% skip, level 2 = 75% skip, level 3 = immune
+    // Frozen Seeker reduces effect chance: 10% skip per level, level X = immune (was 3 levels, 2026-10-01)
     private static void applyMadnessHazard(ServerPlayerEntity player) {
         if (hasItem(player, ModItems.SANITY_AMULET) || hasItem(player, ModItems.SPECTRAL_ANCHOR)) return;
         int frozenLevel = ModEnchantments.getFrozenSeekerLevel(player);
-        if (frozenLevel >= 3) return;
+        if (frozenLevel >= 10) return;
 
         Random rng = player.getRandom();
         // Check skip chance before applying any effects
-        float skipChance = frozenLevel == 1 ? 0.50f : frozenLevel == 2 ? 0.75f : 0.0f;
+        float skipChance = frozenLevel * 0.10f;
         if (rng.nextFloat() < skipChance) return;
 
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA,    100, 0, false, false));

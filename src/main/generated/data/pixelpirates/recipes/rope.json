@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "K": {
+      "item": "minecraft:kelp"
+    }
+  },
+  "pattern": [
+    "K",
+    "K",
+    "K"
+  ],
+  "result": {
+    "item": "pixelpirates:rope"
+  },
+  "show_notification": true
+}

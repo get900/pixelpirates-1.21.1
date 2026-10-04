@@ -37,7 +37,7 @@ public class GallowbrandItem extends SwordItem implements GeoItem {
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     public GallowbrandItem(Item.Settings settings) {
-        super(ToolMaterials.NETHERITE, 7, -3.0f, settings);
+        super(ToolMaterials.NETHERITE, 7, -2.7f, settings);       // 12 @1.3
     }
 
     @Override

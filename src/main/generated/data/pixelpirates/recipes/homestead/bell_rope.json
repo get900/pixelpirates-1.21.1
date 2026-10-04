@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "pixelpirates:rope"
+    },
+    "W": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "pattern": [
+    "R",
+    "R",
+    "W"
+  ],
+  "result": {
+    "item": "pixelpirates:bell_rope"
+  },
+  "show_notification": true
+}

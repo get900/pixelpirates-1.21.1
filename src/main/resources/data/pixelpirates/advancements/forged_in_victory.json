@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:rackham_blunderbuss"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.forged_in_victory.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.forged_in_victory.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_captain_rackham",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:rackham_blunderbuss",
+              "pixelpirates:serpentspine_longbow",
+              "pixelpirates:everburning_flail",
+              "pixelpirates:dutchmans_hand_cannon",
+              "pixelpirates:sunken_trident",
+              "pixelpirates:bloodfin_maw",
+              "pixelpirates:krakenmaw_harpoon_gun",
+              "pixelpirates:chainbreaker",
+              "pixelpirates:heartseeker",
+              "pixelpirates:tidefathers_wrath"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

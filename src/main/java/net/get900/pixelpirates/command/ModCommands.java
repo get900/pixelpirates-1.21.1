@@ -46,6 +46,16 @@ public class ModCommands {
                 .then(CommandManager.literal("off").executes(ctx -> setTestMode(ctx.getSource().getPlayerOrThrow(), god, false)));
     }
 
+    /** /pptest chronicle [on|off]: reveal every page of the Weathered Chronicle (and hand one over if missing). */
+    private static int chronicleToggle(ServerPlayerEntity p, Boolean want) {
+        boolean on = want != null ? want : !net.get900.pixelpirates.world.Chronicle.revealAll(p);
+        net.get900.pixelpirates.world.Chronicle.setRevealAll(p, on);
+        if (on && !p.getInventory().contains(new net.minecraft.item.ItemStack(net.get900.pixelpirates.item.ModItems.WEATHERED_CHRONICLE)))
+            p.getInventory().offerOrDrop(new net.minecraft.item.ItemStack(net.get900.pixelpirates.item.ModItems.WEATHERED_CHRONICLE));
+        p.sendMessage(Text.literal("[~] Chronicle: " + (on ? "every page revealed" : "only earned pages")).formatted(Formatting.YELLOW), false);
+        return 1;
+    }
+
     private static int setTestMode(ServerPlayerEntity p, boolean god, Boolean value) {
         boolean on = value != null ? value : !(god ? net.get900.pixelpirates.world.TestModes.god(p) : net.get900.pixelpirates.world.TestModes.clearSight(p));
         if (god) net.get900.pixelpirates.world.TestModes.setGod(p, on);
@@ -218,7 +228,39 @@ public class ModCommands {
         }
         String built = type;
         source.sendFeedback(() -> Text.literal("[~] Built " + built + " (phase " + t.phase() + ", depth " + depth + ") at " + origin.toShortString()), true);
+        if (net.get900.pixelpirates.world.dungeon.LayoutStructures.exists(type)) {                 // editable: remember it for /ppstruct
+            net.get900.pixelpirates.world.dungeon.StructureEditState.get(world.getServer()).add(type, world, origin, rot);
+            source.sendFeedback(() -> Text.literal("    Edit it by hand, then /ppstruct save to keep your changes in the " + built + " layout."), false);
+        }
         return 1;
+    }
+
+    /** /ppstruct - hand-editing layout structures (see LayoutStructures + StructureEditState). */
+    private static net.get900.pixelpirates.world.dungeon.StructureEditState.Instance structNear(ServerCommandSource source, String id) {
+        var s = net.get900.pixelpirates.world.dungeon.StructureEditState.get(source.getServer());
+        var i = s.nearest(source.getWorld(), BlockPos.ofFloored(source.getPosition()), id, 64);
+        if (i == null) source.sendError(Text.literal("No editable copy" + (id == null ? "" : " of " + id) + " within 64 blocks - build one with /ppdungeon <id> first."));
+        return i;
+    }
+
+    private static int structSave(ServerCommandSource source, String id) {
+        var i = structNear(source, id);
+        if (i == null) return 0;
+        var s = net.get900.pixelpirates.world.dungeon.StructureEditState.get(source.getServer());
+        try {
+            var r = net.get900.pixelpirates.world.dungeon.LayoutStructures.save(source.getWorld(), i.id(), i.origin(), i.rot(), s.beforeIn(i));
+            s.forgetEdits(i);
+            if (r.files().isEmpty()) { source.sendFeedback(() -> Text.literal("[~] " + i.id() + ": nothing changed - the layout already matches."), false); return 1; }
+            source.sendFeedback(() -> Text.literal("[~] Saved " + i.id() + ": " + r.changed() + " blocks changed, " + r.added() + " added"
+                    + (r.lootAdded() > 0 ? ", " + r.lootAdded() + " new loot container(s)" : "") + (r.lootLost() > 0 ? ", " + r.lootLost() + " loot container(s) removed" : "")
+                    + (r.withData() > 0 ? ", " + r.withData() + " with saved text/data" : "") + ". Every new " + i.id() + " uses it."), true);
+            for (var f : r.files()) source.sendFeedback(() -> Text.literal("    -> " + f), false);
+            return 1;
+        } catch (Exception e) {
+            net.get900.pixelpirates.PixelPirates.LOGGER.error("[Layout] save {} failed", i.id(), e);
+            source.sendError(Text.literal("Save failed: " + e.getMessage()));
+            return 0;
+        }
     }
 
     public static void register() {
@@ -227,9 +269,101 @@ public class ModCommands {
             // /ppdungeon <id>  — build any dungeon in Dungeons.ALL right here (testing; features have no
             // /locate). Origin = the block under you; the worldgen site checks are skipped. Short aliases
             // grotto/shrine/galleon still work.
+            // /ppstruct save [id] | restamp | forget | revert <id> | list - keep hand edits to a /ppdungeon copy in its layout
+            dispatcher.register(CommandManager.literal("ppstruct")
+                    .requires(source -> source.hasPermissionLevel(2))
+                    .then(CommandManager.literal("save")
+                            .executes(ctx -> structSave(ctx.getSource(), null))
+                            .then(CommandManager.argument("id", StringArgumentType.word())
+                                    .executes(ctx -> structSave(ctx.getSource(), StringArgumentType.getString(ctx, "id")))))
+                    .then(CommandManager.literal("restamp").executes(ctx -> {
+                        var i = structNear(ctx.getSource(), null);
+                        if (i == null) return 0;
+                        ServerWorld w = ctx.getSource().getWorld();
+                        net.get900.pixelpirates.world.dungeon.LayoutStructures.build(new net.get900.pixelpirates.world.dungeon.DungeonBuilder(w, i.origin(), i.rot(), w.random), i.id(), false);
+                        net.get900.pixelpirates.world.dungeon.StructureEditState.get(ctx.getSource().getServer()).forgetEdits(i);
+                        ctx.getSource().sendFeedback(() -> Text.literal("[~] Re-stamped " + i.id() + " from its layout (no mobs). Unsaved hand edits there are gone."), true);
+                        return 1;
+                    }))
+                    .then(CommandManager.literal("forget").executes(ctx -> {
+                        var i = structNear(ctx.getSource(), null);
+                        if (i == null) return 0;
+                        net.get900.pixelpirates.world.dungeon.StructureEditState.get(ctx.getSource().getServer()).remove(i);
+                        ctx.getSource().sendFeedback(() -> Text.literal("[~] No longer tracking the " + i.id() + " copy at " + i.origin().toShortString() + "."), false);
+                        return 1;
+                    }))
+                    .then(CommandManager.literal("revert").then(CommandManager.argument("id", StringArgumentType.word()).executes(ctx -> {
+                        String id = StringArgumentType.getString(ctx, "id");
+                        try {
+                            boolean had = net.get900.pixelpirates.world.dungeon.LayoutStructures.revert(id);
+                            ctx.getSource().sendFeedback(() -> Text.literal(had ? "[~] Removed this game's saved copy of " + id + " - the layout shipped with the mod applies again (in the dev workspace, undo the src/main/resources copy with git)."
+                                    : "[~] " + id + " has no saved copy in this game folder."), true);
+                            return 1;
+                        } catch (Exception e) { ctx.getSource().sendError(Text.literal("Revert failed: " + e.getMessage())); return 0; }
+                    })))
+                    // /ppstruct export <id> - turn a code-built dungeon into a layout file (then switch its Dungeons.ALL builder)
+                    .then(CommandManager.literal("export").then(CommandManager.argument("id", StringArgumentType.word()).executes(ctx -> {
+                        String id = StringArgumentType.getString(ctx, "id");
+                        var t = net.get900.pixelpirates.world.dungeon.Dungeons.byId(id);
+                        if (t == null) { ctx.getSource().sendError(Text.literal("Unknown dungeon: " + id)); return 0; }
+                        if (net.get900.pixelpirates.world.dungeon.LayoutStructures.exists(id)) { ctx.getSource().sendError(Text.literal(id + " is already a layout - use /ppstruct save.")); return 0; }
+                        try {
+                            String name = Character.toUpperCase(id.charAt(0)) + id.substring(1).replace('_', ' ');
+                            var r = net.get900.pixelpirates.world.dungeon.LayoutExport.export(t, 0, name, "Exported from the old Java builder: y=0 = the site's ground surface, entrance toward -Z");
+                            ctx.getSource().sendFeedback(() -> Text.literal("[~] Exported " + id + ": " + r.cells() + " cells, " + r.loot() + " loot, " + r.spawners() + " spawners, "
+                                    + r.mobs() + " mobs" + (r.clipped() > 0 ? ", " + r.clipped() + " writes beyond +-" + net.get900.pixelpirates.world.dungeon.DungeonBuilder.MAX_REACH + " dropped" : "")), true);
+                            for (var f : r.files()) ctx.getSource().sendFeedback(() -> Text.literal("    -> " + f), false);
+                            return 1;
+                        } catch (Exception e) {
+                            net.get900.pixelpirates.PixelPirates.LOGGER.error("[Layout] export {} failed", id, e);
+                            ctx.getSource().sendError(Text.literal("Export failed: " + e));
+                            return 0;
+                        }
+                    })))
+                    .then(CommandManager.literal("list").executes(ctx -> {
+                        var all = net.get900.pixelpirates.world.dungeon.StructureEditState.get(ctx.getSource().getServer()).instances();
+                        StringBuilder ids = new StringBuilder();
+                        for (var t : net.get900.pixelpirates.world.dungeon.Dungeons.ALL)
+                            if (net.get900.pixelpirates.world.dungeon.LayoutStructures.exists(t.id())) ids.append(ids.length() == 0 ? "" : ", ").append(t.id());
+                        ctx.getSource().sendFeedback(() -> Text.literal("[~] Editable structures: " + ids), false);
+                        if (all.isEmpty()) ctx.getSource().sendFeedback(() -> Text.literal("    No copies built yet - /ppdungeon <id> [rotation 0-3]."), false);
+                        for (var i : all) ctx.getSource().sendFeedback(() -> Text.literal("    " + i.id() + " at " + i.origin().toShortString() + " (" + i.dim() + ", rotation " + i.rot().ordinal() + ")"), false);
+                        return 1;
+                    })));
+
             dispatcher.register(CommandManager.literal("ppdungeon")
                     .requires(source -> source.hasPermissionLevel(2))
                     // /ppdungeon locate <id>  — nearest predicted site (same grid prediction worldgen uses)
+                    // /ppdungeon scan <id> <radius in chunks>  — op diagnostic: why a type finds (no) sites
+                    .then(CommandManager.literal("scan").then(CommandManager.argument("id", StringArgumentType.word())
+                            .then(CommandManager.argument("r", com.mojang.brigadier.arguments.IntegerArgumentType.integer(8, 400)).executes(ctx -> {
+                                ServerCommandSource source = ctx.getSource();
+                                var t = net.get900.pixelpirates.world.dungeon.Dungeons.byId(StringArgumentType.getString(ctx, "id"));
+                                if (t == null) { source.sendError(Text.literal("Unknown dungeon")); return 0; }
+                                ServerWorld world = source.getWorld();
+                                var gen = world.getChunkManager().getChunkGenerator();
+                                var pctx = new net.get900.pixelpirates.world.dungeon.DungeonPlacement.Context(world.getSeed(), gen,
+                                        world.getChunkManager().getNoiseConfig(), world, gen.getSeaLevel());
+                                BlockPos from = BlockPos.ofFloored(source.getPosition());
+                                String s = net.get900.pixelpirates.world.dungeon.DungeonPlacement.siteScan(t, pctx, from.getX() >> 4, from.getZ() >> 4,
+                                        com.mojang.brigadier.arguments.IntegerArgumentType.getInteger(ctx, "r"));
+                                source.sendFeedback(() -> Text.literal("[~] " + s), false);
+                                return 1;
+                            }))))
+                    // /ppdungeon coastscan <radius in chunks>  — op diagnostic for COAST placement tuning
+                    .then(CommandManager.literal("coastscan").then(CommandManager.argument("r", com.mojang.brigadier.arguments.IntegerArgumentType.integer(8, 400))
+                            .executes(ctx -> {
+                                ServerCommandSource source = ctx.getSource();
+                                ServerWorld world = source.getWorld();
+                                var gen = world.getChunkManager().getChunkGenerator();
+                                var pctx = new net.get900.pixelpirates.world.dungeon.DungeonPlacement.Context(world.getSeed(), gen,
+                                        world.getChunkManager().getNoiseConfig(), world, gen.getSeaLevel());
+                                BlockPos from = BlockPos.ofFloored(source.getPosition());
+                                String s = net.get900.pixelpirates.world.dungeon.DungeonPlacement.coastScan(pctx, from.getX() >> 4, from.getZ() >> 4,
+                                        com.mojang.brigadier.arguments.IntegerArgumentType.getInteger(ctx, "r"));
+                                source.sendFeedback(() -> Text.literal("[~] " + s), false);
+                                return 1;
+                            })))
                     .then(CommandManager.literal("locate")
                             .then(CommandManager.argument("id", StringArgumentType.word())
                                     .suggests((c, sb) -> { for (var t : net.get900.pixelpirates.world.dungeon.Dungeons.ALL) sb.suggest(t.id()); return sb.buildFuture(); })
@@ -271,13 +405,19 @@ public class ModCommands {
                         net.get900.pixelpirates.world.TestModes.setGod(p, true);
                         net.get900.pixelpirates.world.TestModes.setClearSight(p, true);
                         giveSlayer(p);
-                        p.sendMessage(Text.literal("[~] Test kit: god mode ON, clear sight ON, Boss Slayer given").formatted(Formatting.GREEN), false);
+                        net.get900.pixelpirates.world.Chronicle.setRevealAll(p, true);
+                        p.sendMessage(Text.literal("[~] Test kit: god mode ON, clear sight ON, Boss Slayer given, every Chronicle page revealed").formatted(Formatting.GREEN), false);
                         return 1;
                     }))
+                    .then(CommandManager.literal("chronicle")
+                            .executes(ctx -> chronicleToggle(ctx.getSource().getPlayerOrThrow(), null))
+                            .then(CommandManager.literal("on").executes(ctx -> chronicleToggle(ctx.getSource().getPlayerOrThrow(), true)))
+                            .then(CommandManager.literal("off").executes(ctx -> chronicleToggle(ctx.getSource().getPlayerOrThrow(), false))))
                     .then(CommandManager.literal("status").executes(ctx -> {
                         ServerPlayerEntity p = ctx.getSource().getPlayerOrThrow();
                         p.sendMessage(Text.literal("[~] god: " + (net.get900.pixelpirates.world.TestModes.god(p) ? "ON" : "off")
-                                + "   clearsight: " + (net.get900.pixelpirates.world.TestModes.clearSight(p) ? "ON" : "off")).formatted(Formatting.YELLOW), false);
+                                + "   clearsight: " + (net.get900.pixelpirates.world.TestModes.clearSight(p) ? "ON" : "off")
+                                + "   chronicle: " + (net.get900.pixelpirates.world.Chronicle.revealAll(p) ? "ALL" : "earned")).formatted(Formatting.YELLOW), false);
                         return 1;
                     })));
 
@@ -291,6 +431,305 @@ public class ModCommands {
             dispatcher.register(CommandManager.literal("pparmortest").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
                 for (String line : net.get900.pixelpirates.item.BossArmor.test(ctx.getSource().getWorld(), ctx.getSource().getPosition()))
                     ctx.getSource().sendFeedback(() -> Text.literal(line), false);
+                return 1;
+            }));
+
+            // /ppskills level <n> | learn <key> | reset  (op) - test the pirate skill tree (world/PirateLevelManager)
+            dispatcher.register(CommandManager.literal("ppskills").requires(src -> src.hasPermissionLevel(2))
+                    .then(CommandManager.literal("level").then(CommandManager.argument("n", com.mojang.brigadier.arguments.IntegerArgumentType.integer(1, 50))
+                            .executes(ctx -> {
+                                var p = ctx.getSource().getPlayerOrThrow();
+                                var comp = (net.get900.pixelpirates.util.PlayerProgressionComponent) p;
+                                int n = com.mojang.brigadier.arguments.IntegerArgumentType.getInteger(ctx, "n");
+                                int spent = 0;
+                                for (int i = 0; i < net.get900.pixelpirates.world.PirateLevelingSystem.ALL_SKILLS.size(); i++) spent += comp.pp_getSkillLevel(i);
+                                comp.pp_setPirateLevel(n);
+                                comp.pp_setPirateXp(0);
+                                comp.pp_setSkillPoints(Math.max(0, net.get900.pixelpirates.world.PirateLevelManager.pointsEarned(n) - spent));
+                                net.get900.pixelpirates.world.PirateLevelManager.applyAttributeModifiers(p);
+                                net.get900.pixelpirates.world.PirateLevelManager.syncToClient(p);
+                                ctx.getSource().sendFeedback(() -> Text.literal("Pirate level " + n + ", " + comp.pp_getSkillPoints() + " points free"), false);
+                                return 1;
+                            })))
+                    .then(CommandManager.literal("learn").then(CommandManager.argument("key", com.mojang.brigadier.arguments.StringArgumentType.word())
+                            .executes(ctx -> net.get900.pixelpirates.world.PirateLevelManager.spendSkillPoint(ctx.getSource().getPlayerOrThrow(),
+                                    com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "key")) ? 1 : 0)))
+                    .then(CommandManager.literal("reset").executes(ctx -> {
+                        var p = ctx.getSource().getPlayerOrThrow();
+                        var comp = (net.get900.pixelpirates.util.PlayerProgressionComponent) p;
+                        int spent = 0;
+                        for (int i = 0; i < net.get900.pixelpirates.world.PirateLevelingSystem.ALL_SKILLS.size(); i++) { spent += comp.pp_getSkillLevel(i); comp.pp_setSkillLevel(i, 0); }
+                        comp.pp_setSkillPoints(comp.pp_getSkillPoints() + spent);
+                        net.get900.pixelpirates.world.PirateLevelManager.applyAttributeModifiers(p);
+                        net.get900.pixelpirates.world.PirateLevelManager.syncToClient(p);
+                        return 1;
+                    })));
+
+            // /pptabs - log every creative tab's contents (item/ModCreativeTabs)
+            dispatcher.register(CommandManager.literal("pptabs").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
+                for (String line : net.get900.pixelpirates.item.ModCreativeTabs.dump()) {
+                    net.get900.pixelpirates.PixelPirates.LOGGER.info("[tabs] " + line);
+                    ctx.getSource().sendFeedback(() -> Text.literal(line.substring(0, Math.min(200, line.length())) + "..."), false);
+                }
+                return 1;
+            }));
+
+            // /ppisland list | restamp <building|number|all> | tp <building|number> - the spawn island overhaul tools: re-stamp a
+            // building from PortCityLayout into this world after editing it (labels = PortCityLayout.buildings(), the same
+            // names/numbers as tools/previews/spawn/wavebreak_map.png)
+            dispatcher.register(CommandManager.literal("ppisland").requires(src -> src.hasPermissionLevel(2))
+                .then(CommandManager.literal("list").executes(ctx -> {
+                    int i = 0;
+                    for (var e : net.get900.pixelpirates.world.gen.PortCityLayout.buildings().entrySet()) {
+                        int[] b = e.getValue();
+                        int n = ++i;
+                        ctx.getSource().sendFeedback(() -> Text.literal(n + ". " + e.getKey() + "  (x " + b[0] + ".." + b[2] + ", z " + b[1] + ".." + b[3] + ")"), false);
+                    }
+                    return 1;
+                }))
+                .then(CommandManager.literal("restamp").then(CommandManager.argument("building", com.mojang.brigadier.arguments.StringArgumentType.greedyString())
+                    .suggests((c, sb) -> net.minecraft.command.CommandSource.suggestMatching(islandNames(), sb))
+                    .executes(ctx -> {
+                        var w = ctx.getSource().getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
+                        if (w == null) return 0;
+                        String q = com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "building");
+                        int[] b = q.equalsIgnoreCase("all") ? new int[]{-200, -200, 200, 200} : islandBox(q);
+                        if (b == null) { ctx.getSource().sendError(Text.literal("No building '" + q + "' - see /ppisland list")); return 0; }
+                        int n = net.get900.pixelpirates.world.gen.SpawnIslandFeature.restamp(w, b[0] - 3, b[1] - 3, b[2] + 3, b[3] + 3);
+                        ctx.getSource().sendFeedback(() -> Text.literal("Restamped " + q + ": " + n + " blocks changed"), true);
+                        return 1;
+                    })))
+                // capture | edits | discard - hand edits made in game, saved over the plan (world/gen/IslandEdits)
+                .then(CommandManager.literal("capture").then(CommandManager.argument("building", com.mojang.brigadier.arguments.StringArgumentType.greedyString())
+                    .suggests((c, sb) -> net.minecraft.command.CommandSource.suggestMatching(islandNames(), sb))
+                    .executes(ctx -> islandEdit(ctx.getSource(), com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "building"), "capture"))))
+                .then(CommandManager.literal("edits").then(CommandManager.argument("building", com.mojang.brigadier.arguments.StringArgumentType.greedyString())
+                    .suggests((c, sb) -> net.minecraft.command.CommandSource.suggestMatching(islandNames(), sb))
+                    .executes(ctx -> islandEdit(ctx.getSource(), com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "building"), "edits"))))
+                .then(CommandManager.literal("discard").then(CommandManager.argument("building", com.mojang.brigadier.arguments.StringArgumentType.greedyString())
+                    .suggests((c, sb) -> net.minecraft.command.CommandSource.suggestMatching(islandNames(), sb))
+                    .executes(ctx -> islandEdit(ctx.getSource(), com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "building"), "discard"))))
+                .then(CommandManager.literal("tp").then(CommandManager.argument("building", com.mojang.brigadier.arguments.StringArgumentType.greedyString())
+                    .suggests((c, sb) -> net.minecraft.command.CommandSource.suggestMatching(islandNames(), sb))
+                    .executes(ctx -> {
+                        var w = ctx.getSource().getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
+                        ServerPlayerEntity p = ctx.getSource().getPlayerOrThrow();
+                        int[] b = islandBox(com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "building"));
+                        if (w == null || b == null) { ctx.getSource().sendError(Text.literal("No such building - see /ppisland list")); return 0; }
+                        double x = (b[0] + b[2]) / 2.0 + 0.5, z = b[3] + 8.5;     // stand south of it, looking north at it
+                        int y = w.getTopY(net.minecraft.world.Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (int) x, (int) z);
+                        p.teleport(w, x, y + 1, z, 180f, 15f);
+                        return 1;
+                    }))));
+
+            // /ppmarket rebuild|seat - re-stamp the Wavebreak Bazaar (PortCityLayout.marketSquare) into this world and seat
+            // every keeper behind his booth (homestead/trade/PortTraders)
+            dispatcher.register(CommandManager.literal("ppmarket").requires(src -> src.hasPermissionLevel(2))
+                .then(CommandManager.literal("rebuild").executes(ctx -> {
+                    var w = ctx.getSource().getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
+                    if (w == null) return 0;
+                    int n = net.get900.pixelpirates.world.gen.SpawnIslandFeature.restamp(w, -48, 8, 48, 49);
+                    int s = net.get900.pixelpirates.homestead.trade.PortTraders.seatAll(w);
+                    ctx.getSource().sendFeedback(() -> Text.literal("Market rebuilt: " + n + " blocks, " + s + " keepers spawned, the rest moved to their booths"), true);
+                    return 1;
+                }))
+                .then(CommandManager.literal("seat").executes(ctx -> {
+                    var w = ctx.getSource().getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
+                    if (w == null) return 0;
+                    int s = net.get900.pixelpirates.homestead.trade.PortTraders.seatAll(w);
+                    ctx.getSource().sendFeedback(() -> Text.literal("Keepers seated (" + s + " spawned)"), true);
+                    return 1;
+                })));
+
+            // /ppharbour status | expire - the harbour dues watch (homestead/harbour/HarbourDues)
+            dispatcher.register(CommandManager.literal("ppharbour").requires(src -> src.hasPermissionLevel(2))
+                .then(CommandManager.literal("status").executes(ctx -> {
+                    var lines = net.get900.pixelpirates.homestead.harbour.HarbourDues.report(ctx.getSource().getServer());
+                    if (lines.isEmpty()) ctx.getSource().sendFeedback(() -> Text.literal("[Harbour] no player ships on the books"), false);
+                    for (String l : lines) ctx.getSource().sendFeedback(() -> Text.literal("[Harbour] " + l), false);
+                    return 1;
+                }))
+                .then(CommandManager.literal("expire").executes(ctx -> {
+                    var p = ctx.getSource().getPlayerOrThrow();
+                    Long ship = net.get900.pixelpirates.world.ShipRegistryState.get(ctx.getSource().getServer().getOverworld()).getOwnedShip(p.getUuid());
+                    if (ship == null) return 0;
+                    net.get900.pixelpirates.homestead.harbour.HarbourDues.get(ctx.getSource().getServer()).debugExpire(ship);
+                    ctx.getSource().sendFeedback(() -> Text.literal("[Harbour] your permit is gone and the grace used up - the watch will chain the helm on its next pass if you lie in the harbour"), false);
+                    return 1;
+                })));
+
+            // /pptavern liars <pos> <regulars> - a bots-only Liar's Dice game at pos (places a table there if needed);
+            // /pptavern status <pos> - the table's state (server soak test for the tavern games)
+            dispatcher.register(CommandManager.literal("pptavern").requires(src -> src.hasPermissionLevel(2))
+                .then(CommandManager.literal("liars").then(CommandManager.argument("pos", net.minecraft.command.argument.BlockPosArgumentType.blockPos())
+                    .then(CommandManager.argument("regulars", com.mojang.brigadier.arguments.IntegerArgumentType.integer(2, 6)).executes(ctx -> {
+                        var w = ctx.getSource().getWorld();
+                        var pos = net.minecraft.command.argument.BlockPosArgumentType.getLoadedBlockPos(ctx, "pos");
+                        if (!(w.getBlockEntity(pos) instanceof net.get900.pixelpirates.homestead.tavern.LiarsDiceBlockEntity))
+                            w.setBlockState(pos, net.get900.pixelpirates.homestead.HomesteadBlocks.LIARS_DICE_TABLE.getDefaultState(), 3);
+                        if (!(w.getBlockEntity(pos) instanceof net.get900.pixelpirates.homestead.tavern.LiarsDiceBlockEntity be)) return 0;
+                        be.debugBots(com.mojang.brigadier.arguments.IntegerArgumentType.getInteger(ctx, "regulars"));
+                        ctx.getSource().sendFeedback(() -> Text.literal("[Tavern] " + be.debugStatus()), false);
+                        return 1;
+                    }))))
+                .then(CommandManager.literal("status").then(CommandManager.argument("pos", net.minecraft.command.argument.BlockPosArgumentType.blockPos()).executes(ctx -> {
+                    var be = ctx.getSource().getWorld().getBlockEntity(net.minecraft.command.argument.BlockPosArgumentType.getLoadedBlockPos(ctx, "pos"));
+                    String line = be instanceof net.get900.pixelpirates.homestead.tavern.LiarsDiceBlockEntity l ? l.debugStatus() : "no Liar's Dice table there";
+                    ctx.getSource().sendFeedback(() -> Text.literal("[Tavern] " + line), false);
+                    return 1;
+                }))));
+
+            // /ppweapontest - every relic weapon's attacks from a fake player on a row of zombies (item/RelicWeapons#selfTest)
+            dispatcher.register(CommandManager.literal("ppweapontest").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
+                var src = ctx.getSource();
+                net.get900.pixelpirates.item.RelicWeapons.selfTest(src.getWorld(), src.getPosition(),
+                        line -> src.sendFeedback(() -> Text.literal(line), false));
+                return 1;
+            }));
+
+            // /ppedittest - a fake player changes three spots on the island, then /ppisland capture all (world/gen/IslandEditSelfTest)
+            dispatcher.register(CommandManager.literal("ppedittest").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
+                var src = ctx.getSource();
+                var w = src.getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
+                try { net.get900.pixelpirates.world.gen.IslandEditSelfTest.run(w, line -> src.sendFeedback(() -> Text.literal(line), false)); }
+                catch (java.io.IOException e) { src.sendError(Text.literal(e.getMessage())); }
+                return 1;
+            }));
+
+            // /ppaviary - turn the parrot keeper's aviary stock over now (townhouse #25): 4 new birds drawn by rarity (homestead/parrot/Aviary)
+            dispatcher.register(CommandManager.literal("ppaviary").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
+                var w = ctx.getSource().getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
+                var got = w == null ? java.util.List.<net.get900.pixelpirates.homestead.parrot.ParrotTypes.PType>of() : net.get900.pixelpirates.homestead.parrot.Aviary.restock(w);
+                StringBuilder sb = new StringBuilder("Aviary restocked:");
+                for (var b : got) sb.append(" ").append(b.name()).append(" (").append(b.tier().label).append(")").append(",");
+                String msg = got.isEmpty() ? "Aviary restocked: nothing (port world not loaded)" : sb.substring(0, sb.length() - 1);
+                ctx.getSource().sendFeedback(() -> Text.literal(msg), true);
+                return 1;
+            }));
+
+            // /ppcattery - turn the ship's-cat keeper's stock over now (townhouse #36): 4 new cats drawn by rarity (homestead/cat/Cattery)
+            // /pplivery check = every livery's block ids exist; /pplivery apply <id|original> = repaint your own ship, free (testing)
+            dispatcher.register(CommandManager.literal("pplivery").requires(src -> src.hasPermissionLevel(2))
+                    .then(CommandManager.literal("check").executes(ctx -> {
+                        int bad = 0;
+                        for (var l : net.get900.pixelpirates.world.livery.Livery.ALL) {
+                            for (String id : new String[]{l.hull().planks(), l.hull().stairs(), l.hull().slab(), l.hull().fence(), l.deck().planks(), l.deck().slab(),
+                                    l.trim(), l.band(), l.band2(), l.gilt(), l.sail(), l.sail2(), l.emblem(), l.light()}) {
+                                if (id == null) continue;
+                                if (net.minecraft.registry.Registries.BLOCK.get(new net.minecraft.util.Identifier(id)) == net.minecraft.block.Blocks.AIR) {
+                                    bad++;
+                                    String msg = "[livery] " + l.id() + ": unknown block " + id;
+                                    ctx.getSource().sendFeedback(() -> Text.literal(msg), false);
+                                }
+                            }
+                        }
+                        int b = bad;
+                        ctx.getSource().sendFeedback(() -> Text.literal("[livery] " + net.get900.pixelpirates.world.livery.Livery.ALL.size() + " liveries, " + b + " unknown block id(s)"), false);
+                        return 1;
+                    }))
+                    .then(CommandManager.literal("apply").then(CommandManager.argument("id", StringArgumentType.word()).executes(ctx -> {
+                        ServerPlayerEntity p = ctx.getSource().getPlayerOrThrow();
+                        Long ship = ShipRegistryState.get(p.getServer().getOverworld()).getOwnedShip(p.getUuid());
+                        if (ship == null) { ctx.getSource().sendError(Text.literal("You own no ship.")); return 0; }
+                        String id = StringArgumentType.getString(ctx, "id");
+                        var vs = org.valkyrienskies.mod.common.VSGameUtilsKt.getShipObjectWorld(p.getServerWorld()).getLoadedShips().getById(ship);
+                        if (vs == null) { ctx.getSource().sendError(Text.literal("Your ship is not loaded.")); return 0; }
+                        var l = id.equals("original") ? null : net.get900.pixelpirates.world.livery.Livery.byId(id);
+                        if (l == null && !id.equals("original")) { ctx.getSource().sendError(Text.literal("Unknown livery " + id)); return 0; }
+                        int n = net.get900.pixelpirates.world.livery.Liveries.repaint(p.getServerWorld(), vs,
+                                net.get900.pixelpirates.world.livery.LiveryState.get(p.getServer()), l);
+                        ctx.getSource().sendFeedback(() -> Text.literal("[livery] " + id + ": " + n + " blocks repainted"), false);
+                        return 1;
+                    })))
+                    .then(CommandManager.literal("spawn").then(CommandManager.argument("blueprint", StringArgumentType.word()).executes(ctx -> {
+                        ServerPlayerEntity p = ctx.getSource().getPlayerOrThrow();
+                        String name = StringArgumentType.getString(ctx, "blueprint");
+                        var look = p.getRotationVec(1.0f);
+                        BlockPos origin = BlockPos.ofFloored(p.getX() + look.x * 30, 75, p.getZ() + look.z * 30);
+                        try {
+                            var ship = net.get900.pixelpirates.world.ShipSpawner.spawn(p.getServerWorld(), ShipSchematic.load(name), origin);
+                            var reg = ShipRegistryState.get(p.getServer().getOverworld());
+                            reg.clearOwnership(p.getUuid());
+                            reg.saveMastCount(ship.getId(), net.get900.pixelpirates.world.ShipSteeringManager.MAST_COUNTS.getOrDefault(ship.getId(), 1));
+                            reg.setOwnership(p.getUuid(), ship.getId());
+                            ctx.getSource().sendFeedback(() -> Text.literal("[livery] spawned your " + name + " (" + ship.getId() + ")"), false);
+                            return 1;
+                        } catch (Exception e) {
+                            ctx.getSource().sendError(Text.literal("Spawn failed: " + e.getMessage()));
+                            return 0;
+                        }
+                    })))
+                    .then(CommandManager.literal("near").then(CommandManager.argument("id", StringArgumentType.word()).executes(ctx -> {
+                        ServerCommandSource src = ctx.getSource();
+                        ServerWorld w = src.getWorld();
+                        org.valkyrienskies.core.api.ships.ServerShip best = null; double bd = 200 * 200;
+                        for (var s : org.valkyrienskies.mod.common.VSGameUtilsKt.getShipObjectWorld(w).getLoadedShips()) {
+                            var q = s.getTransform().getPositionInWorld();
+                            double d = src.getPosition().squaredDistanceTo(q.x(), q.y(), q.z());
+                            if (d < bd) { bd = d; best = s; }
+                        }
+                        if (best == null) { src.sendError(Text.literal("No ship within 200 blocks.")); return 0; }
+                        String id = StringArgumentType.getString(ctx, "id");
+                        var l = id.equals("original") ? null : net.get900.pixelpirates.world.livery.Livery.byId(id);
+                        if (l == null && !id.equals("original")) { src.sendError(Text.literal("Unknown livery " + id)); return 0; }
+                        int n = net.get900.pixelpirates.world.livery.Liveries.repaint(w, best, net.get900.pixelpirates.world.livery.LiveryState.get(w.getServer()), l);
+                        src.sendFeedback(() -> Text.literal("[livery] " + id + ": " + n + " blocks repainted"), false);
+                        return 1;
+                    }))));
+
+            dispatcher.register(CommandManager.literal("ppcattery").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
+                var w = ctx.getSource().getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
+                var got = w == null ? java.util.List.<net.get900.pixelpirates.homestead.cat.CatCoats.Coat>of() : net.get900.pixelpirates.homestead.cat.Cattery.restock(w);
+                StringBuilder sb = new StringBuilder("Cattery restocked:");
+                for (var c : got) sb.append(" ").append(c.name()).append(" (").append(c.tier().label).append("),");
+                String msg = got.isEmpty() ? "Cattery restocked: nothing (port world not loaded)" : sb.substring(0, sb.length() - 1);
+                ctx.getSource().sendFeedback(() -> Text.literal(msg), true);
+                return 1;
+            }));
+
+            // /ppcat <coat> - a tame cat in that coat at your feet (op; ship's cats test, homestead/cat/CatCoats)
+            dispatcher.register(CommandManager.literal("ppcat").requires(src -> src.hasPermissionLevel(2))
+                    .then(CommandManager.argument("coat", com.mojang.brigadier.arguments.StringArgumentType.word())
+                            .suggests((c, b) -> { for (var t : net.get900.pixelpirates.homestead.cat.CatCoats.ALL) b.suggest(t.id()); return b.buildFuture(); })
+                            .executes(ctx -> {
+                                var t = net.get900.pixelpirates.homestead.cat.CatCoats.byId(com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "coat"));
+                                var pl = ctx.getSource().getPlayerOrThrow();
+                                if (t == null) { ctx.getSource().sendError(Text.literal("No such cat coat")); return 0; }
+                                var c = net.minecraft.entity.EntityType.CAT.create(pl.getServerWorld());
+                                if (c == null) return 0;
+                                c.refreshPositionAndAngles(pl.getX(), pl.getY(), pl.getZ(), pl.getYaw(), 0f);
+                                net.get900.pixelpirates.homestead.cat.CatCoats.apply(c, t);
+                                c.setOwner(pl);
+                                c.setPersistent();
+                                pl.getServerWorld().spawnEntity(c);
+                                ctx.getSource().sendFeedback(() -> Text.literal("[~] A " + t.name() + " (" + t.tier().label + ") - your ship's cat"), false);
+                                return 1;
+                            })));
+
+            // /ppparrot <type> - a tame parrot of that type at your feet (op; parrot types phase 1 test, homestead/parrot/ParrotTypes)
+            dispatcher.register(CommandManager.literal("ppparrot").requires(src -> src.hasPermissionLevel(2))
+                    .then(CommandManager.argument("type", com.mojang.brigadier.arguments.StringArgumentType.word())
+                            .suggests((c, b) -> { for (var t : net.get900.pixelpirates.homestead.parrot.ParrotTypes.ALL) b.suggest(t.id()); return b.buildFuture(); })
+                            .executes(ctx -> {
+                                var t = net.get900.pixelpirates.homestead.parrot.ParrotTypes.byId(com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "type"));
+                                var pl = ctx.getSource().getPlayerOrThrow();
+                                if (t == null) { ctx.getSource().sendError(Text.literal("No such parrot type")); return 0; }
+                                var p = net.minecraft.entity.EntityType.PARROT.create(pl.getServerWorld());
+                                if (p == null) return 0;
+                                p.refreshPositionAndAngles(pl.getX(), pl.getY(), pl.getZ(), pl.getYaw(), 0f);
+                                net.get900.pixelpirates.homestead.parrot.ParrotTypes.apply(p, t);
+                                p.setOwner(pl);
+                                p.setPersistent();
+                                pl.getServerWorld().spawnEntity(p);
+                                ctx.getSource().sendFeedback(() -> Text.literal("Here's a " + t.name() + " (" + t.tier().label + ")"), false);
+                                return 1;
+                            })));
+
+            // /ppforgetest - a fake player runs every forging pattern, a mending and each forged weapon's ability (homestead/forge/ForgeSelfTest)
+            dispatcher.register(CommandManager.literal("ppforgetest").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
+                var src = ctx.getSource();
+                net.get900.pixelpirates.homestead.forge.ForgeSelfTest.run(src.getWorld(), net.minecraft.util.math.BlockPos.ofFloored(src.getPosition()),
+                        line -> src.sendFeedback(() -> Text.literal(line), false));
                 return 1;
             }));
 
@@ -681,6 +1120,58 @@ public class ModCommands {
                     )
             );
 
+            // ── /ppship place <blueprint> - stamp a blueprint UNASSEMBLED beside you (to look at, edit, re-save) ──
+            // Placed exactly as stored: helm at the origin, bow toward +Z (south), no rotation - so sneak-clicking its
+            // helm with a named Ship Blueprint saves it back the same way round.
+            dispatcher.register(CommandManager.literal("ppship")
+                    .requires(source -> source.hasPermissionLevel(2))
+                    .then(CommandManager.literal("place")
+                            .then(CommandManager.argument("name", com.mojang.brigadier.arguments.StringArgumentType.word())
+                                    .suggests((c, b) -> net.minecraft.command.CommandSource.suggestMatching(
+                                            net.get900.pixelpirates.world.ShipSchematic.listNames(), b))
+                                    .executes(ctx -> {
+                                        String name = com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "name");
+                                        ServerPlayerEntity p = ctx.getSource().getPlayerOrThrow();
+                                        net.get900.pixelpirates.world.ShipSchematic sc;
+                                        try { sc = net.get900.pixelpirates.world.ShipSchematic.load(name); }
+                                        catch (Exception e) { ctx.getSource().sendError(Text.literal(e.getMessage())); return 0; }
+                                        net.minecraft.util.math.BlockPos helm = p.getBlockPos().add(12, 0, 0);
+                                        for (var en : sc.getEntries())
+                                            p.getServerWorld().setBlockState(helm.add(en.relPos()),
+                                                    net.get900.pixelpirates.world.ShipSchematic.restoreState(en.stateNbt()), 3);
+                                        net.get900.pixelpirates.world.ShipCapture.recordPlace(p.getServerWorld(), name, helm, sc);
+                                        ctx.getSource().sendFeedback(() -> Text.literal("[~] Placed " + name + " with its helm at "
+                                                + helm.toShortString() + " (bow facing south / +Z). Edit it, then /ppship capture " + name
+                                                + " to save it (or sneak-click the helm to assemble).").formatted(Formatting.GREEN), false);
+                                        return 1;
+                                    })))
+                    .then(CommandManager.literal("remove")
+                            .then(CommandManager.argument("name", com.mojang.brigadier.arguments.StringArgumentType.word())
+                                    .suggests((c, b) -> net.minecraft.command.CommandSource.suggestMatching(
+                                            net.get900.pixelpirates.world.ShipSchematic.listNames(), b))
+                                    .executes(ctx -> {
+                                        String msg = net.get900.pixelpirates.world.ShipCapture.remove(ctx.getSource().getPlayerOrThrow(),
+                                                com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "name"));
+                                        ctx.getSource().sendFeedback(() -> Text.literal("[~] " + msg).formatted(Formatting.GREEN), false);
+                                        return 1;
+                                    })))
+                    // /ppship capture <name>: save the placed (unassembled) ship back as a blueprint - see world/ShipCapture
+                    .then(CommandManager.literal("capture")
+                            .then(CommandManager.argument("name", com.mojang.brigadier.arguments.StringArgumentType.word())
+                                    .suggests((c, b) -> net.minecraft.command.CommandSource.suggestMatching(
+                                            net.get900.pixelpirates.world.ShipSchematic.listNames(), b))
+                                    .executes(ctx -> {
+                                        String name = com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "name");
+                                        try {
+                                            String msg = net.get900.pixelpirates.world.ShipCapture.capture(ctx.getSource().getPlayerOrThrow(), name);
+                                            ctx.getSource().sendFeedback(() -> Text.literal("[~] " + msg).formatted(Formatting.GREEN), false);
+                                            return 1;
+                                        } catch (java.io.IOException e) {
+                                            ctx.getSource().sendError(Text.literal("Capture failed: " + e.getMessage()));
+                                            return 0;
+                                        }
+                                    }))));
+
             // ── /ppship hp [amount] ───────────────────────────────────────────
             dispatcher.register(CommandManager.literal("ppship")
                     .requires(source -> source.hasPermissionLevel(2))
@@ -707,6 +1198,27 @@ public class ModCommands {
                             )
                     )
             );
+
+            // ── /ppship upgrade <key> <level> - set a Shipwright refit on your ship (testing) ──
+            dispatcher.register(CommandManager.literal("ppship")
+                    .requires(source -> source.hasPermissionLevel(2))
+                    .then(CommandManager.literal("upgrade")
+                            .then(CommandManager.argument("key", com.mojang.brigadier.arguments.StringArgumentType.word())
+                                    .suggests((c, b) -> net.minecraft.command.CommandSource.suggestMatching(
+                                            net.get900.pixelpirates.world.ShipUpgrades.ALL.stream().map(net.get900.pixelpirates.world.ShipUpgrades.Def::key), b))
+                                    .then(CommandManager.argument("level", IntegerArgumentType.integer(0, 10))
+                                            .executes(ctx -> {
+                                                ServerPlayerEntity player = ctx.getSource().getPlayerOrThrow();
+                                                long shipId = getOwnedShipId(player);
+                                                if (shipId < 0) { ctx.getSource().sendError(Text.literal("You don't own a ship.")); return 0; }
+                                                String key = com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "key");
+                                                var def = net.get900.pixelpirates.world.ShipUpgrades.find(key);
+                                                if (def == null) { ctx.getSource().sendError(Text.literal("Unknown refit " + key)); return 0; }
+                                                int level = Math.min(def.maxLevel(), IntegerArgumentType.getInteger(ctx, "level"));
+                                                ShipRegistryState.get(player.getServer().getOverworld()).setUpgradeLevel(shipId, key, level);
+                                                ctx.getSource().sendFeedback(() -> Text.literal("§a" + def.displayName() + " set to " + level + "."), false);
+                                                return 1;
+                                            })))));
 
             // ── /ppship damage <amount> ────────────────────────────────────────
             dispatcher.register(CommandManager.literal("ppship")
@@ -821,5 +1333,83 @@ public class ModCommands {
         Long shipId = ShipRegistryState.get(player.getServer().getOverworld())
                           .getOwnedShip(player.getUuid());
         return shipId != null ? shipId : -1L;
+    }
+
+    /** /ppisland capture|edits|discard <building | grounds | all>: save, list or drop the hand edits (world/gen/IslandEdits). */
+    private static int islandEdit(net.minecraft.server.command.ServerCommandSource src, String q, String what) {
+        var w = src.getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
+        String G = net.get900.pixelpirates.world.gen.IslandEdits.GROUNDS;
+        boolean all = q.trim().equalsIgnoreCase("all");
+        String name = all ? "all" : q.trim().equalsIgnoreCase("grounds") || q.trim().equalsIgnoreCase("streets") || q.trim().equalsIgnoreCase(G) ? G : islandName(q);
+        if (w == null || name == null) { src.sendError(Text.literal("No building '" + q + "' - see /ppisland list (or use grounds / all)")); return 0; }
+        try {
+            switch (what) {
+                case "capture" -> {
+                    var r = all ? net.get900.pixelpirates.world.gen.IslandEdits.captureAll(w) : net.get900.pixelpirates.world.gen.IslandEdits.capture(w, name);
+                    src.sendFeedback(() -> Text.literal("Captured " + (all ? "your changes (" + r.spots() + " touched spots checked)" : name) + ": "
+                            + r.edits() + " hand edit(s) saved" + (all ? " across " + r.sections() + " section(s)" : "")
+                            + (r.withData() > 0 ? " (" + r.withData() + " with sign/banner/contents data)" : "")
+                            + ". They now survive restamps and new worlds."), true);
+                }
+                case "discard" -> {
+                    int n = all ? net.get900.pixelpirates.world.gen.IslandEdits.discardAll(w) : net.get900.pixelpirates.world.gen.IslandEdits.discard(w, name);
+                    src.sendFeedback(() -> Text.literal("Dropped " + n + " hand edit(s) from " + (all ? "the whole island" : name)
+                            + " - /ppisland restamp " + q.trim() + " puts the plan back."), true);
+                }
+                default -> {
+                    var edits = net.get900.pixelpirates.world.gen.PortCityLayout.edits();
+                    if (all) {
+                        int total = 0;
+                        for (var e : edits.entrySet()) {
+                            total += e.getValue().size();
+                            src.sendFeedback(() -> Text.literal("  " + e.getKey() + ": " + e.getValue().size()).formatted(net.minecraft.util.Formatting.GRAY), false);
+                        }
+                        int t = total;
+                        src.sendFeedback(() -> Text.literal(t + " hand edit(s) saved in " + edits.size() + " section(s)"), false);
+                        return 1;
+                    }
+                    var list = edits.getOrDefault(name, java.util.List.of());
+                    src.sendFeedback(() -> Text.literal(name + ": " + list.size() + " hand edit(s) saved"), false);
+                    for (int i = 0; i < Math.min(10, list.size()); i++) {
+                        var e = list.get(i);
+                        src.sendFeedback(() -> Text.literal("  " + e.x() + " " + e.y() + " " + e.z() + "  " + e.state()).formatted(net.minecraft.util.Formatting.GRAY), false);
+                    }
+                    if (list.size() > 10) src.sendFeedback(() -> Text.literal("  ...").formatted(net.minecraft.util.Formatting.GRAY), false);
+                }
+            }
+        } catch (java.io.IOException e) {
+            src.sendError(Text.literal("Could not write the edits file: " + e.getMessage()));
+            return 0;
+        }
+        return 1;
+    }
+
+    /** The full label name for a building query (name, prefix or map number). */
+    private static String islandName(String q) {
+        int[] b = islandBox(q);
+        if (b == null) return null;
+        for (var e : net.get900.pixelpirates.world.gen.PortCityLayout.buildings().entrySet()) if (e.getValue() == b) return e.getKey();
+        return null;
+    }
+
+    private static java.util.List<String> islandNames() {
+        java.util.List<String> out = new java.util.ArrayList<>(net.get900.pixelpirates.world.gen.PortCityLayout.buildings().keySet());
+        out.add("all");
+        out.add("grounds");
+        return out;
+    }
+
+    /** A building's box by name (case-insensitive, prefix ok) or by its map number. */
+    private static int[] islandBox(String q) {
+        var all = net.get900.pixelpirates.world.gen.PortCityLayout.buildings();
+        try {
+            int n = Integer.parseInt(q.trim());
+            int i = 0;
+            for (int[] b : all.values()) if (++i == n) return b;
+            return null;
+        } catch (NumberFormatException ignored) {}
+        for (var e : all.entrySet()) if (e.getKey().equalsIgnoreCase(q.trim())) return e.getValue();
+        for (var e : all.entrySet()) if (e.getKey().toLowerCase().startsWith(q.trim().toLowerCase())) return e.getValue();
+        return null;
     }
 }

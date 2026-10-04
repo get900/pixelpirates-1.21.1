@@ -209,6 +209,8 @@ public class AbyssalAnglerEntity extends AquaticHostileEntity implements GeoEnti
         int crystals = this.random.nextInt(3);
         if (crystals > 0) this.dropStack(new ItemStack(Items.PRISMARINE_CRYSTALS, crystals));
         if (this.random.nextFloat() < 0.25f) this.dropStack(new ItemStack(ModItems.KRAKEN_SCALE));
+        if (this.random.nextFloat() < 0.3f) this.dropStack(new ItemStack(ModItems.ABYSSAL_PEARL));
+        if (causedByPlayer && this.random.nextFloat() < 0.02f) this.dropStack(new ItemStack(net.get900.pixelpirates.homestead.HomesteadBlocks.ANGLER_TROPHY));
     }
 
     @Override

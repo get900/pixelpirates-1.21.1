@@ -95,7 +95,53 @@ public class ModBoss extends ModMob {
 
     @Override
     protected boolean mayTarget(net.minecraft.entity.LivingEntity player) {
-        return !(player instanceof PlayerEntity p) || BossProgression.eligible(p, chainIndex());
+        return !(player instanceof PlayerEntity p) || fights(p);
+    }
+
+    // ------------------------------------------------------------------ DEFIANT (a sealed boss challenged too early)
+    /** Challenger -> world time their challenge lapses (refreshed while they stay within DEFIANT_RANGE). */
+    private final java.util.Map<java.util.UUID, Long> defiant = new java.util.HashMap<>();
+    private static final int DEFIANT_LAPSE = 20 * 60;              // a minute away (or dead) and the challenge lapses
+    private static final double DEFIANT_RANGE = 64;
+    /** Much harder: deals x2.5 to its challenger (MobDamageScale) and takes x0.4 from them. */
+    public static final float DEFIANT_DEALT = 2.5f, DEFIANT_TAKEN = 0.4f;
+
+    /** May this player fight us? Eligible by the chain - or a challenger who forced the fight early. */
+    public boolean fights(PlayerEntity p) {
+        return BossProgression.eligible(p, chainIndex()) || isDefiantAgainst(p);
+    }
+
+    public boolean isDefiantAgainst(PlayerEntity p) {
+        return defiant.containsKey(p.getUuid()) && !BossProgression.eligible(p, chainIndex());
+    }
+
+    /** Called by BossHoards when a player not yet ready forces the fight by tampering with the hoard. */
+    public void challenge(ServerPlayerEntity p) {
+        defiant.put(p.getUuid(), this.getWorld().getTime() + DEFIANT_LAPSE);
+        bar.setName(this.getDisplayName().copy().append(Text.literal(" - DEFIANT").formatted(Formatting.DARK_RED, Formatting.BOLD)));
+        bar.setColor(BossBar.Color.PURPLE);
+        this.setTarget(p);
+        this.ticksSinceHurt = REGEN_DELAY_TICKS;
+        if (this.getWorld() instanceof ServerWorld sw) {
+            sw.spawnParticles(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY() + getHeight() * 0.5, getZ(), 80, 1.5, 1.5, 1.5, 0.05);
+            sw.playSound(null, getBlockPos(), SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.HOSTILE, 2.0f, 0.6f);
+        }
+        p.sendMessage(Text.literal("[X] You have woken ").formatted(Formatting.DARK_RED)
+                .append(this.getDisplayName().copy().formatted(Formatting.RED, Formatting.BOLD))
+                .append(Text.literal(" before your time. It will not hold back.").formatted(Formatting.DARK_RED)), false);
+    }
+
+    private void tickDefiant() {
+        if (defiant.isEmpty()) return;
+        long now = this.getWorld().getTime();
+        defiant.replaceAll((u, until) -> {
+            PlayerEntity p = this.getWorld().getPlayerByUuid(u);
+            return p != null && p.isAlive() && p.squaredDistanceTo(this) < DEFIANT_RANGE * DEFIANT_RANGE ? now + DEFIANT_LAPSE : until;
+        });
+        if (defiant.values().removeIf(until -> now > until) && defiant.isEmpty()) {
+            bar.setName(this.getDisplayName());
+            bar.setColor(enraged ? BossBar.Color.RED : BossBar.Color.PURPLE);
+        }
     }
 
     @Override
@@ -134,11 +180,12 @@ public class ModBoss extends ModMob {
         if (ticksSinceHurt < REGEN_DELAY_TICKS) ticksSinceHurt++;
         if (shackledTicks > 0) shackledTicks--;
         // drop a target that can't fight us (e.g. god mode switched off mid-fight)
+        tickDefiant();
         if (this.getTarget() instanceof PlayerEntity tp && !mayTarget(tp)) this.setTarget(null);
         // warn players who wander into a lair they aren't ready for
         if (this.age % 40 == 0 && this.getWorld() instanceof ServerWorld sw) {
             for (ServerPlayerEntity p : sw.getPlayers(p -> p.squaredDistanceTo(this) < 20 * 20 && !p.isSpectator()))
-                if (!BossProgression.eligible(p, chainIndex())) p.sendMessage(BossProgression.sealedMessage(p, chainIndex()), true);
+                if (!fights(p)) p.sendMessage(BossProgression.sealedMessage(p, chainIndex()), true);
         }
         // 1% max health per second, but only once nothing has hurt it for a full minute
         if (ticksSinceHurt >= REGEN_DELAY_TICKS && this.age % 20 == 0 && this.getHealth() < this.getMaxHealth())
@@ -189,6 +236,8 @@ public class ModBoss extends ModMob {
                 if (zone > 0) PlayerProgressionManager.unlockZone(p, zone);
             } else if (BossProgression.eligible(p, chainIndex())) {
                 BossProgression.onBossKilled(p, chainIndex(), zone);
+            } else if (defiant.containsKey(p.getUuid())) {
+                BossHoards.defiantVictory(p, chainIndex());        // the gear, the hoard - but the chain does not move
             }
         }
         sw.spawnParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), getY() + 1, getZ(), 80, 1.5, 1.5, 1.5, 0.3);
@@ -221,7 +270,8 @@ public class ModBoss extends ModMob {
         // bosses can't be drowned/suffocated to death in their own lairs
         if (source.isOf(net.minecraft.entity.damage.DamageTypes.DROWN) && spec().kind == MobSpec.Kind.SWIM) return false;
         if (source.isOf(net.minecraft.entity.damage.DamageTypes.IN_WALL)) return false;
-        if (source.getAttacker() instanceof ServerPlayerEntity p && !BossProgression.eligible(p, chainIndex())) {
+        if (source.getAttacker() instanceof ServerPlayerEntity dp && isDefiantAgainst(dp)) amount *= DEFIANT_TAKEN;
+        else if (source.getAttacker() instanceof ServerPlayerEntity p && !BossProgression.eligible(p, chainIndex())) {
             p.sendMessage(BossProgression.sealedMessage(p, chainIndex()), true);
             if (this.getWorld() instanceof ServerWorld sw)
                 sw.spawnParticles(ParticleTypes.ENCHANT, getX(), getY() + getHeight() * 0.6, getZ(), 12, 0.6, 0.6, 0.6, 0.4);

@@ -34,10 +34,10 @@ public class ModArmorItem extends PixelArmorItem {
                     // Volcanic — Ashen: walk through fire
                     .put(ModArmorMaterials.ASHEN,
                             List.of(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 400, 0, false, false)))
-                    // Ring 4 — Cursed Bone: see through the ghost fog, shrug off blows
+                    // Ring 4 — Cursed Bone: see through the ghost fog (Resistance I removed 2026-10-01: -20% to everything
+                    // on top of the armor made it outclass the boss sets)
                     .put(ModArmorMaterials.CURSED_BONE,
-                            List.of(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 400, 0, false, false),
-                                    new StatusEffectInstance(StatusEffects.RESISTANCE, 400, 0, false, false)))
+                            List.of(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 400, 0, false, false)))
                     // Ring 5 — Kraken-Scale: the abyss claims its own
                     .put(ModArmorMaterials.KRAKEN_SCALE,
                             List.of(new StatusEffectInstance(StatusEffects.CONDUIT_POWER, 400, 0, false, false),

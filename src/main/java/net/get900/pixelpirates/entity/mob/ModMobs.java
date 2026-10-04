@@ -36,6 +36,8 @@ public final class ModMobs {
 
     public static void register() {
         for (MobSpec s : MobSpecs.all()) {
+            for (MobSpec.Drop d : s.drops)       // a dish looked up before PirateFoods registered resolves to AIR
+                if (d.item() == net.minecraft.item.Items.AIR) PixelPirates.LOGGER.error("[ModMobs] {} has a drop that resolved to AIR", s.id);
             FabricEntityTypeBuilder<? extends ModMob> b = s.factory != null
                     ? FabricEntityTypeBuilder.create(s.group, s.factory)
                     : s.boss ? FabricEntityTypeBuilder.create(s.group, ModBoss::new)
@@ -82,6 +84,9 @@ public final class ModMobs {
             var ctx = new net.get900.pixelpirates.world.dungeon.DungeonPlacement.Context(sw.getSeed(), gen, sw.getChunkManager().getNoiseConfig(), sw, gen.getSeaLevel());
             if (net.get900.pixelpirates.world.dungeon.DungeonPlacement.nearSite(s.awayFrom, ctx, pos, s.awayRadius)) return false;
         }
+        if (s.sparseRadius > 0 && (reason == SpawnReason.NATURAL || reason == SpawnReason.CHUNK_GENERATION)
+                && world.getEntitiesByType(type, new net.minecraft.util.math.Box(pos).expand(s.sparseRadius), e -> true).size() >= s.sparseMax)
+            return false;
         boolean water = world.getFluidState(pos).isIn(FluidTags.WATER);
         boolean solidBelow = world.getBlockState(pos.down()).isSolidBlock(world, pos.down());
         return switch (s.kind) {

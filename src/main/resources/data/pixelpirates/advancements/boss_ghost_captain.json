@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:spectral_anchor"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_ghost_captain.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_ghost_captain.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_molten_warlord",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

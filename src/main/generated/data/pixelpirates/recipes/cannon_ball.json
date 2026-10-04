@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CIC",
+    " C "
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:cannon_ball"
+  },
+  "show_notification": true
+}

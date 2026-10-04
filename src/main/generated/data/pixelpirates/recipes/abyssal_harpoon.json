@@ -3,13 +3,13 @@
   "category": "equipment",
   "key": {
     "B": {
-      "item": "minecraft:iron_ingot"
+      "item": "pixelpirates:kraken_scale"
     },
     "H": {
       "item": "minecraft:stick"
     },
     "T": {
-      "item": "pixelpirates:kraken_scale"
+      "item": "pixelpirates:abyssal_pearl"
     }
   },
   "pattern": [

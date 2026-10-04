@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:bloodfin_razor_tooth"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_bloodfin.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_bloodfin.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_abyssal_king",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

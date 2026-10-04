@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "pixelpirates:krakens_ink_heart"
+    },
+    {
+      "item": "pixelpirates:kraken_scale"
+    },
+    {
+      "item": "pixelpirates:kraken_scale"
+    },
+    {
+      "item": "minecraft:crossbow"
+    },
+    {
+      "item": "pixelpirates:harpoon"
+    },
+    {
+      "item": "pixelpirates:harpoon"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:krakenmaw_harpoon_gun"
+  }
+}

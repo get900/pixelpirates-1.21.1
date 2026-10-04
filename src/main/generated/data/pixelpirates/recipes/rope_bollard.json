@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:spruce_fence"
+    },
+    "P": {
+      "item": "minecraft:spruce_planks"
+    },
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    " R ",
+    "RFR",
+    " P "
+  ],
+  "result": {
+    "count": 2,
+    "item": "pixelpirates:rope_bollard"
+  },
+  "show_notification": true
+}

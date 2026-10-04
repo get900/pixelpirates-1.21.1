@@ -1,0 +1,139 @@
+{
+ "variants": {
+  "facing=north,fuel=0": {
+   "model": "pixelpirates:block/forge_hearth"
+  },
+  "facing=north,fuel=1": {
+   "model": "pixelpirates:block/forge_hearth_lit"
+  },
+  "facing=north,fuel=2": {
+   "model": "pixelpirates:block/forge_hearth_lit"
+  },
+  "facing=north,fuel=3": {
+   "model": "pixelpirates:block/forge_hearth_lit"
+  },
+  "facing=north,fuel=4": {
+   "model": "pixelpirates:block/forge_hearth_lit"
+  },
+  "facing=north,fuel=5": {
+   "model": "pixelpirates:block/forge_hearth_lit"
+  },
+  "facing=north,fuel=6": {
+   "model": "pixelpirates:block/forge_hearth_lit"
+  },
+  "facing=north,fuel=7": {
+   "model": "pixelpirates:block/forge_hearth_lit"
+  },
+  "facing=north,fuel=8": {
+   "model": "pixelpirates:block/forge_hearth_lit"
+  },
+  "facing=east,fuel=0": {
+   "model": "pixelpirates:block/forge_hearth",
+   "y": 90
+  },
+  "facing=east,fuel=1": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 90
+  },
+  "facing=east,fuel=2": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 90
+  },
+  "facing=east,fuel=3": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 90
+  },
+  "facing=east,fuel=4": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 90
+  },
+  "facing=east,fuel=5": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 90
+  },
+  "facing=east,fuel=6": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 90
+  },
+  "facing=east,fuel=7": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 90
+  },
+  "facing=east,fuel=8": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 90
+  },
+  "facing=south,fuel=0": {
+   "model": "pixelpirates:block/forge_hearth",
+   "y": 180
+  },
+  "facing=south,fuel=1": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 180
+  },
+  "facing=south,fuel=2": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 180
+  },
+  "facing=south,fuel=3": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 180
+  },
+  "facing=south,fuel=4": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 180
+  },
+  "facing=south,fuel=5": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 180
+  },
+  "facing=south,fuel=6": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 180
+  },
+  "facing=south,fuel=7": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 180
+  },
+  "facing=south,fuel=8": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 180
+  },
+  "facing=west,fuel=0": {
+   "model": "pixelpirates:block/forge_hearth",
+   "y": 270
+  },
+  "facing=west,fuel=1": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 270
+  },
+  "facing=west,fuel=2": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 270
+  },
+  "facing=west,fuel=3": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 270
+  },
+  "facing=west,fuel=4": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 270
+  },
+  "facing=west,fuel=5": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 270
+  },
+  "facing=west,fuel=6": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 270
+  },
+  "facing=west,fuel=7": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 270
+  },
+  "facing=west,fuel=8": {
+   "model": "pixelpirates:block/forge_hearth_lit",
+   "y": 270
+  }
+ }
+}

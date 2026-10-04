@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:smooth_stone"
+    },
+    "W": {
+      "item": "minecraft:white_carpet"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "SSS",
+    "S S"
+  ],
+  "result": {
+    "item": "pixelpirates:chapel_altar"
+  },
+  "show_notification": true
+}

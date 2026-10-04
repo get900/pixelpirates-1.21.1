@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/lava_crab_trophy"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/lava_crab_trophy",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/lava_crab_trophy",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/lava_crab_trophy",
+   "y": 270
+  }
+ }
+}

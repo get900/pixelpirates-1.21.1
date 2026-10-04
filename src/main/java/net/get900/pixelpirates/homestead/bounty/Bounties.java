@@ -56,10 +56,10 @@ public final class Bounties {
     private static Item[][] deliveries() {
         return new Item[][]{
                 {HomesteadItems.PARROTFISH, HomesteadItems.RED_SNAPPER, Items.COD, HomesteadItems.PINEAPPLE, ModItems.BANANA, HomesteadItems.RAW_RUM, HomesteadItems.LOBSTER},
-                {HomesteadItems.MAHI_MAHI, HomesteadItems.LIONFISH, HomesteadItems.LIME, ModItems.KRAKEN_INK, HomesteadItems.AGED_RUM, Items.PRISMARINE_SHARD},
-                {HomesteadItems.EMBERFIN, HomesteadItems.CHILI_PEPPER, ModItems.VOLCANIC_EMBER, Items.MAGMA_CREAM, HomesteadItems.AGED_RUM},
-                {HomesteadItems.GHOSTFIN, HomesteadItems.BONEFISH, ModItems.CURSED_BONE, HomesteadItems.VINTAGE_RUM, Items.PHANTOM_MEMBRANE},
-                {HomesteadItems.ANGLERFRY, HomesteadItems.VOIDFIN, ModItems.KRAKEN_SCALE, HomesteadItems.VINTAGE_RUM, Items.GLOW_INK_SAC}};
+                {HomesteadItems.MAHI_MAHI, HomesteadItems.LIONFISH, HomesteadItems.LIME, ModItems.SIREN_SCALE, HomesteadItems.AGED_RUM, ModItems.REEF_PEARL},
+                {HomesteadItems.EMBERFIN, HomesteadItems.CHILI_PEPPER, ModItems.VOLCANIC_EMBER, ModItems.BRIMSTONE, HomesteadItems.AGED_RUM},
+                {HomesteadItems.GHOSTFIN, HomesteadItems.BONEFISH, ModItems.CURSED_BONE, ModItems.ECTOPLASM, HomesteadItems.VINTAGE_RUM},
+                {HomesteadItems.ANGLERFRY, HomesteadItems.VOIDFIN, ModItems.KRAKEN_SCALE, ModItems.LUMINOUS_ICHOR, HomesteadItems.VINTAGE_RUM}};
     }
 
     public static int tier(PlayerEntity p) { return Math.min(4, BossProgression.progress(p) / 2); }
@@ -159,55 +159,106 @@ public final class Bounties {
         };
     }
 
-    // ------------------------------------------------------------------ the board
-    /** Hand in deliveries, pay out finished contracts, list the rest. */
-    public static void useBoard(ServerPlayerEntity p) {
+    // ------------------------------------------------------------------ the board (BountyBoardBlock -> client BountyScreen)
+    public static final Identifier OPEN_BOARD = new Identifier("pixelpirates", "open_bounty_board");
+    public static final Identifier HAND_IN = new Identifier("pixelpirates", "bounty_hand_in");
+
+    public static void registerNetworking() {
+        net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.registerGlobalReceiver(HAND_IN, (server, player, handler, buf, sender) ->
+                server.execute(() -> sendBoard(player, handIn(player))));
+    }
+
+    /** Right-click: show today's contracts. */
+    public static void openBoard(ServerPlayerEntity p) {
+        p.getServerWorld().playSound(null, p.getBlockPos(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.BLOCKS, 0.8f, 1f);
+        sendBoard(p, java.util.List.of());
+    }
+
+    /** Contracts + the result lines of the last hand-in, as NBT (the client screen draws it). */
+    static void sendBoard(ServerPlayerEntity p, java.util.List<String> messages) {
         NbtList list = contracts(p);
-        int paid = 0;
+        NbtCompound out = new NbtCompound();
+        out.putLong("Day", p.getServerWorld().getTimeOfDay() / 24000L);
+        out.putInt("Done", data(p).getInt("Done"));
+        NbtList cs = new NbtList();
+        for (int i = 0; i < list.size(); i++) {
+            NbtCompound c = list.getCompound(i), v = new NbtCompound();
+            v.putString("T", c.getString("T"));
+            v.putString("Desc", describe(c).getString());
+            v.putInt("Have", c.getInt("Have"));
+            v.putInt("Need", c.getInt("Need"));
+            v.putInt("Coins", net.get900.pixelpirates.world.SkillEffects.bounty(p, c.getInt("Coins")));
+            v.putString("Rep", c.getString("Rep").toLowerCase());
+            v.putString("Icon", Registries.ITEM.getId(icon(c)).toString());
+            cs.add(v);
+        }
+        out.put("C", cs);
+        NbtList msg = new NbtList();
+        for (String m : messages) msg.add(net.minecraft.nbt.NbtString.of(m));
+        out.put("Msg", msg);
+        var buf = net.fabricmc.fabric.api.networking.v1.PacketByteBufs.create();
+        buf.writeNbt(out);
+        net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.send(p, OPEN_BOARD, buf);
+    }
+
+    /** The poster's picture: the hunted creature's egg, the wanted goods, or a cannon ball for a ship. */
+    static Item icon(NbtCompound c) {
+        Identifier id = Identifier.tryParse(c.getString("Id"));
+        return switch (c.getString("T")) {
+            case HUNT -> {
+                var egg = id == null ? null : net.minecraft.item.SpawnEggItem.forEntity(Registries.ENTITY_TYPE.get(id));
+                yield egg != null ? egg : Items.IRON_SWORD;
+            }
+            case DELIVER -> id == null ? Items.PAPER : Registries.ITEM.get(id);
+            default -> ModItems.CANNON_BALL;
+        };
+    }
+
+    /** Hand in deliveries and pay out finished contracts; returns what happened, one line each. */
+    public static java.util.List<String> handIn(ServerPlayerEntity p) {
+        java.util.List<String> out = new java.util.ArrayList<>();
+        NbtList list = contracts(p);
         for (int i = 0; i < list.size(); i++) {
             NbtCompound c = list.getCompound(i);
             if (c.getString("T").equals(DELIVER) && !done(c)) {
                 Item it = Registries.ITEM.get(new Identifier(c.getString("Id")));
-                int want = c.getInt("Need") - c.getInt("Have");
+                int want = c.getInt("Need") - c.getInt("Have"), given = 0;
                 for (int s = 0; s < p.getInventory().size() && want > 0; s++) {
                     ItemStack st = p.getInventory().getStack(s);
                     if (!st.isOf(it)) continue;
                     int take = Math.min(want, st.getCount());
                     st.decrement(take);
                     want -= take;
+                    given += take;
                     c.putInt("Have", c.getInt("Have") + take);
                 }
+                if (given > 0) out.add("Handed in " + given + " " + it.getName().getString());
             }
         }
-        p.sendMessage(Text.literal("=== Bounty Board - day " + (p.getServerWorld().getTimeOfDay() / 24000L) + " ===").formatted(Formatting.GOLD), false);
+        int paid = 0;
         for (int i = list.size() - 1; i >= 0; i--) {
             NbtCompound c = list.getCompound(i);
             if (!done(c)) continue;
-            int coins = c.getInt("Coins");
+            int coins = net.get900.pixelpirates.world.SkillEffects.bounty(p, c.getInt("Coins"));
             give(p, coins);
             Faction f = Faction.valueOf(c.getString("Rep"));
             FactionManager.modifyReputation(p, f, c.getString("T").equals(SINK) ? 40 : 15);
-            p.sendMessage(Text.literal(" PAID  ").formatted(Formatting.GREEN).append(describe(c).formatted(Formatting.WHITE))
-                    .append(Text.literal("  +" + coins + " coins, rep with " + f.name().toLowerCase()).formatted(Formatting.GOLD)), false);
+            out.add("PAID: " + describe(c).getString() + "  +" + coins + " doubloons, rep with the " + f.name().toLowerCase());
             list.remove(i);
             paid++;
             data(p).putInt("Done", data(p).getInt("Done") + 1);
         }
-        for (int i = 0; i < list.size(); i++) {
-            NbtCompound c = list.getCompound(i);
-            p.sendMessage(Text.literal(" [ ]  ").formatted(Formatting.GRAY).append(describe(c).formatted(Formatting.WHITE))
-                    .append(Text.literal("  " + c.getInt("Have") + "/" + c.getInt("Need") + "  reward " + c.getInt("Coins") + " coins").formatted(Formatting.GRAY)), false);
-        }
-        if (list.isEmpty()) p.sendMessage(Text.literal(" No more work today, sailor. New contracts at dawn.").formatted(Formatting.GRAY), false);
+        if (out.isEmpty()) out.add("Nothing to hand in yet.");
         HomesteadState.get(p.getServer()).touch();
         p.getServerWorld().playSound(null, p.getBlockPos(), paid > 0 ? SoundEvents.ENTITY_VILLAGER_YES : SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.BLOCKS, 0.8f, 1f);
+        return out;
     }
 
     static void give(PlayerEntity player, int coins) {
         while (coins > 0) {
             int n = Math.min(64, coins);
             coins -= n;
-            ItemStack s = new ItemStack(ModItems.PIRATE_COIN, n);
+            ItemStack s = new ItemStack(ModItems.COIN, n);
             if (!player.getInventory().insertStack(s)) player.dropItem(s, false);
         }
     }

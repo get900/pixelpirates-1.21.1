@@ -1,1 +1,19 @@
-﻿{"variants":{"":{"model":"pixelpirates:block/map_block"}}}
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/map_block"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/map_block",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/map_block",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/map_block",
+   "y": 270
+  }
+ }
+}

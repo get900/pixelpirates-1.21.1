@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:chainbreak_salvage_yard",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

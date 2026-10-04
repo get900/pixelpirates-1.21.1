@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "pixelpirates:everburning_lantern"
+    },
+    {
+      "item": "pixelpirates:volcanic_ember"
+    },
+    {
+      "item": "pixelpirates:volcanic_ember"
+    },
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "pixelpirates:obsidian_shard"
+    },
+    {
+      "item": "pixelpirates:obsidian_shard"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:everburning_flail"
+  }
+}

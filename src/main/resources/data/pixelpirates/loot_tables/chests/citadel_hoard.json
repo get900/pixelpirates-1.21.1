@@ -51,8 +51,23 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:brimstone",
           "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:obsidian_shard",
+          "weight": 5,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -63,26 +78,6 @@
               }
             }
           ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:netherite_scrap",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:ancient_debris",
-          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -98,16 +93,6 @@
           "type": "minecraft:item",
           "name": "pixelpirates:emberbrand",
           "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly"
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:book",
-          "weight": 5,
           "functions": [
             {
               "function": "minecraft:enchant_randomly"
@@ -141,44 +126,32 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:enchanted_golden_apple",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "rolls": 2,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:forgeguard_helmet"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:forgeguard_chestplate"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:forgeguard_leggings"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:forgeguard_boots"
+          "name": "pixelpirates:volcanic_ember",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
         }
       ]
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.5
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:forgeguard_helmet"
+          "name": "pixelpirates:forgeguard_helmet",
+          "functions": [
+            {
+              "function": "pixelpirates:frozen_seeker"
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -191,6 +164,41 @@
         {
           "type": "minecraft:item",
           "name": "pixelpirates:forgeguard_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.6
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:molten_core_chili",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:rare_strongbox"
         }
       ]
     }

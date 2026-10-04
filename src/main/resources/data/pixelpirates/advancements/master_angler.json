@@ -1,0 +1,187 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:voidfin"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.master_angler.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.master_angler.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:gone_fishing",
+  "criteria": {
+    "parrotfish": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:parrotfish"
+            ]
+          }
+        ]
+      }
+    },
+    "red_snapper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:red_snapper"
+            ]
+          }
+        ]
+      }
+    },
+    "mahi_mahi": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:mahi_mahi"
+            ]
+          }
+        ]
+      }
+    },
+    "lionfish": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:lionfish"
+            ]
+          }
+        ]
+      }
+    },
+    "moonfish": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:moonfish"
+            ]
+          }
+        ]
+      }
+    },
+    "emberfin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:emberfin"
+            ]
+          }
+        ]
+      }
+    },
+    "lava_eel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:lava_eel"
+            ]
+          }
+        ]
+      }
+    },
+    "ghostfin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:ghostfin"
+            ]
+          }
+        ]
+      }
+    },
+    "bonefish": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:bonefish"
+            ]
+          }
+        ]
+      }
+    },
+    "anglerfry": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:anglerfry"
+            ]
+          }
+        ]
+      }
+    },
+    "voidfin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:voidfin"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "parrotfish"
+    ],
+    [
+      "red_snapper"
+    ],
+    [
+      "mahi_mahi"
+    ],
+    [
+      "lionfish"
+    ],
+    [
+      "moonfish"
+    ],
+    [
+      "emberfin"
+    ],
+    [
+      "lava_eel"
+    ],
+    [
+      "ghostfin"
+    ],
+    [
+      "bonefish"
+    ],
+    [
+      "anglerfry"
+    ],
+    [
+      "voidfin"
+    ]
+  ]
+}

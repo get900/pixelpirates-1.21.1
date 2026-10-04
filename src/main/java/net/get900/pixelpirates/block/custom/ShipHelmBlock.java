@@ -211,17 +211,8 @@ public class ShipHelmBlock extends Block implements BlockEntityProvider {
             reg.saveMastCount(ship.getId(), mastCount);
             reg.setOwnership(player.getUuid(), ship.getId());
 
-            // Award zone unlock for capturing this ship type
-            String blueprintName = ShipSteeringManager.DERELICT_BLUEPRINT.remove(ship.getId());
-            if (blueprintName != null && player instanceof net.minecraft.server.network.ServerPlayerEntity spe) {
-                int zoneUnlock = ShipTiers.getCaptureZoneUnlock(blueprintName);
-                if (zoneUnlock > 0) {
-                    int currentZone = PlayerProgressionManager.getUnlockedZone(spe);
-                    if (currentZone < zoneUnlock) {
-                        PlayerProgressionManager.unlockZone(spe, zoneUnlock);
-                    }
-                }
-            }
+            // zones open only through the boss chain - claiming a derelict no longer unlocks one (2026-10-01)
+            ShipSteeringManager.DERELICT_BLUEPRINT.remove(ship.getId());
 
             player.sendMessage(Text.literal(
                 "§aDerelict ship claimed! Use a Repair Kit to stop the sinking."), false);

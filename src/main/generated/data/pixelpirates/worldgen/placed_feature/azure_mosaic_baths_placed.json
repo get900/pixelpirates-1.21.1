@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:azure_mosaic_baths",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

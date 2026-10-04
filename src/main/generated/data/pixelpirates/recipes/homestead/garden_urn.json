@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:flowering_azalea"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    },
+    "S": {
+      "item": "minecraft:quartz_slab"
+    }
+  },
+  "pattern": [
+    "F",
+    "Q",
+    "S"
+  ],
+  "result": {
+    "count": 2,
+    "item": "pixelpirates:garden_urn"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,128 @@
+{
+ "parent": "builtin/entity",
+ "gui_light": "front",
+ "textures": {
+  "particle": "minecraft:block/dark_oak_planks"
+ },
+ "display": {
+  "thirdperson_righthand": {
+   "rotation": [
+    90.0,
+    0.0,
+    -0.0
+   ],
+   "translation": [
+    0.0,
+    -2.395,
+    1.895
+   ],
+   "scale": [
+    0.789,
+    0.789,
+    0.789
+   ]
+  },
+  "thirdperson_lefthand": {
+   "rotation": [
+    90.0,
+    0.0,
+    -0.0
+   ],
+   "translation": [
+    0.0,
+    -2.395,
+    1.895
+   ],
+   "scale": [
+    0.789,
+    0.789,
+    0.789
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    -0.0,
+    6.0,
+    -0.0
+   ],
+   "translation": [
+    1.521,
+    -0.795,
+    0.204
+   ],
+   "scale": [
+    0.411,
+    0.411,
+    0.411
+   ]
+  },
+  "firstperson_lefthand": {
+   "rotation": [
+    -0.0,
+    6.0,
+    -0.0
+   ],
+   "translation": [
+    1.521,
+    -0.795,
+    0.204
+   ],
+   "scale": [
+    0.411,
+    0.411,
+    0.411
+   ]
+  },
+  "gui": {
+   "rotation": [
+    15.0,
+    -90.0,
+    0.0
+   ],
+   "translation": [
+    -3.596,
+    0.347,
+    0.093
+   ],
+   "scale": [
+    0.411,
+    0.411,
+    0.411
+   ]
+  },
+  "ground": {
+   "rotation": [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   "translation": [
+    0.0,
+    0.288,
+    2.877
+   ],
+   "scale": [
+    0.3288,
+    0.3288,
+    0.3288
+   ]
+  },
+  "fixed": {
+   "rotation": [
+    -15.0,
+    90.0,
+    0.0
+   ],
+   "translation": [
+    6.712,
+    0.648,
+    -0.174
+   ],
+   "scale": [
+    0.7671,
+    0.7671,
+    0.7671
+   ]
+  }
+ }
+}

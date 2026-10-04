@@ -26,7 +26,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:abyssal_pearl",
           "weight": 5,
           "functions": [
             {
@@ -61,16 +61,16 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:trident",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:enchanted_book",
-          "weight": 6,
+          "name": "pixelpirates:kraken_scale",
+          "weight": 3,
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
             }
           ]
         },
@@ -81,8 +81,18 @@
         },
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:seafarers_token",
-          "weight": 4
+          "name": "pixelpirates:luminous_ichor",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -113,7 +123,7 @@
       ]
     },
     {
-      "rolls": 2,
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
@@ -130,33 +140,41 @@
         {
           "type": "minecraft:item",
           "name": "pixelpirates:gallowbreaker_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.6
         }
       ]
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.5
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_helmet"
-        },
+          "name": "pixelpirates:kraken_platter",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_chestplate"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_leggings"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_boots"
+          "name": "pixelpirates:legendary_strongbox"
         }
       ]
     }

@@ -417,10 +417,18 @@ public class ModMob extends PathAwareEntity implements GeoEntity {
     protected void dropLoot(DamageSource source, boolean causedByPlayer) {
         super.dropLoot(source, causedByPlayer);
         for (MobSpec.Drop d : spec().drops) {
+            if (d.item() == net.get900.pixelpirates.item.ModItems.KRAKEN_INK && !inkUnlocked(source)) continue;
             if (this.random.nextFloat() < d.chance()) {
                 this.dropStack(new ItemStack(d.item(), d.min() + (d.max() > d.min() ? this.random.nextInt(d.max() - d.min() + 1) : 0)));
             }
         }
+    }
+
+    /** KRAKEN INK only drops once the killer has beaten the Kraken (boss 7) - or from the Kraken itself. */
+    private boolean inkUnlocked(DamageSource source) {
+        if ("kraken".equals(spec().id)) return true;
+        return source.getAttacker() instanceof net.minecraft.entity.player.PlayerEntity p
+                && BossProgression.progress(p) > BossProgression.indexOf("kraken");
     }
 
     protected SoundEvent sound(String kind) {

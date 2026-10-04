@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "P": {
+      "item": "minecraft:spruce_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:white_carpet"
+    }
+  },
+  "pattern": [
+    "GWG",
+    "PPP",
+    "S S"
+  ],
+  "result": {
+    "item": "pixelpirates:crown_anchor_table"
+  },
+  "show_notification": true
+}

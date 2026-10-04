@@ -1,15 +1,23 @@
 {
   "display": {
-    "icon": {"item": "pixelpirates:raw_shark_meat"},
-    "title": {"translate": "advancements.pixelpirates.shark_bait.title"},
-    "description": {"translate": "advancements.pixelpirates.shark_bait.description"},
+    "icon": {
+      "item": "pixelpirates:cooked_shark_meat"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.shark_bait.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.shark_bait.description"
+    },
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": true
   },
-  "parent": "pixelpirates:into_the_shallows",
+  "parent": "pixelpirates:monster_of_the_deep",
   "criteria": {
-    "got_here": {"trigger": "minecraft:impossible"}
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
   }
 }

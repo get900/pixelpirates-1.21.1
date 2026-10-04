@@ -2,12 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "A": {
+      "item": "pixelpirates:brimstone"
+    },
     "M": {
       "item": "pixelpirates:volcanic_ember"
     }
   },
   "pattern": [
-    "MMM",
+    "MAM",
     "M M",
     "M M"
   ],

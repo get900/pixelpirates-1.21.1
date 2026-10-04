@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "pixelpirates:block/shipwright_table_bottom",
-    "side": "pixelpirates:block/shipwright_table_side",
-    "top": "pixelpirates:block/shipwright_table_top"
-  }
-}

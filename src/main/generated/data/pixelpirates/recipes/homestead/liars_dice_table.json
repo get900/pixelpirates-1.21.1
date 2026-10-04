@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "pixelpirates:dice_cup"
+    },
+    "L": {
+      "item": "minecraft:green_carpet"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "CLC",
+    "PPP",
+    "S S"
+  ],
+  "result": {
+    "item": "pixelpirates:liars_dice_table"
+  },
+  "show_notification": true
+}

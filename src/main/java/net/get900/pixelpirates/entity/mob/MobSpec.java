@@ -29,6 +29,7 @@ public class MobSpec {
     public final int phase;
     Kind kind = Kind.GROUND;
     Temper temper = Temper.HOSTILE;
+    public Temper temper() { return temper; }
     double health = 20, damage = 4, speed = 0.25, armor = 0, knockbackRes = 0, follow = 24, chaseSpeed = 1.1;
     float width = 0.6f, height = 1.9f, renderScale = 1f, shadow = 0.5f;
     int xp = 5;
@@ -78,7 +79,12 @@ public class MobSpec {
     public MobSpec reach(double r) { reach = r; return this; }
     /** Never spawn naturally within `radius` blocks of a site of this dungeon type (DungeonPlacement.nearSite). */
     public MobSpec awayFrom(String dungeonId, int radius) { awayFrom = dungeonId; awayRadius = radius; return this; }
+
+    int sparseRadius, sparseMax;                  // natural spawns refused while sparseMax of this mob are within sparseRadius
+    public MobSpec sparse(int radius, int max) { sparseRadius = radius; sparseMax = max; return this; }
     public MobSpec hurtByWater() { hurtByWater = true; return this; }
+
+    public boolean isHurtByWater() { return hurtByWater; }
     public MobSpec tough(float damageTakenMultiplier) { damageTaken = damageTakenMultiplier; return this; }
     public MobSpec lifesteal(float f) { lifesteal = f; return this; }
     public MobSpec onHit(StatusEffect e, int ticks, int amp) { onHitEffect = e; onHitTicks = ticks; onHitAmp = amp; return this; }
@@ -105,4 +111,8 @@ public class MobSpec {
     public float renderScale() { return renderScale; }
     public float shadow() { return shadow; }
     public boolean hostile() { return temper == Temper.HOSTILE; }
+
+    public boolean isBoss() { return boss; }
+
+    public boolean isPassive() { return temper == Temper.PASSIVE; }
 }

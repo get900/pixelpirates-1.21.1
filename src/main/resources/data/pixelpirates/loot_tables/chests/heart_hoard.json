@@ -16,13 +16,33 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:nether_star",
-          "weight": 1
+          "name": "pixelpirates:abyssal_pearl",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:netherite_ingot",
-          "weight": 2
+          "name": "pixelpirates:kraken_scale",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
         }
       ]
     },
@@ -96,15 +116,15 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:abyssal_pearl",
           "weight": 4,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 2,
-                "max": 5
+                "min": 1,
+                "max": 3
               }
             }
           ]
@@ -126,45 +146,38 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:trident",
-          "weight": 1
+          "name": "pixelpirates:kraken_scale",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:enchanted_golden_apple",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "rolls": 2,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:thalassar_helmet"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:thalassar_chestplate"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:thalassar_leggings"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:thalassar_boots"
+          "name": "pixelpirates:luminous_ichor",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         }
       ]
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.5
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -181,6 +194,41 @@
         {
           "type": "minecraft:item",
           "name": "pixelpirates:thalassar_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.6
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:heart_tartare",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:legendary_strongbox"
         }
       ]
     }

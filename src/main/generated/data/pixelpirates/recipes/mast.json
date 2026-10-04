@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "RPR",
+    " P ",
+    " P "
+  ],
+  "result": {
+    "item": "pixelpirates:mast"
+  },
+  "show_notification": true
+}

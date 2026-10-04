@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/ship_in_bottle_galleon"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/ship_in_bottle_galleon",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/ship_in_bottle_galleon",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/ship_in_bottle_galleon",
+   "y": 270
+  }
+ }
+}

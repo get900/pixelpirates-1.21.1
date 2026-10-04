@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "pixelpirates:tattered_cloth"
+    },
+    "D": {
+      "item": "pixelpirates:driftwood"
+    },
+    "R": {
+      "item": "pixelpirates:rope"
+    }
+  },
+  "pattern": [
+    "DDD",
+    "RCR",
+    "DDD"
+  ],
+  "result": {
+    "count": 2,
+    "item": "pixelpirates:ship_repair_kit"
+  },
+  "show_notification": true
+}

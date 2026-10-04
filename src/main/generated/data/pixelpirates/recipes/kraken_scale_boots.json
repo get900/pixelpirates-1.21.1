@@ -2,13 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "A": {
+      "item": "pixelpirates:abyssal_pearl"
+    },
     "M": {
       "item": "pixelpirates:kraken_scale"
     }
   },
   "pattern": [
     "M M",
-    "M M"
+    "A A"
   ],
   "result": {
     "item": "pixelpirates:kraken_scale_boots"

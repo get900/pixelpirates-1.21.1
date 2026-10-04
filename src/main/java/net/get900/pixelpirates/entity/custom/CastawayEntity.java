@@ -114,7 +114,7 @@ public class CastawayEntity extends PathAwareEntity implements GeoEntity, Ranged
             this.setPersistent();
             net.minecraft.util.math.random.Random r = this.random;
             java.util.List<net.minecraft.item.ItemStack> gifts = new java.util.ArrayList<>();
-            gifts.add(new net.minecraft.item.ItemStack(net.get900.pixelpirates.item.ModItems.PIRATE_COIN, 4 + r.nextInt(7)));
+            gifts.add(new net.minecraft.item.ItemStack(net.get900.pixelpirates.item.ModItems.COIN, 4 + r.nextInt(7)));
             gifts.add(r.nextBoolean()
                     ? new net.minecraft.item.ItemStack(net.get900.pixelpirates.item.ModItems.DYNAMITE, 2 + r.nextInt(3))
                     : new net.minecraft.item.ItemStack(net.get900.pixelpirates.item.ModItems.TREASURE_MAP_COMMON));

@@ -1,1 +1,3 @@
-﻿{"parent":"pixelpirates:block/treasure_block"}
+{
+ "parent": "pixelpirates:block/treasure_block"
+}

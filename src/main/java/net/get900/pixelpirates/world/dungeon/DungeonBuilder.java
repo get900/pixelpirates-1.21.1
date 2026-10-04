@@ -120,6 +120,15 @@ public class DungeonBuilder {
         world.setBlockState(p, Blocks.SPAWNER.getDefaultState(), Block.NOTIFY_LISTENERS);
         BlockEntity be = world.getBlockEntity(p);
         if (!(be instanceof MobSpawnerBlockEntity)) return;
+        net.minecraft.nbt.NbtCompound nbt = be.createNbt();
+        nbt.copyFrom(spawnerNbt(type));
+        nbt.remove("SpawnPotentials");
+        be.readNbt(nbt);
+        be.markDirty();
+    }
+
+    /** The spawner settings {@link #spawner} writes (also what LayoutExport stores in a layout's nbt list). */
+    public static net.minecraft.nbt.NbtCompound spawnerNbt(EntityType<?> type) {
         net.minecraft.nbt.NbtCompound entity = new net.minecraft.nbt.NbtCompound();
         entity.putString("id", net.minecraft.registry.Registries.ENTITY_TYPE.getId(type).toString());
         net.minecraft.nbt.NbtCompound rules = new net.minecraft.nbt.NbtCompound();
@@ -128,9 +137,8 @@ public class DungeonBuilder {
         net.minecraft.nbt.NbtCompound spawnData = new net.minecraft.nbt.NbtCompound();
         spawnData.put("entity", entity);
         spawnData.put("custom_spawn_rules", rules);
-        net.minecraft.nbt.NbtCompound nbt = be.createNbt();
+        net.minecraft.nbt.NbtCompound nbt = new net.minecraft.nbt.NbtCompound();
         nbt.put("SpawnData", spawnData);
-        nbt.remove("SpawnPotentials");
         nbt.putShort("Delay", (short) 20);
         nbt.putShort("MinSpawnDelay", (short) 200);
         nbt.putShort("MaxSpawnDelay", (short) 600);
@@ -138,8 +146,7 @@ public class DungeonBuilder {
         nbt.putShort("MaxNearbyEntities", (short) 5);
         nbt.putShort("RequiredPlayerRange", (short) 16);
         nbt.putShort("SpawnRange", (short) 3);
-        be.readNbt(nbt);
-        be.markDirty();
+        return nbt;
     }
 
     /** Ellipsoid: interior set to {@code inside(y)} (air/water by height), optional shell of {@code thick}. */

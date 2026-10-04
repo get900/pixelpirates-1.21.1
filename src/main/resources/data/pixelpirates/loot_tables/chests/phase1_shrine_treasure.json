@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:pirate_coin",
+          "name": "pixelpirates:coin",
           "weight": 20,
           "functions": [
             {
@@ -41,22 +41,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "pixelpirates:crab_shell",
           "weight": 10,
           "functions": [
             {
@@ -66,16 +51,6 @@
                 "min": 2,
                 "max": 4
               }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:enchanted_book",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly"
             }
           ]
         },
@@ -91,8 +66,18 @@
         },
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:seafarers_token",
-          "weight": 5
+          "name": "pixelpirates:tattered_cloth",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 5
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -101,8 +86,18 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:trident",
-          "weight": 1
+          "name": "pixelpirates:driftwood",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 5
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -129,6 +124,21 @@
           "type": "minecraft:item",
           "name": "minecraft:gold_block",
           "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:common_strongbox"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.15
         }
       ]
     }

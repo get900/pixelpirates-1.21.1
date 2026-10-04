@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:gallowbrand"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.pulled_from_the_stone.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.pulled_from_the_stone.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_kraken",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:gallowbrand"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

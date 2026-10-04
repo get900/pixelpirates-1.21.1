@@ -124,6 +124,9 @@ public class LavaCrabEntity extends HostileEntity implements GeoEntity {
         if (embers > 0) {
             this.dropStack(new ItemStack(ModItems.VOLCANIC_EMBER, embers));
         }
+        if (this.random.nextFloat() < 0.5f) this.dropStack(new ItemStack(ModItems.BRIMSTONE));
+        if (this.random.nextFloat() < 0.4f) this.dropStack(new ItemStack(ModItems.RAW_LAVA_CRAB_CLAW));
+        if (this.random.nextFloat() < 0.02f) this.dropStack(new ItemStack(net.get900.pixelpirates.homestead.HomesteadBlocks.LAVA_CRAB_TROPHY));
     }
 
     // ---------- sounds ----------

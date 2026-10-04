@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/garden_urn"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/garden_urn",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/garden_urn",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/garden_urn",
+   "y": 270
+  }
+ }
+}

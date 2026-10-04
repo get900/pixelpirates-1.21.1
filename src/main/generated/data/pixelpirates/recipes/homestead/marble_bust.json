@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "Q": {
+      "item": "minecraft:quartz_block"
+    },
+    "S": {
+      "item": "minecraft:quartz_slab"
+    }
+  },
+  "pattern": [
+    "Q",
+    "Q",
+    "S"
+  ],
+  "result": {
+    "item": "pixelpirates:marble_bust"
+  },
+  "show_notification": true
+}

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:pirate_coin",
+          "name": "pixelpirates:coin",
           "weight": 18,
           "functions": [
             {

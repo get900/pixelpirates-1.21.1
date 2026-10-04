@@ -71,12 +71,14 @@ public class ModNetworking {
     public static final Identifier S2C_LEVEL_SYNC      = PixelPirates.id("level_sync");
     /** S2C: /pptest flags the client must honour (boolean clearSight). */
     public static final Identifier S2C_TEST_FLAGS      = PixelPirates.id("test_flags");
+    /** S2C: open the Weathered Chronicle with the reader's page state (world/Chronicle#open). */
+    public static final Identifier S2C_CHRONICLE       = PixelPirates.id("chronicle");
     // S2C — tell the client to open the Pirate Journal / skill screen
     public static final Identifier S2C_OPEN_SKILL_SCREEN = PixelPirates.id("open_skill_screen");
     // C2S — client requests to spend one skill point on the given skill key
     public static final Identifier C2S_SKILL_SPEND     = PixelPirates.id("skill_spend");
+    public static final Identifier C2S_SKILL_RESPEC    = PixelPirates.id("skill_respec");
 
-    public static final int SHIP_COMMISSION_COST = 3; // Coins
 
     private static final Random MUSIC_RNG = new Random();
 
@@ -101,7 +103,12 @@ public class ModNetworking {
                     );
                     if (ship == null) return;
                     long shipId = ship.getId();
+                    if (net.get900.pixelpirates.homestead.harbour.HarbourDues.blockSteering(player, shipId)) {   // dues owed: the helm is chained
+                        ShipSteeringManager.SHIP_INPUTS.put(shipId, new float[]{0f, 0f, 0f});
+                        return;
+                    }
                     ShipSteeringManager.SHIP_INPUTS.put(shipId, new float[]{fwd, turn, sprint ? 1f : 0f});
+                    ShipSteeringManager.HELM_BONUS.put(shipId, (float) net.get900.pixelpirates.world.SkillEffects.thrustMult(player));
                     ShipSteeringManager.HELM_STEER_FRESHNESS.put(shipId, 5);
                     AdvancementHelper.grant(player, "captain_now");
                 });
@@ -120,6 +127,14 @@ public class ModNetworking {
                 long shipId = buf.readLong();
                 String key  = buf.readString(32);
                 server.execute(() -> handleShipwrightUpgrade(player, shipId, key));
+            }
+        );
+
+        ServerPlayNetworking.registerGlobalReceiver(net.get900.pixelpirates.world.livery.Liveries.APPLY,
+            (server, player, handler, buf, responseSender) -> {
+                long shipId = buf.readLong();
+                String id   = buf.readString(48);
+                server.execute(() -> net.get900.pixelpirates.world.livery.Liveries.handle(player, shipId, id));
             }
         );
 
@@ -150,6 +165,8 @@ public class ModNetworking {
         );
 
         // C2S: spend one skill point on the given skill
+        ServerPlayNetworking.registerGlobalReceiver(C2S_SKILL_RESPEC,
+            (server, player, handler, buf, responseSender) -> server.execute(() -> PirateLevelManager.respec(player)));
         ServerPlayNetworking.registerGlobalReceiver(C2S_SKILL_SPEND,
             (server, player, handler, buf, responseSender) -> {
                 String key = buf.readString(64);
@@ -214,6 +231,7 @@ public class ModNetworking {
         for (ShipUpgrades.Def def : ShipUpgrades.ALL) {
             buf.writeInt(upgrades.getOrDefault(def.key(), 0));
         }
+        net.get900.pixelpirates.world.livery.Liveries.writeMenu(buf, player, shipId);       // the Livery tab
         ServerPlayNetworking.send(player, OPEN_SHIPWRIGHT, buf);
     }
 
@@ -243,12 +261,13 @@ public class ModNetworking {
         }
 
         if (!player.isCreative()) {
-            if (player.getInventory().count(ModItems.COIN) < SHIP_COMMISSION_COST) {
+            int price = net.get900.pixelpirates.world.SkillEffects.haggle(player, ShipTiers.commissionCost(name));
+            if (player.getInventory().count(ModItems.COIN) < price) {
                 player.sendMessage(Text.literal(
-                    "§cYou need " + SHIP_COMMISSION_COST + "x Coin to commission a ship."), true);
+                    "§cYou need " + price + " doubloons to commission the " + name + "."), true);
                 return;
             }
-            int remaining = SHIP_COMMISSION_COST;
+            int remaining = price;
             for (int i = 0; i < player.getInventory().size() && remaining > 0; i++) {
                 var s = player.getInventory().getStack(i);
                 if (!s.isOf(ModItems.COIN)) continue;
@@ -329,12 +348,25 @@ public class ModNetworking {
     public static void sendMapMerchantMenu(ServerPlayerEntity player) {
         var buf = PacketByteBufs.create();
         buf.writeBoolean(PlayerProgressionManager.hasRadar(player));
-        buf.writeInt(player.getInventory().count(ModItems.PIRATE_COIN));
+        buf.writeInt(player.getInventory().count(ModItems.COIN));
+        buf.writeInt(claimedFreebies(player));
         ServerPlayNetworking.send(player, OPEN_MAP_MERCHANT, buf);
     }
 
-    /** Prices (in pirate coins) matching index sent by MAP_MERCHANT_BUY. */
-    private static final int[] SHOP_COSTS = {15, 5, 15, 30, 10, 0, 0, 0, 0};
+    /** The free starter cards (index 5+) are one per player, ever: world flag "mm_free:<index>:<uuid>". */
+    private static boolean freebieClaimed(ServerPlayerEntity player, int index) {
+        return net.get900.pixelpirates.homestead.HomesteadState.get(player.getServer()).flag("mm_free:" + index + ":" + player.getUuidAsString());
+    }
+
+    /** Bit i set = free card i already claimed. */
+    private static int claimedFreebies(ServerPlayerEntity player) {
+        int bits = 0;
+        for (int i = 0; i < SHOP_COSTS.length; i++) if (SHOP_COSTS[i] == 0 && freebieClaimed(player, i)) bits |= 1 << i;
+        return bits;
+    }
+
+    /** Prices (in DOUBLOONS) matching index sent by MAP_MERCHANT_BUY. */
+    private static final int[] SHOP_COSTS = {15, 10, 30, 75, 10, 0, 0, 0, 0};
 
     private static void handleMapMerchantBuy(ServerPlayerEntity player, int index) {
         if (index < 0 || index >= SHOP_COSTS.length) return;
@@ -345,8 +377,16 @@ public class ModNetworking {
             return;
         }
 
-        int cost = SHOP_COSTS[index];
-        if (!player.isCreative() && player.getInventory().count(ModItems.PIRATE_COIN) < cost) {
+        if (SHOP_COSTS[index] == 0) {
+            if (freebieClaimed(player, index)) {
+                player.sendMessage(Text.literal("§7\"One per sailor, friend. I'm generous, not daft.\""), true);
+                return;
+            }
+            net.get900.pixelpirates.homestead.HomesteadState.get(player.getServer()).setFlag("mm_free:" + index + ":" + player.getUuidAsString());
+        }
+
+        int cost = net.get900.pixelpirates.world.SkillEffects.haggle(player, SHOP_COSTS[index]);
+        if (!player.isCreative() && player.getInventory().count(ModItems.COIN) < cost) {
             player.sendMessage(Text.literal("§cNot enough doubloons. You need " + cost + "."), true);
             return;
         }
@@ -355,7 +395,7 @@ public class ModNetworking {
             int remaining = cost;
             for (int i = 0; i < player.getInventory().size() && remaining > 0; i++) {
                 var s = player.getInventory().getStack(i);
-                if (!s.isOf(ModItems.PIRATE_COIN)) continue;
+                if (!s.isOf(ModItems.COIN)) continue;
                 int take = Math.min(s.getCount(), remaining);
                 s.decrement(take);
                 remaining -= take;

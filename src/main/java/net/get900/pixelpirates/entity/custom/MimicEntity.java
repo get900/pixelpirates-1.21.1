@@ -207,9 +207,14 @@ public class MimicEntity extends HostileEntity implements GeoEntity {
     @Override
     protected void dropLoot(DamageSource source, boolean causedByPlayer) {
         super.dropLoot(source, causedByPlayer);
-        this.dropStack(new ItemStack(ModItems.PIRATE_COIN, 2 + this.random.nextInt(4)));
-        this.dropStack(new ItemStack(Items.GOLD_NUGGET, 1 + this.random.nextInt(4)));
-        if (this.random.nextFloat() < 0.25f) this.dropStack(new ItemStack(ModItems.CURSED_BONE));
+        // it imitates a chest - and it was holding a chest's worth of cursed-seas loot (2 rolls of phase4_common)
+        if (this.getWorld() instanceof net.minecraft.server.world.ServerWorld sw) {
+            var table = sw.getServer().getLootManager().getLootTable(new net.minecraft.util.Identifier("pixelpirates", "chests/phase4_common"));
+            var params = new net.minecraft.loot.context.LootContextParameterSet.Builder(sw)
+                    .add(net.minecraft.loot.context.LootContextParameters.ORIGIN, this.getPos())
+                    .build(net.minecraft.loot.context.LootContextTypes.CHEST);
+            for (int i = 0; i < 2; i++) table.generateLoot(params, this::dropStack);
+        }
         if (causedByPlayer && this.random.nextFloat() < 0.1f) this.dropStack(new ItemStack(ModItems.TREASURE_MAP_COMMON));
     }
 

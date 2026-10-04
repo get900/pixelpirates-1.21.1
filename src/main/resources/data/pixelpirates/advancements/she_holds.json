@@ -1,8 +1,14 @@
 {
   "display": {
-    "icon": {"item": "pixelpirates:ship_repair_kit"},
-    "title": {"translate": "advancements.pixelpirates.she_holds.title"},
-    "description": {"translate": "advancements.pixelpirates.she_holds.description"},
+    "icon": {
+      "item": "pixelpirates:ship_repair_kit"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.she_holds.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.she_holds.description"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": false,
@@ -10,6 +16,8 @@
   },
   "parent": "pixelpirates:captain_now",
   "criteria": {
-    "got_here": {"trigger": "minecraft:impossible"}
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
   }
 }

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crown_of_the_drowned": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:crown_of_the_drowned"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:tidefathers_wrath"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_crown_of_the_drowned",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:tidefathers_wrath"
+    ]
+  },
+  "sends_telemetry_event": false
+}

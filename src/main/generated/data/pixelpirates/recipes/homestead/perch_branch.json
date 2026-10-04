@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:azalea_leaves"
+    },
+    "L": {
+      "item": "minecraft:jungle_log"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "LS",
+    " A"
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:perch_branch"
+  },
+  "show_notification": true
+}

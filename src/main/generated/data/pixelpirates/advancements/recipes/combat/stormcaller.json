@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_kraken_scale": {
+    "has_abyssal_pearl": {
       "conditions": {
         "items": [
           {
             "items": [
-              "pixelpirates:kraken_scale"
+              "pixelpirates:abyssal_pearl"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_kraken_scale",
+      "has_abyssal_pearl",
       "has_the_recipe"
     ]
   ],

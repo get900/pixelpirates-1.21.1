@@ -172,7 +172,7 @@ public class MonkeyThiefGoal extends Goal {
         for (int slot = 0; slot < 9; slot++) {
             ItemStack stack = target.getInventory().getStack(slot);
             if (stack.isEmpty()) continue;
-            ItemStack stolen = stack.copy();
+            ItemStack stolen = stack.copyWithCount(1);          // ONE item - copying the stack duped the rest on death
             stack.decrement(1);
             target.getInventory().setStack(slot, stack.isEmpty() ? ItemStack.EMPTY : stack);
             monkey.setStolenItem(stolen);

@@ -26,9 +26,8 @@ public class SharkAttackGoal extends Goal {
         if (!potential.isAlive() || !potential.isTouchingWater()) return false;
         if (!shark.isTouchingWater()) return false;
 
-        // Shark Ward: per-level chance the shark decides to ignore this player
-        int sharkWardLvl = net.get900.pixelpirates.world.PirateLevelManager.getSkillLevel(player, "shark_ward");
-        if (sharkWardLvl > 0 && shark.getRandom().nextFloat() < sharkWardLvl * 0.10f) return false;
+        // Deep Diver: per-rank chance the shark decides to ignore this player
+        if (shark.getRandom().nextFloat() > net.get900.pixelpirates.world.SkillEffects.sharkInterest(player)) return false;
 
         target = potential;
         return true;

@@ -130,7 +130,7 @@ public class CompassOfDesireItem extends Item {
             if (g != null && n != null && g.getDimension().equals(world.getRegistryKey()) && g.getPos().getSquaredDistance(p.getX(), g.getPos().getY(), p.getZ()) < 24 * 24) {
                 String key = n.getString("TKey");
                 if (!key.isEmpty() && HomesteadState.get(p.getServer()).discover(p.getUuid(), key)) {
-                    p.sendMessage(Text.literal("[Logbook] Treasure found - the Compass of Desire turns to the next.").formatted(Formatting.GOLD), false);
+                    p.sendMessage(Text.literal("[Chronicle] Treasure found - the Compass of Desire turns to the next.").formatted(Formatting.GOLD), false);
                     p.playSound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundCategory.PLAYERS, 0.6f, 1.4f);
                 }
                 n.remove("TDim");

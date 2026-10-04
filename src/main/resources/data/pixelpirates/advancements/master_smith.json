@@ -1,0 +1,112 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:obsidian_halberd"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.master_smith.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.master_smith.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:forged_weapon",
+  "criteria": {
+    "crabclaw_sabre": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:crabclaw_sabre"
+            ]
+          }
+        ]
+      }
+    },
+    "pearlguard_rapier": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:pearlguard_rapier"
+            ]
+          }
+        ]
+      }
+    },
+    "pistol_cutlass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:pistol_cutlass"
+            ]
+          }
+        ]
+      }
+    },
+    "obsidian_halberd": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:obsidian_halberd"
+            ]
+          }
+        ]
+      }
+    },
+    "soulreaver": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:soulreaver"
+            ]
+          }
+        ]
+      }
+    },
+    "inkfang": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:inkfang"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crabclaw_sabre"
+    ],
+    [
+      "pearlguard_rapier"
+    ],
+    [
+      "pistol_cutlass"
+    ],
+    [
+      "obsidian_halberd"
+    ],
+    [
+      "soulreaver"
+    ],
+    [
+      "inkfang"
+    ]
+  ]
+}

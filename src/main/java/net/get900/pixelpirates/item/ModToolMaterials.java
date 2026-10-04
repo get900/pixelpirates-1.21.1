@@ -7,20 +7,22 @@ import net.minecraft.recipe.Ingredient;
 import java.util.Objects;
 import java.util.function.Supplier;
 
+/** Weapon damage = 1 + attack here + the item's bonus. Attack values are one baseline per phase so the weapon ladder in
+ *  "Materials & Gear Ladder - Design.txt" climbs evenly (2026-10-01; they used to top out far above netherite). */
 public enum ModToolMaterials implements ToolMaterial {
-    PIRATE(2, 600, 7.0F, 3.0F, 15, () -> Ingredient.ofItems(ModItems.ROPE)),
+    PIRATE(2, 400, 7.0F, 2.0F, 15, () -> Ingredient.ofItems(ModItems.ROPE)),
     // Ring 1 — salvage-grade gear
-    CASTAWAY(1, 200, 5.0F, 1.5F, 8, () -> Ingredient.ofItems(ModItems.DRIFTWOOD)),
+    CASTAWAY(1, 250, 5.0F, 2.0F, 8, () -> Ingredient.ofItems(ModItems.DRIFTWOOD)),
     // Ring 2 — navy/merchant forged steel
-    NAVAL(2, 750, 6.5F, 4.0F, 16, () -> Ingredient.ofItems(net.minecraft.item.Items.IRON_INGOT)),
+    NAVAL(2, 600, 6.5F, 3.0F, 16, () -> Ingredient.ofItems(net.minecraft.item.Items.IRON_INGOT)),
     // Ring 3 — corsair gold-worked steel
-    CORSAIR(3, 1200, 7.5F, 5.0F, 18, () -> Ingredient.ofItems(ModItems.PIRATE_COIN)),
+    CORSAIR(3, 900, 7.5F, 4.0F, 18, () -> Ingredient.ofItems(ModItems.PIRATE_COIN)),
     // Volcanic isles — ember-forged
-    VOLCANIC(3, 1500, 8.0F, 5.5F, 15, () -> Ingredient.ofItems(ModItems.VOLCANIC_EMBER)),
+    VOLCANIC(3, 1000, 8.0F, 4.5F, 15, () -> Ingredient.ofItems(ModItems.VOLCANIC_EMBER)),
     // Ring 4 — cursed bone
-    CURSED(3, 1600, 8.0F, 6.0F, 20, () -> Ingredient.ofItems(ModItems.CURSED_BONE)),
+    CURSED(3, 1300, 8.0F, 5.0F, 20, () -> Ingredient.ofItems(ModItems.CURSED_BONE)),
     // Ring 5 — abyssal kraken-scale
-    ABYSSAL(4, 2000, 9.0F, 7.0F, 22, () -> Ingredient.ofItems(ModItems.KRAKEN_SCALE));
+    ABYSSAL(4, 1600, 9.0F, 5.5F, 22, () -> Ingredient.ofItems(ModItems.KRAKEN_SCALE));
 
     private final int miningLevel;
     private final int itemDurability;

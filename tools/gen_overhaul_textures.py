@@ -895,6 +895,75 @@ TIDEBREAKER = [
     "................",
     "................"]
 
+# ---------------------------------------------------------------- early-game food + healing (2026-09-30 playtest)
+ROASTED_BANANA = [
+    "................",
+    "................",
+    "............s...",
+    "...........ss...",
+    "..........yy....",
+    ".........yYy....",
+    "........yYyk....",
+    ".......yYyk.....",
+    "......yYyyk.....",
+    ".....yYyyk......",
+    "...kyYyyk.......",
+    "..kyyyykk.......",
+    "..kkkkk.........",
+    "................",
+    "................",
+    "................"]
+COCONUT_WATER = [
+    "................",
+    "......cc........",
+    "......kk........",
+    ".....gwwg.......",
+    ".....gwwg.......",
+    "....gwwwwg......",
+    "...gwwwwwwg.....",
+    "...gwwhwwwg.....",
+    "...gwhhwwwg.....",
+    "...gwwwwwwg.....",
+    "...gbbbbbbg.....",
+    "....gbbbbg......",
+    ".....gggg.......",
+    "................",
+    "................",
+    "................"]
+SEA_BANDAGE = [
+    "................",
+    "................",
+    "................",
+    ".....wwwww......",
+    "....wwwwwwww....",
+    "...wwhwwwwwwww..",
+    "...whhhwwwwrwww.",
+    "...whhhwwwrrrww.",
+    "...wwhwwwwwrwww.",
+    "....wwwwwwwwww..",
+    ".....wwwww......",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................"]
+ISLAND_SKEWER = [
+    "................",
+    "..............s.",
+    ".............s..",
+    "..........ffs...",
+    ".........fFfs...",
+    "........yyfs....",
+    ".......yYys.....",
+    "......ffsy......",
+    ".....fFsf.......",
+    "....yysy........",
+    "...yYs..........",
+    "...ss...........",
+    "..s.............",
+    ".s..............",
+    "................",
+    "................"]
 # ---------------------------------------------------------------- galley foods
 BANANA_BREAD = [
     "................",
@@ -1019,6 +1088,12 @@ def build_items16() -> None:
     save(sprite(TIDEBREAKER, {"c": ramp("#e8806a"), "C": ramp("#f4a08a"), "p": ramp("#d8f0ec", 1.1, 0.8), "b": ramp("#b8862e"),
                               "h": ramp("#6a4a2a"), "g": ramp("#e0b84a")}, flat="g"), ITEM, "tidebreaker")
 
+    save(sprite(ROASTED_BANANA, {"y": ramp("#c89a3a"), "Y": ramp("#e8c46a"), "k": ramp("#4a2e1a"), "s": ramp("#5a3a1e")}, flat="Y"), ITEM, "roasted_banana")
+    save(sprite(COCONUT_WATER, {"g": ramp("#b8d8e0", 1.1, 0.75), "w": ramp("#f4f0e4"), "h": ramp("#ffffff"), "b": ramp("#e6dcc0"),
+                                "c": ramp("#8a6a42"), "k": ramp("#6a4a2a")}, flat="h"), ITEM, "coconut_water")
+    save(sprite(SEA_BANDAGE, {"w": ramp("#ece2c8"), "h": ramp("#c8b894"), "r": ramp("#b8302a")}, flat="r"), ITEM, "sea_bandage")
+    save(sprite(ISLAND_SKEWER, {"s": ramp("#8a6a42"), "f": ramp("#c8783a"), "F": ramp("#e8a860"), "y": ramp("#e0b84a"), "Y": ramp("#f6e27a")},
+                flat="FY"), ITEM, "island_skewer")
     save(sprite(BANANA_BREAD, {"c": ramp("#8a5a30"), "b": ramp("#c4904e"), "y": ramp("#f0dc6e")}, flat="y"), ITEM, "banana_bread")
     save(sprite(HARDTACK, {"b": ramp("#d2b882"), "h": ramp("#8e7446")}, flat="h"), ITEM, "hardtack")
     save(sprite(CALAMARI, {"o": ramp("#e1ae5a")}), ITEM, "kraken_calamari")
@@ -1630,6 +1705,23 @@ def build_furniture() -> None:
         "................",
         "................",
         "................"], {"s": "#4a6a2a", "g": "#6a8a3a", "y": "#e8c83a", "Y": "#f6e27a", "b": "#5a3a1e"}), BLOCK, "banana_block")
+    save(grid_img([
+        ".......ss.......",
+        ".......ss.......",
+        "......sggs......",
+        ".....yyggyy.....",
+        "....yYyggyYy....",
+        "...yYy.gg.yYy...",
+        "...yYyyggyyYy...",
+        "..yYy.yggy.yYy..",
+        "..yYy.yYYy.yYy..",
+        "..yy..yYYy..yy..",
+        "..b...yYYy...b..",
+        "......yyyy......",
+        "......b..b......",
+        "................",
+        "................",
+        "................"], {"s": "#4a6a2a", "g": "#6a8a3a", "y": "#7aa83a", "Y": "#a6cc5a", "b": "#5a3a1e"}), BLOCK, "banana_block_unripe")
     shell = stone(161, ["#4a2e1a", "#5a3820", "#6a4428", "#7a5030"], cell=2)
     px = shell.load()
     for x, y in ((6, 5), (9, 5), (7, 8)):

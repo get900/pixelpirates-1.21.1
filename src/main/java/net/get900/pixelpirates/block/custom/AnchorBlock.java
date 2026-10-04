@@ -14,11 +14,25 @@ import net.minecraft.world.World;
 import org.valkyrienskies.core.api.ships.Ship;
 import org.valkyrienskies.mod.api.ValkyrienSkies;
 
-public class AnchorBlock extends Block {
+/** The ANCHOR (3D model, tools/gen_props_assets.py; faces the way it's placed): on an assembled ship, right-click drops or raises it. */
+public class AnchorBlock extends net.minecraft.block.HorizontalFacingBlock {
+    private static final net.minecraft.util.shape.VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
 
     public AnchorBlock(Settings settings) {
         super(settings);
+        setDefaultState(getStateManager().getDefaultState().with(FACING, net.minecraft.util.math.Direction.NORTH));
     }
+
+    @Override
+    protected void appendProperties(net.minecraft.state.StateManager.Builder<Block, BlockState> b) { b.add(FACING); }
+
+    @Override
+    public BlockState getPlacementState(net.minecraft.item.ItemPlacementContext ctx) {
+        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    }
+
+    @Override
+    public net.minecraft.util.shape.VoxelShape getOutlineShape(BlockState s, net.minecraft.world.BlockView w, BlockPos p, net.minecraft.block.ShapeContext c) { return SHAPE; }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player,

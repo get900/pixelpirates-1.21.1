@@ -1,0 +1,49 @@
+{
+ "variants": {
+  "facing=north,drink=0": {
+   "model": "pixelpirates:block/tavern_keg_0"
+  },
+  "facing=north,drink=1": {
+   "model": "pixelpirates:block/tavern_keg_1"
+  },
+  "facing=north,drink=2": {
+   "model": "pixelpirates:block/tavern_keg_2"
+  },
+  "facing=east,drink=0": {
+   "model": "pixelpirates:block/tavern_keg_0",
+   "y": 90
+  },
+  "facing=east,drink=1": {
+   "model": "pixelpirates:block/tavern_keg_1",
+   "y": 90
+  },
+  "facing=east,drink=2": {
+   "model": "pixelpirates:block/tavern_keg_2",
+   "y": 90
+  },
+  "facing=south,drink=0": {
+   "model": "pixelpirates:block/tavern_keg_0",
+   "y": 180
+  },
+  "facing=south,drink=1": {
+   "model": "pixelpirates:block/tavern_keg_1",
+   "y": 180
+  },
+  "facing=south,drink=2": {
+   "model": "pixelpirates:block/tavern_keg_2",
+   "y": 180
+  },
+  "facing=west,drink=0": {
+   "model": "pixelpirates:block/tavern_keg_0",
+   "y": 270
+  },
+  "facing=west,drink=1": {
+   "model": "pixelpirates:block/tavern_keg_1",
+   "y": 270
+  },
+  "facing=west,drink=2": {
+   "model": "pixelpirates:block/tavern_keg_2",
+   "y": 270
+  }
+ }
+}

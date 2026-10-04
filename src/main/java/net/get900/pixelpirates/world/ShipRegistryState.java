@@ -31,6 +31,11 @@ public class ShipRegistryState extends PersistentState {
     private final Map<Long, Double> waterlineOffsets = new HashMap<>();
     // shipId -> blueprint name for AI ships (used to award zone unlock on capture)
     private final Map<Long, String> shipBlueprintNames = new HashMap<>();
+    // shipId -> ship-yard positions of blocks players added after assembly (world/ShipBuilding)
+    private final Map<Long, Set<Long>> customBlocks = new HashMap<>();
+
+    /** Live set of a ship's player-added blocks (callers mark dirty after changing it). */
+    public Set<Long> customBlocks(long shipId) { return customBlocks.computeIfAbsent(shipId, k -> new HashSet<>()); }
 
     // ── Write API ─────────────────────────────────────────────────────────────
 
@@ -99,6 +104,12 @@ public class ShipRegistryState extends PersistentState {
         markDirty();
     }
 
+    /** The player who owns this ship, or null (AI ships, derelicts). */
+    public UUID ownerOf(long shipId) {
+        for (Map.Entry<UUID, Long> e : playerOwnedShips.entrySet()) if (e.getValue() == shipId) return e.getKey();
+        return null;
+    }
+
     public Long getOwnedShip(UUID playerUuid) {
         return playerOwnedShips.get(playerUuid);
     }
@@ -114,6 +125,7 @@ public class ShipRegistryState extends PersistentState {
         shipUpgrades.remove(shipId);
         waterlineOffsets.remove(shipId);
         shipBlueprintNames.remove(shipId);
+        customBlocks.remove(shipId);
         playerOwnedShips.entrySet().removeIf(e -> e.getValue() == shipId);
         markDirty();
     }
@@ -188,6 +200,10 @@ public class ShipRegistryState extends PersistentState {
         shipBlueprintNames.forEach((id, name) -> blueprintTag.putString(Long.toString(id), name));
         nbt.put("ship_blueprint_names", blueprintTag);
 
+        NbtCompound customTag = new NbtCompound();
+        customBlocks.forEach((id, set) -> { if (!set.isEmpty()) customTag.putLongArray(Long.toString(id), set.stream().mapToLong(Long::longValue).toArray()); });
+        nbt.put("custom_blocks", customTag);
+
         return nbt;
     }
 
@@ -242,6 +258,15 @@ public class ShipRegistryState extends PersistentState {
         for (String key : blueprintTag.getKeys()) {
             try { state.shipBlueprintNames.put(Long.parseLong(key), blueprintTag.getString(key)); }
             catch (NumberFormatException ignored) {}
+        }
+
+        NbtCompound customTag = nbt.getCompound("custom_blocks");
+        for (String key : customTag.getKeys()) {
+            try {
+                Set<Long> set = new HashSet<>();
+                for (long p : customTag.getLongArray(key)) set.add(p);
+                state.customBlocks.put(Long.parseLong(key), set);
+            } catch (NumberFormatException ignored) {}
         }
 
         return state;

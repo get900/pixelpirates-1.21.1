@@ -80,6 +80,10 @@ public class TreasureHoardBlock extends BlockWithEntity {
         if (!(world.getBlockEntity(pos) instanceof TreasureHoardBlockEntity be)) return ActionResult.PASS;
         if (world.isClient) return ActionResult.SUCCESS;
         ItemStack held = player.getStackInHand(hand);
+        if (held.getItem() instanceof StrongboxItem box && player instanceof net.minecraft.server.network.ServerPlayerEntity sp) {
+            Strongboxes.open(sp, be, held, box.tier());                     // the hoard pays the locksmith
+            return ActionResult.SUCCESS;
+        }
         long moved = 0;
         if (held.isOf(ModItems.PIRATE_COIN)) {
             moved = held.getCount();

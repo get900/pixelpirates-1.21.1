@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:everburning_lantern"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_molten_warlord.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_molten_warlord.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_sea_serpent",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

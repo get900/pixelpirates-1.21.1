@@ -93,7 +93,12 @@
         {
           "type": "minecraft:item",
           "name": "pixelpirates:ashen_helmet",
-          "weight": 2
+          "weight": 2,
+          "functions": [
+            {
+              "function": "pixelpirates:frozen_seeker"
+            }
+          ]
         },
         {
           "type": "minecraft:item",

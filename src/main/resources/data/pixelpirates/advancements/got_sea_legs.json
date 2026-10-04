@@ -1,8 +1,14 @@
 {
   "display": {
-    "icon": {"item": "pixelpirates:raft_item"},
-    "title": {"translate": "advancements.pixelpirates.got_sea_legs.title"},
-    "description": {"translate": "advancements.pixelpirates.got_sea_legs.description"},
+    "icon": {
+      "item": "pixelpirates:raft_item"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.got_sea_legs.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.got_sea_legs.description"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": false,
@@ -13,7 +19,13 @@
     "got_here": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [{"items": ["pixelpirates:raft_item"]}]
+        "items": [
+          {
+            "items": [
+              "pixelpirates:raft_item"
+            ]
+          }
+        ]
       }
     }
   }

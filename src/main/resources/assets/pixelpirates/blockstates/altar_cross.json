@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/altar_cross"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/altar_cross",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/altar_cross",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/altar_cross",
+   "y": 270
+  }
+ }
+}

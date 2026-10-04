@@ -1,15 +1,23 @@
 {
   "display": {
-    "icon": {"item": "pixelpirates:cannon_ball"},
-    "title": {"translate": "advancements.pixelpirates.broadside.title"},
-    "description": {"translate": "advancements.pixelpirates.broadside.description"},
+    "icon": {
+      "item": "pixelpirates:cannon_ball"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.broadside.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.broadside.description"
+    },
     "frame": "task",
     "show_toast": true,
-    "announce_to_chat": true,
+    "announce_to_chat": false,
     "hidden": false
   },
   "parent": "pixelpirates:captain_now",
   "criteria": {
-    "got_here": {"trigger": "minecraft:impossible"}
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
   }
 }

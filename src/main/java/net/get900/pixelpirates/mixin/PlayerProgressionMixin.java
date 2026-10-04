@@ -23,7 +23,7 @@ public abstract class PlayerProgressionMixin implements PlayerProgressionCompone
     @Unique private int pp_pirateLevel = 1;
     @Unique private int pp_pirateXp = 0;
     @Unique private int pp_skillPoints = 0;
-    @Unique private final int[] pp_skillLevels = new int[25]; // one per ALL_SKILLS entry
+    @Unique private final int[] pp_skillLevels = new int[64]; // indexed like ALL_SKILLS; SAVED BY KEY (PPSkills)
     @Unique private int pp_secondWindCooldown = 0;
     @Unique private int pp_davysLuckCooldown  = 0;
     @Unique private final int[] pp_factionRep = new int[Faction.values().length];
@@ -103,11 +103,17 @@ public abstract class PlayerProgressionMixin implements PlayerProgressionCompone
         this.pp_pirateLevel  = nbt.contains("PPLevel")  ? nbt.getInt("PPLevel")  : 1;
         this.pp_pirateXp     = nbt.contains("PPXp")     ? nbt.getInt("PPXp")     : 0;
         this.pp_skillPoints  = nbt.contains("PPSkillPts")? nbt.getInt("PPSkillPts"): 0;
-        if (nbt.contains("PPSkillLevels")) {
-            int[] saved = nbt.getIntArray("PPSkillLevels");
-            for (int i = 0; i < Math.min(saved.length, pp_skillLevels.length); i++) {
-                pp_skillLevels[i] = saved[i];
+        java.util.Arrays.fill(pp_skillLevels, 0);
+        if (nbt.contains("PPSkills")) {                                   // by key (2026-10-01)
+            NbtCompound sk = nbt.getCompound("PPSkills");
+            var all = net.get900.pixelpirates.world.PirateLevelingSystem.ALL_SKILLS;
+            for (int i = 0; i < all.size(); i++) {
+                var def = all.get(i);
+                pp_skillLevels[i] = Math.min(def.maxLevel(), sk.getInt(def.key()));
             }
+        } else if (nbt.contains("PPSkillLevels")) {
+            // the old position-indexed skills were redesigned: refund every point the player has earned
+            this.pp_skillPoints = net.get900.pixelpirates.world.PirateLevelManager.pointsEarned(this.pp_pirateLevel);
         }
         if (nbt.contains("PPFactionRep")) {
             int[] saved = nbt.getIntArray("PPFactionRep");
@@ -128,7 +134,10 @@ public abstract class PlayerProgressionMixin implements PlayerProgressionCompone
         nbt.putInt("PPLevel",    this.pp_pirateLevel);
         nbt.putInt("PPXp",       this.pp_pirateXp);
         nbt.putInt("PPSkillPts", this.pp_skillPoints);
-        nbt.putIntArray("PPSkillLevels", pp_skillLevels);
+        NbtCompound sk = new NbtCompound();
+        var all = net.get900.pixelpirates.world.PirateLevelingSystem.ALL_SKILLS;
+        for (int i = 0; i < all.size(); i++) if (pp_skillLevels[i] > 0) sk.putInt(all.get(i).key(), pp_skillLevels[i]);
+        nbt.put("PPSkills", sk);
         nbt.putIntArray("PPFactionRep",  pp_factionRep);
     }
 }

@@ -56,7 +56,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:pirate_coin",
+          "name": "pixelpirates:coin",
           "weight": 10,
           "functions": [
             {

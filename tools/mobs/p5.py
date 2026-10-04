@@ -247,6 +247,11 @@ def coral_whale(seed):
     anim(m, "special", 2.0, {"jaw": {"rotation": keys((0, [0, 0, 0]), (0.6, [20, 0, 0]), (1.4, [20, 0, 0]), (2.0, [0, 0, 0]))},
                              "head": {"rotation": keys((0, [0, 0, 0]), (0.6, [-12, 0, 0]), (2.0, [0, 0, 0]))}}, loop=False)
     anim(m, "special2", 1.5, {"body": {"rotation": keys((0, [0, 0, 0]), (0.7, [0, 0, 30]), (1.5, [0, 0, 0]))}}, loop=False)
+    # fed a krill cluster (CoralWhaleEntity): one happy barrel roll round its long axis, flippers out, jaw open
+    anim(m, "roll", 1.6, {"body": {"rotation": keys((0, [0, 0, 0]), (0.4, [0, 0, 90]), (0.8, [0, 0, 180]), (1.2, [0, 0, 270]), (1.6, [0, 0, 360]))},
+                          "fin_r": {"rotation": keys((0, [0, 0, 0]), (0.3, [0, 0, 25]), (1.3, [0, 0, 25]), (1.6, [0, 0, 0]))},
+                          "fin_l": {"rotation": keys((0, [0, 0, 0]), (0.3, [0, 0, -25]), (1.3, [0, 0, -25]), (1.6, [0, 0, 0]))},
+                          "jaw": {"rotation": keys((0, [0, 0, 0]), (0.4, [14, 0, 0]), (1.2, [14, 0, 0]), (1.6, [0, 0, 0]))}}, loop=False)
     return m
 
 

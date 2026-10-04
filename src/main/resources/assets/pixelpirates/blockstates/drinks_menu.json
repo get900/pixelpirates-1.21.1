@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/drinks_menu"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/drinks_menu",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/drinks_menu",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/drinks_menu",
+   "y": 270
+  }
+ }
+}

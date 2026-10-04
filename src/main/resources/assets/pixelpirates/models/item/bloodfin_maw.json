@@ -1,0 +1,128 @@
+{
+ "parent": "builtin/entity",
+ "gui_light": "front",
+ "textures": {
+  "particle": "minecraft:block/nether_wart_block"
+ },
+ "display": {
+  "thirdperson_righthand": {
+   "rotation": [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   "translation": [
+    0.0,
+    -2.0,
+    1.5
+   ],
+   "scale": [
+    0.6122,
+    0.6122,
+    0.6122
+   ]
+  },
+  "thirdperson_lefthand": {
+   "rotation": [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   "translation": [
+    0.0,
+    -2.0,
+    1.5
+   ],
+   "scale": [
+    0.6122,
+    0.6122,
+    0.6122
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    127.42,
+    -64.85,
+    143.16
+   ],
+   "translation": [
+    1.1,
+    -1.3,
+    -0.5
+   ],
+   "scale": [
+    0.2449,
+    0.2449,
+    0.2449
+   ]
+  },
+  "firstperson_lefthand": {
+   "rotation": [
+    127.42,
+    -64.85,
+    143.16
+   ],
+   "translation": [
+    1.1,
+    -1.3,
+    -0.5
+   ],
+   "scale": [
+    0.2449,
+    0.2449,
+    0.2449
+   ]
+  },
+  "gui": {
+   "rotation": [
+    -90.0,
+    -45.0,
+    -90.0
+   ],
+   "translation": [
+    -3.334,
+    -2.424,
+    -0.107
+   ],
+   "scale": [
+    0.4286,
+    0.4286,
+    0.4286
+   ]
+  },
+  "ground": {
+   "rotation": [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   "translation": [
+    -0.061,
+    -2.327,
+    0.367
+   ],
+   "scale": [
+    0.2449,
+    0.2449,
+    0.2449
+   ]
+  },
+  "fixed": {
+   "rotation": [
+    -90.0,
+    45.0,
+    90.0
+   ],
+   "translation": [
+    7.302,
+    -5.311,
+    0.235
+   ],
+   "scale": [
+    0.9388,
+    0.9388,
+    0.9388
+   ]
+  }
+ }
+}

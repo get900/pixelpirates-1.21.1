@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "pixelpirates:tattered_cloth"
+      "item": "pixelpirates:crab_shell"
     },
     "M": {
-      "item": "minecraft:iron_ingot"
+      "item": "pixelpirates:tattered_cloth"
     }
   },
   "pattern": [

@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:gullwing_boathouse",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

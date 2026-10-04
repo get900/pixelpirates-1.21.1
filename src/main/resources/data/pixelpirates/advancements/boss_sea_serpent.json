@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:serpents_tide_pearl"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_sea_serpent.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_sea_serpent.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_captain_rackham",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

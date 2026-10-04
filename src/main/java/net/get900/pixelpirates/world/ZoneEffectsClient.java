@@ -108,11 +108,10 @@ public class ZoneEffectsClient {
     }
 
     // Zone 5 — blizzard: dense snowflakes driven by strong winds, wall of snow at 12-15 blocks.
-    // Frozen Seeker enchantment reduces particle count: 0=full, 1=60%, 2=30%, 3=10%
+    // Frozen Seeker enchantment reduces particle count: -9% per level, level X keeps 10%
     private static void spawnBlizzard(ClientWorld world, double x, double y, double z, Random rng, int frozenLevel) {
         // Multiplier: how many particles to skip based on level
-        float[] keepChance = { 1.0f, 0.6f, 0.3f, 0.10f };
-        float chance = keepChance[Math.min(frozenLevel, 3)];
+        float chance = 1.0f - 0.09f * Math.min(frozenLevel, 10);
 
         // Dense field of driven snowflakes around player
         int field = Math.max(1, (int)(10 * chance));

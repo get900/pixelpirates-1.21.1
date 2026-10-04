@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rackhams_diving_charm": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:rackhams_diving_charm"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:rackham_blunderbuss"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_rackhams_diving_charm",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:rackham_blunderbuss"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,52 +1,221 @@
 {
-  "type": "minecraft:tree",
+  "type": "minecraft:simple_random_selector",
   "config": {
-    "decorators": [],
-    "dirt_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "minecraft:dirt"
+    "features": [
+      {
+        "feature": {
+          "type": "minecraft:tree",
+          "config": {
+            "decorators": [
+              {
+                "type": "pixelpirates:coconut",
+                "chance": 0.08
+              }
+            ],
+            "dirt_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:dirt"
+              }
+            },
+            "foliage_placer": {
+              "type": "minecraft:blob_foliage_placer",
+              "height": 2,
+              "offset": 0,
+              "radius": 2
+            },
+            "foliage_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:palm_leaves",
+                "Properties": {
+                  "distance": "7",
+                  "persistent": "true",
+                  "waterlogged": "false"
+                }
+              }
+            },
+            "force_dirt": false,
+            "ignore_vines": true,
+            "minimum_size": {
+              "type": "minecraft:two_layers_feature_size",
+              "limit": 1,
+              "lower_size": 0,
+              "upper_size": 1
+            },
+            "trunk_placer": {
+              "type": "minecraft:straight_trunk_placer",
+              "base_height": 6,
+              "height_rand_a": 3,
+              "height_rand_b": 0
+            },
+            "trunk_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:palm_log",
+                "Properties": {
+                  "axis": "y"
+                }
+              }
+            }
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:air"
+            }
+          }
+        ]
+      },
+      {
+        "feature": {
+          "type": "minecraft:tree",
+          "config": {
+            "decorators": [
+              {
+                "type": "pixelpirates:coconut",
+                "chance": 0.08
+              }
+            ],
+            "dirt_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:dirt"
+              }
+            },
+            "foliage_placer": {
+              "type": "minecraft:acacia_foliage_placer",
+              "offset": 0,
+              "radius": 2
+            },
+            "foliage_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:palm_leaves",
+                "Properties": {
+                  "distance": "7",
+                  "persistent": "true",
+                  "waterlogged": "false"
+                }
+              }
+            },
+            "force_dirt": false,
+            "ignore_vines": true,
+            "minimum_size": {
+              "type": "minecraft:two_layers_feature_size",
+              "limit": 1,
+              "lower_size": 0,
+              "upper_size": 1
+            },
+            "trunk_placer": {
+              "type": "minecraft:bending_trunk_placer",
+              "base_height": 6,
+              "bend_length": {
+                "type": "minecraft:uniform",
+                "value": {
+                  "max_inclusive": 2,
+                  "min_inclusive": 1
+                }
+              },
+              "height_rand_a": 2,
+              "height_rand_b": 1,
+              "min_height_for_leaves": 4
+            },
+            "trunk_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:palm_log",
+                "Properties": {
+                  "axis": "y"
+                }
+              }
+            }
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:air"
+            }
+          }
+        ]
+      },
+      {
+        "feature": {
+          "type": "minecraft:tree",
+          "config": {
+            "decorators": [
+              {
+                "type": "pixelpirates:coconut",
+                "chance": 0.08
+              }
+            ],
+            "dirt_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:dirt"
+              }
+            },
+            "foliage_placer": {
+              "type": "minecraft:random_spread_foliage_placer",
+              "foliage_height": 2,
+              "leaf_placement_attempts": 40,
+              "offset": 0,
+              "radius": 3
+            },
+            "foliage_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:palm_leaves",
+                "Properties": {
+                  "distance": "7",
+                  "persistent": "true",
+                  "waterlogged": "false"
+                }
+              }
+            },
+            "force_dirt": false,
+            "ignore_vines": true,
+            "minimum_size": {
+              "type": "minecraft:two_layers_feature_size",
+              "limit": 1,
+              "lower_size": 0,
+              "upper_size": 1
+            },
+            "trunk_placer": {
+              "type": "minecraft:bending_trunk_placer",
+              "base_height": 4,
+              "bend_length": 1,
+              "height_rand_a": 1,
+              "height_rand_b": 1,
+              "min_height_for_leaves": 3
+            },
+            "trunk_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:palm_log",
+                "Properties": {
+                  "axis": "y"
+                }
+              }
+            }
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:air"
+            }
+          }
+        ]
       }
-    },
-    "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "height": 2,
-      "offset": 0,
-      "radius": 2
-    },
-    "foliage_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "pixelpirates:palm_leaves",
-        "Properties": {
-          "distance": "7",
-          "persistent": "true",
-          "waterlogged": "false"
-        }
-      }
-    },
-    "force_dirt": false,
-    "ignore_vines": true,
-    "minimum_size": {
-      "type": "minecraft:two_layers_feature_size",
-      "limit": 1,
-      "lower_size": 0,
-      "upper_size": 1
-    },
-    "trunk_placer": {
-      "type": "minecraft:straight_trunk_placer",
-      "base_height": 6,
-      "height_rand_a": 3,
-      "height_rand_b": 0
-    },
-    "trunk_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "pixelpirates:palm_log",
-        "Properties": {
-          "axis": "y"
-        }
-      }
-    }
+    ]
   }
 }

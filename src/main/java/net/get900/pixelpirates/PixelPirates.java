@@ -26,7 +26,6 @@ import net.get900.pixelpirates.entity.custom.MapMerchantEntity;
 import net.get900.pixelpirates.entity.custom.PirateCrewEntity;
 import net.get900.pixelpirates.entity.custom.SharkEntity;
 import net.minecraft.util.math.Box;
-import net.get900.pixelpirates.item.ModItemGroups;
 import net.get900.pixelpirates.item.ModItems;
 import net.get900.pixelpirates.util.PlayerProgressionComponent;
 import net.get900.pixelpirates.world.AdminTestState;
@@ -82,10 +81,16 @@ public class PixelPirates implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		// the spawn island's hand edits saved in game (/ppisland capture) - read with the layout, written by world/gen/IslandEdits
+		net.get900.pixelpirates.world.gen.PortCityLayout.LOCAL_EDITS = net.fabricmc.loader.api.FabricLoader.getInstance().getGameDir().resolve("pixelpirates/island_edits.txt");
+		net.get900.pixelpirates.world.gen.IslandEditTracker.init();
+		net.get900.pixelpirates.world.dungeon.StructureEditState.init();   // /ppstruct: hand edits to /ppdungeon copies of layout structures   // remembers what players change on the island (/ppisland capture all)
 		ModItems.registerModItems();
-		ModItemGroups.registerItemGroups();
+		net.get900.pixelpirates.item.ModCreativeTabs.register();   // self-sorting creative tabs (item/ModCreativeTabs)
 		ModBlocks.registerModBlocks();
+		net.get900.pixelpirates.world.dungeon.AbyssPuzzleNodes.register();   // Phase 5 puzzle stones (abyss_puzzle_node + its block entity)
 		net.get900.pixelpirates.homestead.Homestead.init();   // base building, farming, galley, trade... (homestead/)
+		net.get900.pixelpirates.item.food.PirateFoods.register();   // the galley: 40 dishes (item/food/PirateFoods)
 		net.get900.pixelpirates.util.ModLootTableModifiers.register();
 
 		ModEnchantments.register();
@@ -143,11 +148,13 @@ public class PixelPirates implements ModInitializer {
 			var player = handler.player;
 			if (player.getServerWorld().getRegistryKey().equals(ModDimensions.PIXEL_PIRATES_WORLD)) {
 				grantStarterCoinsIfNeeded(player);
+				net.get900.pixelpirates.world.Chronicle.giveStarter(player);
 			}
 		});
 		ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, origin, destination) -> {
 			if (destination.getRegistryKey().equals(ModDimensions.PIXEL_PIRATES_WORLD)) {
 				grantStarterCoinsIfNeeded(player);
+				net.get900.pixelpirates.world.Chronicle.giveStarter(player);
 			}
 		});
 
@@ -160,24 +167,10 @@ public class PixelPirates implements ModInitializer {
 				return;
 			}
 			ShipRegistryState.get(server.getOverworld()).restoreToMaps(ppWorld);
+			ShipSchematic.installBundled();          // copy the mod's blueprints into config/ if missing
 			AiShipConfig.generateDefaults();
 
-			// Ensure one Map Merchant exists near the spawn island
-			ppWorld.getChunk(0, 0); // force-load spawn chunk
-			int spawnY = ppWorld.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, 0, 0);
-			if (spawnY < 64) spawnY = 65;
-			Box searchBox = new Box(-30, spawnY - 5, -30, 30, spawnY + 10, 30);
-			boolean merchantPresent = !ppWorld.getEntitiesByClass(
-				MapMerchantEntity.class, searchBox, e -> true).isEmpty();
-			if (!merchantPresent) {
-				MapMerchantEntity merchant = ModEntities.MAP_MERCHANT.create(ppWorld);
-				if (merchant != null) {
-					merchant.refreshPositionAndAngles(5.5, spawnY, 5.5, 0f, 0f);
-					merchant.setPersistent();
-					ppWorld.spawnEntity(merchant);
-					LOGGER.info("[SpawnSetup] Spawned Map Merchant at spawn island.");
-				}
-			}
+			// The Map Merchant is seated in his market booth by homestead/trade/PortTraders (with the port traders).
 		});
 
 		// AI computes SHIP_INPUTS first so SteeringManager sees fresh values this same tick.
@@ -185,6 +178,11 @@ public class PixelPirates implements ModInitializer {
 
 		// Ship helm steering — applies physics forces using SHIP_INPUTS set above (or by HELM_STEER packet).
 		ServerTickEvents.END_SERVER_TICK.register(ShipSteeringManager::tick);
+		ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.world.KeelBreaker::tick);
+		ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.homestead.harbour.HarbourDues::tick);
+		ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.item.custom.SirenConchItem::tick);
+		ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.item.RelicWeapons::tick);
+		ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.world.HelmDismountGuard::tick);
 
 		// Natural AI ship spawning — rate and cap are configurable via /ppai setrate and /ppai setcap.
 		// Multiple factions can spawn; defaults: every 2400 ticks, cap = max(8, players*2).
@@ -316,6 +314,16 @@ public class PixelPirates implements ModInitializer {
 		// /pptest god + clearsight upkeep (every tick)
 		ServerTickEvents.END_SERVER_TICK.register(TestModes::tick);
 		ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.world.GhostShipEncounter::tick);
+		// SEALED BOSS HOARDS: a hoard won't open (or break) until you're ready for its boss; a second try wakes it (BossHoards)
+		net.fabricmc.fabric.api.event.player.UseBlockCallback.EVENT.register((player, world, hand, hit) -> {
+			if (world.isClient || !(player instanceof net.minecraft.server.network.ServerPlayerEntity sp)) return net.minecraft.util.ActionResult.PASS;
+			return net.get900.pixelpirates.entity.mob.BossHoards.onUse(sp, (ServerWorld) world, hit.getBlockPos());
+		});
+		net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, be) ->
+				world.isClient || be == null || net.get900.pixelpirates.entity.mob.BossHoards.mayBreak(player, be));
+		// a thrown rope line reels back in as rope (item/custom/RopeItem)
+		net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, be) ->
+				world.isClient || net.get900.pixelpirates.item.custom.RopeItem.reel(world, player, pos, state));
 		// Ringing a bell that stands on a Phantom Buoy (Dutchman's Rest) summons the Flying Dutchman
 		net.fabricmc.fabric.api.event.player.UseBlockCallback.EVENT.register((player, world, hand, hit) -> {
 			if (world.isClient || hand != net.minecraft.util.Hand.MAIN_HAND) return net.minecraft.util.ActionResult.PASS;
@@ -345,6 +353,10 @@ public class PixelPirates implements ModInitializer {
 			return net.minecraft.util.ActionResult.SUCCESS;            // never mined, not even in creative
 		});
 		ServerLivingEntityEvents.ALLOW_DEATH.register(TestModes::allowDeath);
+		// A broken player-added ship block frees its build slot (world/ShipBuilding)
+		net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, be) -> {
+			if (world instanceof ServerWorld sw) net.get900.pixelpirates.world.ShipBuilding.broken(sw, pos);
+		});
 		net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents.JOIN.register(
 				(handler, sender, server) -> TestModes.sync(handler.getPlayer()));
 
@@ -396,39 +408,11 @@ public class PixelPirates implements ModInitializer {
 			AdvancementHelper.grant(player, "shark_bait");
 		});
 
-		// Zone progression: killing a shark awards a kill toward the zone it died in.
-		// Accumulate SHARK_KILLS_PER_ZONE kills in your current max zone to unlock the next.
-		// (Placeholder until zone bosses are implemented.)
-		final int SHARK_KILLS_PER_ZONE = 3;
+		// First shark kill -> "Monster of the Deep". (Zones are opened by the boss chain only - the old placeholder
+		// "3 sharks unlock the next zone" let players skip the Ghost Captain and was removed 2026-09-30.)
 		ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, killer, killedEntity) -> {
-			if (!(killedEntity instanceof SharkEntity)) return;
-			if (!(killer instanceof ServerPlayerEntity player)) return;
-			if (!world.getRegistryKey().equals(ModDimensions.PIXEL_PIRATES_WORLD)) return;
-
-			// First shark kill advancement
-			AdvancementHelper.grant(player, "monster_of_the_deep");
-
-			int sharkZone = PlayerProgressionManager.getZoneAt(killedEntity.getPos());
-			int playerUnlocked = PlayerProgressionManager.getUnlockedZone(player);
-
-			// Zones 2 and 3 are unlocked by capturing AI ships, not shark kills
-			if (playerUnlocked <= 3) return;
-			// Only count kills in the player's current highest unlocked zone
-			if (sharkZone != playerUnlocked) return;
-			if (playerUnlocked >= 5) return; // already max zone
-
-			PlayerProgressionManager.addZoneKill(player, sharkZone);
-			int kills = PlayerProgressionManager.getZoneKills(player, sharkZone);
-			int remaining = SHARK_KILLS_PER_ZONE - kills;
-
-			if (remaining <= 0) {
-				PlayerProgressionManager.unlockZone(player, playerUnlocked + 1);
-			} else {
-				player.sendMessage(
-					net.minecraft.text.Text.literal("§e" + remaining + " more shark" + (remaining == 1 ? "" : "s") + " until the next zone opens."),
-					true
-				);
-			}
+			if (killedEntity instanceof SharkEntity && killer instanceof ServerPlayerEntity player)
+				AdvancementHelper.grant(player, "monster_of_the_deep");
 		});
 
 		// ── Pirate leveling ──────────────────────────────────────────────────────
@@ -444,76 +428,28 @@ public class PixelPirates implements ModInitializer {
 		ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, killer, killedEntity) -> {
 			if (!(killer instanceof net.minecraft.server.network.ServerPlayerEntity player)) return;
 
-			int xp = 0;
-			if (killedEntity instanceof net.get900.pixelpirates.entity.custom.CaptainEntity)
-				xp = PirateLevelingSystem.XP_KILL_CAPTAIN;
-			else if (killedEntity instanceof SharkEntity)
-				xp = PirateLevelingSystem.XP_KILL_SHARK;
-			else if (killedEntity instanceof net.minecraft.entity.mob.PillagerEntity)
-				xp = PirateLevelingSystem.XP_KILL_CREW;
-			else if (killedEntity instanceof net.minecraft.entity.mob.HostileEntity)
-				xp = PirateLevelingSystem.XP_KILL_MOB;
+			int xp = net.get900.pixelpirates.world.PirateXp.forKill(killedEntity);   // roster mobs by sea, bosses via onBossKilled
 
 			if (xp > 0) PirateLevelManager.awardXp(player, xp, false);
 
-			// Bloodlust: heal on any melee kill
-			int bloodlustLvl = PirateLevelManager.getSkillLevel(player, "bloodlust");
-			if (bloodlustLvl > 0) player.heal(bloodlustLvl * 0.5f);
+			net.get900.pixelpirates.world.SkillEffects.onKill(player, killedEntity);   // Monster Hunter
 
-			// Silver Tongue: chance for bonus pirate coin
+			// Bloodlust: heal on a melee kill (the killing blow came from the player's own hand)
+			int bloodlustLvl = PirateLevelManager.getSkillLevel(player, "bloodlust");
+			var lastHit = killedEntity.getRecentDamageSource();
+			if (bloodlustLvl > 0 && lastHit != null && lastHit.getSource() == player) player.heal(bloodlustLvl);
+
+			// Silver Tongue: chance for a bonus doubloon
 			int silverLvl = PirateLevelManager.getSkillLevel(player, "silver_tongue");
 			if (silverLvl > 0 && world.getRandom().nextFloat() < silverLvl * 0.05f) {
-				player.getInventory().offerOrDrop(new ItemStack(ModItems.PIRATE_COIN));
+				player.getInventory().offerOrDrop(new ItemStack(ModItems.COIN));
 			}
 		});
 
-		// Damage events: parry, davy's luck, salt skin, wave dancer
-		ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
-			if (!(entity instanceof net.minecraft.server.network.ServerPlayerEntity player)) return true;
-
-			// Parry: block incoming melee hits
-			boolean isMelee = source.getAttacker() instanceof net.minecraft.entity.LivingEntity
-				&& !source.isIn(net.minecraft.registry.tag.DamageTypeTags.IS_PROJECTILE)
-				&& !source.isIn(net.minecraft.registry.tag.DamageTypeTags.IS_FIRE)
-				&& !source.isIn(net.minecraft.registry.tag.DamageTypeTags.IS_FALL);
-			int parryLvl = PirateLevelManager.getSkillLevel(player, "parry");
-			if (parryLvl > 0 && isMelee && player.getRandom().nextFloat() < parryLvl * 0.08f) {
-				player.sendMessage(net.minecraft.text.Text.literal("§aParried!"), true);
-				return false;
-			}
-
-			// Davy's Luck: survive a fatal blow
-			net.get900.pixelpirates.util.PlayerProgressionComponent comp =
-				(net.get900.pixelpirates.util.PlayerProgressionComponent) player;
-			int davysLvl = PirateLevelManager.getSkillLevel(player, "davys_luck");
-			if (davysLvl > 0 && comp.pp_getDavysLuckCooldown() == 0
-					&& player.getHealth() <= amount
-					&& player.getRandom().nextFloat() < davysLvl * 0.02f) {
-				comp.pp_setDavysLuckCooldown(60 * 20);
-				player.setHealth(1.0f);
-				player.sendMessage(net.minecraft.text.Text.literal("§6** Davy's Luck saved you!"), true);
-				return false;
-			}
-
-			// Salt Skin: resist fire and poison
-			boolean isFireOrPoison = source.isIn(net.minecraft.registry.tag.DamageTypeTags.IS_FIRE)
-				|| "magic".equals(source.getName());
-			int saltSkinLvl = PirateLevelManager.getSkillLevel(player, "salt_skin");
-			if (saltSkinLvl > 0 && isFireOrPoison
-					&& player.getRandom().nextFloat() < saltSkinLvl * 0.10f) {
-				return false;
-			}
-
-			// Wave Dancer: resist fall damage
-			int waveDancerLvl = PirateLevelManager.getSkillLevel(player, "wave_dancer");
-			if (waveDancerLvl > 0
-					&& source.isIn(net.minecraft.registry.tag.DamageTypeTags.IS_FALL)
-					&& player.getRandom().nextFloat() < waveDancerLvl * 0.10f) {
-				return false;
-			}
-
-			return true;
-		});
+		// Damage events: every "survive / cancel this hit" skill (world/SkillEffects)
+		ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
+			!(entity instanceof net.minecraft.server.network.ServerPlayerEntity player)
+				|| net.get900.pixelpirates.world.SkillEffects.allowDamage(player, source, amount));
 
 		// Per-tick: cooldowns + second wind
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
@@ -537,8 +473,9 @@ public class PixelPirates implements ModInitializer {
 		PlayerProgressionComponent comp = (PlayerProgressionComponent) player;
 		if (comp.pp_hasStarterCoins()) return;
 		comp.pp_setStarterCoins(true);
-		player.getInventory().insertStack(new ItemStack(ModItems.COIN, 6));
+		player.getInventory().insertStack(new ItemStack(ModItems.COIN, 30));      // a sloop costs 25 doubloons (ShipTiers)
 		player.getInventory().insertStack(new ItemStack(ModItems.PIRATE_JOURNAL));
+		// (the Weathered Chronicle has its own once-per-player flag - see Chronicle.giveStarter)
 		player.sendMessage(net.minecraft.text.Text.literal(
 			"§6You've been given 6 Coins — commission a ship at the Shipwright!"), false);
 		player.sendMessage(net.minecraft.text.Text.literal(
@@ -560,41 +497,25 @@ public class PixelPirates implements ModInitializer {
 	}
 
 	/**
-	 * Returns a blueprint name for the given zone and faction.
-	 * Prefers blueprints whose AiShipConfig.faction matches the requested faction.
-	 * Falls back to any available blueprint if none match (keeps things working until
-	 * faction-specific schematics are saved by the player).
+	 * Returns a blueprint name for the given zone and faction (2026-10-04 fleet): a ship of that faction whose zone range
+	 * (AiShipConfig.zoneRange - each faction sails a small -> flagship ladder) covers the zone; failing that the faction ship
+	 * whose range lies nearest; failing that any blueprint (keeps things working with a bare config folder).
 	 */
 	private static String pickAiBlueprintForZone(int zone, Faction faction, List<String> available) {
 		if (zone <= 0) return null;
-
-		// Preferred ship sizes per zone (existing pirate blueprints)
-		String[] sizeCandidates = switch (zone) {
-			case 1  -> new String[]{"sloop", "skipper"};
-			case 2  -> new String[]{"skipper", "brigantine"};
-			default -> new String[]{"brigantine"};
-		};
-
-		// Filter blueprints matching this faction (reads JSON config per blueprint)
-		java.util.List<String> factionMatches = available.stream()
-			.filter(b -> Faction.fromId(AiShipConfig.load(b).faction) == faction)
-			.collect(java.util.stream.Collectors.toList());
-
-		if (!factionMatches.isEmpty()) {
-			// Prefer size-appropriate ones within the faction pool
-			java.util.List<String> sized = factionMatches.stream()
-				.filter(b -> java.util.Arrays.asList(sizeCandidates).contains(b))
-				.collect(java.util.stream.Collectors.toList());
-			java.util.List<String> pool = sized.isEmpty() ? factionMatches : sized;
-			return pool.get((int)(Math.random() * pool.size()));
+		java.util.List<String> inZone = new java.util.ArrayList<>();
+		String nearest = null; int nearestGap = Integer.MAX_VALUE;
+		for (String b : available) {
+			AiShipConfig cfg = AiShipConfig.load(b);
+			if (Faction.fromId(cfg.faction) != faction) continue;
+			int[] r = cfg.zoneRange(b);
+			if (zone >= r[0] && zone <= r[1]) inZone.add(b);
+			int gap = zone < r[0] ? r[0] - zone : zone - r[1];
+			if (gap < nearestGap) { nearestGap = gap; nearest = b; }
 		}
-
-		// Fallback: any size-appropriate blueprint regardless of faction
-		java.util.List<String> sized = available.stream()
-			.filter(b -> java.util.Arrays.asList(sizeCandidates).contains(b))
-			.collect(java.util.stream.Collectors.toList());
-		if (!sized.isEmpty()) return sized.get((int)(Math.random() * sized.size()));
-
-		return available.isEmpty() ? null : available.get((int)(Math.random() * available.size()));
+		if (!inZone.isEmpty()) return inZone.get((int) (Math.random() * inZone.size()));
+		if (nearest != null) return nearest;
+		return available.isEmpty() ? null : available.get((int) (Math.random() * available.size()));
 	}
+
 }

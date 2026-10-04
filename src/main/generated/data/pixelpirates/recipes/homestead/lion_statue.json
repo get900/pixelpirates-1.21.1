@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "Q": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "pattern": [
+    "Q Q",
+    "QQQ"
+  ],
+  "result": {
+    "item": "pixelpirates:lion_statue"
+  },
+  "show_notification": true
+}

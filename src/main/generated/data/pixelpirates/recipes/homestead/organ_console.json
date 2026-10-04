@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:note_block"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "QQQ",
+    "P P"
+  ],
+  "result": {
+    "item": "pixelpirates:organ_console"
+  },
+  "show_notification": true
+}

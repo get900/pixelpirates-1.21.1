@@ -70,7 +70,20 @@ public class RouletteTableBlock extends BlockWithEntity {
         ItemStack held = p.getMainHandStack();
         if (p.isSneaking()) be.cycleBet(p);
         else if (held.isOf(ModItems.PIRATE_COIN)) be.stake(p, held);
+        else if (held.isOf(ModItems.SEAFARERS_TOKEN)) tokenSpin(world, pos, p, held);
         else be.help(p);
         return ActionResult.CONSUME;
+    }
+
+    /** TOKEN SPIN: one Seafarer's Token buys a random armor piece or weapon up to your boss tier (SeafarersTokenItem). */
+    private static void tokenSpin(World world, BlockPos pos, ServerPlayerEntity p, ItemStack held) {
+        ItemStack prize = net.get900.pixelpirates.item.custom.SeafarersTokenItem.spin(p);
+        if (!p.isCreative()) held.decrement(1);
+        world.playSound(null, pos, net.minecraft.sound.SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), net.minecraft.sound.SoundCategory.BLOCKS, 1.2f, 1.4f);
+        world.playSound(null, pos, net.minecraft.sound.SoundEvents.ENTITY_PLAYER_LEVELUP, net.minecraft.sound.SoundCategory.BLOCKS, 0.8f, 1.2f);
+        if (world instanceof net.minecraft.server.world.ServerWorld sw)
+            sw.spawnParticles(net.minecraft.particle.ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, 30, 0.4, 0.4, 0.4, 0.3);
+        p.getInventory().offerOrDrop(prize);
+        p.sendMessage(net.minecraft.text.Text.literal("Token Spin: " + prize.getName().getString() + "!").formatted(net.minecraft.util.Formatting.GOLD), true);
     }
 }

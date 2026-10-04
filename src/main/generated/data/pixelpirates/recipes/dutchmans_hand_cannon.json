@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "pixelpirates:spectral_anchor"
+    },
+    {
+      "item": "pixelpirates:ghostwood_planks"
+    },
+    {
+      "item": "pixelpirates:ghostwood_planks"
+    },
+    {
+      "item": "minecraft:iron_block"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:dutchmans_hand_cannon"
+  }
+}

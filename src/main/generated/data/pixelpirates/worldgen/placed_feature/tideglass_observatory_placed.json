@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:tideglass_observatory",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

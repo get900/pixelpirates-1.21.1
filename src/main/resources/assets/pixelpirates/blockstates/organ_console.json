@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/organ_console"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/organ_console",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/organ_console",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/organ_console",
+   "y": 270
+  }
+ }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    " C ",
+    "GAG",
+    "AGA"
+  ],
+  "result": {
+    "item": "pixelpirates:crystal_chandelier"
+  },
+  "show_notification": true
+}

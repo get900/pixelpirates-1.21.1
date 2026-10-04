@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cursed_bone": {
+    "has_ectoplasm": {
       "conditions": {
         "items": [
           {
             "items": [
-              "pixelpirates:cursed_bone"
+              "pixelpirates:ectoplasm"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_cursed_bone",
+      "has_ectoplasm",
       "has_the_recipe"
     ]
   ],

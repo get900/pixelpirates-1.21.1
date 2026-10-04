@@ -34,6 +34,8 @@ def flintlock_pistol(seed):
     c("root", [-1, -7, 1], [2, 6, 2], WOOD(), rot=[-24, 0, 0], pivot=[0, -1, 2])       # bird's-head grip, raked back
     c("root", [-1, -9, 2], [2, 2, 3], BRASS(), rot=[-24, 0, 0], pivot=[0, -1, 2])      # brass butt cap
     anim(m, "idle", 1.0, {"root": {"rotation": keys((0, [0, 0, 0]), (1.0, [0, 0, 0]))}})
+    anim(m, "fire", 0.5, {"root": {"rotation": keys((0, [0, 0, 0]), (0.05, [-18, 0, 0]), (0.5, [0, 0, 0])),
+                                   "position": keys((0, [0, 0, 0]), (0.05, [0, 0.5, 2.5]), (0.5, [0, 0, 0]))}}, loop=False)
     return m
 
 
@@ -56,6 +58,8 @@ def blunderbuss(seed):
     c("root", [-1, -9, 3], [3, 3, 4], WOOD(), rot=[-30, 0, 0], pivot=[0, -1, 3])
     c("root", [-1, -10, 6], [3, 1, 1], BRASS(), rot=[-30, 0, 0], pivot=[0, -1, 3])     # butt plate edge
     anim(m, "idle", 1.0, {"root": {"rotation": keys((0, [0, 0, 0]), (1.0, [0, 0, 0]))}})
+    anim(m, "fire", 0.5, {"root": {"rotation": keys((0, [0, 0, 0]), (0.05, [-18, 0, 0]), (0.5, [0, 0, 0])),
+                                   "position": keys((0, [0, 0, 0]), (0.05, [0, 0.5, 2.5]), (0.5, [0, 0, 0]))}}, loop=False)
     return m
 
 

@@ -1,15 +1,23 @@
 {
   "display": {
-    "icon": {"item": "minecraft:compass"},
-    "title": {"translate": "advancements.pixelpirates.eyes_on_the_horizon.title"},
-    "description": {"translate": "advancements.pixelpirates.eyes_on_the_horizon.description"},
+    "icon": {
+      "item": "minecraft:compass"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.eyes_on_the_horizon.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.eyes_on_the_horizon.description"
+    },
     "frame": "goal",
     "show_toast": true,
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "hidden": false
   },
   "parent": "pixelpirates:meet_the_merchant",
   "criteria": {
-    "got_here": {"trigger": "minecraft:impossible"}
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
   }
 }

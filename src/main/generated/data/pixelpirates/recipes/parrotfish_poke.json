@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "pixelpirates:parrotfish"
+    },
+    {
+      "item": "minecraft:kelp"
+    },
+    {
+      "item": "pixelpirates:lime"
+    },
+    {
+      "item": "pixelpirates:pineapple"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:parrotfish_poke"
+  }
+}

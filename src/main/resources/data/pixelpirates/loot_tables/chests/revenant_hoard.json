@@ -11,15 +11,15 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:netherite_scrap",
+          "name": "pixelpirates:abyssal_pearl",
           "weight": 1,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 2,
-                "max": 4
+                "min": 1,
+                "max": 3
               }
             }
           ]
@@ -66,30 +66,30 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:abyssal_pearl",
           "weight": 8,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 3,
-                "max": 7
+                "min": 1,
+                "max": 3
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald_block",
+          "name": "pixelpirates:kraken_scale",
           "weight": 4,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
+                "min": 2,
+                "max": 4
               }
             }
           ]
@@ -111,13 +111,33 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:enchanted_golden_apple",
-          "weight": 1
+          "name": "pixelpirates:luminous_ichor",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:totem_of_undying",
-          "weight": 1
+          "name": "pixelpirates:abyssal_pearl",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -127,78 +147,63 @@
       ]
     },
     {
-      "rolls": {
-        "type": "minecraft:uniform",
-        "min": 1,
-        "max": 2
-      },
-      "bonus_rolls": 0,
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:book",
+          "name": "pixelpirates:gallowbreaker_helmet",
+          "functions": [
+            {
+              "function": "pixelpirates:frozen_seeker"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:gallowbreaker_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:gallowbreaker_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:gallowbreaker_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.6
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:last_meal",
           "weight": 1,
           "functions": [
             {
-              "function": "minecraft:enchant_randomly",
-              "enchantments": [
-                "minecraft:protection",
-                "minecraft:sharpness",
-                "minecraft:smite",
-                "minecraft:mending",
-                "minecraft:unbreaking",
-                "minecraft:looting"
-              ]
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
             }
           ]
         }
       ]
     },
     {
-      "rolls": 2,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_helmet"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_chestplate"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_leggings"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_boots"
-        }
-      ]
-    },
-    {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.5
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_helmet"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_chestplate"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_leggings"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:gallowbreaker_boots"
+          "name": "pixelpirates:legendary_strongbox"
         }
       ]
     }

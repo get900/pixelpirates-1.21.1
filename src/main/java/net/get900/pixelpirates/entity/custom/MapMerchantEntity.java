@@ -23,10 +23,11 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class MapMerchantEntity extends PathAwareEntity implements GeoEntity {
 
-    private static final RawAnimation IDLE_ANIMATION =
-            RawAnimation.begin().thenLoop("animation.map_merchant.idle");
-    private static final RawAnimation WALK_ANIMATION =
-            RawAnimation.begin().thenLoop("animation.map_merchant.walk");
+    // clips from tools/mobs/traders.py (map_merchant): idle, move, talk (unrolls a chart), flourish (studies it)
+    private static final RawAnimation IDLE_ANIMATION = RawAnimation.begin().thenLoop("idle");
+    private static final RawAnimation WALK_ANIMATION = RawAnimation.begin().thenLoop("move");
+    @org.jetbrains.annotations.Nullable private net.minecraft.util.math.BlockPos home;
+    private int flourishIn = 400;
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
@@ -45,10 +46,42 @@ public class MapMerchantEntity extends PathAwareEntity implements GeoEntity {
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!player.getWorld().isClient && player instanceof ServerPlayerEntity serverPlayer) {
             this.playSound(net.get900.pixelpirates.sound.ModSounds.MAP_MERCHANT_TRADE, 1.0f, 1.0f);
+            this.triggerAnim("action", "talk");
             ModNetworking.sendMapMerchantMenu(serverPlayer);
             AdvancementHelper.grant(serverPlayer, "meet_the_merchant");
         }
         return ActionResult.SUCCESS;
+    }
+
+    public void setHome(net.minecraft.util.math.BlockPos p) { this.home = p.toImmutable(); this.setPersistent(); }
+
+    @Override
+    protected void mobTick() {
+        super.mobTick();
+        if (home != null && this.age % 20 == 0 && this.getBlockPos().getSquaredDistance(home) > 4)
+            this.getNavigation().startMovingTo(home.getX() + 0.5, home.getY(), home.getZ() + 0.5, 0.5);
+        if (--flourishIn <= 0) {
+            flourishIn = 400 + this.random.nextInt(400);
+            this.triggerAnim("action", "flourish");
+        }
+    }
+
+    @Override
+    public boolean damage(net.minecraft.entity.damage.DamageSource source, float amount) {
+        if (source.isIn(net.minecraft.registry.tag.DamageTypeTags.BYPASSES_INVULNERABILITY)) return super.damage(source, amount);
+        return false;                                                    // the port's merchants are not for stabbing
+    }
+
+    @Override
+    public void writeCustomDataToNbt(net.minecraft.nbt.NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        if (home != null) nbt.put("Home", net.minecraft.nbt.NbtHelper.fromBlockPos(home));
+    }
+
+    @Override
+    public void readCustomDataFromNbt(net.minecraft.nbt.NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        if (nbt.contains("Home")) home = net.minecraft.nbt.NbtHelper.toBlockPos(nbt.getCompound("Home"));
     }
 
     @Override
@@ -61,7 +94,7 @@ public class MapMerchantEntity extends PathAwareEntity implements GeoEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.6));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.5, 0.0005f));   // a homebody: he minds his booth (mobTick)
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(4, new LookAroundGoal(this));
     }
@@ -71,6 +104,9 @@ public class MapMerchantEntity extends PathAwareEntity implements GeoEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 4, this::animPredicate));
+        controllers.add(new AnimationController<>(this, "action", 3, st -> PlayState.STOP)
+                .triggerableAnim("talk", RawAnimation.begin().thenPlay("talk"))
+                .triggerableAnim("flourish", RawAnimation.begin().thenPlay("flourish")));
     }
 
     private PlayState animPredicate(AnimationState<MapMerchantEntity> state) {

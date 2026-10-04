@@ -71,10 +71,7 @@ public final class PirateLevelManager {
         if (curLevel >= PirateLevelingSystem.MAX_LEVEL) return;
 
         // Explorer skill bonus for discovery XP (barrel loots, zone unlocks)
-        if (isDiscovery) {
-            int explorerLvl = getSkillLevel(player, "explorer");
-            if (explorerLvl > 0) amount = (int)(amount * (1.0 + explorerLvl * 0.05));
-        }
+        if (isDiscovery) amount = (int) Math.round(amount * SkillEffects.explorerMult(player));
 
         int xp = comp.pp_getPirateXp() + amount;
         boolean levelled = false;
@@ -118,7 +115,12 @@ public final class PirateLevelManager {
         if (idx < 0) return false;
 
         int curSkillLvl = comp.pp_getSkillLevel(idx);
-        if (curSkillLvl >= def.maxLevel()) return false;
+        String blocked = PirateLevelingSystem.blockedReason(def, curSkillLvl, pointsInTree(player, def.tree()),
+                net.get900.pixelpirates.entity.mob.BossProgression.progress(player), comp.pp_getSkillPoints());
+        if (blocked != null) {
+            player.sendMessage(Text.literal("§c" + blocked), true);
+            return false;
+        }
 
         comp.pp_setSkillLevel(idx, curSkillLvl + 1);
         comp.pp_setSkillPoints(comp.pp_getSkillPoints() - 1);
@@ -130,6 +132,43 @@ public final class PirateLevelManager {
             "§a+" + def.displayName() + " §7→ §bLevel " + (curSkillLvl + 1) +
             "/" + def.maxLevel()), true);
         return true;
+    }
+
+    /** Points spent in one tree (gates tiers II, III and the capstone). */
+    public static int pointsInTree(PlayerEntity player, PirateLevelingSystem.SkillTree tree) {
+        int n = 0;
+        for (var def : PirateLevelingSystem.ALL_SKILLS) if (def.tree() == tree) n += getSkillLevel(player, def.key());
+        return n;
+    }
+
+    /** Every skill point a player of this level has earned. */
+    public static int pointsEarned(int level) {
+        int n = 0;
+        for (int l = 2; l <= level; l++) n += PirateLevelingSystem.skillPointsAt(l);
+        return n;
+    }
+
+    /** Refunds every point. Costs RESPEC_COST pirate coins (free in creative). */
+    public static final int RESPEC_COST = 10;
+
+    public static void respec(ServerPlayerEntity player) {
+        PlayerProgressionComponent comp = (PlayerProgressionComponent) player;
+        int spent = 0;
+        for (int i = 0; i < PirateLevelingSystem.ALL_SKILLS.size(); i++) spent += comp.pp_getSkillLevel(i);
+        if (spent == 0) { player.sendMessage(Text.literal("§7Nothing to unlearn."), true); return; }
+        if (!player.isCreative()) {
+            if (player.getInventory().count(net.get900.pixelpirates.item.ModItems.COIN) < RESPEC_COST) {
+                player.sendMessage(Text.literal("§cRetraining costs " + RESPEC_COST + " doubloons."), true);
+                return;
+            }
+            net.minecraft.inventory.Inventories.remove(player.getInventory(),
+                    st -> st.isOf(net.get900.pixelpirates.item.ModItems.COIN), RESPEC_COST, false);
+        }
+        for (int i = 0; i < PirateLevelingSystem.ALL_SKILLS.size(); i++) comp.pp_setSkillLevel(i, 0);
+        comp.pp_setSkillPoints(comp.pp_getSkillPoints() + spent);
+        applyAttributeModifiers(player);
+        syncToClient(player);
+        player.sendMessage(Text.literal("§6Your skills are unlearned - " + spent + " points returned."), false);
     }
 
     // ── Attribute modifiers ───────────────────────────────────────────────────
@@ -186,6 +225,7 @@ public final class PirateLevelManager {
 
     public static void tickPlayer(ServerPlayerEntity player) {
         PlayerProgressionComponent comp = (PlayerProgressionComponent) player;
+        SkillEffects.tick(player);
 
         if (comp.pp_getSecondWindCooldown() > 0)
             comp.pp_setSecondWindCooldown(comp.pp_getSecondWindCooldown() - 1);
@@ -215,6 +255,7 @@ public final class PirateLevelManager {
         buf.writeInt(comp.pp_getSkillPoints());
         int count = PirateLevelingSystem.ALL_SKILLS.size();
         for (int i = 0; i < count; i++) buf.writeInt(comp.pp_getSkillLevel(i));
+        buf.writeInt(net.get900.pixelpirates.entity.mob.BossProgression.progress(player));
         ServerPlayNetworking.send(player, ModNetworking.S2C_LEVEL_SYNC, buf);
     }
 

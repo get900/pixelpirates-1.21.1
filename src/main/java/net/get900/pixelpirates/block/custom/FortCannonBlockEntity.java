@@ -3,6 +3,13 @@ package net.get900.pixelpirates.block.custom;
 import net.get900.pixelpirates.block.ModBlocks;
 import net.get900.pixelpirates.entity.custom.CannonBallEntity;
 import net.get900.pixelpirates.entity.mob.ModMobs;
+import net.get900.pixelpirates.homestead.trade.PortTraders;
+import net.get900.pixelpirates.world.faction.Faction;
+import net.get900.pixelpirates.world.faction.FactionManager;
+import net.get900.pixelpirates.world.gen.PortCityLayout;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
@@ -23,7 +30,10 @@ import net.minecraft.world.chunk.WorldChunk;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Brain of a fort wall cannon. While a fort captain (captain_rackham) is alive within
@@ -32,9 +42,19 @@ import java.util.List;
  * {@link CannonBallEntity#fort} shot on a solved ballistic arc with a little lead and scatter.
  * When the captain falls the fort goes quiet. Rackham's "Broadside!" ability also queues shots at
  * marked spots through {@link #queueShot}, ignoring arc and cooldown.
+ * <p>
+ * ISLAND GARRISON (2026-10-04): the same guns stand on the spawn island's Governor's Fortress (#44, PortCityLayout.FORT_GUNS).
+ * The island belongs to {@link #ISLAND_FACTION}; those guns are always manned and fire only on players that faction
+ * counts an enemy (reputation below 0) - a warning in chat first, then {@link #GRACE} ticks before the first shot. Their
+ * shots only hurt players (the town's villagers, traders and pets are safe).
  */
 public class FortCannonBlockEntity extends BlockEntity {
-    public static final double RANGE = 44, MIN_RANGE = 5, MANNED_RANGE = 64;
+    public static final double RANGE = 44, MIN_RANGE = 5, MANNED_RANGE = 64, ISLAND_RANGE = 60;
+    /** Who the spawn island belongs to - one constant to change. */
+    public static final Faction ISLAND_FACTION = Faction.NAVY;
+    private static final int GRACE = 60, FORGET = 6000;
+    /** Per player: {tick first warned, tick last targeted} - shared by every island gun. */
+    private static final Map<UUID, long[]> WARNED = new HashMap<>();
     private static final double SPEED = 1.5, GRAVITY = 0.04, DRAG = 0.99;
     private static final double ARC_COS = Math.cos(Math.toRadians(80));
     private static final int FUSE = 24;
@@ -44,6 +64,7 @@ public class FortCannonBlockEntity extends BlockEntity {
     private int fuse = -1;
     private int mannedCheck;
     private boolean manned;
+    @Nullable private Boolean island;
     @Nullable private PlayerEntity target;
     @Nullable private Vec3d forcedAim;
 
@@ -64,16 +85,45 @@ public class FortCannonBlockEntity extends BlockEntity {
         if (be.cooldown > 0) { be.cooldown--; return; }
         if (--be.mannedCheck <= 0) {
             be.mannedCheck = 20;
-            be.manned = captainNear(sw, pos);
+            be.manned = be.isIslandGun(sw) || captainNear(sw, pos);
         }
         if (!be.manned) { be.cooldown = 20; return; }
         PlayerEntity p = be.pickTarget(sw, state);
         if (p == null) { be.cooldown = 10; return; }
+        if (be.isIslandGun(sw) && !warned(sw, p)) { be.cooldown = 20; return; }
         be.target = p;
         be.forcedAim = null;
         be.fuse = FUSE;
         be.cooldown = 90 + sw.random.nextInt(60);
         sw.playSound(null, pos, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.HOSTILE, 1.0f, 1.2f);
+    }
+
+    /** One of the spawn island's fortress guns (in the pirate dimension, inside the island's plan)? */
+    private boolean isIslandGun(ServerWorld sw) {
+        if (island == null)
+            island = sw.getRegistryKey().equals(PortTraders.DIM) && pos.getX() >= PortCityLayout.X0 && pos.getX() <= PortCityLayout.X1
+                    && pos.getZ() >= PortCityLayout.Z0 && pos.getZ() <= PortCityLayout.Z1;
+        return island;
+    }
+
+    /** Does the island faction count this player an enemy? */
+    private static boolean islandEnemy(PlayerEntity p) {
+        return p instanceof ServerPlayerEntity sp && FactionManager.getReputation(sp, ISLAND_FACTION) < 0;
+    }
+
+    /** The warning before the island guns open up: true once the player has been warned and the grace has run out. */
+    private static boolean warned(ServerWorld sw, PlayerEntity p) {
+        long now = sw.getTime();
+        long[] w = WARNED.get(p.getUuid());
+        if (w == null || now - w[1] > FORGET) {
+            WARNED.put(p.getUuid(), new long[]{now, now});
+            p.sendMessage(Text.literal("[X] The fortress guns swing toward you - the " + ISLAND_FACTION.displayName.replaceAll("§.", "") + " counts you an enemy of the Governor!")
+                    .formatted(Formatting.RED), false);
+            sw.playSound(null, p.getBlockPos(), SoundEvents.BLOCK_BELL_USE, SoundCategory.HOSTILE, 1.5f, 0.6f);
+            return false;
+        }
+        w[1] = now;
+        return now - w[0] >= GRACE;
     }
 
     /** Is a living fort captain close enough to man the guns? */
@@ -107,13 +157,16 @@ public class FortCannonBlockEntity extends BlockEntity {
     @Nullable
     private PlayerEntity pickTarget(ServerWorld sw, BlockState state) {
         Vec3d m = muzzle(state), f = facingVec(state);
+        boolean isl = isIslandGun(sw);
+        double range = isl ? ISLAND_RANGE : RANGE;
         PlayerEntity best = null;
         double bestD = Double.MAX_VALUE;
         for (PlayerEntity p : sw.getPlayers()) {
             if (!p.isAlive() || p.isSpectator() || p.isCreative()) continue;
+            if (isl && !islandEnemy(p)) continue;
             Vec3d to = p.getPos().subtract(m);
             double h = Math.sqrt(to.x * to.x + to.z * to.z);
-            if (h < MIN_RANGE || h > RANGE) continue;
+            if (h < MIN_RANGE || h > range) continue;
             if ((to.x * f.x + to.z * f.z) / h < ARC_COS) continue;
             if (!clearShot(sw, m, p.getEyePos())) continue;
             if (h < bestD) { bestD = h; best = p; }
@@ -132,7 +185,8 @@ public class FortCannonBlockEntity extends BlockEntity {
         if (forcedAim != null) {
             aim = forcedAim;
         } else {
-            if (target == null || !target.isAlive() || target.isSpectator() || target.squaredDistanceTo(m) > (RANGE + 8) * (RANGE + 8)) {
+            double range = isIslandGun(sw) ? ISLAND_RANGE : RANGE;
+            if (target == null || !target.isAlive() || target.isSpectator() || target.squaredDistanceTo(m) > (range + 8) * (range + 8)) {
                 target = null;
                 return;
             }
@@ -142,6 +196,7 @@ public class FortCannonBlockEntity extends BlockEntity {
                     .add((sw.random.nextDouble() - 0.5) * 2.4, 0, (sw.random.nextDouble() - 0.5) * 2.4);
         }
         CannonBallEntity ball = CannonBallEntity.fort(sw, null, m.x, m.y, m.z, DAMAGE);
+        if (isIslandGun(sw)) ball.setPlayersOnly();
         ball.setVelocity(solve(m, aim));
         sw.spawnEntity(ball);
         sw.spawnParticles(ParticleTypes.EXPLOSION, m.x, m.y, m.z, 1, 0, 0, 0, 0);

@@ -45,6 +45,7 @@ public final class FactionManager {
      */
     public static void onShipDestroyed(ServerPlayerEntity player, Faction destroyedFaction) {
         net.get900.pixelpirates.homestead.bounty.Bounties.onShip(player, destroyedFaction);
+        net.get900.pixelpirates.world.PirateLevelManager.awardXp(player, net.get900.pixelpirates.world.PirateLevelingSystem.XP_SINK_SHIP, false);
         modifyReputation(player, destroyedFaction, REP_DESTROY_SHIP);
         for (Faction f : Faction.values()) {
             if (f != destroyedFaction && f.isEnemyFaction(destroyedFaction)) {
@@ -56,6 +57,7 @@ public final class FactionManager {
     /** Called when a player kills the captain of a faction ship (boarding path). */
     public static void onCaptainKilled(ServerPlayerEntity player, Faction captainFaction) {
         net.get900.pixelpirates.homestead.bounty.Bounties.onShip(player, captainFaction);
+        net.get900.pixelpirates.world.PirateLevelManager.awardXp(player, net.get900.pixelpirates.world.PirateLevelingSystem.XP_BOARD_SHIP, false);
         modifyReputation(player, captainFaction, REP_KILL_CAPTAIN);
         for (Faction f : Faction.values()) {
             if (f != captainFaction && f.isEnemyFaction(captainFaction)) {

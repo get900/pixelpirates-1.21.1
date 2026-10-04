@@ -20,6 +20,12 @@
           "type": "minecraft:item",
           "name": "pixelpirates:thalassar_boots"
         }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.35
+        }
       ]
     },
     {
@@ -62,7 +68,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:abyssal_pearl",
           "weight": 3,
           "functions": [
             {

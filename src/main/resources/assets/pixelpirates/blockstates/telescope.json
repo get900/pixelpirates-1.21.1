@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/telescope"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/telescope",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/telescope",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/telescope",
+   "y": 270
+  }
+ }
+}

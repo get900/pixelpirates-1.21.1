@@ -16,7 +16,7 @@ public class ModEnchantments {
     );
 
     public static void register() {
-        // triggers static field initialization
+        FrozenSeekerLootFunction.register();       // must exist before loot tables load
     }
 
     public static int getFrozenSeekerLevel(LivingEntity entity) {

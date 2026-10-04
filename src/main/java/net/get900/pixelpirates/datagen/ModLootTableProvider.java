@@ -37,8 +37,15 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         custom.add(ModBlocks.DRIFTWOOD_BLOCK);
         addDrop(ModBlocks.DRIFTWOOD_BLOCK, multipleOreDrops(ModBlocks.DRIFTWOOD_BLOCK, ModItems.DRIFTWOOD, 4, 8));
+        // sulfur boulders break into brimstone (phase 3 material) - silk touch keeps the block
+        custom.add(ModBlocks.SULFUR_BLOCK);
+        addDrop(ModBlocks.SULFUR_BLOCK, multipleOreDrops(ModBlocks.SULFUR_BLOCK, ModItems.BRIMSTONE, 2, 4));
         custom.add(ModBlocks.BANANA_BLOCK);
-        addDrop(ModBlocks.BANANA_BLOCK, createSingleItemDrop(ModItems.BANANA));
+        addDrop(ModBlocks.BANANA_BLOCK, LootTable.builder().pool(LootPool.builder()
+                .conditionally(net.minecraft.loot.condition.BlockStatePropertyLootCondition.builder(ModBlocks.BANANA_BLOCK)
+                        .properties(net.minecraft.predicate.StatePredicate.Builder.create()
+                                .exactMatch(net.get900.pixelpirates.block.custom.HangingFruitBlock.RIPE, true)))
+                .with(ItemEntry.builder(ModItems.BANANA).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2, 4))))));
         custom.add(ModBlocks.COCONUT_BLOCK);
         addDrop(ModBlocks.COCONUT_BLOCK, createSingleItemDrop(ModItems.COCONUT));
 
@@ -77,6 +84,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         custom.add(ModBlocks.TIDE_BELL);
         custom.add(ModBlocks.BANE_BALLISTA);
         custom.add(ModBlocks.WATCHERS_HORN);
+        custom.add(net.get900.pixelpirates.world.dungeon.AbyssPuzzleNodes.BLOCK);     // drops nothing: its puzzle link must not travel
 
         // Everything else in the mod drops itself. Before this, ~70 decorative blocks
         // (shroud/volcanic/ethereal/pirate sets, water light, ship helm) had no loot table at all.

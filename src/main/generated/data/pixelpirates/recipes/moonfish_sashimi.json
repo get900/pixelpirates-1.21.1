@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "pixelpirates:moonfish"
+    },
+    {
+      "item": "minecraft:kelp"
+    },
+    {
+      "item": "pixelpirates:lime"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:moonfish_sashimi"
+  }
+}

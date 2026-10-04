@@ -50,7 +50,6 @@ E = {
     "block.pixelpirates.white_sail_canvas": "White Sail Canvas", "block.pixelpirates.black_sail_canvas": "Black Sail Canvas",
     "block.pixelpirates.crimson_sail_canvas": "Crimson Sail Canvas", "block.pixelpirates.striped_sail_canvas": "Striped Sail Canvas",
     "block.pixelpirates.jolly_roger_sail_canvas": "Jolly Roger Sail Canvas",
-    "item.pixelpirates.captains_logbook": "Captain's Logbook",
     "block.pixelpirates.roulette_table": "Roulette Table",
     "block.pixelpirates.trading_post": "Trading Post", "block.pixelpirates.bounty_board": "Bounty Board", "entity.pixelpirates.port_trader": "Port Trader",
     "item.pixelpirates.port_trader_spawn_egg": "Port Trader Spawn Egg",

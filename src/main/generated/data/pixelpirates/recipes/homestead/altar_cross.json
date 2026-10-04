@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:stone_brick_slab"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    " G ",
+    "GGG",
+    " B "
+  ],
+  "result": {
+    "item": "pixelpirates:altar_cross"
+  },
+  "show_notification": true
+}

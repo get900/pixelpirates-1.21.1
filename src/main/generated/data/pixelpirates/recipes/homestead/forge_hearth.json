@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bricks"
+    },
+    "C": {
+      "item": "minecraft:campfire"
+    },
+    "S": {
+      "item": "minecraft:stone_bricks"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BCB",
+    "SSS"
+  ],
+  "result": {
+    "item": "pixelpirates:forge_hearth"
+  },
+  "show_notification": true
+}

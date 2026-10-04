@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/forge_anvil"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/forge_anvil",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/forge_anvil",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/forge_anvil",
+   "y": 270
+  }
+ }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bone"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "L",
+    "B"
+  ],
+  "result": {
+    "item": "pixelpirates:dice_cup"
+  },
+  "show_notification": true
+}

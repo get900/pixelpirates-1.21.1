@@ -22,7 +22,7 @@ public class FrozenSeekerEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 3;
+        return 10;            // 2026-10-01: found on zone 3/4 chest headgear (FrozenSeekerLootFunction); each level = 10% protection
     }
 
     @Override

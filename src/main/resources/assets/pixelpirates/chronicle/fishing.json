@@ -1,0 +1,29 @@
+{
+  "elements": [
+    {"title": "Fishing"},
+    {"img": "chapter_fishing", "w": 138},
+    {"p": "Any rod works, and every sea has its own fish. The common catches of home bite everywhere; the rare ones only in their own waters."},
+    {"h": "By sea"},
+    {"row": "Starter: parrotfish, red snapper, mahi-mahi", "icon": "pixelpirates:parrotfish"},
+    {"row": "Merchant: lionfish, moonfish", "icon": "pixelpirates:lionfish"},
+    {"row": "Volcanic: emberfin, lava eel", "icon": "pixelpirates:emberfin"},
+    {"row": "Cursed: ghostfin, bonefish", "icon": "pixelpirates:ghostfin"},
+    {"row": "Abyss: anglerfry, voidfin", "icon": "pixelpirates:anglerfry"},
+
+    {"page": "next"},
+    {"h": "Trophies", "icon": "pixelpirates:golden_marlin_trophy"},
+    {"p": "Once in a long while, the line comes up with something worth mounting on the wall: the Golden Marlin (warm open water and reefs), the Ghost Swordfish (Cursed Seas) and the Abyssal Coelacanth (the Abyss)."},
+    {"h": "Traps", "icon": "pixelpirates:lobster_pot"},
+    {"p": "A Fish Trap Net or a Lobster Pot left in the water fills itself over time. Lobsters and crab claws come from the pots."},
+    {"h": "The Salvage Hook", "icon": "pixelpirates:salvage_hook"},
+    {"p": "Cast it over a wreck site and you reel up salvage crates instead of fish."},
+
+    {"page": "spread"},
+    {"h": "At the galley"},
+    {"p": "A cooked fish from a hostile sea helps you survive that sea. Emberfin dishes guard against fire, anglerfry lets you breathe in the deep, and bone broth cures wither. The first taste of each dish also earns pirate experience."},
+    {"img": "rum", "w": 22},
+    {"page": "next"},
+    {"title": "The Catch"},
+    {"dyn": "fish"}
+  ]
+}

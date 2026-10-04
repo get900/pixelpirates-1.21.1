@@ -2,12 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "A": {
+      "item": "pixelpirates:ectoplasm"
+    },
     "M": {
       "item": "pixelpirates:cursed_bone"
     }
   },
   "pattern": [
-    "MMM",
+    "MAM",
     "M M"
   ],
   "result": {

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "pixelpirates:block/abyss_puzzle_node"
+    },
+    "lit=true": {
+      "model": "pixelpirates:block/abyss_puzzle_node_lit"
+    }
+  }
+}

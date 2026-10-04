@@ -83,17 +83,8 @@ public class ShipRepairKitItem extends Item {
             reg.saveMastCount(shipId, mastCount);
             reg.setOwnership(player.getUuid(), shipId);
 
-            // Award zone unlock for capturing this ship type
-            String blueprintName = ShipSteeringManager.DERELICT_BLUEPRINT.remove(shipId);
-            if (blueprintName != null && player instanceof net.minecraft.server.network.ServerPlayerEntity spe) {
-                int zoneUnlock = ShipTiers.getCaptureZoneUnlock(blueprintName);
-                if (zoneUnlock > 0) {
-                    int currentZone = PlayerProgressionManager.getUnlockedZone(spe);
-                    if (currentZone < zoneUnlock) {
-                        PlayerProgressionManager.unlockZone(spe, zoneUnlock);
-                    }
-                }
-            }
+            // zones open only through the boss chain - claiming a derelict no longer unlocks one (2026-10-01)
+            ShipSteeringManager.DERELICT_BLUEPRINT.remove(shipId);
 
             player.sendMessage(Text.literal("§aDerelict ship claimed!"), false);
         }

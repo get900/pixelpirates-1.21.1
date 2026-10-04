@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:sea_bandage"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.patched_up.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.patched_up.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:island_fare",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:sea_bandage"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -66,7 +66,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "pixelpirates:crab_shell",
           "weight": 12,
           "functions": [
             {
@@ -74,22 +74,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 2,
-                "max": 6
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:diamond",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
+                "max": 4
               }
             }
           ]
@@ -106,8 +91,18 @@
         },
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:seafarers_token",
-          "weight": 4
+          "name": "pixelpirates:tattered_cloth",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 5
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -136,23 +131,23 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:book",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly"
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:golden_apple",
           "weight": 4
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:enchanted_golden_apple",
-          "weight": 1
+          "name": "pixelpirates:driftwood",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 5
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -177,7 +172,7 @@
       ]
     },
     {
-      "rolls": 2,
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
@@ -194,33 +189,41 @@
         {
           "type": "minecraft:item",
           "name": "pixelpirates:powder_monkey_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.6
         }
       ]
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.5
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:powder_monkey_helmet"
-        },
+          "name": "pixelpirates:rackhams_reserve",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:powder_monkey_chestplate"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:powder_monkey_leggings"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:powder_monkey_boots"
+          "name": "pixelpirates:common_strongbox"
         }
       ]
     }

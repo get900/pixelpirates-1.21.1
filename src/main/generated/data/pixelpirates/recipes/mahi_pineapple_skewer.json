@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "pixelpirates:mahi_mahi"
+    },
+    {
+      "item": "pixelpirates:pineapple"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:mahi_pineapple_skewer"
+  }
+}

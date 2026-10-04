@@ -1,51 +1,194 @@
 {
-  "type": "minecraft:tree",
+  "type": "minecraft:simple_random_selector",
   "config": {
-    "decorators": [],
-    "dirt_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "minecraft:dirt"
+    "features": [
+      {
+        "feature": {
+          "type": "minecraft:tree",
+          "config": {
+            "decorators": [],
+            "dirt_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:dirt"
+              }
+            },
+            "foliage_placer": {
+              "type": "minecraft:acacia_foliage_placer",
+              "offset": 0,
+              "radius": 2
+            },
+            "foliage_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:tidewood_leaves",
+                "Properties": {
+                  "distance": "7",
+                  "persistent": "true",
+                  "waterlogged": "false"
+                }
+              }
+            },
+            "force_dirt": false,
+            "ignore_vines": true,
+            "minimum_size": {
+              "type": "minecraft:two_layers_feature_size",
+              "limit": 1,
+              "lower_size": 0,
+              "upper_size": 2
+            },
+            "trunk_placer": {
+              "type": "minecraft:forking_trunk_placer",
+              "base_height": 5,
+              "height_rand_a": 2,
+              "height_rand_b": 2
+            },
+            "trunk_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:tidewood_log",
+                "Properties": {
+                  "axis": "y"
+                }
+              }
+            }
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:air"
+            }
+          }
+        ]
+      },
+      {
+        "feature": {
+          "type": "minecraft:tree",
+          "config": {
+            "decorators": [],
+            "dirt_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:dirt"
+              }
+            },
+            "foliage_placer": {
+              "type": "minecraft:acacia_foliage_placer",
+              "offset": 0,
+              "radius": 3
+            },
+            "foliage_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:tidewood_leaves",
+                "Properties": {
+                  "distance": "7",
+                  "persistent": "true",
+                  "waterlogged": "false"
+                }
+              }
+            },
+            "force_dirt": false,
+            "ignore_vines": true,
+            "minimum_size": {
+              "type": "minecraft:two_layers_feature_size",
+              "limit": 1,
+              "lower_size": 0,
+              "upper_size": 2
+            },
+            "trunk_placer": {
+              "type": "minecraft:forking_trunk_placer",
+              "base_height": 7,
+              "height_rand_a": 2,
+              "height_rand_b": 3
+            },
+            "trunk_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:tidewood_log",
+                "Properties": {
+                  "axis": "y"
+                }
+              }
+            }
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:air"
+            }
+          }
+        ]
+      },
+      {
+        "feature": {
+          "type": "minecraft:tree",
+          "config": {
+            "decorators": [],
+            "dirt_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:dirt"
+              }
+            },
+            "foliage_placer": {
+              "type": "minecraft:bush_foliage_placer",
+              "height": 2,
+              "offset": 1,
+              "radius": 2
+            },
+            "foliage_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:tidewood_leaves",
+                "Properties": {
+                  "distance": "7",
+                  "persistent": "true",
+                  "waterlogged": "false"
+                }
+              }
+            },
+            "force_dirt": false,
+            "ignore_vines": true,
+            "minimum_size": {
+              "type": "minecraft:two_layers_feature_size",
+              "limit": 0,
+              "lower_size": 0,
+              "upper_size": 0
+            },
+            "trunk_placer": {
+              "type": "minecraft:straight_trunk_placer",
+              "base_height": 3,
+              "height_rand_a": 1,
+              "height_rand_b": 0
+            },
+            "trunk_provider": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "pixelpirates:tidewood_log",
+                "Properties": {
+                  "axis": "y"
+                }
+              }
+            }
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:air"
+            }
+          }
+        ]
       }
-    },
-    "foliage_placer": {
-      "type": "minecraft:acacia_foliage_placer",
-      "offset": 0,
-      "radius": 2
-    },
-    "foliage_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "pixelpirates:tidewood_leaves",
-        "Properties": {
-          "distance": "7",
-          "persistent": "true",
-          "waterlogged": "false"
-        }
-      }
-    },
-    "force_dirt": false,
-    "ignore_vines": true,
-    "minimum_size": {
-      "type": "minecraft:two_layers_feature_size",
-      "limit": 1,
-      "lower_size": 0,
-      "upper_size": 2
-    },
-    "trunk_placer": {
-      "type": "minecraft:forking_trunk_placer",
-      "base_height": 5,
-      "height_rand_a": 2,
-      "height_rand_b": 2
-    },
-    "trunk_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "pixelpirates:tidewood_log",
-        "Properties": {
-          "axis": "y"
-        }
-      }
-    }
+    ]
   }
 }

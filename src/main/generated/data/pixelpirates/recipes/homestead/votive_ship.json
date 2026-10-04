@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:spruce_fence"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "pattern": [
+    " W ",
+    "SFS",
+    "PPP"
+  ],
+  "result": {
+    "item": "pixelpirates:votive_ship"
+  },
+  "show_notification": true
+}

@@ -45,6 +45,12 @@ public class GunItem extends Item implements GeoItem {
         super(s);
         this.kind = kind;
         this.ammo = ammo;
+        software.bernie.geckolib.animatable.SingletonGeoAnimatable.registerSyncedAnimatable(this);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, net.minecraft.entity.Entity entity, int slot, boolean selected) {
+        net.get900.pixelpirates.item.relic.WeaponAnims.assignId(stack, world);
     }
 
     public static boolean loaded(ItemStack s) { return s.hasNbt() && s.getNbt().getBoolean("Loaded"); }
@@ -79,6 +85,16 @@ public class GunItem extends Item implements GeoItem {
     }
 
     @Override
+    public void usageTick(World world, LivingEntity user, ItemStack stack, int remaining) {
+        // Quick Hands: the round is loaded after the (shortened) reload, not after the item's fixed use time
+        int need = Math.max(8, (int) Math.round(reloadTicks() * net.get900.pixelpirates.world.SkillEffects.reloadMult(user instanceof PlayerEntity p ? p : null)));
+        if (getMaxUseTime(stack) - remaining >= need) {
+            finishUsing(stack, world, user);
+            user.stopUsingItem();
+        }
+    }
+
+    @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (!world.isClient && user instanceof PlayerEntity p) {
             if (!p.getAbilities().creativeMode) {
@@ -95,16 +111,17 @@ public class GunItem extends Item implements GeoItem {
 
     private void discharge(ServerWorld world, PlayerEntity user, ItemStack stack, Hand hand) {
         setLoaded(stack, false);
+        net.get900.pixelpirates.item.relic.WeaponAnims.play(this, user, stack, "fire");
         Vec3d look = user.getRotationVec(1f);
         Vec3d muzzle = user.getEyePos().add(look.multiply(1.1)).add(0, -0.15, 0);
         if (kind == Kind.PISTOL) {
             MusketBallEntity b = new MusketBallEntity(world, user, 13f, 30, false);
-            b.setVelocity(user, user.getPitch(), user.getYaw(), 0f, 4.6f, 0.4f);
+            b.setVelocity(user, user.getPitch(), user.getYaw(), 0f, 4.6f, 0.4f * net.get900.pixelpirates.world.SkillEffects.spreadMult(user));
             world.spawnEntity(b);
         } else {
             for (int i = 0; i < 7; i++) {
                 MusketBallEntity b = new MusketBallEntity(world, user, 4.5f, 8, true);
-                b.setVelocity(user, user.getPitch(), user.getYaw(), 0f, 3.0f, 9.0f);
+                b.setVelocity(user, user.getPitch(), user.getYaw(), 0f, 3.0f, 9.0f * net.get900.pixelpirates.world.SkillEffects.spreadMult(user));
                 world.spawnEntity(b);
             }
             Vec3d kick = look.multiply(-0.45);
@@ -122,10 +139,12 @@ public class GunItem extends Item implements GeoItem {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) { return reloadTicks(); }
+    public int getMaxUseTime(ItemStack stack) { return 72000; }        // loading ends in usageTick (Quick Hands)
 
     @Override
-    public UseAction getUseAction(ItemStack stack) { return UseAction.CROSSBOW; }
+    // NONE, not CROSSBOW: vanilla only positions the CROSSBOW use action for real crossbows - any other item was drawn
+    // at the camera while held (the gun covered the whole screen). NONE keeps the normal first-person hold.
+    public UseAction getUseAction(ItemStack stack) { return UseAction.NONE; }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
@@ -152,7 +171,9 @@ public class GunItem extends Item implements GeoItem {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        net.get900.pixelpirates.item.relic.WeaponAnims.controllers(this, controllers, "fire");
+    }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() { return cache; }

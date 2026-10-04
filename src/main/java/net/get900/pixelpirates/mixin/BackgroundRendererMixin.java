@@ -44,10 +44,10 @@ public class BackgroundRendererMixin {
 
         if (dist >= 4500.0) {
             // Zone 5 — blizzard: Frozen Seeker reduces fog density each level
-            // Level 0 = 15 blocks, +9 per level → Level 3 = 42 blocks (nearly clear)
+            // Level 0 = 15 blocks, +2.7 per level -> level X = 42 blocks (nearly clear)
             int level = ModEnchantments.getFrozenSeekerLevel(client.player);
             RenderSystem.setShaderFogStart(1.0f);
-            RenderSystem.setShaderFogEnd(15.0f + level * 9.0f);
+            RenderSystem.setShaderFogEnd(15.0f + Math.min(level, 10) * 2.7f);
             RenderSystem.setShaderFogColor(0.78f, 0.85f, 0.94f, 1.0f); // icy white-blue
         } else if (dist >= 3500.0) {
             // Zone 4 — dense sea-mist: dark, murky, claustrophobic

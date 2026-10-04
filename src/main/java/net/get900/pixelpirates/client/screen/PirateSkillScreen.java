@@ -1,66 +1,58 @@
 package net.get900.pixelpirates.client.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.get900.pixelpirates.PixelPirates;
 import net.get900.pixelpirates.client.PirateLevelingClient;
 import net.get900.pixelpirates.network.ModNetworking;
 import net.get900.pixelpirates.world.PirateLevelManager;
 import net.get900.pixelpirates.world.PirateLevelingSystem;
+import net.get900.pixelpirates.world.PirateLevelingSystem.SkillDef;
+import net.get900.pixelpirates.world.PirateLevelingSystem.SkillTree;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 
 import java.util.List;
 
 /**
- * Five-tab pirate skill tree screen.
- * All data is read from PirateLevelingClient which is kept sync'd by the server.
+ * THE PIRATE JOURNAL (redesigned 2026-10-01): an open leather journal. Ribbon bookmarks pick one of the five trees; the
+ * LEFT page draws the tree growing upward - tier I (two skills), tier II (two), tier III (one) and the capstone - as
+ * medallions joined by rope; the RIGHT page shows the pirate (level, rank, XP, points) and the selected skill: what it
+ * does now, what the next rank adds, and what is still needed (tree points, a boss for ranks IV/V and capstones).
+ * Art: tools/gen_gui_textures.py -> textures/gui/journal.png; the J_* rectangles below match its atlas.
+ * Server rules are the same function (PirateLevelingSystem.blockedReason), so the page never promises what the server refuses.
  */
 @Environment(EnvType.CLIENT)
 public class PirateSkillScreen extends Screen {
+    private static final Identifier TEX = new Identifier(PixelPirates.MOD_ID, "textures/gui/journal.png");
+    private static final int TW = 512, TH = 256;
+    private static final int W = 320, H = 210;
+    // atlas rectangles
+    private static final int J_NODE_V = 212, J_NODE = 26, J_CAP = 34, J_CAP_U = 104, J_RING_U = 206;
+    private static final int J_BTN_U = 330, J_BTN_W = 64, J_BTN_H = 18, J_SBTN_V = 56, J_SBTN_W = 84, J_SBTN_H = 14;
+    private static final int J_TAB_U = 330, J_TAB_V = 100, J_TAB_W = 28;
+    private static final int J_XP_U = 330, J_XP_V = 130, J_XPF_V = 140, J_COIN_V = 150;
 
-    // ── Layout constants ──────────────────────────────────────────────────────
-    private static final int PANEL_W = 324;
-    private static final int PANEL_H = 242;
+    private static final int INK = 0xFF3B2A1A, INK_DIM = 0xFF7A6040, RED = 0xFF9A1C1C, GOLD = 0xFF8A6410;
 
-    private static final int HDR_H   = 20;  // header bar
-    private static final int XP_H    = 14;  // xp bar row
-    private static final int PTS_H   = 12;  // skill points row
-    private static final int TAB_H   = 16;  // tab row
-    private static final int CARD_H  = 36;  // each skill card
+    // node centres on the left page (panel coordinates), in skillsForTree order: I, I, II, II, III, capstone
+    private static final int[][] NODE = {{48, 160}, {118, 160}, {48, 120}, {118, 120}, {83, 82}, {83, 44}};
 
-    // Within panel: y positions
-    private static final int Y_HDR  = 0;
-    private static final int Y_XP   = HDR_H;
-    private static final int Y_PTS  = Y_XP  + XP_H;
-    private static final int Y_TABS = Y_PTS + PTS_H;
-    private static final int Y_CARDS= Y_TABS + TAB_H; // = 62
-
-    // Colors (ARGB)
-    private static final int C_PANEL_BG   = 0xF0120E1E;
-    private static final int C_HDR_BG     = 0xFF1A1430;
-    private static final int C_CARD_BG    = 0xFF1E1840;
-    private static final int C_CARD_BG_H  = 0xFF26205A; // hover/even alt
-    private static final int C_TAB_INACT  = 0xFF2A2244;
-    private static final int C_BTN_ON     = 0xFF2E6B1E;
-    private static final int C_BTN_OFF    = 0xFF2A2244;
-    private static final int C_BTN_TXT    = 0xFFFFFFFF;
-    private static final int C_DOT_EMPTY  = 0xFF444444;
-    private static final int C_BORDER     = 0xFF3A3060;
-
-    // Tab colors (packed RGB from SkillTree enum, forced opaque)
-    private static final int[] TAB_COLORS = {
-        0xFF993333, // BRAWLER  — red
-        0xFF333333, // CANNONEER — dark
-        0xFF3355BB, // NAVIGATOR — blue
-        0xFFAA8800, // MERCHANT  — gold
-        0xFF228833, // SURVIVOR  — green
-    };
-
-    private int panelX, panelY;
-    private int selectedTab = 0;
+    private int px, py;
+    private int tab = 0;
+    private int selected = 0;           // index within the tree
 
     public PirateSkillScreen() {
         super(Text.literal("Pirate Journal"));
@@ -68,229 +60,261 @@ public class PirateSkillScreen extends Screen {
 
     @Override
     protected void init() {
-        panelX = (width  - PANEL_W) / 2;
-        panelY = (height - PANEL_H) / 2;
+        px = (width - W) / 2;
+        py = (height - H) / 2 + 8;
     }
 
     @Override
-    public void render(DrawContext ctx, int mouseX, int mouseY, float delta) {
+    public boolean shouldPause() { return false; }
+
+    private SkillTree tree() { return SkillTree.values()[tab]; }
+
+    private List<SkillDef> skills() { return PirateLevelingSystem.skillsForTree(tree()); }
+
+    private static ItemStack icon(String id) {
+        Item i = Registries.ITEM.get(new Identifier(id));
+        return new ItemStack(i);
+    }
+
+    private static int rankOf(SkillDef d) { return PirateLevelingClient.level(d.key()); }
+
+    private String blocked(SkillDef d) {
+        return PirateLevelingSystem.blockedReason(d, rankOf(d), PirateLevelingClient.pointsInTree(d.tree()),
+                PirateLevelingClient.bossesBeaten, PirateLevelingClient.skillPoints);
+    }
+
+    /** Locked = its tier (or boss gate) is not open yet - different from "open, but no points". */
+    private boolean locked(SkillDef d) {
+        return PirateLevelingClient.pointsInTree(d.tree()) < PirateLevelingSystem.TIER_POINTS[d.tier()]
+                || d.bossGate() > PirateLevelingClient.bossesBeaten && rankOf(d) == 0;
+    }
+
+    // ------------------------------------------------------------------ render
+    @Override
+    public void render(DrawContext ctx, int mx, int my, float delta) {
         renderBackground(ctx);
-        drawPanel(ctx, mouseX, mouseY);
-        super.render(ctx, mouseX, mouseY, delta);
-    }
-
-    private void drawPanel(DrawContext ctx, int mx, int my) {
-        int px = panelX, py = panelY;
-
-        // Outer border
-        ctx.fill(px - 1, py - 1, px + PANEL_W + 1, py + PANEL_H + 1, C_BORDER);
-        // Panel background
-        ctx.fill(px, py, px + PANEL_W, py + PANEL_H, C_PANEL_BG);
-
-        drawHeader(ctx, px, py);
-        drawXpRow(ctx, px, py);
-        drawSkillPointsRow(ctx, px, py);
-        drawTabs(ctx, px, py, mx, my);
-        drawSkillCards(ctx, px, py, mx, my);
-    }
-
-    // ── Header ────────────────────────────────────────────────────────────────
-
-    private void drawHeader(DrawContext ctx, int px, int py) {
-        ctx.fill(px, py + Y_HDR, px + PANEL_W, py + Y_HDR + HDR_H, C_HDR_BG);
-
-        int level = PirateLevelingClient.level;
-        String rank  = PirateLevelingSystem.rankName(level);
-        String color = PirateLevelingSystem.rankColor(level);
-
-        ctx.drawCenteredTextWithShadow(textRenderer,
-            "§6* §fPirate Journal", px + PANEL_W / 2, py + Y_HDR + 6, 0xFFFFFF);
-
-        String lvlStr = color + rank + " §7[§fLv " + level + "§7]";
-        ctx.drawTextWithShadow(textRenderer, lvlStr,
-            px + PANEL_W - textRenderer.getWidth(lvlStr) - 6, py + Y_HDR + 6, 0xFFFFFF);
-    }
-
-    // ── XP bar ────────────────────────────────────────────────────────────────
-
-    private void drawXpRow(DrawContext ctx, int px, int py) {
-        int rowY = py + Y_XP;
-        ctx.fill(px, rowY, px + PANEL_W, rowY + XP_H, 0xFF0D0B1A);
-
-        int barX  = px + 60;
-        int barY  = rowY + 3;
-        int barW  = PANEL_W - 120;
-        int barH  = 7;
-
-        ctx.fill(barX, barY, barX + barW, barY + barH, 0xFF111111);
-        float frac = PirateLevelingClient.xpFraction();
-        int fill = (int)(barW * frac);
-        if (fill > 0) ctx.fill(barX, barY, barX + fill, barY + barH, 0xFFFFCC00);
-        // Bar border
-        ctx.fill(barX - 1, barY - 1, barX + barW + 1, barY,         0xFF555555);
-        ctx.fill(barX - 1, barY + barH, barX + barW + 1, barY + barH + 1, 0xFF555555);
-
-        int level  = PirateLevelingClient.level;
-        int xp     = PirateLevelingClient.xp;
-        int needed = PirateLevelingSystem.xpToNextLevel(level);
-        String xpStr = (level >= PirateLevelingSystem.MAX_LEVEL)
-            ? "§6MAX LEVEL"
-            : "§7" + xp + " §8/ §7" + needed + " XP";
-        ctx.drawCenteredTextWithShadow(textRenderer, xpStr, px + PANEL_W / 2, rowY + 3, 0xFFFFFF);
-    }
-
-    // ── Skill points row ──────────────────────────────────────────────────────
-
-    private void drawSkillPointsRow(DrawContext ctx, int px, int py) {
-        int rowY = py + Y_PTS;
-        ctx.fill(px, rowY, px + PANEL_W, rowY + PTS_H, 0xFF0F0D1E);
-        int pts = PirateLevelingClient.skillPoints;
-        String msg = pts > 0
-            ? "§a" + pts + " Skill Point" + (pts == 1 ? "" : "s") + " Available §7— Click §a+§7 to Spend"
-            : "§7No unspent skill points";
-        ctx.drawCenteredTextWithShadow(textRenderer, msg, px + PANEL_W / 2, rowY + 2, 0xFFFFFF);
-    }
-
-    // ── Tabs ──────────────────────────────────────────────────────────────────
-
-    private static final int TAB_W = 64; // 5 × 64 = 320, leaving 4px padded (2 each side)
-
-    private void drawTabs(DrawContext ctx, int px, int py, int mx, int my) {
-        int rowY = py + Y_TABS;
-        PirateLevelingSystem.SkillTree[] trees = PirateLevelingSystem.SkillTree.values();
-
-        for (int t = 0; t < trees.length; t++) {
-            int tx = px + 2 + t * TAB_W;
-            boolean active = (t == selectedTab);
-            boolean hover  = !active && mx >= tx && mx < tx + TAB_W - 1
-                && my >= rowY && my < rowY + TAB_H;
-
-            int bg = active ? TAB_COLORS[t] : (hover ? 0xFF302860 : C_TAB_INACT);
-            ctx.fill(tx, rowY, tx + TAB_W - 1, rowY + TAB_H, bg);
-
-            // Bottom highlight on active tab
-            if (active) ctx.fill(tx, rowY + TAB_H - 2, tx + TAB_W - 1, rowY + TAB_H, 0x80FFFFFF);
-
-            ctx.drawCenteredTextWithShadow(textRenderer,
-                trees[t].name, tx + TAB_W / 2, rowY + 4, active ? 0xFFFFFF : 0xAAAAAA);
+        // ribbons behind the book (inactive) and over it (active)
+        drawTabs(ctx, mx, my, false);
+        ctx.drawTexture(TEX, px, py, 0, 0, W, H, TW, TH);
+        drawTabs(ctx, mx, my, true);
+        drawTree(ctx, mx, my);
+        drawPage(ctx, mx, my);
+        super.render(ctx, mx, my, delta);
+        // tooltip for hovered nodes
+        int h = hoveredNode(mx, my);
+        if (h >= 0) {
+            SkillDef d = skills().get(h);
+            ctx.drawTooltip(textRenderer, List.of(Text.literal(d.displayName()).formatted(Formatting.GOLD),
+                    Text.literal(d.tier() == 4 ? "Capstone" : "Rank " + rankOf(d) + "/" + d.maxLevel()).formatted(Formatting.GRAY)), mx, my);
         }
     }
 
-    // ── Skill cards ───────────────────────────────────────────────────────────
+    private int tabX(int t) { return px + 14 + t * 30; }
 
-    private static final int BTN_W = 22;
-    private static final int BTN_H = 14;
+    private void drawTabs(DrawContext ctx, int mx, int my, boolean activeLayer) {
+        for (int t = 0; t < SkillTree.values().length; t++) {
+            boolean active = t == tab;
+            if (active != activeLayer) continue;
+            SkillTree tr = SkillTree.values()[t];
+            int x = tabX(t), h = active ? 26 : 20, y = py - h + (active ? 8 : 4);
+            float r = ((tr.color >> 16) & 255) / 255f, g = ((tr.color >> 8) & 255) / 255f, b = (tr.color & 255) / 255f;
+            boolean hover = mx >= x && mx < x + J_TAB_W && my >= y && my < y + h;
+            float k = active ? 1f : hover ? 0.85f : 0.65f;
+            RenderSystem.setShaderColor(r * k, g * k, b * k, 1f);
+            ctx.drawTexture(TEX, x, y, J_TAB_U + (active ? 30 : 0), J_TAB_V, J_TAB_W, h, TW, TH);
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+            ctx.drawItem(icon(tr.icon), x + 6, y + 2);
+        }
+    }
 
-    private void drawSkillCards(DrawContext ctx, int px, int py, int mx, int my) {
-        PirateLevelingSystem.SkillTree tree =
-            PirateLevelingSystem.SkillTree.values()[selectedTab];
-        List<PirateLevelingSystem.SkillDef> skills = PirateLevelingSystem.skillsForTree(tree);
-        int treeColor = TAB_COLORS[selectedTab] | 0xFF000000;
+    private void drawTree(DrawContext ctx, int mx, int my) {
+        SkillTree tr = tree();
+        List<SkillDef> sk = skills();
+        int pts = PirateLevelingClient.pointsInTree(tr);
+        // title
+        text(ctx, Text.literal(tr.name).formatted(Formatting.BOLD), px + 83, py + 13, INK, true);
+        // tier labels in the margin
+        String[] tiers = {"", "I", "II", "III", "*"};
+        int[] ys = {0, 160, 120, 82, 44};
+        for (int t = 1; t <= 4; t++) {
+            boolean open = pts >= PirateLevelingSystem.TIER_POINTS[t];
+            int col = open ? GOLD : INK_DIM;
+            text(ctx, Text.literal(tiers[t]).formatted(Formatting.BOLD), px + 21, py + ys[t] - 6, col, true);
+            if (PirateLevelingSystem.TIER_POINTS[t] > 0)
+                small(ctx, PirateLevelingSystem.TIER_POINTS[t] + " pts", px + 22, py + ys[t] + 4, col);
+        }
+        // ropes: I -> II (straight up), II -> III (a yoke), III -> capstone
+        boolean open2 = pts >= PirateLevelingSystem.TIER_POINTS[2], open3 = pts >= PirateLevelingSystem.TIER_POINTS[3],
+                open4 = pts >= PirateLevelingSystem.TIER_POINTS[4];
+        rope(ctx, 48, 133, 48, 147, open2); rope(ctx, 118, 133, 118, 147, open2);
+        rope(ctx, 48, 100, 48, 107, open3); rope(ctx, 118, 100, 118, 107, open3);
+        rope(ctx, 48, 100, 118, 101, open3); rope(ctx, 83, 95, 83, 100, open3);
+        rope(ctx, 83, 61, 83, 69, open4);
+        // nodes
+        for (int i = 0; i < sk.size() && i < NODE.length; i++) drawNode(ctx, sk.get(i), i, px + NODE[i][0], py + NODE[i][1]);
+    }
 
-        for (int i = 0; i < skills.size(); i++) {
-            PirateLevelingSystem.SkillDef def = skills.get(i);
-            int globalIdx  = PirateLevelManager.getSkillIndex(def.key());
-            int skillLvl   = (globalIdx >= 0 && globalIdx < PirateLevelingClient.skillLevels.length)
-                ? PirateLevelingClient.skillLevels[globalIdx] : 0;
-            boolean maxed  = (skillLvl >= def.maxLevel());
-            boolean canBuy = (PirateLevelingClient.skillPoints > 0 && !maxed);
+    private void rope(DrawContext ctx, int x0, int y0, int x1, int y1, boolean open) {
+        int c = open ? 0xFFC8962A : 0xFF6A4A26, c2 = open ? 0xFF7A5A14 : 0xFF3A2414;
+        int ax = px + Math.min(x0, x1), ay = py + Math.min(y0, y1), bx = px + Math.max(x0, x1), by = py + Math.max(y0, y1);
+        if (bx - ax < 2) { ctx.fill(ax - 1, ay, ax + 1, by, c); ctx.fill(ax + 1, ay, ax + 2, by, c2); }
+        else { ctx.fill(ax, ay - 1, bx, ay + 1, c); ctx.fill(ax, ay + 1, bx, ay + 2, c2); }
+    }
 
-            int cardTop = py + Y_CARDS + i * CARD_H;
-            int cardBot = cardTop + CARD_H - 2;
-
-            // Card background (alternating shade)
-            int cardBg = (i % 2 == 0) ? C_CARD_BG : C_CARD_BG_H;
-            ctx.fill(px + 2, cardTop, px + PANEL_W - 2, cardBot, cardBg);
-
-            // Skill name
-            ctx.drawTextWithShadow(textRenderer, def.displayName(),
-                px + 8, cardTop + 5, treeColor);
-
-            // Level indicator "Lv X / Y"
-            String lvlStr = skillLvl == 0 ? "§7Unlearned"
-                : (maxed ? "§6MAX" : "§b" + skillLvl + " §7/ §8" + def.maxLevel());
-            int lvlX = px + PANEL_W - 2 - BTN_W - 4 - textRenderer.getWidth(lvlStr);
-            ctx.drawTextWithShadow(textRenderer, lvlStr, lvlX, cardTop + 5, 0xFFFFFF);
-
-            // Level dots (5 small squares)
-            for (int d = 0; d < def.maxLevel(); d++) {
-                int dotX = px + 8 + d * 9;
-                int dotY = cardTop + 18;
-                int dotColor = (d < skillLvl) ? treeColor : C_DOT_EMPTY;
-                ctx.fill(dotX, dotY, dotX + 6, dotY + 4, dotColor);
+    private void drawNode(DrawContext ctx, SkillDef d, int idx, int cx, int cy) {
+        boolean cap = d.tier() == 4;
+        int rank = rankOf(d);
+        boolean lock = locked(d), can = blocked(d) == null;
+        int size = cap ? J_CAP : J_NODE;
+        int u;
+        if (cap) u = J_CAP_U + (rank > 0 ? 2 : lock ? 0 : 1) * J_CAP;
+        else u = (rank >= d.maxLevel() ? 3 : rank > 0 ? 2 : lock ? 0 : 1) * J_NODE;
+        if (idx == selected) ctx.drawTexture(TEX, cx - 15, cy - 15, J_RING_U, J_NODE_V, 30, 30, TW, TH);
+        ctx.drawTexture(TEX, cx - size / 2, cy - size / 2, u, J_NODE_V, size, size, TW, TH);
+        ctx.drawItem(icon(d.icon()), cx - 8, cy - 8);
+        if (lock) ctx.fill(cx - 8, cy - 8, cx + 8, cy + 8, 0xA0201818);
+        else if (can && (System.currentTimeMillis() / 400) % 2 == 0)       // gently blinks when you can learn it
+            ctx.fill(cx - 9, cy + (cap ? 12 : 9), cx + 9, cy + (cap ? 13 : 10), 0xFFFFE08A);
+        if (!cap) {                                                        // rank pips
+            for (int r = 0; r < d.maxLevel(); r++) {
+                int x = cx - 12 + r * 5, y = cy + 14;
+                ctx.fill(x, y, x + 4, y + 3, 0xFF3A2414);
+                ctx.fill(x + 1, y, x + 3, y + 2, r < rank ? 0xFFE0B040 : 0xFF6A4A30);
             }
-
-            // Description text (small, after dots)
-            String desc = def.descAt().apply(skillLvl);
-            String truncated = textRenderer.trimToWidth(desc, PANEL_W - 8 - 5 * 9 - 4 - BTN_W - 8);
-            ctx.drawTextWithShadow(textRenderer, "§7" + truncated,
-                px + 8 + 5 * 9 + 4, cardTop + 18, 0x888888);
-
-            // "+1" button
-            int bx = px + PANEL_W - 2 - BTN_W;
-            int by = cardTop + 11;
-            boolean btnHover = mx >= bx && mx < bx + BTN_W && my >= by && my < by + BTN_H;
-            int btnBg = canBuy
-                ? (btnHover ? 0xFF3E8B2E : C_BTN_ON)
-                : C_BTN_OFF;
-            ctx.fill(bx, by, bx + BTN_W, by + BTN_H, btnBg);
-            ctx.drawCenteredTextWithShadow(textRenderer,
-                canBuy ? "§a+" : "§8+", bx + BTN_W / 2, by + 3, C_BTN_TXT);
-        }
-
-        // Tree subtitle below the last card
-        int subY = py + Y_CARDS + skills.size() * CARD_H + 2;
-        if (subY < py + PANEL_H - 8) {
-            PirateLevelingSystem.SkillTree t = PirateLevelingSystem.SkillTree.values()[selectedTab];
-            ctx.drawCenteredTextWithShadow(textRenderer,
-                "§8" + t.subtitle, px + PANEL_W / 2, subY, 0x666666);
         }
     }
 
-    // ── Input ─────────────────────────────────────────────────────────────────
+    private void drawPage(DrawContext ctx, int mx, int my) {
+        int x0 = px + 170, cx = px + 237;
+        String rank = PirateLevelingSystem.rankName(PirateLevelingClient.level);
+        text(ctx, Text.literal("Level " + PirateLevelingClient.level + "  ").append(Text.literal(rank).formatted(Formatting.BOLD)), cx, py + 13, INK, true);
+        // XP bar
+        ctx.drawTexture(TEX, cx - 52, py + 25, J_XP_U, J_XP_V, 104, 8, TW, TH);
+        int fill = Math.round(PirateLevelingClient.xpFraction() * 100);
+        if (fill > 0) ctx.drawTexture(TEX, cx - 50, py + 27, J_XP_U, J_XPF_V, fill, 4, TW, TH);
+        small(ctx, PirateLevelingClient.level >= PirateLevelingSystem.MAX_LEVEL ? "max level"
+                : PirateLevelingClient.xp + " / " + PirateLevelingClient.xpToNextLevel() + " xp", cx, py + 36, INK_DIM);
+        // points
+        ctx.drawTexture(TEX, cx - 34, py + 45, J_XP_U, J_COIN_V, 9, 9, TW, TH);
+        int pts = PirateLevelingClient.skillPoints;
+        ctx.drawText(textRenderer, Text.literal(pts + (pts == 1 ? " skill point" : " skill points")), cx - 22, py + 46, pts > 0 ? GOLD : INK_DIM, false);
+        ctx.fill(x0 + 2, py + 58, px + 304, py + 59, 0x60704A20);
 
+        // the selected skill
+        List<SkillDef> sk = skills();
+        SkillDef d = sk.get(Math.min(selected, sk.size() - 1));
+        int rankNow = rankOf(d);
+        ctx.drawItem(icon(d.icon()), x0 + 2, py + 64);
+        ctx.drawText(textRenderer, Text.literal(d.displayName()).formatted(Formatting.BOLD), x0 + 22, py + 64, INK, false);
+        String sub = d.tier() == 4 ? (rankNow > 0 ? "Capstone - learned" : "Capstone")
+                : "Rank " + rankNow + " / " + d.maxLevel() + "   -   Tier " + PirateLevelingSystem.roman(d.tier());
+        small(ctx, sub, x0 + 22, py + 74, INK_DIM, false);
+
+        int y = py + 86;
+        if (rankNow == 0) y = para(ctx, d.descAt().apply(0), x0 + 2, y, INK_DIM);
+        if (rankNow > 0) {
+            ctx.drawText(textRenderer, Text.literal("Now").formatted(Formatting.BOLD), x0 + 2, y, GOLD, false);
+            y = para(ctx, d.descAt().apply(rankNow), x0 + 2, y + 10, INK);
+        }
+        if (rankNow < d.maxLevel()) {
+            ctx.drawText(textRenderer, Text.literal(rankNow == 0 ? "Learn" : "Next").formatted(Formatting.BOLD), x0 + 2, y + 2, GOLD, false);
+            y = para(ctx, d.descAt().apply(rankNow + 1), x0 + 2, y + 12, INK);
+        }
+        String why = blocked(d);
+        if (why != null && !why.equals("Mastered")) {                  // keep the gate line clear of the button (py + 160)
+            int lines = textRenderer.wrapLines(Text.literal(why), 132).size();
+            para(ctx, why, x0 + 2, Math.min(y + 3, py + 158 - lines * 9), RED);
+        }
+
+        // buttons
+        boolean can = why == null;
+        int bx = cx - J_BTN_W / 2, by = py + 160;
+        boolean hov = in(mx, my, bx, by, J_BTN_W, J_BTN_H);
+        ctx.drawTexture(TEX, bx, by, J_BTN_U, (can ? (hov ? 1 : 0) : 2) * J_BTN_H, J_BTN_W, J_BTN_H, TW, TH);
+        ctx.drawCenteredTextWithShadow(textRenderer, why != null && why.equals("Mastered") ? "Mastered" : rankNow == 0 ? "Learn" : "Improve",
+                cx, by + 5, can ? 0xFFFFF0D0 : 0xFFB0A898);
+        int rx = cx - J_SBTN_W / 2, ry = py + 184;
+        boolean rh = in(mx, my, rx, ry, J_SBTN_W, J_SBTN_H);
+        ctx.drawTexture(TEX, rx, ry, J_BTN_U, J_SBTN_V + (rh ? 1 : 0) * J_SBTN_H, J_SBTN_W, J_SBTN_H, TW, TH);
+        small(ctx, "Retrain (" + PirateLevelManager.RESPEC_COST + " doubloons)", cx, ry + 4, 0xFFFFF0D0);
+    }
+
+    // ------------------------------------------------------------------ text helpers (ink on parchment: no shadow)
+    private void text(DrawContext ctx, Text t, int x, int y, int col, boolean centred) {
+        int w = textRenderer.getWidth(t);
+        ctx.drawText(textRenderer, t, centred ? x - w / 2 : x, y, col, false);
+    }
+
+    private void small(DrawContext ctx, String s, int x, int y, int col) { small(ctx, s, x, y, col, true); }
+
+    private void small(DrawContext ctx, String s, int x, int y, int col, boolean centred) {
+        ctx.getMatrices().push();
+        ctx.getMatrices().translate(x, y, 0);
+        ctx.getMatrices().scale(0.75f, 0.75f, 1f);
+        int w = textRenderer.getWidth(s);
+        ctx.drawText(textRenderer, s, centred ? -w / 2 : 0, 0, col, false);
+        ctx.getMatrices().pop();
+    }
+
+    /** Word-wrapped paragraph in the right page's width; returns the y below it. */
+    private int para(DrawContext ctx, String s, int x, int y, int col) {
+        for (OrderedText line : textRenderer.wrapLines(Text.literal(s), 132)) {
+            ctx.drawText(textRenderer, line, x, y, col, false);
+            y += 9;
+        }
+        return y;
+    }
+
+    private static boolean in(double mx, double my, int x, int y, int w, int h) {
+        return mx >= x && mx < x + w && my >= y && my < y + h;
+    }
+
+    private int hoveredNode(double mx, double my) {
+        List<SkillDef> sk = skills();
+        for (int i = 0; i < sk.size() && i < NODE.length; i++) {
+            int r = sk.get(i).tier() == 4 ? 17 : 13;
+            if (Math.hypot(mx - (px + NODE[i][0]), my - (py + NODE[i][1])) <= r) return i;
+        }
+        return -1;
+    }
+
+    // ------------------------------------------------------------------ input
     @Override
     public boolean mouseClicked(double mx, double my, int btn) {
         if (btn != 0) return super.mouseClicked(mx, my, btn);
-
-        int px = panelX, py = panelY;
-
-        // Tab click
-        int tabRowY = py + Y_TABS;
-        if (my >= tabRowY && my < tabRowY + TAB_H) {
-            for (int t = 0; t < 5; t++) {
-                int tx = px + 2 + t * TAB_W;
-                if (mx >= tx && mx < tx + TAB_W - 1) {
-                    selectedTab = t;
-                    return true;
-                }
+        for (int t = 0; t < SkillTree.values().length; t++) {
+            int x = tabX(t);
+            if (in(mx, my, x, py - 22, J_TAB_W, 24)) {
+                if (tab != t) { tab = t; selected = 0; click(); }
+                return true;
             }
         }
-
-        // Skill card "+" button click
-        if (PirateLevelingClient.skillPoints > 0) {
-            PirateLevelingSystem.SkillTree tree = PirateLevelingSystem.SkillTree.values()[selectedTab];
-            List<PirateLevelingSystem.SkillDef> skills = PirateLevelingSystem.skillsForTree(tree);
-
-            for (int i = 0; i < skills.size(); i++) {
-                int cardTop = py + Y_CARDS + i * CARD_H;
-                int bx = px + PANEL_W - 2 - BTN_W;
-                int by = cardTop + 11;
-                if (mx >= bx && mx < bx + BTN_W && my >= by && my < by + BTN_H) {
-                    PirateLevelingSystem.SkillDef def = skills.get(i);
-                    int globalIdx = PirateLevelManager.getSkillIndex(def.key());
-                    int curLvl = (globalIdx >= 0 && globalIdx < PirateLevelingClient.skillLevels.length)
-                        ? PirateLevelingClient.skillLevels[globalIdx] : 0;
-                    if (curLvl < def.maxLevel()) {
-                        var buf = PacketByteBufs.create();
-                        buf.writeString(def.key(), 64);
-                        ClientPlayNetworking.send(ModNetworking.C2S_SKILL_SPEND, buf);
-                    }
-                    return true;
-                }
-            }
+        int n = hoveredNode(mx, my);
+        if (n >= 0) { selected = n; click(); return true; }
+        int cx = px + 237;
+        SkillDef d = skills().get(Math.min(selected, skills().size() - 1));
+        if (in(mx, my, cx - J_BTN_W / 2, py + 160, J_BTN_W, J_BTN_H) && blocked(d) == null) {
+            var buf = PacketByteBufs.create();
+            buf.writeString(d.key(), 64);
+            ClientPlayNetworking.send(ModNetworking.C2S_SKILL_SPEND, buf);
+            if (client != null) client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.6f, 0.6f));
+            return true;
         }
-
+        if (in(mx, my, cx - J_SBTN_W / 2, py + 184, J_SBTN_W, J_SBTN_H)) {
+            ClientPlayNetworking.send(ModNetworking.C2S_SKILL_RESPEC, PacketByteBufs.empty());
+            click();
+            return true;
+        }
         return super.mouseClicked(mx, my, btn);
+    }
+
+    @Override
+    public boolean keyPressed(int key, int scan, int mods) {
+        if (key >= '1' && key < '1' + SkillTree.values().length) { tab = key - '1'; selected = 0; return true; }
+        return super.keyPressed(key, scan, mods);
+    }
+
+    private void click() {
+        if (client != null) client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.ITEM_BOOK_PAGE_TURN, 1f));
     }
 }

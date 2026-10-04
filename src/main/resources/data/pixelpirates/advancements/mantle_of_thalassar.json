@@ -1,0 +1,82 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:thalassar_helmet"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.mantle_of_thalassar.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.mantle_of_thalassar.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_ward",
+  "criteria": {
+    "thalassar_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:thalassar_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "thalassar_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:thalassar_chestplate"
+            ]
+          }
+        ]
+      }
+    },
+    "thalassar_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:thalassar_leggings"
+            ]
+          }
+        ]
+      }
+    },
+    "thalassar_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:thalassar_boots"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "thalassar_helmet"
+    ],
+    [
+      "thalassar_chestplate"
+    ],
+    [
+      "thalassar_leggings"
+    ],
+    [
+      "thalassar_boots"
+    ]
+  ]
+}

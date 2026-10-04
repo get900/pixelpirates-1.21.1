@@ -1,0 +1,172 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:tidefathers_wrath"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.arsenal_of_the_deep.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.arsenal_of_the_deep.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:forged_in_victory",
+  "criteria": {
+    "rackham_blunderbuss": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:rackham_blunderbuss"
+            ]
+          }
+        ]
+      }
+    },
+    "serpentspine_longbow": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:serpentspine_longbow"
+            ]
+          }
+        ]
+      }
+    },
+    "everburning_flail": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:everburning_flail"
+            ]
+          }
+        ]
+      }
+    },
+    "dutchmans_hand_cannon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:dutchmans_hand_cannon"
+            ]
+          }
+        ]
+      }
+    },
+    "sunken_trident": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:sunken_trident"
+            ]
+          }
+        ]
+      }
+    },
+    "bloodfin_maw": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:bloodfin_maw"
+            ]
+          }
+        ]
+      }
+    },
+    "krakenmaw_harpoon_gun": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:krakenmaw_harpoon_gun"
+            ]
+          }
+        ]
+      }
+    },
+    "chainbreaker": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:chainbreaker"
+            ]
+          }
+        ]
+      }
+    },
+    "heartseeker": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:heartseeker"
+            ]
+          }
+        ]
+      }
+    },
+    "tidefathers_wrath": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:tidefathers_wrath"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "rackham_blunderbuss"
+    ],
+    [
+      "serpentspine_longbow"
+    ],
+    [
+      "everburning_flail"
+    ],
+    [
+      "dutchmans_hand_cannon"
+    ],
+    [
+      "sunken_trident"
+    ],
+    [
+      "bloodfin_maw"
+    ],
+    [
+      "krakenmaw_harpoon_gun"
+    ],
+    [
+      "chainbreaker"
+    ],
+    [
+      "heartseeker"
+    ],
+    [
+      "tidefathers_wrath"
+    ]
+  ]
+}

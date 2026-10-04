@@ -29,6 +29,13 @@ public final class HomesteadItems {
         return item;
     }
 
+    // SEALED STRONGBOXES (2026-10-01): cracked open at a Treasure Hoard - a spinning reel of prizes (hoard/Strongboxes)
+    public static final Item COMMON_STRONGBOX = item("common_strongbox", new net.get900.pixelpirates.homestead.hoard.StrongboxItem(new Item.Settings().maxCount(16), 0));
+    public static final Item RARE_STRONGBOX = item("rare_strongbox", new net.get900.pixelpirates.homestead.hoard.StrongboxItem(new Item.Settings().maxCount(16).rarity(net.minecraft.util.Rarity.UNCOMMON), 1));
+    // PARROT TYPES (2026-10-03): a crate holding one parrot of a set type - treasure loot (homestead/parrot/ParrotCrateItem)
+    public static final Item PARROT_CRATE = item("parrot_crate", new net.get900.pixelpirates.homestead.parrot.ParrotCrateItem(new Item.Settings().maxCount(1).rarity(net.minecraft.util.Rarity.RARE)));
+    public static final Item LEGENDARY_STRONGBOX = item("legendary_strongbox", new net.get900.pixelpirates.homestead.hoard.StrongboxItem(new Item.Settings().maxCount(16).rarity(net.minecraft.util.Rarity.RARE), 2));
+
     static <T extends Item> T tool(String name, T item) {
         Registry.register(Registries.ITEM, new Identifier(PixelPirates.MOD_ID, name), item);
         ALL.add(item);
@@ -49,9 +56,9 @@ public final class HomesteadItems {
     public static final Item PINEAPPLE = item("pineapple", new Item(new Item.Settings().food(HomesteadFoods.PINEAPPLE)));
     public static final Item LIME = item("lime", new Item(new Item.Settings().food(HomesteadFoods.LIME)));
     public static final Item CHILI_PEPPER = item("chili_pepper", new Item(new Item.Settings().food(HomesteadFoods.CHILI_PEPPER)));
-    public static final Item FRUIT_SALAD = item("tropical_fruit_salad", new StewItem(new Item.Settings().food(HomesteadFoods.FRUIT_SALAD).maxCount(16)));
-    public static final Item CEVICHE = item("ceviche", new StewItem(new Item.Settings().food(HomesteadFoods.CEVICHE).maxCount(16)));
-    public static final Item SPICY_CHOWDER = item("spicy_chowder", new StewItem(new Item.Settings().food(HomesteadFoods.SPICY_CHOWDER).maxCount(16)));
+    public static final Item FRUIT_SALAD = item("tropical_fruit_salad", new net.get900.pixelpirates.item.food.BowlFoodItem(new Item.Settings().food(HomesteadFoods.FRUIT_SALAD).maxCount(16)));
+    public static final Item CEVICHE = item("ceviche", new net.get900.pixelpirates.item.food.BowlFoodItem(new Item.Settings().food(HomesteadFoods.CEVICHE).maxCount(16)));
+    public static final Item SPICY_CHOWDER = item("spicy_chowder", new net.get900.pixelpirates.item.food.BowlFoodItem(new Item.Settings().food(HomesteadFoods.SPICY_CHOWDER).maxCount(16)));
     public static final Item CHOCOLATE_DOUBLOON = item("chocolate_doubloon", new Item(new Item.Settings().food(HomesteadFoods.CHOCOLATE_DOUBLOON)));
     public static final Item PINEAPPLE_GROG = item("pineapple_grog", new DrinkItem(new Item.Settings().food(HomesteadFoods.PINEAPPLE_GROG).maxCount(16)
             .recipeRemainder(Items.GLASS_BOTTLE)));
@@ -64,6 +71,21 @@ public final class HomesteadItems {
             e -> net.get900.pixelpirates.homestead.rum.Rum.drink(e, 1)));
     public static final Item VINTAGE_RUM = item("vintage_rum", new DrinkItem(new Item.Settings().maxCount(16).rarity(net.minecraft.util.Rarity.RARE),
             e -> net.get900.pixelpirates.homestead.rum.Rum.drink(e, 2)));
+
+    // ================================================================== THE GROG BARREL'S DRINKS (tavern/TavernDrinks)
+    public static final Item ALE = item("tankard_of_ale", new net.get900.pixelpirates.homestead.tavern.TavernDrinks.TavernDrinkItem(new Item.Settings().maxCount(16),
+            net.get900.pixelpirates.homestead.tavern.TavernDrinks.Kind.ALE));
+    public static final Item HONEY_MEAD = item("honey_mead", new net.get900.pixelpirates.homestead.tavern.TavernDrinks.TavernDrinkItem(new Item.Settings().maxCount(16),
+            net.get900.pixelpirates.homestead.tavern.TavernDrinks.Kind.HONEY_MEAD));
+    public static final Item SPICED_WINE = item("spiced_wine", new net.get900.pixelpirates.homestead.tavern.TavernDrinks.TavernDrinkItem(new Item.Settings().maxCount(16),
+            net.get900.pixelpirates.homestead.tavern.TavernDrinks.Kind.SPICED_WINE));
+    public static final Item BILGE_WHISKEY = item("bilge_whiskey", new net.get900.pixelpirates.homestead.tavern.TavernDrinks.TavernDrinkItem(new Item.Settings().maxCount(16),
+            net.get900.pixelpirates.homestead.tavern.TavernDrinks.Kind.BILGE_WHISKEY));
+    public static final Item KRAKENS_KISS = item("krakens_kiss", new net.get900.pixelpirates.homestead.tavern.TavernDrinks.TavernDrinkItem(new Item.Settings().maxCount(16)
+            .rarity(net.minecraft.util.Rarity.UNCOMMON), net.get900.pixelpirates.homestead.tavern.TavernDrinks.Kind.KRAKENS_KISS));
+
+    // ================================================================== THE FORGE (homestead/forge)
+    public static final Item SMITHS_HAMMER = tool("smiths_hammer", new net.get900.pixelpirates.homestead.forge.SmithsHammerItem(new Item.Settings().maxDamage(400)));
 
     // ================================================================== #21 GUNS
     public static final Item PAPER_CARTRIDGE = item("paper_cartridge", new Item(new Item.Settings()));
@@ -123,8 +145,7 @@ public final class HomesteadItems {
     public static final Item CHAIN_SHOT = item("chain_shot", new Item(new Item.Settings().maxCount(16)));
     public static final Item GRAPE_SHOT = item("grape_shot", new Item(new Item.Settings().maxCount(16)));
 
-    // ================================================================== #20 LOGBOOK
-    public static final Item CAPTAINS_LOGBOOK = item("captains_logbook", new net.get900.pixelpirates.homestead.logbook.LogbookItem(new Item.Settings().maxCount(1)));
+    // #20 the Captain's Logbook was replaced by the Weathered Chronicle (ModItems.WEATHERED_CHRONICLE, world/Chronicle)
 
     public static void init() {}
 }

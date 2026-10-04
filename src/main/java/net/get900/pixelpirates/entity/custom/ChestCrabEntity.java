@@ -105,7 +105,7 @@ public class ChestCrabEntity extends PathAwareEntity implements GeoEntity {
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!this.getWorld().isClient && isHiding() && coinDropCount < 2) {
-            this.dropStack(new ItemStack(ModItems.PIRATE_COIN, 1));
+            this.dropStack(new ItemStack(ModItems.COIN, 1));            // rummaging a hiding crab turns up a doubloon
             coinDropCount++;
             this.playSound(ModSounds.CHEST_CRAB_COIN, 1.0f, 0.9f + random.nextFloat() * 0.2f);
             return ActionResult.SUCCESS;
@@ -116,8 +116,7 @@ public class ChestCrabEntity extends PathAwareEntity implements GeoEntity {
     @Override
     protected void dropInventory() {
         super.dropInventory();
-        int coins = 1 + this.random.nextInt(3);
-        this.dropStack(new ItemStack(ModItems.PIRATE_COIN, coins));
+        this.dropStack(new ItemStack(ModItems.CRAB_SHELL, 1 + this.random.nextInt(2)));     // phase 1 armor material
     }
 
     @Override

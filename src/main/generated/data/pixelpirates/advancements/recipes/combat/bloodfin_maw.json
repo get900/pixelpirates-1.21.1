@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bloodfin_razor_tooth": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:bloodfin_razor_tooth"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:bloodfin_maw"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_bloodfin_razor_tooth",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:bloodfin_maw"
+    ]
+  },
+  "sends_telemetry_event": false
+}

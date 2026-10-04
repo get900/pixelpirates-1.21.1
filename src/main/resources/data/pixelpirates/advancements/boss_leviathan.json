@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:crown_of_the_drowned"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_leviathan.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_leviathan.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_abyssal_heart",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

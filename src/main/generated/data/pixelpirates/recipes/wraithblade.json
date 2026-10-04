@@ -3,13 +3,13 @@
   "category": "equipment",
   "key": {
     "B": {
-      "item": "pixelpirates:kraken_ink"
+      "item": "pixelpirates:ectoplasm"
     },
     "H": {
       "item": "pixelpirates:rope"
     },
     "T": {
-      "item": "pixelpirates:cursed_bone"
+      "item": "pixelpirates:ectoplasm"
     }
   },
   "pattern": [

@@ -31,7 +31,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:pirate_coin",
+          "name": "pixelpirates:coin",
           "weight": 12,
           "functions": [
             {
@@ -61,7 +61,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "pixelpirates:ectoplasm",
           "weight": 8,
           "functions": [
             {
@@ -69,22 +69,22 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 2,
-                "max": 6
+                "max": 4
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:cursed_bone",
           "weight": 3,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
+                "min": 2,
+                "max": 4
               }
             }
           ]
@@ -98,22 +98,21 @@
           "type": "minecraft:item",
           "name": "minecraft:compass",
           "weight": 3
-        },
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:book",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "enchantments": [
-                "minecraft:protection",
-                "minecraft:sharpness",
-                "minecraft:unbreaking",
-                "minecraft:smite"
-              ]
-            }
-          ]
+          "name": "pixelpirates:rare_strongbox"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.15
         }
       ]
     }

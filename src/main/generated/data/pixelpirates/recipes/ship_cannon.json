@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "III",
+    "III",
+    "PIP"
+  ],
+  "result": {
+    "item": "pixelpirates:ship_cannon"
+  },
+  "show_notification": true
+}

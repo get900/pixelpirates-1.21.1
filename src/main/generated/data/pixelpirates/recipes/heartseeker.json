@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "pixelpirates:abyssal_heartstone"
+    },
+    {
+      "item": "pixelpirates:kraken_fang"
+    },
+    {
+      "item": "pixelpirates:living_flesh"
+    },
+    {
+      "item": "pixelpirates:living_flesh"
+    },
+    {
+      "item": "minecraft:heart_of_the_sea"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:heartseeker"
+  }
+}

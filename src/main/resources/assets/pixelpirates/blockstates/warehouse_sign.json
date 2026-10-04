@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/warehouse_sign"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/warehouse_sign",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/warehouse_sign",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/warehouse_sign",
+   "y": 270
+  }
+ }
+}

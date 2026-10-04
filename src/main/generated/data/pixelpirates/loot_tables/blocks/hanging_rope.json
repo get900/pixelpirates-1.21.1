@@ -5,6 +5,13 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
+          "block": "pixelpirates:hanging_rope",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "deployed": "false"
+          }
+        },
+        {
           "condition": "minecraft:survives_explosion"
         }
       ],

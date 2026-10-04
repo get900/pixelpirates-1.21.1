@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cod"
+    },
+    "P": {
+      "item": "minecraft:spruce_planks"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "pattern": [
+    "WCW",
+    "PPP",
+    "P P"
+  ],
+  "result": {
+    "item": "pixelpirates:cattery_counter"
+  },
+  "show_notification": true
+}

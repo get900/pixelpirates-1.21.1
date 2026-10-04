@@ -1,0 +1,317 @@
+{
+ "textures": {
+  "wood": "minecraft:block/spruce_planks",
+  "top": "minecraft:block/stripped_birch_log",
+  "wicker": "minecraft:block/hay_block_side",
+  "cushion": "minecraft:block/red_wool",
+  "slate": "minecraft:block/black_concrete",
+  "bowl": "minecraft:block/terracotta",
+  "particle": "minecraft:block/spruce_planks"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    2
+   ],
+   "to": [
+    16,
+    12,
+    14
+   ],
+   "faces": {
+    "north": {
+     "texture": "#wood"
+    },
+    "south": {
+     "texture": "#wood"
+    },
+    "east": {
+     "texture": "#wood"
+    },
+    "west": {
+     "texture": "#wood"
+    },
+    "up": {
+     "texture": "#wood"
+    },
+    "down": {
+     "texture": "#wood"
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    2,
+    1.5
+   ],
+   "to": [
+    16,
+    3,
+    2
+   ],
+   "faces": {
+    "north": {
+     "texture": "#top"
+    },
+    "south": {
+     "texture": "#top"
+    },
+    "east": {
+     "texture": "#top"
+    },
+    "west": {
+     "texture": "#top"
+    },
+    "up": {
+     "texture": "#top"
+    },
+    "down": {
+     "texture": "#top"
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    9,
+    1.5
+   ],
+   "to": [
+    16,
+    10,
+    2
+   ],
+   "faces": {
+    "north": {
+     "texture": "#top"
+    },
+    "south": {
+     "texture": "#top"
+    },
+    "east": {
+     "texture": "#top"
+    },
+    "west": {
+     "texture": "#top"
+    },
+    "up": {
+     "texture": "#top"
+    },
+    "down": {
+     "texture": "#top"
+    }
+   }
+  },
+  {
+   "from": [
+    -0.5,
+    12,
+    1.5
+   ],
+   "to": [
+    16.5,
+    13,
+    14.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#top",
+     "uv": [
+      15.5,
+      3,
+      16,
+      4
+     ]
+    },
+    "south": {
+     "texture": "#top",
+     "uv": [
+      15.5,
+      3,
+      16,
+      4
+     ]
+    },
+    "east": {
+     "texture": "#top"
+    },
+    "west": {
+     "texture": "#top"
+    },
+    "up": {
+     "texture": "#top",
+     "uv": [
+      15.5,
+      1.5,
+      16,
+      14.5
+     ]
+    },
+    "down": {
+     "texture": "#top",
+     "uv": [
+      15.5,
+      1.5,
+      16,
+      14.5
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    1,
+    13,
+    4
+   ],
+   "to": [
+    8,
+    15.5,
+    12
+   ],
+   "faces": {
+    "north": {
+     "texture": "#wicker"
+    },
+    "south": {
+     "texture": "#wicker"
+    },
+    "east": {
+     "texture": "#wicker"
+    },
+    "west": {
+     "texture": "#wicker"
+    },
+    "up": {
+     "texture": "#wicker"
+    },
+    "down": {
+     "texture": "#wicker"
+    }
+   }
+  },
+  {
+   "from": [
+    2,
+    14,
+    5
+   ],
+   "to": [
+    7,
+    15.75,
+    11
+   ],
+   "faces": {
+    "north": {
+     "texture": "#cushion"
+    },
+    "south": {
+     "texture": "#cushion"
+    },
+    "east": {
+     "texture": "#cushion"
+    },
+    "west": {
+     "texture": "#cushion"
+    },
+    "up": {
+     "texture": "#cushion"
+    },
+    "down": {
+     "texture": "#cushion"
+    }
+   }
+  },
+  {
+   "from": [
+    10,
+    13,
+    9
+   ],
+   "to": [
+    15,
+    17,
+    9.75
+   ],
+   "faces": {
+    "north": {
+     "texture": "#slate",
+     "uv": [
+      1,
+      15,
+      6,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#slate",
+     "uv": [
+      10,
+      15,
+      15,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#slate",
+     "uv": [
+      6.25,
+      15,
+      7,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#slate",
+     "uv": [
+      9,
+      15,
+      9.75,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#slate"
+    },
+    "down": {
+     "texture": "#slate"
+    }
+   }
+  },
+  {
+   "from": [
+    11,
+    13,
+    4
+   ],
+   "to": [
+    14,
+    14.25,
+    7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#bowl"
+    },
+    "south": {
+     "texture": "#bowl"
+    },
+    "east": {
+     "texture": "#bowl"
+    },
+    "west": {
+     "texture": "#bowl"
+    },
+    "up": {
+     "texture": "#bowl"
+    },
+    "down": {
+     "texture": "#bowl"
+    }
+   }
+  }
+ ]
+}

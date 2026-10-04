@@ -1,18 +1,93 @@
 {
  "variants": {
-  "facing=north": {
+  "facing=north,part=0": {
+   "model": "pixelpirates:block/bounty_board_part"
+  },
+  "facing=north,part=1": {
    "model": "pixelpirates:block/bounty_board"
   },
-  "facing=east": {
+  "facing=north,part=2": {
+   "model": "pixelpirates:block/bounty_board_part"
+  },
+  "facing=north,part=3": {
+   "model": "pixelpirates:block/bounty_board_part"
+  },
+  "facing=north,part=4": {
+   "model": "pixelpirates:block/bounty_board_part"
+  },
+  "facing=north,part=5": {
+   "model": "pixelpirates:block/bounty_board_part"
+  },
+  "facing=east,part=0": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 90
+  },
+  "facing=east,part=1": {
    "model": "pixelpirates:block/bounty_board",
    "y": 90
   },
-  "facing=south": {
+  "facing=east,part=2": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 90
+  },
+  "facing=east,part=3": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 90
+  },
+  "facing=east,part=4": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 90
+  },
+  "facing=east,part=5": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 90
+  },
+  "facing=south,part=0": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 180
+  },
+  "facing=south,part=1": {
    "model": "pixelpirates:block/bounty_board",
    "y": 180
   },
-  "facing=west": {
+  "facing=south,part=2": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 180
+  },
+  "facing=south,part=3": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 180
+  },
+  "facing=south,part=4": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 180
+  },
+  "facing=south,part=5": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 180
+  },
+  "facing=west,part=0": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 270
+  },
+  "facing=west,part=1": {
    "model": "pixelpirates:block/bounty_board",
+   "y": 270
+  },
+  "facing=west,part=2": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 270
+  },
+  "facing=west,part=3": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 270
+  },
+  "facing=west,part=4": {
+   "model": "pixelpirates:block/bounty_board_part",
+   "y": 270
+  },
+  "facing=west,part=5": {
+   "model": "pixelpirates:block/bounty_board_part",
    "y": 270
   }
  }

@@ -1,0 +1,305 @@
+{
+ "textures": {
+  "side": "minecraft:block/barrel_side",
+  "end": "minecraft:block/barrel_top",
+  "wood": "minecraft:block/spruce_log",
+  "iron": "minecraft:block/iron_block",
+  "tap": "minecraft:block/cut_copper",
+  "label": "minecraft:block/yellow_terracotta",
+  "particle": "minecraft:block/barrel_side"
+ },
+ "elements": [
+  {
+   "from": [
+    2,
+    3,
+    3
+   ],
+   "to": [
+    14,
+    14,
+    14
+   ],
+   "faces": {
+    "north": {
+     "texture": "#side",
+     "rotation": 90
+    },
+    "south": {
+     "texture": "#side",
+     "rotation": 90
+    },
+    "east": {
+     "texture": "#end"
+    },
+    "west": {
+     "texture": "#end"
+    },
+    "up": {
+     "texture": "#side",
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#side",
+     "rotation": 90
+    }
+   }
+  },
+  {
+   "from": [
+    4,
+    2.7,
+    2.7
+   ],
+   "to": [
+    4.6,
+    14.3,
+    14.3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#iron"
+    },
+    "south": {
+     "texture": "#iron"
+    },
+    "east": {
+     "texture": "#iron"
+    },
+    "west": {
+     "texture": "#iron"
+    },
+    "up": {
+     "texture": "#iron"
+    },
+    "down": {
+     "texture": "#iron"
+    }
+   }
+  },
+  {
+   "from": [
+    11.5,
+    2.7,
+    2.7
+   ],
+   "to": [
+    12.1,
+    14.3,
+    14.3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#iron"
+    },
+    "south": {
+     "texture": "#iron"
+    },
+    "east": {
+     "texture": "#iron"
+    },
+    "west": {
+     "texture": "#iron"
+    },
+    "up": {
+     "texture": "#iron"
+    },
+    "down": {
+     "texture": "#iron"
+    }
+   }
+  },
+  {
+   "from": [
+    3,
+    0,
+    4
+   ],
+   "to": [
+    5,
+    3.5,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#wood"
+    },
+    "south": {
+     "texture": "#wood"
+    },
+    "east": {
+     "texture": "#wood"
+    },
+    "west": {
+     "texture": "#wood"
+    },
+    "up": {
+     "texture": "#wood"
+    },
+    "down": {
+     "texture": "#wood"
+    }
+   }
+  },
+  {
+   "from": [
+    11,
+    0,
+    4
+   ],
+   "to": [
+    13,
+    3.5,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#wood"
+    },
+    "south": {
+     "texture": "#wood"
+    },
+    "east": {
+     "texture": "#wood"
+    },
+    "west": {
+     "texture": "#wood"
+    },
+    "up": {
+     "texture": "#wood"
+    },
+    "down": {
+     "texture": "#wood"
+    }
+   }
+  },
+  {
+   "from": [
+    7,
+    5,
+    1.5
+   ],
+   "to": [
+    9,
+    7,
+    3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#tap"
+    },
+    "south": {
+     "texture": "#tap"
+    },
+    "east": {
+     "texture": "#tap"
+    },
+    "west": {
+     "texture": "#tap"
+    },
+    "up": {
+     "texture": "#tap"
+    },
+    "down": {
+     "texture": "#tap"
+    }
+   }
+  },
+  {
+   "from": [
+    7.5,
+    3.5,
+    1.5
+   ],
+   "to": [
+    8.5,
+    5,
+    2.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#tap"
+    },
+    "south": {
+     "texture": "#tap"
+    },
+    "east": {
+     "texture": "#tap"
+    },
+    "west": {
+     "texture": "#tap"
+    },
+    "up": {
+     "texture": "#tap"
+    },
+    "down": {
+     "texture": "#tap"
+    }
+   }
+  },
+  {
+   "from": [
+    7.4,
+    7,
+    2
+   ],
+   "to": [
+    8.6,
+    8.5,
+    2.6
+   ],
+   "faces": {
+    "north": {
+     "texture": "#tap"
+    },
+    "south": {
+     "texture": "#tap"
+    },
+    "east": {
+     "texture": "#tap"
+    },
+    "west": {
+     "texture": "#tap"
+    },
+    "up": {
+     "texture": "#tap"
+    },
+    "down": {
+     "texture": "#tap"
+    }
+   }
+  },
+  {
+   "from": [
+    5.5,
+    9,
+    2.8
+   ],
+   "to": [
+    10.5,
+    11.5,
+    3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#label"
+    },
+    "south": {
+     "texture": "#label"
+    },
+    "east": {
+     "texture": "#label"
+    },
+    "west": {
+     "texture": "#label"
+    },
+    "up": {
+     "texture": "#label"
+    },
+    "down": {
+     "texture": "#label"
+    }
+   }
+  }
+ ]
+}

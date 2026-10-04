@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:coconut_water"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.coconut_water.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.coconut_water.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:island_fare",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:coconut_water"
+          ]
+        }
+      }
+    }
+  }
+}

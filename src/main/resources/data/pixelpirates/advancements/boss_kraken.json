@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:krakens_ink_heart"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_kraken.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_kraken.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_bloodfin",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

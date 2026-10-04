@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "G G",
+    "GGG",
+    "PPP"
+  ],
+  "result": {
+    "count": 2,
+    "item": "pixelpirates:organ_pipes"
+  },
+  "show_notification": true
+}

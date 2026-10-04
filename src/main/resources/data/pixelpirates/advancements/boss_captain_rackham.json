@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:rackhams_diving_charm"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_captain_rackham.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_captain_rackham.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:powder_key",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

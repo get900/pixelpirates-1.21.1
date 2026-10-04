@@ -1,15 +1,23 @@
 {
   "display": {
-    "icon": {"item": "pixelpirates:pirate_chestplate"},
-    "title": {"translate": "advancements.pixelpirates.full_pirate_kit.title"},
-    "description": {"translate": "advancements.pixelpirates.full_pirate_kit.description"},
-    "frame": "goal",
+    "icon": {
+      "item": "pixelpirates:pirate_chestplate"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.full_pirate_kit.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.full_pirate_kit.description"
+    },
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": false,
     "hidden": false
   },
-  "parent": "pixelpirates:into_the_shallows",
+  "parent": "pixelpirates:monster_of_the_deep",
   "criteria": {
-    "got_here": {"trigger": "minecraft:impossible"}
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
   }
 }

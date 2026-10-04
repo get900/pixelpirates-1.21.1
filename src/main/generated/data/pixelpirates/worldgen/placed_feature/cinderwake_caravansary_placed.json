@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:cinderwake_caravansary",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

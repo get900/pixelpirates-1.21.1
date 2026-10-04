@@ -1,0 +1,51 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:powder_monkey_chestplate"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_ward.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_ward.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_captain_rackham",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:powder_monkey_helmet",
+              "pixelpirates:powder_monkey_chestplate",
+              "pixelpirates:powder_monkey_leggings",
+              "pixelpirates:powder_monkey_boots",
+              "pixelpirates:forgeguard_helmet",
+              "pixelpirates:forgeguard_chestplate",
+              "pixelpirates:forgeguard_leggings",
+              "pixelpirates:forgeguard_boots",
+              "pixelpirates:tidecourt_helmet",
+              "pixelpirates:tidecourt_chestplate",
+              "pixelpirates:tidecourt_leggings",
+              "pixelpirates:tidecourt_boots",
+              "pixelpirates:gallowbreaker_helmet",
+              "pixelpirates:gallowbreaker_chestplate",
+              "pixelpirates:gallowbreaker_leggings",
+              "pixelpirates:gallowbreaker_boots",
+              "pixelpirates:thalassar_helmet",
+              "pixelpirates:thalassar_chestplate",
+              "pixelpirates:thalassar_leggings",
+              "pixelpirates:thalassar_boots"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

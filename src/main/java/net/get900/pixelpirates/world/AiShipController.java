@@ -650,33 +650,26 @@ public class AiShipController {
      */
     private static void spawnCrew(LoadedServerShip ship, AiShipData data) {
         if (GhostShipEncounter.isDutchman(data.blueprintName)) { GhostShipEncounter.spawnCrew(ship, data); return; }
-        Vector3d center = new Vector3d(ship.getTransform().getPositionInWorld());
-        int seaLevel = data.world.getSeaLevel();
-
-        double[][] xzOffsets = {{0, 0}, {-3, 0}, {3, 0}, {0, -2}, {0, 2}};
         int wanted  = 3;
         int spawned = 0;
 
         boolean hasCaptain = data.faction == Faction.PIRATES || data.faction == Faction.UNDEAD;
 
-        for (double[] off : xzOffsets) {
+        // Posts are real standing spots on the deck, found in the ship's own blocks (ship space). The old version
+        // scanned straight down from above the centre of mass and took the first block it hit - on a rigged ship
+        // that was the top of a sail, so the crew fell to the deck and keepCrewAboard teleported them back up there
+        // every tick (the crew "bouncing" on every AI ship).
+        List<Vector3d> spots = deckSpots(ship, data.world, wanted);
+        if (spots.isEmpty()) {
+            LOGGER.warn("[AI] No deck spots found on ship {} ('{}') - crew not spawned", data.shipId, data.blueprintName);
+            return;
+        }
+        Matrix4dc shipToWorld = ship.getTransform().getShipToWorld();
+
+        for (Vector3d spot : spots) {
             if (spawned >= wanted) break;
-
-            double cx = center.x + off[0];
-            double cz = center.z + off[1];
-
-            double spawnY = Double.NaN;
-            int scanTop = (int) Math.ceil(center.y) + 10;
-            for (int dy = 0; dy < 30; dy++) {
-                BlockPos bp = BlockPos.ofFloored(cx, scanTop - dy, cz);
-                if (bp.getY() < seaLevel - 2) break;
-                BlockState bs = data.world.getBlockState(bp);
-                if (!bs.isAir() && bs.getFluidState().isEmpty()) {
-                    spawnY = bp.getY() + 1.1;
-                    break;
-                }
-            }
-            if (Double.isNaN(spawnY)) spawnY = center.y + 4.0;
+            Vector3d wp = shipToWorld.transformPosition(new Vector3d(spot), new Vector3d());
+            double cx = wp.x, cz = wp.z, spawnY = wp.y + 0.05;
 
             if (hasCaptain && spawned == 0) {
                 CaptainEntity captain = ModEntities.SHIP_CAPTAIN.create(data.world);
@@ -698,7 +691,7 @@ public class AiShipController {
                 data.world.spawnEntity(captain);
                 data.captainEntityId = captain.getUuid();
                 data.crewEntityIds.add(captain.getUuid());
-                data.crewPosts.put(captain.getUuid(), ship.getTransform().getWorldToShip().transformPosition(new Vector3d(cx, spawnY, cz), new Vector3d()));
+                data.crewPosts.put(captain.getUuid(), new Vector3d(spot));
             } else {
                 // Faction-specific crew type
                 Entity crew = spawnCrewMob(data);
@@ -713,7 +706,7 @@ public class AiShipController {
                     mob.setPersistent();
                 }
                 data.crewEntityIds.add(crew.getUuid());
-                data.crewPosts.put(crew.getUuid(), ship.getTransform().getWorldToShip().transformPosition(new Vector3d(cx, spawnY, cz), new Vector3d()));
+                data.crewPosts.put(crew.getUuid(), new Vector3d(spot));
                 data.world.spawnEntity(crew);
             }
             spawned++;
@@ -725,9 +718,10 @@ public class AiShipController {
 
     /**
      * Crew used to patrol a fixed WORLD point set at spawn, so the moment the ship sailed they walked after an empty
-     * patch of sea and fell off. Posts are now kept in ship space: every tick each crew member's tether follows the
-     * ship, and anyone who wanders past its patrol leash (5.5 blocks idle, 10 while fighting a boarder), drops below the deck or
-     * ends up in the water is put back on it.
+     * patch of sea and fell off. Posts are kept in ship space: every tick each crew member's tether (patrol home, or the
+     * vanilla walk-target leash for villager/vindicator/drowned crews) follows the ship. Teleporting is only the last
+     * resort - someone in the water, fallen well below the deck, or clearly off the ship is put back on their post.
+     * Normal walking about the deck is left alone (snapping at 5.5 blocks made the crew visibly jump around).
      */
     private static void keepCrewAboard(LoadedServerShip ship, AiShipData data) {
         if (data.crewPosts.isEmpty()) return;
@@ -738,11 +732,14 @@ public class AiShipController {
             Vector3d w = toWorld.transformPosition(new Vector3d(post.getValue()), new Vector3d());
             if (e instanceof PirateCrewEntity pc) pc.setShipHome(w.x, w.y, w.z);
             else if (e instanceof CaptainEntity c) c.setShipHome(w.x, w.y, w.z);
+            else if (e instanceof net.minecraft.entity.mob.PathAwareEntity pa) pa.setPositionTarget(BlockPos.ofFloored(w.x, w.y, w.z), 4);
             boolean fighting = e instanceof net.minecraft.entity.mob.MobEntity m && m.getTarget() != null
                     && m.getTarget().squaredDistanceTo(w.x, w.y, w.z) < 12 * 12;
             double dx = e.getX() - w.x, dz = e.getZ() - w.z;
             double drift = Math.sqrt(dx * dx + dz * dz);
-            if (e.isTouchingWater() || e.getY() < w.y - 2.5 || drift > (fighting ? 10.0 : 5.5)) {
+            if (e.isTouchingWater() || e.getY() < w.y - 3.5 || drift > (fighting ? 14.0 : 11.0)) {
+                LOGGER.info("[AI] crew {} put back on post (water={} dy={} drift={}) ship {}", e.getType().getUntranslatedName(),
+                        e.isTouchingWater(), String.format("%.1f", e.getY() - w.y), String.format("%.1f", drift), data.shipId);
                 e.refreshPositionAndAngles(w.x, w.y, w.z, e.getYaw(), e.getPitch());
                 e.setVelocity(Vec3d.ZERO);
                 e.fallDistance = 0;
@@ -750,11 +747,61 @@ public class AiShipController {
         }
     }
 
+    /**
+     * Up to {@code n} standing spots on the ship's working deck, in SHIP space (feet position, block centre): a block
+     * with a full solid top and two free blocks above it. The deck is the helm's level (the helm stands on it) - spots
+     * within 4 below to 1 above it count, the most crowded level (the main deck) is preferred, and spots are spread at
+     * least 3 blocks apart, nearest the helm first. Falls back to any standing spot if the ship has no helm.
+     */
+    static List<Vector3d> deckSpots(LoadedServerShip ship, ServerWorld world, int n) {
+        var box = ship.getShipAABB();
+        List<Vector3d> out = new ArrayList<>();
+        if (box == null) return out;
+        BlockPos helm = null;
+        List<BlockPos> stand = new ArrayList<>();
+        BlockPos.Mutable p = new BlockPos.Mutable();
+        for (int x = box.minX(); x <= box.maxX(); x++)
+            for (int z = box.minZ(); z <= box.maxZ(); z++)
+                for (int y = box.minY(); y <= box.maxY(); y++) {
+                    p.set(x, y, z);
+                    BlockState st = world.getBlockState(p);
+                    if (st.isOf(net.get900.pixelpirates.block.ModBlocks.SHIP_HELM)) helm = p.toImmutable();
+                    if (!st.isSideSolidFullSquare(world, p, net.minecraft.util.math.Direction.UP)) continue;
+                    BlockPos a = p.up(), b = p.up(2);
+                    if (!world.getBlockState(a).getCollisionShape(world, a).isEmpty() || !world.getFluidState(a).isEmpty()) continue;
+                    if (!world.getBlockState(b).getCollisionShape(world, b).isEmpty()) continue;
+                    stand.add(a.toImmutable());
+                }
+        if (stand.isEmpty()) return out;
+        final BlockPos h = helm != null ? helm : stand.get(stand.size() / 2);
+        List<BlockPos> deck = new ArrayList<>(stand.stream().filter(s -> s.getY() >= h.getY() - 4 && s.getY() <= h.getY() + 1).toList());
+        if (deck.isEmpty()) deck = stand;
+        Map<Integer, Integer> perLevel = new HashMap<>();
+        for (BlockPos s : deck) perLevel.merge(s.getY(), 1, Integer::sum);
+        int main = perLevel.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
+        deck.sort(java.util.Comparator.comparingInt((BlockPos s) -> s.getY() == main ? 0 : 1)
+                .thenComparingDouble(s -> s.getSquaredDistance(h)));
+        for (BlockPos s : deck) {
+            if (out.size() >= n) break;
+            boolean far = out.stream().allMatch(o -> o.distanceSquared(s.getX() + 0.5, s.getY(), s.getZ() + 0.5) >= 9);
+            if (far && !s.equals(h)) out.add(new Vector3d(s.getX() + 0.5, s.getY(), s.getZ() + 0.5));
+        }
+        return out;
+    }
+
     private static Entity spawnCrewMob(AiShipData data) {
         return switch (data.faction) {
             case MERCHANTS -> EntityType.VILLAGER.create(data.world);
             case NAVY      -> EntityType.VINDICATOR.create(data.world);
-            case UNDEAD    -> EntityType.DROWNED.create(data.world);
+            case UNDEAD    -> {
+                // drowned burn in daylight; a skull (not damageable, so it never wears through) keeps the sun off
+                var d = EntityType.DROWNED.create(data.world);
+                if (d != null) {
+                    d.equipStack(EquipmentSlot.HEAD, new ItemStack(net.minecraft.item.Items.SKELETON_SKULL));
+                    d.setEquipmentDropChance(EquipmentSlot.HEAD, 0f);
+                }
+                yield d;
+            }
             default        -> ModEntities.PIRATE_CREW.create(data.world);
         };
     }

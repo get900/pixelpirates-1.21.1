@@ -34,18 +34,24 @@ public final class Homestead {
         HomesteadEffects.init();
         HomesteadBlockEntities.init();
         HomesteadEntities.init();
-        GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(PixelPirates.MOD_ID, "homestead"),
-                FabricItemGroup.builder().icon(() -> new ItemStack(HomesteadItems.PINEAPPLE))
-                        .displayName(Text.translatable("itemgroup.pixelpirates.homestead"))
-                        .entries((ctx, entries) -> {
-                            for (Block b : HomesteadBlocks.WITH_ITEM) entries.add(b);
-                            for (Item i : HomesteadItems.ALL) entries.add(i);
-                        }).build());
+        // (the Homestead creative tab was folded into item/ModCreativeTabs 2026-09-30)
         registerSeedDrops();
         net.get900.pixelpirates.homestead.trade.Prices.init();
         net.get900.pixelpirates.homestead.trade.PortTraders.register();
         net.get900.pixelpirates.homestead.bounty.Bounties.register();
+        net.get900.pixelpirates.homestead.bounty.Bounties.registerNetworking();
+        net.get900.pixelpirates.homestead.tavern.TavernGames.registerNetworking();
+        net.get900.pixelpirates.homestead.chapel.OrganNotes.init();
+        net.get900.pixelpirates.homestead.chapel.OrganNotes.registerNetworking();
+        net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.homestead.chapel.OrganNotes::tick);
+        net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(net.get900.pixelpirates.homestead.hoard.Strongboxes::tick);
         net.get900.pixelpirates.homestead.parrot.ParrotCompanion.register();
+        net.get900.pixelpirates.homestead.parrot.Aviary.register();
+        net.get900.pixelpirates.homestead.cat.Cattery.register();
+        net.get900.pixelpirates.homestead.wreck.WreckSecret.register();          // the Beach Wreck easter egg (#45)
+        net.get900.pixelpirates.homestead.tattoo.Tattoos.register();             // tattoos (the tattooist's chair, #33)               // ship's cats (townhouse #36)
+        net.get900.pixelpirates.homestead.parrot.ParrotAbilities.register();
+        net.get900.pixelpirates.homestead.parrot.ParrotCollection.register();
         net.get900.pixelpirates.homestead.fishing.Fishing.register();
         net.get900.pixelpirates.homestead.salvage.SalvageFeature.register();
         registerComposting();

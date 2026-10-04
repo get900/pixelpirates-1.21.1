@@ -119,6 +119,7 @@ public class CoralJellyEntity extends WaterCreatureEntity implements GeoEntity {
         super.dropLoot(source, causedByPlayer);
         this.dropStack(new ItemStack(Items.GLOW_INK_SAC, 1 + this.random.nextInt(2)));
         if (this.random.nextFloat() < 0.3f) this.dropStack(new ItemStack(Items.SLIME_BALL));
+        if (this.random.nextFloat() < 0.25f) this.dropStack(new ItemStack(net.get900.pixelpirates.item.ModItems.REEF_PEARL));
     }
 
     public static boolean canSpawn(EntityType<CoralJellyEntity> type, ServerWorldAccess world, SpawnReason reason,

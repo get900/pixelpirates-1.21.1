@@ -1,0 +1,141 @@
+{
+ "textures": {
+  "a": "minecraft:block/brown_terracotta",
+  "b": "minecraft:block/green_terracotta",
+  "c": "minecraft:block/red_terracotta",
+  "d": "minecraft:block/black_terracotta",
+  "cork": "minecraft:block/stripped_oak_log",
+  "label": "minecraft:block/white_terracotta",
+  "particle": "minecraft:block/brown_terracotta"
+ },
+ "elements": [
+  {
+   "from": [
+    7,
+    0,
+    7
+   ],
+   "to": [
+    9.5,
+    6,
+    9.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#a"
+    },
+    "south": {
+     "texture": "#a"
+    },
+    "east": {
+     "texture": "#a"
+    },
+    "west": {
+     "texture": "#a"
+    },
+    "up": {
+     "texture": "#a"
+    },
+    "down": {
+     "texture": "#a"
+    }
+   }
+  },
+  {
+   "from": [
+    7.75,
+    6,
+    7.75
+   ],
+   "to": [
+    8.75,
+    8.4,
+    8.75
+   ],
+   "faces": {
+    "north": {
+     "texture": "#a"
+    },
+    "south": {
+     "texture": "#a"
+    },
+    "east": {
+     "texture": "#a"
+    },
+    "west": {
+     "texture": "#a"
+    },
+    "up": {
+     "texture": "#a"
+    },
+    "down": {
+     "texture": "#a"
+    }
+   }
+  },
+  {
+   "from": [
+    7.7,
+    8.4,
+    7.7
+   ],
+   "to": [
+    8.8,
+    9,
+    8.8
+   ],
+   "faces": {
+    "north": {
+     "texture": "#cork"
+    },
+    "south": {
+     "texture": "#cork"
+    },
+    "east": {
+     "texture": "#cork"
+    },
+    "west": {
+     "texture": "#cork"
+    },
+    "up": {
+     "texture": "#cork"
+    },
+    "down": {
+     "texture": "#cork"
+    }
+   }
+  },
+  {
+   "from": [
+    6.95,
+    2,
+    6.95
+   ],
+   "to": [
+    9.55,
+    4,
+    7.3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#label"
+    },
+    "south": {
+     "texture": "#label"
+    },
+    "east": {
+     "texture": "#label"
+    },
+    "west": {
+     "texture": "#label"
+    },
+    "up": {
+     "texture": "#label"
+    },
+    "down": {
+     "texture": "#label"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:powderwatch_battery",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:banana_fritters"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.ship_cook.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.ship_cook.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:island_fare",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pixelpirates:banana_fritters",
+            "pixelpirates:banana_pudding",
+            "pixelpirates:coconut_macaroon",
+            "pixelpirates:coconut_cream_pie",
+            "pixelpirates:seaweed_salad",
+            "pixelpirates:kelp_crisps",
+            "pixelpirates:plum_duff",
+            "pixelpirates:biscuit_porridge",
+            "pixelpirates:tropical_smoothie",
+            "pixelpirates:hot_cocoa",
+            "pixelpirates:salmagundi",
+            "pixelpirates:grog_glazed_pork",
+            "pixelpirates:shark_jerky",
+            "pixelpirates:shark_fin_soup",
+            "pixelpirates:fish_and_chips",
+            "pixelpirates:crab_cakes",
+            "pixelpirates:seafood_boil",
+            "pixelpirates:lobster_thermidor",
+            "pixelpirates:kraken_ink_pasta",
+            "pixelpirates:grilled_pineapple",
+            "pixelpirates:pineapple_upside_down_cake",
+            "pixelpirates:pineapple_salsa",
+            "pixelpirates:key_lime_pie",
+            "pixelpirates:limeade",
+            "pixelpirates:scurvy_tonic",
+            "pixelpirates:fire_roasted_chili",
+            "pixelpirates:chili_con_shark",
+            "pixelpirates:coconut_curry",
+            "pixelpirates:blackened_fillet",
+            "pixelpirates:fish_taco",
+            "pixelpirates:rum_cake",
+            "pixelpirates:molasses_cookie",
+            "pixelpirates:parrotfish_poke",
+            "pixelpirates:mahi_pineapple_skewer",
+            "pixelpirates:moonfish_sashimi",
+            "pixelpirates:ember_eel_skewer",
+            "pixelpirates:ghostfin_broth",
+            "pixelpirates:bone_broth",
+            "pixelpirates:anglerfry_chowder",
+            "pixelpirates:voidfin_roe"
+          ]
+        }
+      }
+    }
+  }
+}

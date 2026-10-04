@@ -32,6 +32,8 @@ import java.util.List;
  */
 public class TradingPostBlock extends FurnitureBlock {
     public static final int HIRE_COST = 32;
+    /** Items one player may sell across all Trading Posts per game day. */
+    public static final int DAILY_LIMIT = 64;
 
     public TradingPostBlock(Settings s) {
         super(s, true, new double[]{0, 0, 3, 16, 14, 16});
@@ -42,23 +44,33 @@ public class TradingPostBlock extends FurnitureBlock {
         ItemStack held = player.getStackInHand(hand);
         if (hand != Hand.MAIN_HAND) return ActionResult.PASS;
         if (world.isClient) return ActionResult.SUCCESS;
-        if (player.isSneaking() && held.isOf(ModItems.PIRATE_COIN)) return hire((ServerWorld) world, pos, player, held);
+        if (player.isSneaking() && held.isOf(ModItems.COIN)) return hire((ServerWorld) world, pos, player, held);
         int price = Prices.priceOf(held.getItem());
         if (price <= 0) {
             player.sendMessage(Text.literal(held.isEmpty()
                     ? "Trading Post: use it with fish, rum, curios or monster parts to sell them (75% of a trader's price). Sneak-use with "
-                    + HIRE_COST + " coins to hire a trader."
+                    + HIRE_COST + " doubloons to hire a trader."
                     : "\"Nobody at this counter wants that.\"").formatted(Formatting.GRAY), false);
             return ActionResult.CONSUME;
         }
-        int coins = Math.max(1, (int) Math.floor(held.getCount() * price * 0.75));
+        // DAILY LIMIT (2026-10-01): a post buys at most DAILY_LIMIT items from each player per game day - it was an open money tap
+        var st = net.get900.pixelpirates.homestead.HomesteadState.get(world.getServer());
+        long day = world.getTimeOfDay() / 24000L;
+        int left = DAILY_LIMIT - st.postSold(player.getUuid(), day);
+        if (left <= 0) {
+            player.sendMessage(Text.literal("\"I've bought all I can carry today, sailor. Come back tomorrow.\" (" + DAILY_LIMIT
+                    + " items a day)").formatted(Formatting.RED), true);
+            return ActionResult.CONSUME;
+        }
+        int count = Math.min(held.getCount(), left);
+        int coins = net.get900.pixelpirates.world.SkillEffects.fence(player, Math.max(1, (int) Math.floor(count * price * 0.75)));
         String what = held.getName().getString();
-        int count = held.getCount();
         held.decrement(count);
+        st.addPostSold(player.getUuid(), day, count);
         give(player, coins);
         world.playSound(null, pos, SoundEvents.ENTITY_VILLAGER_TRADE, SoundCategory.BLOCKS, 0.8f, 1.1f);
         world.playSound(null, pos, SoundEvents.BLOCK_CHAIN_PLACE, SoundCategory.BLOCKS, 0.6f, 1.6f);
-        player.sendMessage(Text.literal("Sold " + count + " x " + what + " for " + coins + " pirate coins").formatted(Formatting.GOLD), true);
+        player.sendMessage(Text.literal("Sold " + count + " x " + what + " for " + coins + " doubloons").formatted(Formatting.GOLD), true);
         return ActionResult.CONSUME;
     }
 
@@ -66,14 +78,14 @@ public class TradingPostBlock extends FurnitureBlock {
         while (coins > 0) {
             int n = Math.min(64, coins);
             coins -= n;
-            ItemStack s = new ItemStack(ModItems.PIRATE_COIN, n);
+            ItemStack s = new ItemStack(ModItems.COIN, n);
             if (!player.getInventory().insertStack(s)) player.dropItem(s, false);
         }
     }
 
     private ActionResult hire(ServerWorld world, BlockPos pos, PlayerEntity player, ItemStack held) {
         if (held.getCount() < HIRE_COST && !player.getAbilities().creativeMode) {
-            player.sendMessage(Text.literal("Hiring a trader costs " + HIRE_COST + " pirate coins.").formatted(Formatting.RED), true);
+            player.sendMessage(Text.literal("Hiring a trader costs " + HIRE_COST + " doubloons.").formatted(Formatting.RED), true);
             return ActionResult.CONSUME;
         }
         EnumSet<PortTraderEntity.Kind> free = EnumSet.allOf(PortTraderEntity.Kind.class);

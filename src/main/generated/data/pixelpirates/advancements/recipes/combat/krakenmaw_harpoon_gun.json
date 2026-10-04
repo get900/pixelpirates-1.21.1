@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_krakens_ink_heart": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:krakens_ink_heart"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pixelpirates:krakenmaw_harpoon_gun"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_krakens_ink_heart",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pixelpirates:krakenmaw_harpoon_gun"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -55,12 +55,12 @@ public final class MobSpecs {
 
     static {
         // ============================================================ PHASE 1 - Starter Seas
-        def(MobSpec.of("raft_pirate", 1).kind(SWIM).floats().awayFrom("bloodfin_reef", 50).stats(22, 4, 0.9, 2).size(1.1f, 2.0f, 1.0f, 0.8f).xp(8).noMelee()
+        def(MobSpec.of("raft_pirate", 1).kind(SWIM).floats().awayFrom("bloodfin_reef", 50).sparse(96, 1).stats(22, 4, 0.9, 2).size(1.1f, 2.0f, 1.0f, 0.8f).xp(8).noMelee()
                 .ability(Ability.of("knives", "special2", 50, 3, 16, 7, projectile(KNIFE, 3, 18, 1.2f)))
                 .ability(Ability.of("dynamite", "special2", 140, 5, 14, 7, projectile(DYNAMITE, 1, 0, 0.9f)))
                 .drop(ModItems.PIRATE_COIN, 1, 3, 0.8f).drop(ModItems.ROPE, 1, 2, 0.4f).drop(ModItems.GROG, 1, 1, 0.15f)
-                .drop(ModItems.DYNAMITE, 1, 2, 0.25f).drop(Items.GUNPOWDER, 1, 2, 0.35f)
-                .spawns(SpawnGroup.MONSTER, 3, 1, 1, ModBiomeKeys.OPEN_OCEAN, ModBiomeKeys.TEMPERATE_SHALLOWS).egg(0x3a5a7a, 0xb8322c));
+                .drop(ModItems.DYNAMITE, 1, 2, 0.25f).drop(Items.GUNPOWDER, 1, 2, 0.35f).drop(ModItems.TATTERED_CLOTH, 1, 2, 0.3f)
+                .spawns(SpawnGroup.MONSTER, 1, 1, 1, ModBiomeKeys.OPEN_OCEAN, ModBiomeKeys.TEMPERATE_SHALLOWS).egg(0x3a5a7a, 0xb8322c));   // playtest: far too many -> weight 3->1, max 1 per 96 blocks
 
         // BOSS CHAIN 1/10 (see BossProgression) - the first real fight; unlocks zone 2. Bespoke class:
         // CaptainRackhamEntity (flurry, powder keg, Polly, broadside with the fort's wall cannons, grog swig).
@@ -73,7 +73,7 @@ public final class MobSpecs {
                 .ability(new Ability("bosuns_whistle", "whistle", 480, 0, 24, 18, 26, false, CaptainRackhamEntity.whistle()))
                 .phase2(new Ability("dynamite_barrage", "barrage", 150, 4, 20, 12, 22, false, CaptainRackhamEntity.dynamiteBarrage()))
                 .phase2(new Ability("broadside", "broadside", 320, 0, 40, 16, 30, false, CaptainRackhamEntity.broadside()))
-                .drop(ModItems.BOARDING_SABRE, 1, 1, 1f).drop(ModItems.PIRATE_COIN, 16, 26, 1f).drop(ModItems.SEAFARERS_TOKEN, 1, 1, 1f)
+                .drop(ModItems.BOARDING_SABRE, 1, 1, 1f).drop(ModItems.PIRATE_COIN, 16, 26, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("rackhams_reserve"), 1, 2, 1f)
                 .drop(ModItems.DYNAMITE, 4, 8, 1f).drop(ModItems.TREASURE_MAP_RARE, 1, 1, 0.5f).egg(0x8a1e22, 0xe0b84a));
 
         // BOSS CHAIN 6/10 - a late-game return to zone 1: the reef's apex hunter, sealed until the Abyssal King falls.
@@ -89,7 +89,7 @@ public final class MobSpecs {
                 .phase2(new Ability("the_hunt", "hunt", 300, 3, 24, 4, 20, false, BloodfinEntity.hunt()))
                 .phase2(new Ability("frenzied_devour", "devour", 170, 0, 4.5, 9, 18, false, BloodfinEntity.devourEffect()))
                 .drop(ModItems.KRAKEN_FANG, 1, 1, 1f).drop(ModItems.RAW_SHARK_MEAT, 6, 10, 1f).drop(ModItems.PIRATE_COIN, 32, 48, 1f)
-                .drop(ModItems.KRAKEN_SCALE, 4, 8, 1f).drop(ModItems.HARPOON, 4, 8, 1f).drop(Items.HEART_OF_THE_SEA, 1, 1, 0.5f).egg(0x5a6e7e, 0xa01818));
+                .drop(ModItems.KRAKEN_SCALE, 4, 8, 1f).drop(ModItems.HARPOON, 4, 8, 1f).drop(Items.HEART_OF_THE_SEA, 1, 1, 0.5f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("bloodfin_fillet"), 1, 3, 1f).drop(ModItems.SEAFARERS_TOKEN, 1, 1, 1f).egg(0x5a6e7e, 0xa01818));
 
         // ============================================================ PHASE 2 - Reefs & Siren Sea
         def(MobSpec.of("kraken_tentacle", 2).kind(STATIONARY).stats(40, 7, 0, 4).size(0.8f, 2.2f, 1.0f, 0.6f).xp(12).knockbackRes(1)
@@ -99,14 +99,14 @@ public final class MobSpecs {
                 .spawns(SpawnGroup.MONSTER, 3, 1, 1, ModBiomeKeys.CORAL_BAY, ModBiomeKeys.REEF_EDGE).egg(0x5a2a4a, 0xff6a8a));
 
         def(MobSpec.of("reefback_fish", 2).kind(SWIM).temper(PASSIVE).stats(24, 0, 0.8, 2).size(1.2f, 1.0f, 1.0f, 0.8f).xp(3).noMelee()
-                .drop(Items.COD, 2, 4, 1f).drop(Items.TUBE_CORAL, 1, 2, 0.4f).drop(Items.BRAIN_CORAL, 1, 2, 0.4f).drop(Items.FIRE_CORAL, 1, 1, 0.3f)
+                .drop(Items.COD, 2, 4, 1f).drop(ModItems.REEF_PEARL, 1, 1, 0.4f).drop(net.get900.pixelpirates.homestead.HomesteadBlocks.REEFBACK_TROPHY.asItem(), 1, 1, 0.02f).drop(Items.TUBE_CORAL, 1, 2, 0.4f).drop(Items.BRAIN_CORAL, 1, 2, 0.4f).drop(Items.FIRE_CORAL, 1, 1, 0.3f)
                 .spawns(SpawnGroup.WATER_CREATURE, 6, 1, 2, ModBiomeKeys.CORAL_BAY, ModBiomeKeys.REEF_EDGE, ModBiomeKeys.SIREN_SEA).egg(0x4aa0d6, 0xd23c3c));
 
         def(MobSpec.of("void_squid", 2).kind(SWIM).stats(22, 5, 1.1, 0).size(0.7f, 1.3f, 1.0f, 0.5f).xp(8)
                 .trail(ParticleTypes.SQUID_INK, 10)
                 .ability(Ability.of("ink", "special", 90, 2, 12, 6, cloud(StatusEffects.BLINDNESS, 60, 2.5f, ParticleTypes.SQUID_INK)))
                 .ability(Ability.of("grab", "attack", 70, 0, 4, 4, grab(4, 40)))
-                .drop(Items.INK_SAC, 1, 3, 1f).drop(ModItems.KRAKEN_INK, 1, 1, 0.3f)
+                .drop(Items.INK_SAC, 1, 3, 1f).drop(Items.COD, 1, 2, 0.5f).drop(Items.SALMON, 1, 1, 0.3f).drop(net.get900.pixelpirates.homestead.HomesteadItems.LIONFISH, 1, 1, 0.15f)
                 .spawns(SpawnGroup.MONSTER, 4, 1, 2, ModBiomeKeys.SIREN_SEA, ModBiomeKeys.REEF_EDGE).egg(0x141820, 0x2fd8ff));
 
         // BOSS CHAIN 2/10 - unlocks zone 3. Bespoke class SeaSerpentEntity: four pearl plates anchored by
@@ -122,7 +122,7 @@ public final class MobSpecs {
                 .phase2(new Ability("maelstrom", "maelstrom", 240, 0, 20, 14, 28, false, both(pull(18, 0.8), aura(StatusEffects.MINING_FATIGUE, 200, 1, 14, ParticleTypes.BUBBLE_POP))))
                 .phase2(new Ability("storm_surge", "surge", 200, 0, 9, 2, 30, false, SeaSerpentEntity.surge()))
                 .phase2(new Ability("brood", "brood", 420, 0, 24, 12, 22, false, SeaSerpentEntity.brood()))
-                .drop(ModItems.STORMCALLER, 1, 1, 1f).drop(ModItems.KRAKEN_SCALE, 3, 6, 1f).drop(ModItems.PIRATE_COIN, 20, 30, 1f)
+                .drop(ModItems.OFFICERS_SABRE, 1, 1, 1f).drop(ModItems.SIREN_SCALE, 6, 10, 1f).drop(ModItems.PIRATE_COIN, 20, 30, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("serpent_steak"), 1, 2, 1f)
                 .drop(Items.NAUTILUS_SHELL, 1, 2, 1f).drop(ModItems.TREASURE_MAP_LEGENDARY, 1, 1, 0.4f).egg(0x1f5e6a, 0xffd84a));
 
         // BOSS CHAIN 7/10 - sealed until the Bloodfin falls.
@@ -137,7 +137,7 @@ public final class MobSpecs {
                 .ability(new Ability("quake", "quake", 200, 0, 22, 14, 24, false, KrakenEntity.quake()))
                 .phase2(new Ability("maelstrom", "whirl", 360, 0, 24, 4, 52, false, KrakenEntity.whirl()))
                 .drop(ModItems.KRAKEN_FANG, 1, 1, 1f).drop(ModItems.KRAKEN_INK, 8, 14, 1f).drop(ModItems.KRAKEN_SCALE, 6, 10, 1f)
-                .drop(ModItems.PIRATE_COIN, 36, 52, 1f).egg(0x5a2a4a, 0xffd84a));
+                .drop(ModItems.PIRATE_COIN, 36, 52, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("kraken_platter"), 1, 3, 1f).drop(ModItems.SEAFARERS_TOKEN, 1, 1, 1f).egg(0x5a2a4a, 0xffd84a));
 
         // Phase-1 arm of the Kraken (KrakenArmEntity): ~70 px x renderScale 2.0 = ~9 blocks tall, spawned by the Kraken.
         def(MobSpec.of("kraken_arm", 2).kind(STATIONARY).stats(90, 12, 0, 8).size(1.8f, 8.5f, 2.0f, 1.2f).xp(25).knockbackRes(1).follow(24)
@@ -152,34 +152,34 @@ public final class MobSpecs {
                 .fireImmune().hurtByWater().trail(ParticleTypes.PORTAL, 8)
                 .ability(Ability.of("slam", "special", 120, 0, 5, 16, slam(5, 12, 3, ParticleTypes.FLAME)))
                 .ability(Ability.of("fire_charge", "special2", 80, 4, 18, 6, projectile(FIREBALL, 1, 0, 1.3f)))
-                .drop(Items.OBSIDIAN, 2, 4, 1f).drop(ModItems.VOLCANIC_EMBER, 2, 4, 1f).drop(Items.CRYING_OBSIDIAN, 1, 2, 0.4f)
+                .drop(ModItems.OBSIDIAN_SHARD, 2, 4, 1f).drop(ModItems.VOLCANIC_EMBER, 2, 4, 1f).drop(Items.OBSIDIAN, 1, 1, 0.3f)
                 .spawns(SpawnGroup.MONSTER, 2, 1, 1, ModBiomeKeys.ASH_REEF, ModBiomeKeys.BOILING_BASIN, ModBiomeKeys.MAGMA_SEA).egg(0x1c1828, 0xb060ff));
 
         def(MobSpec.of("flame_sprite", 3).kind(FLY).stats(14, 3, 0.35, 0).size(0.6f, 1.0f, 0.8f, 0.3f).xp(6).fireImmune().hurtByWater()
                 .noMelee().trail(ParticleTypes.FLAME, 2)
                 .ability(Ability.of("fireballs", "attack", 45, 3, 16, 5, projectile(FIREBALL, 2, 12, 1.1f)))
                 .ability(Ability.of("flicker", "special2", 140, 0, 6, 4, blink(ParticleTypes.FLAME)))
-                .drop(ModItems.VOLCANIC_EMBER, 1, 2, 0.7f).drop(Items.BLAZE_POWDER, 1, 1, 0.3f)
+                .drop(ModItems.VOLCANIC_EMBER, 1, 2, 0.7f).drop(ModItems.BRIMSTONE, 1, 1, 0.4f).drop(Items.BLAZE_POWDER, 1, 1, 0.3f)
                 .spawns(SpawnGroup.MONSTER, 6, 1, 3, ModBiomeKeys.ASH_REEF, ModBiomeKeys.BOILING_BASIN, ModBiomeKeys.MAGMA_SEA).egg(0xff8a2a, 0xffd070));
 
         def(MobSpec.of("ember_wraith", 3).stats(30, 6, 0.3, 4).size(0.7f, 2.0f, 1.0f, 0.5f).xp(10).fireImmune().hurtByWater().onHitFire(4)
                 .trail(ParticleTypes.SMALL_FLAME, 3)
                 .ability(Ability.of("lunge", "special2", 90, 3, 10, 4, dash(1.1)))
                 .ability(Ability.of("heat_wave", "special", 160, 0, 5, 10, aura(StatusEffects.WEAKNESS, 100, 0, 5, ParticleTypes.FLAME)))
-                .drop(ModItems.VOLCANIC_EMBER, 1, 2, 0.6f).drop(Items.MAGMA_CREAM, 1, 1, 0.3f)
+                .drop(ModItems.VOLCANIC_EMBER, 1, 2, 0.6f).drop(Items.MAGMA_CREAM, 1, 1, 0.3f).drop(ModItems.BRIMSTONE, 1, 1, 0.25f)
                 .spawns(SpawnGroup.MONSTER, 6, 1, 2, ModBiomeKeys.ASH_REEF, ModBiomeKeys.BOILING_BASIN, ModBiomeKeys.MAGMA_SEA).egg(0x2a2727, 0xffae3a));
 
         def(MobSpec.of("lava_scorpion", 3).stats(28, 5, 0.3, 6).size(1.2f, 0.9f, 0.8f, 0.8f).xp(10).fireImmune()
                 .onHit(StatusEffects.POISON, 80, 0).onHitFire(2)
                 .ability(Ability.of("sting", "attack", 60, 0, 3.5, 4, both(slam(2.5, 5, 3, ParticleTypes.FLAME), aura(StatusEffects.POISON, 80, 1, 2.5, ParticleTypes.ITEM_SLIME))))
                 .ability(Ability.of("burrow", "special2", 200, 4, 16, 10, blink(ParticleTypes.LAVA)))
-                .drop(ModItems.VOLCANIC_EMBER, 1, 2, 0.6f).drop(Items.SPIDER_EYE, 1, 1, 0.4f)
+                .drop(ModItems.VOLCANIC_EMBER, 1, 2, 0.6f).drop(ModItems.BRIMSTONE, 1, 2, 0.4f).drop(Items.SPIDER_EYE, 1, 1, 0.4f)
                 .spawns(SpawnGroup.MONSTER, 6, 1, 2, ModBiomeKeys.ASH_REEF, ModBiomeKeys.BOILING_BASIN, ModBiomeKeys.MAGMA_SEA).egg(0x3a2218, 0xff7a1e));
 
         def(MobSpec.of("fire_pirate", 3).stats(34, 7, 0.3, 4).size(0.7f, 2.1f, 1.0f, 0.5f).xp(12).fireImmune().onHitFire(5)
                 .trail(ParticleTypes.SMALL_FLAME, 5)
                 .ability(Ability.of("firebomb", "special2", 90, 4, 14, 7, projectile(FIREBALL, 1, 0, 1.0f)))
-                .drop(ModItems.PIRATE_COIN, 1, 4, 0.8f).drop(ModItems.VOLCANIC_EMBER, 1, 1, 0.5f).drop(ModItems.GROG, 1, 1, 0.2f)
+                .drop(ModItems.PIRATE_COIN, 1, 4, 0.8f).drop(ModItems.VOLCANIC_EMBER, 1, 1, 0.5f).drop(ModItems.GROG, 1, 1, 0.2f).drop(ModItems.OBSIDIAN_SHARD, 1, 1, 0.1f)
                 .spawns(SpawnGroup.MONSTER, 5, 1, 2, ModBiomeKeys.ASH_REEF, ModBiomeKeys.BOILING_BASIN, ModBiomeKeys.MAGMA_SEA).egg(0x5a1a14, 0xffae3a));
 
         // BOSS CHAIN 3/10 - unlocks zone 4. Bespoke class MoltenWarlordEntity (chain mace, Quench Valves - molten armour
@@ -196,36 +196,36 @@ public final class MobSpecs {
                 .phase2(new Ability("core_vent", "core_vent", 260, 0, 8, 12, 22, false,
                         both(aura(StatusEffects.WEAKNESS, 160, 1, 8, ParticleTypes.LAVA), selfBuff(StatusEffects.RESISTANCE, 160, 0, ParticleTypes.FLAME))))
                 .drop(ModItems.EMBERBRAND, 1, 1, 1f).drop(ModItems.VOLCANIC_EMBER, 10, 16, 1f).drop(ModItems.PIRATE_COIN, 24, 36, 1f)
-                .drop(Items.NETHERITE_SCRAP, 1, 2, 0.6f).drop(ModItems.DYNAMITE, 3, 6, 1f).egg(0x2a2727, 0xff8a2a));
+                .drop(ModItems.OBSIDIAN_SHARD, 4, 8, 1f).drop(ModItems.BRIMSTONE, 3, 6, 1f).drop(ModItems.DYNAMITE, 3, 6, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("molten_core_chili"), 1, 2, 1f).egg(0x2a2727, 0xff8a2a));
 
         // ============================================================ PHASE 4 - Cursed Seas
         def(MobSpec.of("skeleton_pirate", 4).stats(26, 6, 0.3, 4).size(0.6f, 2.0f, 1.0f, 0.5f).xp(8)
                 .ability(Ability.of("bone_toss", "special2", 100, 4, 14, 7, projectile(BONE, 1, 0, 1.2f)))
-                .drop(ModItems.CURSED_BONE, 1, 2, 0.5f).drop(Items.BONE, 1, 3, 0.8f).drop(ModItems.PIRATE_COIN, 1, 3, 0.6f)
+                .drop(ModItems.CURSED_BONE, 1, 2, 0.5f).drop(Items.BONE, 1, 3, 0.8f).drop(ModItems.PIRATE_COIN, 1, 3, 0.6f).drop(ModItems.LOST_SOUL, 1, 1, 0.03f)
                 .spawns(SpawnGroup.MONSTER, 8, 1, 3, ModBiomeKeys.PHANTOM_WAKE, ModBiomeKeys.SHIPGRAVE_DEPTHS, ModBiomeKeys.DROWNED_TRENCH).egg(0xd8d2bc, 0x7a2a22));
 
         def(MobSpec.of("ghost_shark", 4).kind(SWIM).stats(36, 8, 1.2, 2).size(1.4f, 1.0f, 1.0f, 0.8f).xp(12).lifesteal(0.3f)
                 .trail(ParticleTypes.SOUL, 8)
                 .ability(Ability.of("phase_lunge", "attack", 70, 3, 14, 3, dash(1.4)))
-                .drop(ModItems.CURSED_BONE, 1, 3, 0.8f).drop(Items.PHANTOM_MEMBRANE, 1, 1, 0.3f)
+                .drop(ModItems.CURSED_BONE, 1, 3, 0.8f).drop(ModItems.ECTOPLASM, 1, 2, 0.6f).drop(ModItems.LOST_SOUL, 1, 1, 0.03f).drop(net.get900.pixelpirates.homestead.HomesteadBlocks.GHOST_SHARK_TROPHY.asItem(), 1, 1, 0.02f)
                 .spawns(SpawnGroup.MONSTER, 4, 1, 1, ModBiomeKeys.PHANTOM_WAKE, ModBiomeKeys.SHIPGRAVE_DEPTHS, ModBiomeKeys.DROWNED_TRENCH).egg(0x8ae0e0, 0x3a6a6a));
 
         def(MobSpec.of("drowned_hands", 4).kind(STATIONARY).stats(24, 5, 0, 2).size(1.0f, 1.2f, 1.0f, 0.8f).xp(8).knockbackRes(1)
                 .ability(Ability.of("clutch", "attack", 40, 0, 3, 4, grab(4, 60)))
                 .ability(Ability.of("drag_under", "special", 140, 0, 6, 8, both(pull(6, 0.5), aura(StatusEffects.SLOWNESS, 60, 2, 5, ParticleTypes.SOUL))))
-                .drop(ModItems.CURSED_BONE, 1, 2, 0.6f).drop(Items.ROTTEN_FLESH, 1, 3, 0.8f)
+                .drop(ModItems.CURSED_BONE, 1, 2, 0.6f).drop(ModItems.ECTOPLASM, 1, 1, 0.4f).drop(Items.ROTTEN_FLESH, 1, 3, 0.8f)
                 .spawns(SpawnGroup.MONSTER, 3, 1, 1, ModBiomeKeys.PHANTOM_WAKE, ModBiomeKeys.SHIPGRAVE_DEPTHS).egg(0x6a9a8a, 0x2a3a34));
 
         def(MobSpec.of("trident_skeleton", 4).stats(24, 5, 0.3, 4).size(0.6f, 2.1f, 1.0f, 0.5f).xp(9).noMelee()
                 .ability(Ability.of("hurl_trident", "special2", 50, 3, 20, 7, projectile(TRIDENT, 1, 0, 1.6f)))
                 .ability(Ability.of("jab", "attack", 30, 0, 3, 3, slam(2.5, 5, 0, ParticleTypes.SWEEP_ATTACK)))
-                .drop(ModItems.CURSED_BONE, 1, 2, 0.5f).drop(Items.PRISMARINE_SHARD, 1, 2, 0.4f).drop(Items.TRIDENT, 1, 1, 0.03f)
+                .drop(ModItems.CURSED_BONE, 1, 2, 0.5f).drop(Items.PRISMARINE_SHARD, 1, 2, 0.4f).drop(ModItems.LOST_SOUL, 1, 1, 0.03f)
                 .spawns(SpawnGroup.MONSTER, 6, 1, 2, ModBiomeKeys.PHANTOM_WAKE, ModBiomeKeys.SHIPGRAVE_DEPTHS, ModBiomeKeys.DROWNED_TRENCH).egg(0xd8d2bc, 0x3a6a6a));
 
         def(MobSpec.of("phantom_pirate", 4).kind(FLY).stats(28, 6, 0.16, 0).size(0.7f, 2.1f, 1.0f, 0.4f).xp(12).lifesteal(0.25f)
                 .onHit(StatusEffects.WEAKNESS, 80, 0).trail(ParticleTypes.SOUL_FIRE_FLAME, 6)
                 .ability(Ability.of("haunt", "special2", 120, 3, 16, 4, blink(ParticleTypes.SOUL)))
-                .drop(ModItems.CURSED_BONE, 1, 2, 0.6f).drop(Items.PHANTOM_MEMBRANE, 1, 1, 0.4f).drop(ModItems.PIRATE_COIN, 1, 3, 0.6f)
+                .drop(ModItems.CURSED_BONE, 1, 2, 0.6f).drop(ModItems.ECTOPLASM, 1, 2, 0.6f).drop(ModItems.PIRATE_COIN, 1, 3, 0.6f).drop(ModItems.LOST_SOUL, 1, 1, 0.03f)
                 .spawns(SpawnGroup.MONSTER, 4, 1, 1, ModBiomeKeys.PHANTOM_WAKE, ModBiomeKeys.SHIPGRAVE_DEPTHS, ModBiomeKeys.DROWNED_TRENCH).egg(0x3fbfb0, 0x0e2020));
 
         // BOSS CHAIN 8/10 - sealed until the Kraken falls
@@ -240,7 +240,7 @@ public final class MobSpecs {
                 .ability(new Ability("gibbet_drop", "gibbet", 260, 2, 14, 2, 32, false, ChainedRevenantEntity.gibbet()))
                 .phase2(new Ability("dread", "wrath", 240, 0, 12, 10, 30, false, aura(StatusEffects.WITHER, 140, 1, 12, ParticleTypes.SOUL_FIRE_FLAME)))
                 .drop(ModItems.SOULRENDER, 1, 1, 1f).drop(ModItems.CURSED_BONE, 8, 14, 1f).drop(ModItems.PIRATE_COIN, 40, 56, 1f)
-                .drop(Items.NETHERITE_SCRAP, 2, 3, 1f).egg(0x1c1e20, 0x3fe0c0));
+                .drop(ModItems.LOST_SOUL, 2, 3, 1f).drop(ModItems.ECTOPLASM, 4, 8, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("last_meal"), 1, 2, 1f).drop(ModItems.SEAFARERS_TOKEN, 1, 1, 1f).egg(0x1c1e20, 0x3fe0c0));
 
         // Gallows Landing's last soul (LamplighterEntity): talk to him (right-click) - he warns you off the Gallows Grotto,
         // then tells you how to fight what hangs in it. Spawned once by the grotto's surface port; unkillable, no spawns.
@@ -262,18 +262,18 @@ public final class MobSpecs {
                 .phase2(new Ability("drowning_curse", "curse", 240, 0, 10, 12, 20, false,
                         both(aura(StatusEffects.SLOWNESS, 100, 1, 10, ParticleTypes.SOUL), aura(StatusEffects.WITHER, 80, 0, 10, ParticleTypes.BUBBLE_POP))))
                 .drop(ModItems.WRAITHBLADE, 1, 1, 1f).drop(ModItems.CURSED_BONE, 8, 14, 1f).drop(ModItems.PIRATE_COIN, 30, 44, 1f)
-                .drop(ModItems.TREASURE_MAP_LEGENDARY, 1, 1, 0.7f).drop(ModItems.SHIP_REPAIR_KIT, 2, 3, 1f).egg(0x2a8a80, 0x0e1818));
+                .drop(ModItems.TREASURE_MAP_LEGENDARY, 1, 1, 0.7f).drop(ModItems.SHIP_REPAIR_KIT, 2, 3, 1f).drop(ModItems.ECTOPLASM, 4, 8, 1f).drop(ModItems.LOST_SOUL, 1, 2, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("phantom_hardtack"), 1, 3, 1f).egg(0x2a8a80, 0x0e1818));
 
         // ============================================================ PHASE 5 - The Abyss
         def(MobSpec.of("abyss_crab", 5).stats(34, 7, 0.28, 10).size(1.3f, 0.6f, 1.0f, 0.8f).xp(10).knockbackRes(0.5).trail(ParticleTypes.GLOW, 12)
                 .ability(Ability.of("crush", "attack", 70, 0, 3, 4, slam(3, 8, 0, ParticleTypes.BUBBLE)))
-                .drop(ModItems.KRAKEN_SCALE, 1, 2, 0.4f).drop(Items.PRISMARINE_CRYSTALS, 1, 3, 0.6f)
+                .drop(ModItems.KRAKEN_SCALE, 1, 2, 0.4f).drop(ModItems.ABYSSAL_PEARL, 1, 1, 0.35f).drop(Items.PRISMARINE_CRYSTALS, 1, 3, 0.6f)
                 .spawns(SpawnGroup.MONSTER, 6, 1, 2, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.PILLAR_SEA, ModBiomeKeys.MAW_DEPTHS).egg(0x1a242c, 0x3fd0ff));
 
         def(MobSpec.of("brain_fish", 5).kind(SWIM).stats(30, 3, 0.9, 2).size(1.1f, 0.9f, 0.9f, 0.7f).xp(12).noMelee().trail(ParticleTypes.ENCHANT, 3)
                 .ability(Ability.of("psychic_beam", "special", 70, 3, 18, 8, beam(5, StatusEffects.NAUSEA, 120, ParticleTypes.ENCHANT)))
                 .ability(Ability.of("mind_fog", "special2", 180, 0, 8, 8, aura(StatusEffects.SLOWNESS, 100, 1, 8, ParticleTypes.WITCH)))
-                .drop(ModItems.KRAKEN_SCALE, 1, 1, 0.3f).drop(Items.EXPERIENCE_BOTTLE, 1, 2, 0.5f)
+                .drop(ModItems.KRAKEN_SCALE, 1, 1, 0.3f).drop(ModItems.KRILL_CLUSTER, 1, 2, 0.4f).drop(Items.EXPERIENCE_BOTTLE, 1, 2, 0.5f)
                 .spawns(SpawnGroup.MONSTER, 3, 1, 1, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.MAW_DEPTHS).egg(0x1a2a4a, 0x7a8aff));
 
         def(MobSpec.of("abyssal_centipede", 5).stats(36, 7, 0.34, 6).size(1.0f, 0.5f, 0.8f, 0.6f).xp(12).onHit(StatusEffects.POISON, 100, 1)
@@ -284,21 +284,21 @@ public final class MobSpecs {
         def(MobSpec.of("shadow", 5).stats(30, 8, 0.33, 2).size(0.6f, 2.0f, 1.0f, 0.4f).xp(14).onHit(StatusEffects.BLINDNESS, 40, 0)
                 .trail(ParticleTypes.SMOKE, 4)
                 .ability(Ability.of("shadowstep", "special2", 90, 3, 18, 3, blink(ParticleTypes.SMOKE)))
-                .drop(Items.ECHO_SHARD, 1, 1, 0.1f).drop(Items.INK_SAC, 1, 2, 0.6f)
+                .drop(ModItems.ABYSSAL_PEARL, 1, 1, 0.15f).drop(Items.INK_SAC, 1, 2, 0.6f)
                 .spawns(SpawnGroup.MONSTER, 3, 1, 1, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.PILLAR_SEA, ModBiomeKeys.MAW_DEPTHS).egg(0x08080c, 0xb080ff));
 
         def(MobSpec.of("coral_whale", 5).kind(SWIM).temper(PASSIVE).stats(120, 0, 0.7, 6).size(3.5f, 2.0f, 1.5f, 3.0f).xp(10).noMelee()
-                .knockbackRes(1)
+                .knockbackRes(1).entity(CoralWhaleEntity::new)          // feed it krill: barrel roll + Whale's Bounty
                 .drop(Items.COD, 6, 10, 1f).drop(Items.HORN_CORAL_BLOCK, 1, 3, 0.6f).drop(Items.NAUTILUS_SHELL, 1, 1, 0.3f)
                 .spawns(SpawnGroup.WATER_CREATURE, 2, 1, 1, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.PILLAR_SEA).egg(0x1e4a8a, 0xd23c3c));
 
         def(MobSpec.of("luminous_isopod", 5).temper(NEUTRAL).stats(20, 4, 0.22, 8).size(0.9f, 0.5f, 0.7f, 0.5f).xp(4).trail(ParticleTypes.GLOW, 10)
-                .drop(Items.GLOW_INK_SAC, 1, 2, 0.8f).drop(Items.GLOW_BERRIES, 1, 3, 0.5f)
+                .drop(Items.GLOW_INK_SAC, 1, 2, 0.8f).drop(ModItems.LUMINOUS_ICHOR, 1, 1, 0.5f).drop(Items.GLOW_BERRIES, 1, 3, 0.5f)
                 .spawns(SpawnGroup.MONSTER, 5, 1, 3, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.PILLAR_SEA, ModBiomeKeys.MAW_DEPTHS).egg(0x6a8a90, 0x6fe8ff));
 
         def(MobSpec.of("deep_lurker", 5).stats(40, 9, 0.32, 6).size(1.2f, 0.95f, 1.0f, 0.8f).xp(14).lifesteal(0.2f)
                 .ability(Ability.of("pounce", "special2", 80, 3, 12, 4, dash(1.5)))
-                .drop(ModItems.KRAKEN_SCALE, 1, 2, 0.4f).drop(Items.LEATHER, 1, 3, 0.6f)
+                .drop(ModItems.KRAKEN_SCALE, 1, 2, 0.4f).drop(ModItems.ABYSSAL_PEARL, 1, 1, 0.25f).drop(Items.LEATHER, 1, 3, 0.6f)
                 .spawns(SpawnGroup.MONSTER, 4, 1, 1, ModBiomeKeys.PILLAR_SEA, ModBiomeKeys.MAW_DEPTHS).egg(0x2a4a2a, 0x6fffc0));
 
         def(MobSpec.of("corrupted_diver", 5).stats(34, 7, 0.28, 6).size(0.6f, 2.1f, 1.0f, 0.5f).xp(10).onHit(StatusEffects.POISON, 60, 0)
@@ -309,26 +309,26 @@ public final class MobSpecs {
         def(MobSpec.of("abyss_eel", 5).kind(SWIM).stats(32, 7, 1.3, 2).size(0.9f, 0.6f, 0.9f, 0.6f).xp(12)
                 .ability(Ability.of("shock", "special", 110, 0, 5, 6, both(aura(StatusEffects.SLOWNESS, 60, 2, 5, ParticleTypes.ELECTRIC_SPARK), slam(4, 6, 0, ParticleTypes.ELECTRIC_SPARK))))
                 .ability(Ability.of("strike", "attack", 60, 3, 12, 3, dash(1.4)))
-                .drop(ModItems.KRAKEN_SCALE, 1, 1, 0.4f).drop(Items.GLOW_INK_SAC, 1, 1, 0.5f)
+                .drop(ModItems.KRAKEN_SCALE, 1, 1, 0.4f).drop(ModItems.KRILL_CLUSTER, 1, 2, 0.4f).drop(Items.GLOW_INK_SAC, 1, 1, 0.5f).drop(net.get900.pixelpirates.homestead.HomesteadBlocks.ABYSS_EEL_TROPHY.asItem(), 1, 1, 0.02f)
                 .spawns(SpawnGroup.MONSTER, 4, 1, 2, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.MAW_DEPTHS).egg(0x3a1a2a, 0x6fe0d0));
 
         def(MobSpec.of("crystal_golem", 5).stats(120, 12, 0.22, 16).size(1.7f, 2.5f, 1.3f, 1.2f).xp(40).knockbackRes(1).tough(0.7f)
                 .trail(ParticleTypes.END_ROD, 10)
                 .ability(Ability.of("shatter", "special", 120, 0, 5, 16, slam(5, 12, 0, ParticleTypes.END_ROD)))
                 .ability(Ability.of("shard_volley", "special2", 80, 4, 18, 8, projectile(SHARD, 4, 30, 1.3f)))
-                .drop(Items.AMETHYST_SHARD, 3, 6, 1f).drop(ModItems.KRAKEN_SCALE, 1, 2, 0.5f).drop(Items.DIAMOND, 1, 1, 0.1f)
+                .drop(Items.AMETHYST_SHARD, 3, 6, 1f).drop(ModItems.KRAKEN_SCALE, 1, 2, 0.5f).drop(ModItems.ABYSSAL_PEARL, 1, 2, 1f)
                 .spawns(SpawnGroup.MONSTER, 2, 1, 1, ModBiomeKeys.PILLAR_SEA, ModBiomeKeys.MAW_DEPTHS).egg(0x22343e, 0x6fe8ff));
 
         def(MobSpec.of("drowned_sailor", 5).stats(30, 6, 0.28, 4).size(0.6f, 2.0f, 1.0f, 0.5f).xp(10)
                 .ability(Ability.of("harpoon", "special2", 80, 4, 16, 7, projectile(HARPOON, 1, 0, 1.4f)))
-                .drop(Items.ROTTEN_FLESH, 1, 3, 0.7f).drop(ModItems.PIRATE_COIN, 1, 4, 0.6f).drop(Items.NAUTILUS_SHELL, 1, 1, 0.05f)
+                .drop(Items.ROTTEN_FLESH, 1, 3, 0.7f).drop(ModItems.COIN, 1, 4, 0.6f).drop(Items.NAUTILUS_SHELL, 1, 1, 0.05f)
                 .spawns(SpawnGroup.MONSTER, 6, 1, 2, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.PILLAR_SEA, ModBiomeKeys.MAW_DEPTHS).egg(0x5a7a70, 0x6fffe0));
 
         def(MobSpec.of("jelly_skull", 5).kind(SWIM).stats(24, 5, 0.8, 0).size(0.7f, 1.2f, 0.9f, 0.4f).xp(10).noMelee()
                 .onHit(StatusEffects.POISON, 80, 1).trail(ParticleTypes.GLOW, 6)
                 .ability(Ability.of("zap", "special", 80, 2, 12, 6, beam(5, StatusEffects.POISON, 60, ParticleTypes.ELECTRIC_SPARK)))
                 .ability(Ability.of("spores", "special2", 160, 0, 10, 6, cloud(StatusEffects.POISON, 80, 2.5f, ParticleTypes.GLOW)))
-                .drop(Items.GLOW_INK_SAC, 1, 2, 0.8f).drop(Items.BONE, 1, 2, 0.5f)
+                .drop(Items.GLOW_INK_SAC, 1, 2, 0.8f).drop(ModItems.LUMINOUS_ICHOR, 1, 1, 0.4f).drop(Items.BONE, 1, 2, 0.5f)
                 .spawns(SpawnGroup.MONSTER, 5, 1, 2, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.PILLAR_SEA, ModBiomeKeys.MAW_DEPTHS).egg(0x7a2a4a, 0xff5a8a));
 
         def(MobSpec.of("anemone_eye", 5).kind(STATIONARY).stats(30, 5, 0, 4).size(0.7f, 1.3f, 1.0f, 0.5f).xp(10).knockbackRes(1).noMelee()
@@ -347,7 +347,7 @@ public final class MobSpecs {
                 .trail(ParticleTypes.GLOW, 5)
                 .ability(Ability.of("flash", "special", 120, 0, 12, 6, aura(StatusEffects.BLINDNESS, 60, 0, 10, ParticleTypes.FLASH)))
                 .ability(Ability.of("ink", "special2", 90, 2, 12, 6, projectile(INK, 1, 0, 1.2f)))
-                .drop(Items.GLOW_INK_SAC, 1, 3, 1f).drop(ModItems.KRAKEN_INK, 1, 1, 0.3f)
+                .drop(Items.GLOW_INK_SAC, 1, 3, 1f).drop(ModItems.LUMINOUS_ICHOR, 1, 1, 0.5f).drop(ModItems.KRAKEN_INK, 1, 1, 0.3f)
                 .spawns(SpawnGroup.MONSTER, 4, 1, 2, ModBiomeKeys.ABYSSAL_RINGS, ModBiomeKeys.MAW_DEPTHS).egg(0x1a1c22, 0x6fe8ff));
 
         // BOSS CHAIN 5/10 - the first abyss boss; after him the chain loops back to the Bloodfin in zone 1.
@@ -366,7 +366,7 @@ public final class MobSpecs {
                 .phase2(new Ability("maelstrom", "maelstrom", 280, 0, 20, 6, 52, false, AbyssalKingEntity.maelstrom()))
                 .phase2(new Ability("undertow", "undertow", 190, 0, 18, 12, 24, false, AbyssalKingEntity.undertow()))
                 .drop(ModItems.ABYSSAL_HARPOON, 1, 1, 1f).drop(ModItems.KRAKEN_SCALE, 10, 16, 1f).drop(ModItems.PIRATE_COIN, 32, 48, 1f)
-                .drop(Items.HEART_OF_THE_SEA, 1, 1, 1f).egg(0x1e3a36, 0x6fe8d0));
+                .drop(Items.HEART_OF_THE_SEA, 1, 1, 1f).drop(ModItems.ABYSSAL_PEARL, 3, 6, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("royal_tide_feast"), 1, 2, 1f).drop(ModItems.SEAFARERS_TOKEN, 1, 1, 1f).egg(0x1e3a36, 0x6fe8d0));
 
         // The King's guard: walks the flooded floor and winds open Tide Sluices shut (TideWardenEntity).
         def(MobSpec.of("tide_warden", 5).stats(44, 8, 0.27, 10).size(0.7f, 2.1f, 1.05f, 0.5f).xp(20).seabed().entity(TideWardenEntity::new)
@@ -382,8 +382,8 @@ public final class MobSpecs {
         def(MobSpec.of("abyssal_heart", 5).kind(STATIONARY).stats(1024, 15, 0, 10).size(6.0f, 8.0f, 2.0f, 0f).xp(700).knockbackRes(1).follow(72)
                 .boss(BossBar.Color.PINK, 0).noMelee().entity(AbyssalHeartEntity::new).enrage("rupture", "Ruptured")
                 .trail(ParticleTypes.CRIMSON_SPORE, 2)
-                .drop(ModItems.KRAKEN_SCALE, 12, 20, 1f).drop(Items.HEART_OF_THE_SEA, 1, 2, 1f).drop(Items.NETHER_STAR, 1, 1, 1f)
-                .drop(Items.NETHERITE_INGOT, 1, 2, 1f).drop(ModItems.PIRATE_COIN, 48, 64, 1f).egg(0x7a222c, 0xffd070));
+                .drop(ModItems.KRAKEN_SCALE, 12, 20, 1f).drop(Items.HEART_OF_THE_SEA, 1, 2, 1f).drop(ModItems.TIDAL_CORE, 1, 1, 1f)
+                .drop(ModItems.ABYSSAL_PEARL, 4, 8, 1f).drop(ModItems.PIRATE_COIN, 48, 64, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("heart_tartare"), 1, 3, 1f).drop(ModItems.SEAFARERS_TOKEN, 1, 1, 1f).egg(0x7a222c, 0xffd070));
 
         // The Titan's Chest cast (all spawned by the Heart or its lair, never naturally):
         // the rival's eye in the north wall - invulnerable, only watches and reacts (~56 px x 3.4 = ~12 blocks)
@@ -411,7 +411,7 @@ public final class MobSpecs {
         def(MobSpec.of("leviathan", 5).kind(SWIM).stats(1024, 20, 0, 12).size(6.0f, 5.0f, 3.0f, 0f).xp(2000).knockbackRes(1).follow(96)
                 .boss(BossBar.Color.PURPLE, 0).tough(0.75f).noMelee().entity(LeviathanEntity::new)
                 .drop(ModItems.LEVIATHAN_SCALE, 8, 14, 1f).drop(ModItems.KRAKEN_FANG, 1, 1, 1f).drop(ModItems.STORMCALLER, 1, 1, 0.5f)
-                .drop(ModItems.KRAKEN_SCALE, 16, 24, 1f).drop(ModItems.PIRATE_COIN, 64, 96, 1f).drop(Items.NETHER_STAR, 1, 2, 1f)
-                .drop(Items.NETHERITE_INGOT, 2, 4, 1f).egg(0x12181e, 0xff2a2a));
+                .drop(ModItems.KRAKEN_SCALE, 16, 24, 1f).drop(ModItems.PIRATE_COIN, 64, 96, 1f).drop(ModItems.TIDAL_CORE, 1, 2, 1f)
+                .drop(ModItems.ABYSSAL_PEARL, 6, 10, 1f).drop(ModItems.LEVIATHAN_HEAD, 1, 1, 1f).drop(net.get900.pixelpirates.item.food.PirateFoods.item("leviathan_steak"), 2, 4, 1f).drop(ModItems.SEAFARERS_TOKEN, 1, 1, 1f).egg(0x12181e, 0xff2a2a));
     }
 }

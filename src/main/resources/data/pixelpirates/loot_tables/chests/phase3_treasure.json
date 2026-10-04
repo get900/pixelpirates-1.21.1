@@ -26,22 +26,22 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:brimstone",
           "weight": 6,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
+                "min": 2,
+                "max": 5
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:netherite_scrap",
+          "name": "pixelpirates:obsidian_shard",
           "weight": 3,
           "functions": [
             {
@@ -49,7 +49,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 2
+                "max": 3
               }
             }
           ]
@@ -72,7 +72,12 @@
         {
           "type": "minecraft:item",
           "name": "pixelpirates:ashen_helmet",
-          "weight": 3
+          "weight": 3,
+          "functions": [
+            {
+              "function": "pixelpirates:frozen_seeker"
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -88,16 +93,6 @@
           "type": "minecraft:item",
           "name": "pixelpirates:ashen_boots",
           "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:enchanted_book",
-          "weight": 6,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly"
-            }
-          ]
         },
         {
           "type": "minecraft:item",
@@ -124,6 +119,21 @@
           "type": "minecraft:item",
           "name": "minecraft:gold_block",
           "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:rare_strongbox"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.2
         }
       ]
     }

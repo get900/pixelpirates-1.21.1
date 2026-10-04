@@ -50,7 +50,7 @@ public class ModItems {
     public static final Item COIN = registerItem("coin", new Item(new Item.Settings()));
     public static final Item PIRATE_COIN = registerItem("pirate_coin", new Item(new Item.Settings()));
     public static final Item KRAKEN_INK = registerItem("kraken_ink", new Item(new Item.Settings()));
-    public static final Item ROPE = registerItem("rope", new Item(new Item.Settings()));
+    public static final Item ROPE = registerItem("rope", new net.get900.pixelpirates.item.custom.RopeItem(new Item.Settings()));
     public static final Item CANNON = registerItem("cannon", new Item(new Item.Settings()));
     public static final Item SAIL = registerItem("sail", new Item(new Item.Settings()));
     public static final Item MAST_WITH_SAILS = registerItem("mast_with_sails", new Item(new Item.Settings()));
@@ -98,6 +98,19 @@ public class ModItems {
             new Item(new Item.Settings().food(ModFoodComponents.BANANA)));
     public static final Item COCONUT = registerItem("coconut",
             new Item(new Item.Settings().food(ModFoodComponents.COCONUT)));
+    // Early-game food + healing (2026-09-30 playtest)
+    public static final Item ROASTED_BANANA = registerItem("roasted_banana",
+            new Item(new Item.Settings().food(ModFoodComponents.ROASTED_BANANA)));
+    /** Heals 2 hearts at once and cures poison; returns the bottle. */
+    public static final Item COCONUT_WATER = registerItem("coconut_water",
+            new net.get900.pixelpirates.homestead.item.DrinkItem(new Item.Settings().maxCount(16).food(ModFoodComponents.COCONUT_WATER), e -> {
+                e.heal(4f);
+                e.removeStatusEffect(net.minecraft.entity.effect.StatusEffects.POISON);
+            }));
+    public static final Item ISLAND_SKEWER = registerItem("island_skewer",
+            new Item(new Item.Settings().food(ModFoodComponents.ISLAND_SKEWER)));
+    public static final Item SEA_BANDAGE = registerItem("sea_bandage",
+            new net.get900.pixelpirates.item.custom.SeaBandageItem(new Item.Settings().maxCount(16)));
 
     // Galley cooking
     public static final Item BANANA_BREAD = registerItem("banana_bread",
@@ -205,9 +218,9 @@ public class ModItems {
     public static final Item CUTLASS = registerItem("cutlass",
             new CutlassItem(ModToolMaterials.PIRATE, 3, -2.4f, new Item.Settings()));
     public static final Item DAGGER = registerItem("dagger",
-            new SwordItem(ModToolMaterials.PIRATE, 1, -1.5f, new Item.Settings()));
+            new SwordItem(ModToolMaterials.PIRATE, 1, -1.9f, new Item.Settings()));
     public static final Item RUSTED_CUTLASS = registerItem("rusted_cutlass",
-            new SwordItem(ModToolMaterials.PIRATE, 1, -2.8f, new Item.Settings()));
+            new SwordItem(ModToolMaterials.PIRATE, 2, -2.6f, new Item.Settings()));
     public static final Item BROKEN_SHOVEL = registerItem("broken_shovel",
             new ShovelItem(ModToolMaterials.PIRATE, -1.0f, -3.0f, new Item.Settings()));
     public static final Item BOARDING_AXE = registerItem("boarding_axe",
@@ -239,36 +252,50 @@ public class ModItems {
     // ================= REGION WEAPONS =================
     // Ring 1 — Starter Seas
     public static final Item MARLINSPIKE = registerItem("marlinspike",
-            new SwordItem(ModToolMaterials.CASTAWAY, 2, -1.6f, new Item.Settings()));
+            new SwordItem(ModToolMaterials.CASTAWAY, 1, -2.0f, new Item.Settings()));
     public static final Item BOARDING_SABRE = registerItem("boarding_sabre",
-            new SwordItem(ModToolMaterials.CASTAWAY, 4, -2.4f, new Item.Settings()));
+            new SwordItem(ModToolMaterials.CASTAWAY, 3, -2.3f, new Item.Settings()));
     // Ring 2 — Merchant Waters
     public static final Item NAVAL_RAPIER = registerItem("naval_rapier",
-            new SwordItem(ModToolMaterials.NAVAL, 2, -1.2f, new Item.Settings()));
+            new SwordItem(ModToolMaterials.NAVAL, 2, -2.0f, new Item.Settings()));
     public static final Item OFFICERS_SABRE = registerItem("officers_sabre",
-            new SwordItem(ModToolMaterials.NAVAL, 4, -2.2f, new Item.Settings()));
+            new SwordItem(ModToolMaterials.NAVAL, 4, -2.5f, new Item.Settings()));
     public static final Item THROWING_KNIFE = registerItem("throwing_knife",
             new ThrowingKnifeItem(new Item.Settings().maxCount(16)));
     // Ring 3 — Pirate Territory
     public static final Item CORSAIR_CUTLASS = registerItem("corsair_cutlass",
-            new SwordItem(ModToolMaterials.CORSAIR, 4, -2.2f, new Item.Settings()));
+            new SwordItem(ModToolMaterials.CORSAIR, 3, -2.4f, new Item.Settings()));
     public static final Item BOARDING_PIKE = registerItem("boarding_pike",
-            new SwordItem(ModToolMaterials.CORSAIR, 7, -3.0f, new Item.Settings()));
+            new SwordItem(ModToolMaterials.CORSAIR, 6, -3.0f, new Item.Settings()));
     // Volcanic Isles
     public static final Item EMBERBRAND = registerItem("emberbrand",
-            new EmberbrandItem(ModToolMaterials.VOLCANIC, 6, -2.4f, new Item.Settings().fireproof()));
+            new EmberbrandItem(ModToolMaterials.VOLCANIC, 3, -2.4f, new Item.Settings().fireproof()));
     // Ring 4 — Cursed Seas
     public static final Item SOULRENDER = registerItem("soulrender",
-            new SoulrenderItem(ModToolMaterials.CURSED, 6, -2.4f, new Item.Settings()));
+            new SoulrenderItem(ModToolMaterials.CURSED, 3, -2.4f, new Item.Settings()));
     public static final Item WRAITHBLADE = registerItem("wraithblade",
-            new WraithbladeItem(ModToolMaterials.CURSED, 5, -2.0f, new Item.Settings()));
+            new WraithbladeItem(ModToolMaterials.CURSED, 2, -2.2f, new Item.Settings()));
     // Ring 5 — The Abyss
     public static final Item KRAKEN_FANG = registerItem("kraken_fang",
-            new KrakenFangItem(ModToolMaterials.ABYSSAL, 3, -1.4f, new Item.Settings()));
+            new KrakenFangItem(ModToolMaterials.ABYSSAL, 1, -1.9f, new Item.Settings()));
     public static final Item STORMCALLER = registerItem("stormcaller",
-            new StormcallerItem(ModToolMaterials.ABYSSAL, 7, -2.6f, new Item.Settings()));
+            new StormcallerItem(ModToolMaterials.ABYSSAL, 4, -2.5f, new Item.Settings()));
     public static final Item ABYSSAL_HARPOON = registerItem("abyssal_harpoon",
-            new AbyssalHarpoonItem(ModToolMaterials.ABYSSAL, 8, -2.9f, new Item.Settings()));
+            new AbyssalHarpoonItem(ModToolMaterials.ABYSSAL, 7, -2.85f, new Item.Settings()));
+
+    // ================= FORGED WEAPONS (only off a Forge Anvil - homestead/forge/Forging) =================
+    public static final Item CRABCLAW_SABRE = registerItem("crabclaw_sabre",
+            new net.get900.pixelpirates.item.forged.CrabclawSabreItem(ModToolMaterials.CASTAWAY, 4, -2.4f, new Item.Settings()));
+    public static final Item PEARLGUARD_RAPIER = registerItem("pearlguard_rapier",
+            new net.get900.pixelpirates.item.forged.PearlguardRapierItem(ModToolMaterials.NAVAL, 2, -1.9f, new Item.Settings()));
+    public static final Item PISTOL_CUTLASS = registerItem("pistol_cutlass",
+            new net.get900.pixelpirates.item.forged.PistolCutlassItem(ModToolMaterials.CORSAIR, 3, -2.4f, new Item.Settings()));
+    public static final Item OBSIDIAN_HALBERD = registerItem("obsidian_halberd",
+            new net.get900.pixelpirates.item.forged.ObsidianHalberdItem(ModToolMaterials.CORSAIR, 7, -3.0f, new Item.Settings().fireproof()));
+    public static final Item SOULREAVER = registerItem("soulreaver",
+            new net.get900.pixelpirates.item.forged.SoulreaverItem(ModToolMaterials.CURSED, 4, -2.5f, new Item.Settings()));
+    public static final Item INKFANG = registerItem("inkfang",
+            new net.get900.pixelpirates.item.forged.InkfangItem(ModToolMaterials.ABYSSAL, 1, -1.8f, new Item.Settings()));
 
     // Boss relics - one per chain boss, each counters the NEXT boss (entity/mob/BossProgression)
     public static final Item RACKHAMS_DIVING_CHARM = registerItem("rackhams_diving_charm",
@@ -299,16 +326,91 @@ public class ModItems {
     public static final Item BANE_SHAFT = registerItem("bane_shaft", new Item(new Item.Settings().maxCount(1).fireproof().rarity(Rarity.EPIC)));
     /** A scale it shed - left in the ports it destroyed, and dropped in every lair. */
     public static final Item LEVIATHAN_SCALE = registerItem("leviathan_scale", new Item(new Item.Settings().fireproof().rarity(Rarity.RARE)));
+
+    // ================= PHASE MATERIALS (Materials & Gear Ladder design, 2026-10-01) =================
+    // Each phase has its own materials; no recipe turns one phase's material into another's.
+    public static final Item CRAB_SHELL = registerItem("crab_shell", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings(),
+            "Phase 1 - chest crabs. Navy Officer armor, Shell Buckler"));
+    public static final Item SIREN_SCALE = registerItem("siren_scale", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings(),
+            "Phase 2 - sirens. Corsair armor"));
+    public static final Item REEF_PEARL = registerItem("reef_pearl", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings(),
+            "Phase 2 - coral jellies, reefback fish. Naval blades"));
+    public static final Item BRIMSTONE = registerItem("brimstone", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings(),
+            "Phase 3 - volcanic mobs, sulfur rock. Ashen armor, gunpowder"));
+    public static final Item OBSIDIAN_SHARD = registerItem("obsidian_shard", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings(),
+            "Phase 3 - obsidian golems, magma brutes. Corsair blades"));
+    public static final Item ECTOPLASM = registerItem("ectoplasm", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings(),
+            "Phase 4 - ghosts. Cursed blades, Cursed Bone armor"));
+    public static final Item LOST_SOUL = registerItem("lost_soul", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings().rarity(Rarity.UNCOMMON),
+            "Phase 4 - rarely, from the cursed seas. Relic weapons"));
+    public static final Item ABYSSAL_PEARL = registerItem("abyssal_pearl", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings().rarity(Rarity.UNCOMMON),
+            "Phase 5 - creatures of the abyss. Abyssal weapons, Kraken Scale armor"));
+    public static final Item LUMINOUS_ICHOR = registerItem("luminous_ichor", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings(),
+            "Phase 5 - glowing deep-sea creatures. Brews"));
+    public static final Item KRILL_CLUSTER = registerItem("krill_cluster", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings(),
+            "Phase 5 - feed it to a Coral Whale"));
+    public static final Item TIDAL_CORE = registerItem("tidal_core", new net.get900.pixelpirates.item.custom.MaterialItem(new Item.Settings().fireproof().rarity(Rarity.EPIC),
+            "The Abyssal Heart and the Leviathan. The last relic weapon"));
+    public static final Item RAW_LAVA_CRAB_CLAW = registerItem("raw_lava_crab_claw", new Item(new Item.Settings()
+            .food(new net.minecraft.item.FoodComponent.Builder().hunger(2).saturationModifier(0.2f).meat().build())));
+    public static final Item SIREN_CONCH = registerItem("siren_conch",
+            new net.get900.pixelpirates.item.custom.SirenConchItem(new Item.Settings().maxDamage(64).rarity(Rarity.RARE)));
+    public static final Item INK_BOMB = registerItem("ink_bomb", new net.get900.pixelpirates.item.custom.InkBombItem(new Item.Settings().maxCount(16)));
+    /** The Leviathan's head, worn as a helm - its own drop (there is only one). Model: tools/gen_wearables.py. */
+    public static final Item LEVIATHAN_HEAD = registerItem("leviathan_head", new net.get900.pixelpirates.item.custom.WearableHeadItem(
+            new Item.Settings().maxCount(1).fireproof().rarity(Rarity.EPIC), "Taken from the only one there ever was"));
+    public static final Item SHELL_BUCKLER = registerItem("shell_buckler", new net.get900.pixelpirates.item.custom.ShellBucklerItem(new Item.Settings().maxDamage(240)));
     /** The final relic: the Leviathan's crown, from the Drowning Spire. */
     public static final Item CROWN_OF_THE_DROWNED = registerItem("crown_of_the_drowned",
             new BossRelicItem(BossRelicItem.Kind.CROWN, new Item.Settings().maxCount(1).fireproof().rarity(Rarity.EPIC)));
+
+    // ---- RELIC WEAPONS: each boss relic forged into that boss's weapon (item/RelicWeapons, item/relic/)
+    public static final Item RACKHAM_BLUNDERBUSS = relicWeapon("rackham_blunderbuss",
+            new net.get900.pixelpirates.item.relic.RelicGunItem(net.get900.pixelpirates.item.relic.RelicGunItem.Type.BLUNDERBUSS, relicSettings()));
+    public static final Item SERPENTSPINE_LONGBOW = relicWeapon("serpentspine_longbow",
+            new net.get900.pixelpirates.item.relic.SerpentspineBowItem(relicSettings().maxDamage(1200)));
+    public static final Item EVERBURNING_FLAIL = relicWeapon("everburning_flail",
+            new net.get900.pixelpirates.item.relic.RelicMeleeItem(net.get900.pixelpirates.item.relic.RelicMeleeItem.Type.FLAIL, relicSettings()));
+    public static final Item DUTCHMANS_HAND_CANNON = relicWeapon("dutchmans_hand_cannon",
+            new net.get900.pixelpirates.item.relic.RelicGunItem(net.get900.pixelpirates.item.relic.RelicGunItem.Type.HAND_CANNON, relicSettings()));
+    public static final Item SUNKEN_TRIDENT = relicWeapon("sunken_trident",
+            new net.get900.pixelpirates.item.relic.SunkenTridentItem(relicSettings().maxDamage(1500)));
+    public static final Item BLOODFIN_MAW = relicWeapon("bloodfin_maw",
+            new net.get900.pixelpirates.item.relic.RelicMeleeItem(net.get900.pixelpirates.item.relic.RelicMeleeItem.Type.MAW, relicSettings()));
+    public static final Item KRAKENMAW_HARPOON_GUN = relicWeapon("krakenmaw_harpoon_gun",
+            new net.get900.pixelpirates.item.relic.RelicGunItem(net.get900.pixelpirates.item.relic.RelicGunItem.Type.HARPOON_GUN, relicSettings()));
+    public static final Item CHAINBREAKER = relicWeapon("chainbreaker",
+            new net.get900.pixelpirates.item.relic.RelicMeleeItem(net.get900.pixelpirates.item.relic.RelicMeleeItem.Type.CHAINBREAKER, relicSettings()));
+    public static final Item HEARTSEEKER = relicWeapon("heartseeker",
+            new net.get900.pixelpirates.item.relic.RelicMeleeItem(net.get900.pixelpirates.item.relic.RelicMeleeItem.Type.HEARTSEEKER, relicSettings()));
+    public static final Item TIDEFATHERS_WRATH = relicWeapon("tidefathers_wrath",
+            new net.get900.pixelpirates.item.relic.RelicMeleeItem(net.get900.pixelpirates.item.relic.RelicMeleeItem.Type.WRATH, relicSettings()));
+    public static final List<Item> RELIC_WEAPONS = List.of(RACKHAM_BLUNDERBUSS, SERPENTSPINE_LONGBOW, EVERBURNING_FLAIL,
+            DUTCHMANS_HAND_CANNON, SUNKEN_TRIDENT, BLOODFIN_MAW, KRAKENMAW_HARPOON_GUN, CHAINBREAKER, HEARTSEEKER, TIDEFATHERS_WRATH);
+
+    static {
+        RelicWeapons.link(RACKHAM_BLUNDERBUSS, () -> RACKHAMS_DIVING_CHARM);
+        RelicWeapons.link(SERPENTSPINE_LONGBOW, () -> SERPENTS_TIDE_PEARL);
+        RelicWeapons.link(EVERBURNING_FLAIL, () -> EVERBURNING_LANTERN);
+        RelicWeapons.link(DUTCHMANS_HAND_CANNON, () -> SPECTRAL_ANCHOR);
+        RelicWeapons.link(SUNKEN_TRIDENT, () -> ROYAL_TIDE_SIGIL);
+        RelicWeapons.link(BLOODFIN_MAW, () -> BLOODFIN_RAZOR_TOOTH);
+        RelicWeapons.link(KRAKENMAW_HARPOON_GUN, () -> KRAKENS_INK_HEART);
+        RelicWeapons.link(CHAINBREAKER, () -> BROKEN_SHACKLE);
+        RelicWeapons.link(HEARTSEEKER, () -> ABYSSAL_HEARTSTONE);
+        RelicWeapons.link(TIDEFATHERS_WRATH, () -> CROWN_OF_THE_DROWNED);
+    }
+
+    private static Item.Settings relicSettings() { return new Item.Settings().maxCount(1).fireproof().rarity(Rarity.EPIC); }
+
+    private static Item relicWeapon(String name, Item item) { return registerItem(name, item); }
 
     public static final Item TIDEBREAKER = registerItem("tidebreaker",
             new net.get900.pixelpirates.item.custom.TidebreakerItem(new Item.Settings().maxDamage(12).rarity(Rarity.RARE)));
 
     // Zone access items
     public static final Item SEAFARERS_TOKEN = registerItem("seafarers_token",
-            new Item(new Item.Settings().maxCount(16)));
+            new net.get900.pixelpirates.item.custom.SeafarersTokenItem(new Item.Settings().maxCount(16)));
 
     // Map Merchant shop items
     public static final Item TREASURE_MAP_COMMON = registerItem("treasure_map_common",
@@ -323,6 +425,10 @@ public class ModItems {
     // Pirate Journal — opens the skill tree screen
     public static final Item PIRATE_JOURNAL = registerItem("pirate_journal",
             new PirateJournalItem(new Item.Settings().maxCount(1)));
+
+    // The Weathered Chronicle - the lore book every captain starts with (world/Chronicle, client/screen/ChronicleScreen)
+    public static final Item WEATHERED_CHRONICLE = registerItem("weathered_chronicle",
+            new net.get900.pixelpirates.item.custom.ChronicleItem(new Item.Settings().maxCount(1)));
 
     // Test disc — lets us verify sound events work via jukebox before relying on ShipMusicPlayer
     public static final Item DISC_HALYARD_SONG = registerItem("disc_halyard_song",

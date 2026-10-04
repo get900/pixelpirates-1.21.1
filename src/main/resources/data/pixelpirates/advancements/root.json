@@ -1,15 +1,23 @@
 {
   "display": {
-    "icon": {"item": "pixelpirates:pirate_coin"},
-    "title": {"translate": "advancements.pixelpirates.root.title"},
-    "description": {"translate": "advancements.pixelpirates.root.description"},
+    "icon": {
+      "item": "pixelpirates:pirate_coin"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.root.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.root.description"
+    },
     "frame": "task",
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "show_toast": false,
     "announce_to_chat": false,
-    "hidden": false
+    "hidden": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png"
   },
   "criteria": {
-    "got_here": {"trigger": "minecraft:impossible"}
+    "got_here": {
+      "trigger": "minecraft:tick"
+    }
   }
 }

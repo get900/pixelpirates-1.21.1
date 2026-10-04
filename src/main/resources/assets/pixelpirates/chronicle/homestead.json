@@ -1,0 +1,45 @@
+{
+  "elements": [
+    {"title": "Homestead"},
+    {"img": "chapter_homestead", "w": 138},
+    {"p": "Every captain needs a place to come home to: somewhere to moor the ship, hang the hammock and count the gold."},
+
+    {"page": "next"},
+    {"h": "The Jolly Roger", "icon": "pixelpirates:jolly_roger"},
+    {"p": "Plant your flag to claim a HIDEOUT. You can have one. Within its claim no monsters spawn naturally: 32 blocks at first, 48 and then 64 as you upgrade it. Use the flag to set your respawn point there."},
+    {"p": "Hold pirate coins and use the flag to raise it: 64 coins for tier 2, 128 more for tier 3. At tier 3 you regenerate while at home. Break the flag to give up the claim."},
+
+    {"page": "spread"},
+    {"h": "Moorings", "icon": "pixelpirates:mooring_post"},
+    {"p": "A Mooring Post holds any ship within 12 blocks in place and slowly repairs its hull. Inside your own hideout it counts as your HOME PORT and repairs twice as fast."},
+    {"h": "Building", "icon": "pixelpirates:thatch"},
+    {"p": "Build with palm wood, thatch, woven screens, driftwood fences, rope ladders and rope bridges. Tiki torches light the beach."},
+    {"page": "next"},
+    {"h": "Furnishing", "icon": "pixelpirates:sea_chest"},
+    {"p": "A captain's desk, a sea chest that keeps its contents when broken, chairs and barrel stools you can sit on, a map table, rum racks, nets and rope coils, and a display cannon for show."},
+    {"h": "The Treasure Hoard", "icon": "pixelpirates:treasure_hoard"},
+    {"p": "Add coins to it and the pile grows, through eight sizes. A big enough hoard brings you luck, and even a hero's welcome."},
+
+    {"page": "spread"},
+    {"h": "Crops", "icon": "pixelpirates:pineapple"},
+    {"p": "Pineapple, lime and chili grow here. The seeds turn up in island grass, and the Quartermaster sells them too."},
+    {"h": "Rum", "icon": "pixelpirates:rum_still"},
+    {"p": "A Rum Still needs a fire lit under it to make raw rum. Leave it in an Aging Cask and it becomes aged, and in time vintage. Drinking too much makes you Tipsy."},
+    {"page": "next"},
+    {"h": "Trade and bounties", "icon": "pixelpirates:bounty_board"},
+    {"p": "At a Trading Post you can sell a held stack for three quarters of its worth in doubloons (up to 64 items a day), or pay 32 doubloons to hire a trader to stand at it. A Bounty Board offers three contracts a day: a hunt, a delivery, or a ship to sink."},
+    {"h": "Games of chance", "icon": "pixelpirates:roulette_table"},
+    {"p": "Bet up to 16 pirate coins at the roulette table. Anyone nearby can join in before the wheel spins."},
+
+    {"page": "spread"},
+    {"title": "Captain's Tools"},
+    {"row": "Captain's Spyglass - read a creature or a ship at a distance", "icon": "pixelpirates:captains_spyglass"},
+    {"row": "Compass of Desire - home, your death, treasure, or your next quarry", "icon": "pixelpirates:compass_of_desire"},
+    {"row": "Grappling Hook - bite into a block and reel yourself in", "icon": "pixelpirates:grappling_hook"},
+    {"row": "Parrot - sits on your shoulder, squawks at danger, sniffs out loot", "icon": "minecraft:parrot_spawn_egg"},
+    {"page": "next"},
+    {"img": "cutlass", "w": 90},
+    {"img": "pistol", "w": 70},
+    {"quote": "Keep your powder dry and your blade sharper."}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/harbour_sign"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/harbour_sign",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/harbour_sign",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/harbour_sign",
+   "y": 270
+  }
+ }
+}

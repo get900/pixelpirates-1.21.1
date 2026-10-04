@@ -5,6 +5,7 @@
     "pixelpirates:fort_cannon",
     "pixelpirates:manacle_anchor",
     "pixelpirates:anchor_winch",
+    "pixelpirates:wreckers_signal_lantern",
     "pixelpirates:gallowbrand_stone",
     "pixelpirates:ghost_cannon",
     "pixelpirates:water_light_block",
@@ -60,9 +61,19 @@
     "pixelpirates:soul_barnacle",
     "pixelpirates:abyssal_slate",
     "pixelpirates:luminous_vein",
+    "pixelpirates:abyss_puzzle_node",
     "pixelpirates:rum_still",
     "pixelpirates:treasure_pedestal",
     "pixelpirates:display_cannon",
-    "pixelpirates:treasure_hoard"
+    "pixelpirates:treasure_hoard",
+    "pixelpirates:distillery_sign",
+    "pixelpirates:governor_statue",
+    "pixelpirates:lion_statue",
+    "pixelpirates:sea_god_statue",
+    "pixelpirates:marble_bust",
+    "pixelpirates:garden_urn",
+    "pixelpirates:crystal_chandelier",
+    "pixelpirates:forge_hearth",
+    "pixelpirates:forge_anvil"
   ]
 }

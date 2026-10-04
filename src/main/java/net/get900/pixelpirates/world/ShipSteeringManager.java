@@ -25,6 +25,8 @@ public class ShipSteeringManager {
     // Freshness counter: set to 5 on each custom HELM_STEER packet; decremented per tick.
     // While > 0, SeatedControllingPlayer is bypassed and custom packet inputs are used instead.
     public static final ConcurrentHashMap<Long, Integer>  HELM_STEER_FRESHNESS = new ConcurrentHashMap<>();
+    /** Wind Reader of whoever last steered the ship (thrust multiplier). */
+    public static final ConcurrentHashMap<Long, Float>    HELM_BONUS = new ConcurrentHashMap<>();
 
     // Derelict AI ships: AI removed, waiting for player claim or 5-min deletion.
     // Value = server tick at which the ship will be deleted if unclaimed.
@@ -230,7 +232,7 @@ public class ShipSteeringManager {
 
         if (Math.abs(fwd) > 0.01f) {
             int    masts  = MAST_COUNTS.getOrDefault(shipId, 1);
-            double thrust = fwd * masts * THRUST_PER_MAST * (sprint ? SPRINT_MULT : 1.0);
+            double thrust = fwd * masts * THRUST_PER_MAST * (sprint ? SPRINT_MULT : 1.0) * HELM_BONUS.getOrDefault(shipId, 1f);
             gtpa.applyBodyForce(shipId, new Vector3d(0, 0, thrust), new Vector3d());
         }
 

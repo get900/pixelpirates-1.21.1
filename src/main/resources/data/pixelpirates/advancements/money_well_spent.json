@@ -1,8 +1,14 @@
 {
   "display": {
-    "icon": {"item": "pixelpirates:ship_blueprint"},
-    "title": {"translate": "advancements.pixelpirates.money_well_spent.title"},
-    "description": {"translate": "advancements.pixelpirates.money_well_spent.description"},
+    "icon": {
+      "item": "pixelpirates:ship_blueprint"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.money_well_spent.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.money_well_spent.description"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": false,
@@ -10,6 +16,8 @@
   },
   "parent": "pixelpirates:got_sea_legs",
   "criteria": {
-    "got_here": {"trigger": "minecraft:impossible"}
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
   }
 }

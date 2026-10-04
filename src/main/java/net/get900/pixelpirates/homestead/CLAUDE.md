@@ -1,0 +1,1 @@
+Homestead: read docs/homestead.md first (tavern games, chapel, Chronicle); harbour dues are in docs/ships.md, trophies/strongboxes/bounties in docs/gameplay-systems.md; parrots (parrot/: types, abilities, aviary, roost) in docs/parrot_ideas.md.

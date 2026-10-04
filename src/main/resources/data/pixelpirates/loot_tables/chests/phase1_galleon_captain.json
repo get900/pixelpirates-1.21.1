@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:pirate_coin",
+          "name": "pixelpirates:coin",
           "weight": 20,
           "functions": [
             {
@@ -66,33 +66,8 @@
         },
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:kraken_ink",
+          "name": "pixelpirates:crab_shell",
           "weight": 6,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "pixelpirates:kraken_scale",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:heart_of_the_sea",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:emerald",
-          "weight": 8,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -106,18 +81,43 @@
         },
         {
           "type": "minecraft:item",
-          "name": "pixelpirates:rusted_cutlass",
-          "weight": 3
+          "name": "minecraft:heart_of_the_sea",
+          "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:enchanted_book",
-          "weight": 3,
+          "name": "pixelpirates:crab_shell",
+          "weight": 8,
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:rusted_cutlass",
+          "weight": 3
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:common_strongbox"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.12
         }
       ]
     }

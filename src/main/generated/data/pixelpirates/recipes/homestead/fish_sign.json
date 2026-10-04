@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:oak_sign"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "F": {
+      "item": "minecraft:cod"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " F "
+  ],
+  "result": {
+    "item": "pixelpirates:fish_sign"
+  },
+  "show_notification": true
+}

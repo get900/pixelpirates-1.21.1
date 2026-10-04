@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/dice_cup"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/dice_cup",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/dice_cup",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/dice_cup",
+   "y": 270
+  }
+ }
+}

@@ -35,6 +35,70 @@ final class HomesteadRecipes {
     }
 
     static void more(HomesteadRecipeProvider p, Consumer<RecipeJsonProvider> ex) {
+        // ---------------- the Grog Barrel: tavern decor, game tables, drinks
+        shaped(ex, HomesteadBlocks.TANKARD, 2, new String[]{"P P", "PNP"}, 'P', Items.SPRUCE_PLANKS, 'N', Items.IRON_NUGGET);
+        shaped(ex, HomesteadBlocks.TAVERN_KEG, 1, new String[]{"N", "B", "F"}, 'N', Items.IRON_NUGGET, 'B', Items.BARREL, 'F', Items.SPRUCE_FENCE);
+        shaped(ex, HomesteadBlocks.DICE_CUP, 1, new String[]{"L", "B"}, 'L', Items.LEATHER, 'B', Items.BONE);
+        shaped(ex, HomesteadBlocks.TAVERN_SIGN, 1, new String[]{" C ", "SBS"}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN);
+        shaped(ex, HomesteadBlocks.CHANDLERY_SIGN, 1, new String[]{" C ", "SBS", " L "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'L', Items.LANTERN);
+        shaped(ex, HomesteadBlocks.BAKERY_SIGN, 1, new String[]{" C ", "SBS", " W "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'W', Items.WHEAT);
+        shaped(ex, HomesteadBlocks.HARBOUR_SIGN, 1, new String[]{" C ", "SBS", " P "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'P', Items.PRISMARINE_SHARD);
+        shaped(ex, HomesteadBlocks.WAREHOUSE_SIGN, 1, new String[]{" C ", "SBS", " K "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'K', HomesteadBlocks.CARGO_CRATE);
+        shaped(ex, HomesteadBlocks.DISTILLERY_SIGN, 1, new String[]{" C ", "SBS", " R "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'R', HomesteadItems.RAW_RUM);
+        shaped(ex, HomesteadBlocks.FISH_SIGN, 1, new String[]{" C ", "SBS", " F "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'F', Items.COD);
+        shaped(ex, HomesteadBlocks.DUES_LEDGER, 1, new String[]{"BCI", "PPP", "P P"}, 'B', Items.BOOK, 'C', net.get900.pixelpirates.item.ModItems.COIN, 'I', Items.INK_SAC, 'P', Items.SPRUCE_PLANKS);
+        shaped(ex, HomesteadBlocks.BERTH_BOLLARD, 1, new String[]{"I", "L", "S"}, 'I', Items.IRON_INGOT, 'L', Items.DARK_OAK_LOG, 'S', Items.STONE_BRICKS);
+        shaped(ex, HomesteadBlocks.DUES_BOARD, 1, new String[]{"SIS", "PCP"}, 'S', Items.STICK, 'I', Items.INK_SAC, 'P', Items.SPRUCE_PLANKS, 'C', net.get900.pixelpirates.item.ModItems.COIN);
+        shaped(ex, HomesteadBlocks.DOCK_SIGN, 1, new String[]{" C ", "SBS", " R "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'R', net.get900.pixelpirates.item.ModItems.ROPE);
+        shaped(ex, HomesteadBlocks.INN_SIGN, 1, new String[]{" C ", "SBS", " R "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'R', Items.RED_BED);
+        shaped(ex, HomesteadBlocks.PERCH_BRANCH, 4, new String[]{"LS", " A"}, 'L', Items.JUNGLE_LOG, 'S', Items.STICK, 'A', Items.AZALEA_LEAVES);
+        shaped(ex, HomesteadBlocks.PARROT_ROOST, 1, new String[]{"SSS", " L ", "PPP"}, 'S', Items.STICK, 'L', Items.JUNGLE_LOG, 'P', Items.JUNGLE_PLANKS);
+        shaped(ex, HomesteadBlocks.CHAPEL_PEW, 3, new String[]{"P  ", "PPP", "S S"}, 'P', Items.SPRUCE_PLANKS, 'S', Items.STICK);
+        shaped(ex, HomesteadBlocks.BELL_ROPE, 1, new String[]{"R", "R", "W"}, 'R', net.get900.pixelpirates.item.ModItems.ROPE, 'W', Items.RED_WOOL);
+        shaped(ex, HomesteadBlocks.ORGAN_CONSOLE, 1, new String[]{"NNN", "QQQ", "P P"}, 'N', Items.NOTE_BLOCK, 'Q', Items.QUARTZ, 'P', Items.DARK_OAK_PLANKS);
+        shaped(ex, HomesteadBlocks.ORGAN_PIPES, 2, new String[]{"G G", "GGG", "PPP"}, 'G', Items.GOLD_INGOT, 'P', Items.DARK_OAK_PLANKS);
+        shaped(ex, HomesteadBlocks.CHAPEL_ALTAR, 1, new String[]{"WWW", "SSS", "S S"}, 'W', Items.WHITE_CARPET, 'S', Items.SMOOTH_STONE);
+        shaped(ex, HomesteadBlocks.ALTAR_CROSS, 1, new String[]{" G ", "GGG", " B "}, 'G', Items.GOLD_INGOT, 'B', Items.STONE_BRICK_SLAB);
+        shaped(ex, HomesteadBlocks.WALL_CROSS, 1, new String[]{" S ", "SGS", " S "}, 'S', Items.DARK_OAK_PLANKS, 'G', Items.GOLD_NUGGET);
+        shaped(ex, HomesteadBlocks.CANDELABRA, 1, new String[]{"CCC", " G ", " G "}, 'C', Items.CANDLE, 'G', Items.GOLD_INGOT);
+        shaped(ex, HomesteadBlocks.VOTIVE_RACK, 1, new String[]{"CCC", "III"}, 'C', Items.CANDLE, 'I', Items.IRON_BARS);
+        shaped(ex, HomesteadBlocks.BAPTISMAL_FONT, 1, new String[]{"SWS", " S ", "SSS"}, 'S', Items.SMOOTH_STONE, 'W', Items.WATER_BUCKET);
+        shaped(ex, HomesteadBlocks.HYMN_BOARD, 1, new String[]{"PPP", "PIP"}, 'P', Items.DARK_OAK_PLANKS, 'I', Items.INK_SAC);
+        shaped(ex, HomesteadBlocks.MEMORIAL_PLAQUE, 1, new String[]{"SAS"}, 'S', Items.POLISHED_ANDESITE, 'A', net.get900.pixelpirates.block.ModBlocks.ANCHOR_BLOCK);
+        shaped(ex, HomesteadBlocks.VOTIVE_SHIP, 1, new String[]{" W ", "SFS", "PPP"}, 'W', Items.WHITE_WOOL, 'S', Items.STRING, 'F', Items.SPRUCE_FENCE, 'P', Items.DARK_OAK_SLAB);
+        shaped(ex, HomesteadBlocks.GOVERNOR_STATUE, 1, new String[]{" Q ", "QGQ", "QQQ"}, 'Q', Items.QUARTZ_BLOCK, 'G', Items.GOLD_INGOT);
+        shaped(ex, HomesteadBlocks.LION_STATUE, 1, new String[]{"Q Q", "QQQ"}, 'Q', Items.QUARTZ_BLOCK);
+        shaped(ex, HomesteadBlocks.SEA_GOD_STATUE, 1, new String[]{"QGQ", "QPQ", "QQQ"}, 'Q', Items.QUARTZ_BLOCK, 'G', Items.GOLD_INGOT, 'P', Items.PRISMARINE);
+        shaped(ex, HomesteadBlocks.MARBLE_BUST, 1, new String[]{"Q", "Q", "S"}, 'Q', Items.QUARTZ_BLOCK, 'S', Items.QUARTZ_SLAB);
+        shaped(ex, HomesteadBlocks.GARDEN_URN, 2, new String[]{"F", "Q", "S"}, 'F', Items.FLOWERING_AZALEA, 'Q', Items.QUARTZ_BLOCK, 'S', Items.QUARTZ_SLAB);
+        shaped(ex, HomesteadBlocks.CRYSTAL_CHANDELIER, 1, new String[]{" C ", "GAG", "AGA"}, 'C', Items.CHAIN, 'G', Items.GOLD_INGOT, 'A', Items.AMETHYST_SHARD);
+        shaped(ex, HomesteadBlocks.GOVERNOR_PORTRAIT, 1, new String[]{"GGG", "GPG", "GGG"}, 'G', Items.GOLD_NUGGET, 'P', Items.PAINTING);
+        shaped(ex, HomesteadBlocks.WATCH_SIGN, 1, new String[]{" C ", "SBS", " L "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'L', Items.BLUE_DYE);
+        shaped(ex, HomesteadBlocks.WANTED_POSTER, 2, new String[]{"PIP", "PSP"}, 'P', Items.PAPER, 'I', Items.INK_SAC, 'S', Items.STICK);
+        shaped(ex, HomesteadBlocks.WEAPON_RACK, 1, new String[]{"SSS", "WIW", "SSS"}, 'S', Items.STICK, 'W', Items.SPRUCE_SLAB, 'I', Items.IRON_SWORD);
+        shaped(ex, HomesteadBlocks.FORGE_HEARTH, 1, new String[]{"BBB", "BCB", "SSS"}, 'B', Items.BRICKS, 'C', Items.CAMPFIRE, 'S', Items.STONE_BRICKS);
+        shaped(ex, HomesteadBlocks.FORGE_ANVIL, 1, new String[]{"III", " A ", " L "}, 'I', Items.IRON_INGOT, 'A', Items.ANVIL, 'L', Items.OAK_LOG);
+        shaped(ex, HomesteadBlocks.BELLOWS, 1, new String[]{"PPP", "LLL", "PIP"}, 'P', Items.SPRUCE_PLANKS, 'L', Items.LEATHER, 'I', Items.IRON_NUGGET);
+        shaped(ex, HomesteadBlocks.PATTERN_BOARD, 1, new String[]{"PIP", "PSP"}, 'P', Items.SPRUCE_PLANKS, 'I', Items.IRON_INGOT, 'S', Items.PAPER);
+        shaped(ex, HomesteadBlocks.TELESCOPE, 1, new String[]{"GCC", " S ", "S S"}, 'G', Items.GLASS_PANE, 'C', Items.COPPER_INGOT, 'S', Items.STICK);
+        shaped(ex, HomesteadBlocks.SEA_CHART, 1, new String[]{"SSS", "SMS", "SSS"}, 'S', Items.STICK, 'M', Items.MAP);
+        shaped(ex, HomesteadBlocks.PARK_SIGN, 1, new String[]{" C ", "SBS", " L "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'L', Items.OAK_SAPLING);
+        shaped(ex, HomesteadBlocks.SMITHY_SIGN, 1, new String[]{" C ", "SBS", " I "}, 'C', Items.CHAIN, 'S', Items.STICK, 'B', Items.OAK_SIGN, 'I', Items.IRON_INGOT);
+        shaped(ex, HomesteadItems.SMITHS_HAMMER, 1, new String[]{"III", "ISI", " S "}, 'I', Items.IRON_INGOT, 'S', Items.STICK);
+        shaped(ex, HomesteadBlocks.DRINKS_MENU, 1, new String[]{"SIS", "PPP"}, 'S', Items.STICK, 'I', Items.INK_SAC, 'P', Items.SPRUCE_PLANKS);
+        shaped(ex, HomesteadBlocks.LIARS_DICE_TABLE, 1, new String[]{"CLC", "PPP", "S S"}, 'C', HomesteadBlocks.DICE_CUP, 'L', Items.GREEN_CARPET, 'P', Items.DARK_OAK_PLANKS, 'S', Items.STICK);
+        shaped(ex, HomesteadBlocks.CROWN_ANCHOR_TABLE, 1, new String[]{"GWG", "PPP", "S S"}, 'G', Items.GOLD_NUGGET, 'W', Items.WHITE_CARPET, 'P', Items.SPRUCE_PLANKS, 'S', Items.STICK);
+        shaped(ex, HomesteadBlocks.CATTERY_COUNTER, 1, new String[]{"WCW", "PPP", "P P"}, 'W', Items.WHITE_WOOL, 'C', Items.COD, 'P', Items.SPRUCE_PLANKS);
+        shaped(ex, HomesteadBlocks.TATTOO_CHAIR, 1, new String[]{"L  ", "LLL", "S S"}, 'L', Items.LEATHER, 'S', Items.DARK_OAK_SLAB);
+        p.shapeless(RecipeCategory.DECORATIONS, HomesteadBlocks.SHIP_IN_BOTTLE_SLOOP, 1, Items.GLASS_BOTTLE, Items.OAK_PLANKS, Items.STRING, Items.PAPER).offerTo(ex, HomesteadRecipeProvider.id("ship_in_bottle_sloop"));
+        p.shapeless(RecipeCategory.DECORATIONS, HomesteadBlocks.SHIP_IN_BOTTLE_BRIG, 1, Items.GLASS_BOTTLE, Items.DARK_OAK_PLANKS, Items.STRING, Items.PAPER, Items.RED_DYE).offerTo(ex, HomesteadRecipeProvider.id("ship_in_bottle_brig"));
+        p.shapeless(RecipeCategory.DECORATIONS, HomesteadBlocks.SHIP_IN_BOTTLE_GALLEON, 1, Items.GLASS_BOTTLE, Items.DARK_OAK_PLANKS, Items.STRING, Items.PAPER, Items.GOLD_NUGGET, Items.RED_DYE).offerTo(ex, HomesteadRecipeProvider.id("ship_in_bottle_galleon"));
+        p.shapeless(RecipeCategory.DECORATIONS, HomesteadBlocks.SPIRIT_BOTTLES, 1, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE, Items.SUGAR).offerTo(ex, HomesteadRecipeProvider.id("spirit_bottles"));
+        p.shapeless(RecipeCategory.FOOD, HomesteadItems.ALE, 1, HomesteadBlocks.TANKARD, Items.WHEAT, Items.WHEAT, Items.SUGAR).offerTo(ex, HomesteadRecipeProvider.id("tankard_of_ale"));
+        p.shapeless(RecipeCategory.FOOD, HomesteadItems.HONEY_MEAD, 1, Items.HONEY_BOTTLE, Items.SUGAR).offerTo(ex, HomesteadRecipeProvider.id("honey_mead"));
+        p.shapeless(RecipeCategory.FOOD, HomesteadItems.SPICED_WINE, 1, Items.GLASS_BOTTLE, Items.SWEET_BERRIES, Items.SWEET_BERRIES, HomesteadItems.CHILI_PEPPER).offerTo(ex, HomesteadRecipeProvider.id("spiced_wine"));
+        p.shapeless(RecipeCategory.FOOD, HomesteadItems.BILGE_WHISKEY, 1, Items.GLASS_BOTTLE, Items.WHEAT, Items.WHEAT, Items.CHARCOAL).offerTo(ex, HomesteadRecipeProvider.id("bilge_whiskey"));
+        p.shapeless(RecipeCategory.FOOD, HomesteadItems.KRAKENS_KISS, 1, HomesteadItems.AGED_RUM, net.get900.pixelpirates.item.ModItems.KRAKEN_INK, HomesteadItems.LIME).offerTo(ex, HomesteadRecipeProvider.id("krakens_kiss"));
         // ---------------- #12 rum
         p.shapeless(RecipeCategory.FOOD, HomesteadItems.MOLASSES, 1, Items.SUGAR_CANE, Items.SUGAR_CANE, Items.SUGAR_CANE, Items.GLASS_BOTTLE)
                 .offerTo(ex, HomesteadRecipeProvider.id("molasses"));
@@ -152,10 +216,10 @@ final class HomesteadRecipes {
         shaped(ex, HomesteadBlocks.CRIMSON_SAIL_CANVAS, 4, new String[]{"WW", "WW"}, 'W', Items.RED_WOOL);
         shaped(ex, HomesteadBlocks.STRIPED_SAIL_CANVAS, 4, new String[]{"WR", "RW"}, 'W', Items.WHITE_WOOL, 'R', Items.RED_WOOL);
         shaped(ex, HomesteadBlocks.JOLLY_ROGER_SAIL_CANVAS, 4, new String[]{"BB", "BK"}, 'B', Items.BLACK_WOOL, 'K', Items.BONE);
-        shaped(ex, HomesteadItems.CAPTAINS_LOGBOOK, 1, new String[]{" F ", "IBC"}, 'F', Items.FEATHER, 'I', Items.INK_SAC, 'B', Items.BOOK, 'C', Items.COMPASS);
+        shaped(ex, net.get900.pixelpirates.item.ModItems.WEATHERED_CHRONICLE, 1, new String[]{" F ", "IBC"}, 'F', Items.FEATHER, 'I', Items.INK_SAC, 'B', Items.BOOK, 'C', Items.COMPASS);
         shaped(ex, HomesteadBlocks.ROULETTE_TABLE, 1, new String[]{"GCW", "PPP", "S S"}, 'G', Items.GOLD_INGOT, 'C', Items.COMPASS, 'W', Items.GREEN_CARPET,
                 'P', Items.DARK_OAK_PLANKS, 'S', Items.STICK);
-        shaped(ex, HomesteadBlocks.TRADING_POST, 1, new String[]{"GCB", "SSS", "P P"}, 'G', Items.GOLD_INGOT, 'C', net.get900.pixelpirates.item.ModItems.PIRATE_COIN, 'B', Items.BOOK, 'S', Items.SPRUCE_SLAB, 'P', Items.SPRUCE_PLANKS);
+        shaped(ex, HomesteadBlocks.TRADING_POST, 1, new String[]{"GCB", "SSS", "P P"}, 'G', Items.GOLD_INGOT, 'C', net.get900.pixelpirates.item.ModItems.COIN, 'B', Items.BOOK, 'S', Items.SPRUCE_SLAB, 'P', Items.SPRUCE_PLANKS);
         shaped(ex, HomesteadItems.SALVAGE_HOOK, 1, new String[]{"  S", " SL", "S I"}, 'S', Items.STICK, 'L', Items.STRING, 'I', Items.IRON_INGOT);
 
         // ---------------- #24 region tools

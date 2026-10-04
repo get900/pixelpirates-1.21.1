@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    [
+      {
+        "item": "pixelpirates:emberfin"
+      },
+      {
+        "item": "pixelpirates:lava_eel"
+      }
+    ],
+    {
+      "item": "pixelpirates:brimstone"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:brimstone_smoked_fish"
+  }
+}

@@ -50,7 +50,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GHOST_MAST);
         // GHOST_CANNON: hand-authored model (ship_cannon geometry, ghost textures) in resources/
         // FORT_CANNON reuses the hand-authored ship_cannon model (blockstate + item model in resources/)
-        blockStateModelGenerator.registerSingleton(ModBlocks.SHIPWRIGHT_TABLE, TexturedModel.CUBE_BOTTOM_TOP);
+        // SHIPWRIGHT_TABLE: a shaped drafting table, hand-authored in resources/ (tools/gen_shipwright_model.py)
 
         //Phase3
         blockStateModelGenerator.registerLog(ModBlocks.ASHEN_LOG).log(ModBlocks.ASHEN_LOG);
@@ -130,6 +130,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.BANANA, Models.GENERATED);
         itemModelGenerator.register(ModItems.COCONUT, Models.GENERATED);
         itemModelGenerator.register(ModItems.PIRATE_JOURNAL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.WEATHERED_CHRONICLE, Models.GENERATED);
         // Spawn eggs use the vanilla tinted template - colours come from ModSpawnEggs
         Model spawnEgg = new Model(java.util.Optional.of(new Identifier("item/template_spawn_egg")), java.util.Optional.empty());
         for (net.minecraft.item.Item egg : net.get900.pixelpirates.item.ModSpawnEggs.ALL) {
@@ -143,6 +144,17 @@ public class ModModelProvider extends FabricModelProvider {
 
         // Galley cooking
         itemModelGenerator.register(ModItems.BANANA_BREAD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ROASTED_BANANA, Models.GENERATED);
+        itemModelGenerator.register(ModItems.COCONUT_WATER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ISLAND_SKEWER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SEA_BANDAGE, Models.GENERATED);
+        for (net.minecraft.item.Item dish : net.get900.pixelpirates.item.food.PirateFoods.ALL) itemModelGenerator.register(dish, Models.GENERATED);
+        // phase materials + their gadgets (Materials & Gear Ladder) - textures from tools/gen_material_textures.py
+        for (net.minecraft.item.Item m : new net.minecraft.item.Item[]{ModItems.CRAB_SHELL, ModItems.SIREN_SCALE, ModItems.REEF_PEARL,
+                ModItems.BRIMSTONE, ModItems.OBSIDIAN_SHARD, ModItems.ECTOPLASM, ModItems.LOST_SOUL, ModItems.ABYSSAL_PEARL,
+                ModItems.LUMINOUS_ICHOR, ModItems.KRILL_CLUSTER, ModItems.TIDAL_CORE, ModItems.RAW_LAVA_CRAB_CLAW,
+                ModItems.SIREN_CONCH, ModItems.INK_BOMB, ModItems.SHELL_BUCKLER})
+            itemModelGenerator.register(m, Models.GENERATED);
         itemModelGenerator.register(ModItems.HARDTACK, Models.GENERATED);
         itemModelGenerator.register(ModItems.KRAKEN_CALAMARI, Models.GENERATED);
         itemModelGenerator.register(ModItems.COCONUT_GROG, Models.GENERATED);
@@ -160,6 +172,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.NAVAL_RAPIER, Models.HANDHELD);
         itemModelGenerator.register(ModItems.OFFICERS_SABRE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.THROWING_KNIFE, Models.HANDHELD);
+        // forged weapons (homestead/forge/Forging)
+        for (net.minecraft.item.Item i : new net.minecraft.item.Item[]{ModItems.CRABCLAW_SABRE, ModItems.PEARLGUARD_RAPIER, ModItems.PISTOL_CUTLASS,
+                ModItems.OBSIDIAN_HALBERD, ModItems.SOULREAVER, ModItems.INKFANG}) itemModelGenerator.register(i, Models.HANDHELD);
         itemModelGenerator.register(ModItems.CORSAIR_CUTLASS, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BOARDING_PIKE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.EMBERBRAND, Models.HANDHELD);

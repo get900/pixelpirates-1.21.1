@@ -25,7 +25,7 @@ import java.util.*;
 
 public class ShipSchematic {
 
-    private static final int MAX_BLOCKS = 2048;
+    private static final int MAX_BLOCKS = 4096;              // the flagships (tools/gen_fleet_ships.py) run 2-3k blocks
 
     private final List<Entry> entries;
     private final int mastCount;
@@ -113,6 +113,79 @@ public class ShipSchematic {
 
         return new ShipSchematic(entries, mastCount);
     }
+
+    /**
+     * The blueprints that ship with the mod (data/pixelpirates/ships/*.nbt in the jar: the hand-built sloop, skipper and
+     * brigantine, the faction ships + the fleet from tools/gen_*_ships.py, anything saved with /ppship capture) are copied
+     * into the config folder. UPDATES (2026-10-04): config/pixelpirates/ships/.bundled remembers the hash of each file as
+     * installed; when the mod brings a NEW version of a blueprint and the installed copy is still the one we installed,
+     * it is replaced (the old one kept as .nbt.bak). A copy you changed locally (re-saved with a Ship Blueprint) is kept.
+     * Copies from before this tracking existed are treated as installs and updated (with the .bak).
+     */
+    public static void installBundled() {
+        var mod = FabricLoader.getInstance().getModContainer(net.get900.pixelpirates.PixelPirates.MOD_ID).orElse(null);
+        if (mod == null) return;
+        var src = mod.findPath("data/pixelpirates/ships").orElse(null);
+        if (src == null) return;
+        Path dir = getSchematicDir();
+        java.util.Properties seen = loadInstalled();
+        try (var files = java.nio.file.Files.list(src)) {
+            java.nio.file.Files.createDirectories(dir);
+            for (Path f : (Iterable<Path>) files::iterator) {
+                String n = f.getFileName().toString();
+                if (!n.endsWith(".nbt")) continue;
+                Path to = dir.resolve(n);
+                String bundled = hash(f);
+                if (!java.nio.file.Files.exists(to)) {
+                    java.nio.file.Files.copy(f, to);
+                    net.get900.pixelpirates.PixelPirates.LOGGER.info("[Ships] Installed bundled blueprint {}", n);
+                } else {
+                    String installed = hash(to), recorded = seen.getProperty(n);
+                    if (installed.equals(bundled)) { seen.setProperty(n, bundled); continue; }
+                    if (recorded != null && !recorded.equals(installed)) {
+                        net.get900.pixelpirates.PixelPirates.LOGGER.info("[Ships] Kept your edited blueprint {} (the mod has a newer one)", n);
+                        continue;
+                    }
+                    java.nio.file.Files.copy(to, dir.resolve(n + ".bak"), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                    java.nio.file.Files.copy(f, to, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                    net.get900.pixelpirates.PixelPirates.LOGGER.info("[Ships] Updated bundled blueprint {} (old copy kept as {}.bak)", n, n);
+                }
+                seen.setProperty(n, bundled);
+            }
+            saveInstalled(seen);
+        } catch (IOException e) {
+            net.get900.pixelpirates.PixelPirates.LOGGER.warn("[Ships] Could not install bundled blueprints: {}", e.toString());
+        }
+    }
+
+    /** Mark a blueprint file in the config folder as matching the mod's version (ShipCapture writes both at once). */
+    public static void recordInstalled(String fileName, Path file) {
+        try {
+            java.util.Properties seen = loadInstalled();
+            seen.setProperty(fileName, hash(file));
+            saveInstalled(seen);
+        } catch (IOException ignored) { }
+    }
+
+    private static java.util.Properties loadInstalled() {
+        java.util.Properties p = new java.util.Properties();
+        Path f = getSchematicDir().resolve(".bundled");
+        if (java.nio.file.Files.exists(f)) try (var r = java.nio.file.Files.newBufferedReader(f)) { p.load(r); } catch (IOException ignored) { }
+        return p;
+    }
+
+    private static void saveInstalled(java.util.Properties p) throws IOException {
+        try (var w = java.nio.file.Files.newBufferedWriter(getSchematicDir().resolve(".bundled"))) { p.store(w, "hashes of the bundled ship blueprints as installed"); }
+    }
+
+    private static String hash(Path f) throws IOException {
+        java.util.zip.CRC32 c = new java.util.zip.CRC32();
+        c.update(java.nio.file.Files.readAllBytes(f));
+        return Long.toHexString(c.getValue());
+    }
+
+    /** config/pixelpirates/ships */
+    public static Path schematicDir() { return getSchematicDir(); }
 
     public static List<String> listNames() {
         File dir = getSchematicDir().toFile();

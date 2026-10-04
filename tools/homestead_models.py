@@ -6,10 +6,10 @@
 Each builder writes the block model(s), the blockstate and the item model, and renders a preview. Models are authored
 facing NORTH (the front is the -z face); blockstates rotate them for the other facings.
 """
-import sys
+import sys, json
 from pathlib import Path
 
-from blockmodels import BM, blockstate_facing, variants_facing, item_model, write_blockstate, preview
+from blockmodels import BM, blockstate_facing, variants_facing, item_model, write_blockstate, preview, RES
 
 PREV = Path(__file__).parent / "previews/homestead"
 BUILT = {}
@@ -411,32 +411,55 @@ def barrel_stool():
 # =====================================================================================
 @model
 def treasure_hoard():
+    """TREASURE HOARD (redrawn 2026-10-01): an iron-banded treasure chest. LEVEL 0 = shut; as the hoard grows the lid
+    swings open, coins mound up inside and spill onto the floor, then a goblet, gems and finally a crown appear."""
     import random
-    t = {"coins": "pixelpirates:block/coin_pile", "gold": "minecraft:block/gold_block", "cup": "minecraft:block/raw_gold_block",
-         "gem": "minecraft:block/emerald_block", "wood": DO, "particle": "pixelpirates:block/coin_pile"}
+    t = {"coins": "pixelpirates:block/coin_pile", "gold": "minecraft:block/gold_block", "wood": "minecraft:block/dark_oak_planks",
+         "band": "minecraft:block/iron_block", "gem": "minecraft:block/amethyst_block", "ruby": "minecraft:block/redstone_block",
+         "particle": "pixelpirates:block/coin_pile"}
     last = None
     for lvl in range(8):
         m = BM(f"treasure_hoard_{lvl}", t)
-        m.box([1, 0, 1], [15, 1, 15], all="#wood")                                     # a plank base the pile sits on
-        rng = random.Random(40 + lvl)
-        for layer in range(lvl + 1):                                                   # stacked, narrowing slabs of coins
-            inset = 1 + layer * (6 / 8.0) * (1 + (layer > 3))
-            if inset >= 7.5:
-                break
-            m.box([1 + inset, 1 + layer * 2, 1 + inset], [15 - inset, 3 + layer * 2, 15 - inset], all="#coins")
-        for i in range(lvl * 2):                                                       # coin stacks + loot poking out
-            x, z = rng.uniform(2, 12), rng.uniform(2, 12)
-            h = rng.uniform(1, 2 + lvl)
-            m.box([x, 1, z], [x + 1.5, 1 + h, z + 1.5], all="#gold")
+        m.box([3, 0, 5], [13, 6, 12], all="#wood")                                     # chest body
+        for x in (3.8, 11.4):                                                          # iron bands round the body
+            m.box([x, 0, 4.8], [x + 0.8, 6.2, 12.2], all="#band")
+        m.box([7.2, 3.5, 4.6], [8.8, 5.5, 5], all="#gold")                              # the lock plate
+        if lvl == 0:
+            m.box([3, 6, 5], [13, 8.5, 12], all="#wood")                               # lid shut
+            for x in (3.8, 11.4):
+                m.box([x, 6, 4.8], [x + 0.8, 8.7, 12.2], all="#band")
+        else:
+            lid = ("x", -45, [8, 6, 12])
+            m.box([3, 6, 12], [13, 8.5, 19], all="#wood", rot=lid)                     # lid thrown open on its hinge
+            for x in (3.8, 11.4):
+                m.box([x, 6, 11.8], [x + 0.8, 8.7, 19.2], all="#band", rot=lid)
+            h = min(6.2 + lvl * 0.35, 8.6)                                             # coins heaped inside, in steps
+            m.box([3.5, 5, 5.5], [12.5, h, 11.5], all="#coins")
+            if lvl >= 3: m.box([4.5, h, 6.5], [11.5, h + 1, 10.5], all="#coins")
+            if lvl >= 5: m.box([6, h + 1, 7.5], [10, h + 1.8, 9.8], all="#coins")
+        rng = random.Random(70 + lvl)
+        if lvl >= 2:                                                                   # spilled coins on the floor
+            for k in range(min(lvl * 2, 12)):
+                x, z = rng.uniform(0.5, 13.5), rng.choice([rng.uniform(0.5, 3.5), rng.uniform(12.5, 14.5)])
+                m.box([x, 0, z], [x + rng.uniform(1.5, 3), rng.uniform(0.5, 0.5 + lvl * 0.25), z + rng.uniform(1, 2)], all="#coins")
+            m.box([1, 0, 1.5], [15, 0.5 + lvl * 0.15, 4.5], all="#coins")             # a drift of coins at the front
         if lvl >= 4:
-            m.box([10, 1, 3], [12, 5, 5], all="#cup")                                  # a goblet
-        if lvl >= 6:
-            m.box([4, 2 + lvl, 9], [5.5, 3.5 + lvl, 10.5], all="#gem")                  # a gem on top
+            m.box([13, 0, 9], [15, 4, 11], all="#gold")                                # a goblet beside it
+            m.box([13.5, 4, 9.5], [14.5, 5, 10.5], all="#gold")
+        if lvl >= 5:
+            m.box([1.2, 0.5, 6], [2.4, 1.7, 7.2], all="#ruby")                         # loose gems
+            m.box([1.5, 0.5, 9], [2.5, 1.5, 10], all="#gem")
+        if lvl >= 7:                                                                   # a crown on top of it all
+            top = min(6.2 + lvl * 0.35, 8.6) + 1.8
+            m.box([6, top, 7.5], [10, top + 1, 10.5], all="#gold")
+            for x in (6, 7.75, 9.5):
+                m.box([x, top + 1, 7.5], [x + 0.5, top + 2.2, 8], all="#gold")
+            m.box([7.75, top + 1.2, 7.3], [8.25, top + 1.7, 7.5], all="#ruby")
         m.write()
         last = m
     from blockmodels import write_blockstate as wb
     wb("treasure_hoard", {"variants": {f"level={l}": {"model": f"pixelpirates:block/treasure_hoard_{l}"} for l in range(8)}})
-    item_model("treasure_hoard", "pixelpirates:block/treasure_hoard_4")
+    item_model("treasure_hoard", "pixelpirates:block/treasure_hoard_5")
     return last
 
 
@@ -513,6 +536,26 @@ def ghost_swordfish_trophy(): return trophy("ghost_swordfish_trophy", bill=True)
 def coelacanth_trophy(): return trophy("coelacanth_trophy", spines=True)
 
 
+def mob_plaque(name):
+    """MOB TROPHY plaque (2026-10-01): just the board + brass rail + name plate; the creature itself is the mob's own
+    GeckoLib model drawn by MobTrophyRenderer."""
+    m = BM(name, {"wood": DO, "gold": "minecraft:block/gold_block", "trim": "minecraft:block/stripped_dark_oak_log", "particle": DO})
+    m.box([0.5, 1.5, 15], [15.5, 14.5, 16], all="#wood")                               # the plaque
+    m.box([0, 1, 15.3], [16, 2, 16], all="#trim")                                      # bevelled frame
+    m.box([0, 14, 15.3], [16, 15, 16], all="#trim")
+    m.box([0, 2, 15.3], [1, 14, 16], all="#trim")
+    m.box([15, 2, 15.3], [16, 14, 16], all="#trim")
+    m.box([5.5, 2.3, 14.7], [10.5, 3.6, 15], all="#gold")                              # name plate
+    m.write()
+    blockstate_facing(name)
+    item_model(name, f"pixelpirates:block/{name}")
+    return m
+
+
+for _n in ("shark_trophy", "reefback_trophy", "lava_crab_trophy", "ghost_shark_trophy", "angler_trophy", "abyss_eel_trophy"):
+    BUILT[_n] = (lambda n: (lambda: mob_plaque(n)))(_n)
+
+
 # =====================================================================================
 # #9 SALVAGE CRATE (the cargo crate, sea-worn)
 # =====================================================================================
@@ -567,22 +610,43 @@ def trading_post():
 # =====================================================================================
 @model
 def bounty_board():
+    """3 wide x 2 high (2026-10-01): drawn by the bottom-centre MASTER block, x -16..32 / y 0..32 (the element limits).
+    The other five parts use bounty_board_part (no elements). Blockstate: facing x part (BountyBoardBlock.PART)."""
     m = BM("bounty_board", {"post": "minecraft:block/spruce_log", "board": "minecraft:block/dark_oak_planks", "roof": "minecraft:block/spruce_planks",
-                            "wanted": "pixelpirates:block/wanted_poster", "notice": "pixelpirates:block/bounty_notice",
-                            "iron": "minecraft:block/iron_block", "particle": "minecraft:block/dark_oak_planks"})
-    m.box([0, 0, 7], [2, 16, 9], all="#post")
-    m.box([14, 0, 7], [16, 16, 9], all="#post")
-    m.box([2, 3, 7.5], [14, 15, 8.5], all="#board")
-    m.box([-0.5, 15.5, 6], [16.5, 16, 10], all="#roof")                         # little roof
-    m.box([2.5, 7, 7], [7.5, 14, 7.5], faces={"north": "#wanted", "south": "#wanted"}, uv={"north": [0, 0, 16, 16], "south": [0, 0, 16, 16]})
-    m.box([8.5, 8.5, 7.1], [13.5, 14, 7.5], faces={"north": "#notice"}, uv={"north": [0, 0, 16, 16]})
-    m.box([8, 3.5, 7.2], [12, 7.5, 7.5], faces={"north": "#wanted"}, uv={"north": [0, 0, 16, 16]})
-    m.box([3, 3.5, 7.2], [7, 6.5, 7.5], faces={"north": "#notice"}, uv={"north": [0, 0, 16, 16]})
-    for x, y in ((4.8, 13.5), (10.8, 13.5), (9.8, 7), (4.8, 6)):
-        m.box([x, y, 6.8], [x + 0.5, y + 0.5, 7.2], all="#iron")                  # tacks
+                            "trim": "minecraft:block/stripped_spruce_log", "wanted": "pixelpirates:block/wanted_poster",
+                            "notice": "pixelpirates:block/bounty_notice", "iron": "minecraft:block/iron_block",
+                            "particle": "minecraft:block/dark_oak_planks"})
+    m.box([-15.5, 0, 6.5], [-12.5, 30, 9.5], all="#post")                                   # two stout posts
+    m.box([28.5, 0, 6.5], [31.5, 30, 9.5], all="#post")
+    m.box([-12.5, 4, 7.5], [28.5, 27, 8.5], all="#board")                                   # the board
+    m.box([-13, 27, 7], [29, 28.5, 9], all="#trim")                                         # frame top / bottom
+    m.box([-13, 3, 7], [29, 4.5, 9], all="#trim")
+    m.box([-16, 29.5, 4.5], [32, 31, 11.5], all="#roof")                                    # roof
+    m.box([-14, 31, 6], [30, 32, 10], all="#roof")
+    # posters (front face = north)
+    posters = [(-11, 17, 6, 8, "wanted"), (-3.5, 18, 6, 7, "notice"), (3.5, 16, 7, 9, "wanted"), (12, 18.5, 6, 7, "wanted"),
+               (20, 17, 7, 8, "notice"), (-10, 6.5, 7, 8, "notice"), (-1.5, 6, 6, 8, "wanted"), (7, 7, 6, 7, "notice"),
+               (15, 6, 6, 8, "wanted"), (22, 7, 5, 7, "wanted")]
+    for k, (x, y, w, h, tex) in enumerate(posters):
+        z = 7.2 - (k % 3) * 0.05
+        m.box([x, y, z], [x + w, y + h, 7.5], faces={"north": "#" + tex}, uv={"north": [0, 0, 16, 16]})
+        m.box([x + w / 2 - 0.25, y + h - 1, z - 0.3], [x + w / 2 + 0.25, y + h - 0.5, z], all="#iron")       # tack
     m.write()
-    blockstate_facing("bounty_board")
-    item_model("bounty_board", "pixelpirates:block/bounty_board")
+    p = BM("bounty_board_part", {"particle": "minecraft:block/dark_oak_planks"})
+    p.write()
+    rot = {"north": 0, "east": 90, "south": 180, "west": 270}
+    v = {}
+    for f, r in rot.items():
+        for part in range(6):
+            model = "pixelpirates:block/bounty_board" if part == 1 else "pixelpirates:block/bounty_board_part"
+            v[f"facing={f},part={part}"] = {"model": model, "y": r} if r else {"model": model}
+    write_blockstate("bounty_board", {"variants": v})
+    (RES / "models/item/bounty_board.json").write_bytes(json.dumps({"parent": "pixelpirates:block/bounty_board", "display": {
+        "gui": {"rotation": [30, 225, 0], "translation": [0, -1.5, 0], "scale": [0.3, 0.3, 0.3]},
+        "ground": {"rotation": [0, 0, 0], "translation": [0, 3, 0], "scale": [0.18, 0.18, 0.18]},
+        "fixed": {"rotation": [0, 0, 0], "translation": [0, 0, 0], "scale": [0.3, 0.3, 0.3]},
+        "thirdperson_righthand": {"rotation": [75, 45, 0], "translation": [0, 2.5, 0], "scale": [0.2, 0.2, 0.2]},
+        "firstperson_righthand": {"rotation": [0, 45, 0], "translation": [0, 0, 0], "scale": [0.2, 0.2, 0.2]}}}, indent=1).encode("utf-8"))
     return m
 
 

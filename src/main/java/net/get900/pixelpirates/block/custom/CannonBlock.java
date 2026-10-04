@@ -60,6 +60,62 @@ public class CannonBlock extends HorizontalFacingBlock implements BlockEntityPro
         return (BlockEntityTicker<T>) (BlockEntityTicker<CannonBlockEntity>) CannonBlockEntity::serverTick;
     }
 
+    // ── Gun Crew upgrade ──────────────────────────────────────────────────────
+
+    /**
+     * GUN CREW (Shipwright upgrade "gun_crew"): loading a cannon on a ship also loads every empty cannon of the same
+     * block type that faces the same way (= the same broadside) - level I only on the same deck (same y), level II
+     * the whole side. Each extra cannon takes one more of the same shot from the player's inventory (creative: free);
+     * it stops when they run out. Returns how many extra cannons were loaded.
+     */
+    private int loadBroadside(ServerWorld world, BlockPos pos, BlockState state, PlayerEntity player, ItemStack held, int ammo) {
+        var ship = org.valkyrienskies.mod.api.ValkyrienSkies.getShipManagingBlock(world, pos.getX(), pos.getY(), pos.getZ());
+        if (ship == null || ship.getShipAABB() == null) return 0;
+        int level = net.get900.pixelpirates.world.ShipRegistryState.get(world.getServer().getOverworld()).getUpgradeLevel(ship.getId(), "gun_crew");
+        if (level <= 0) return 0;
+        var box = ship.getShipAABB();
+        Direction side = state.get(FACING);
+        net.minecraft.item.Item shotItem = held.isEmpty() ? shotItemOf(ammo) : held.getItem();
+        int loaded = 0;
+        BlockPos.Mutable p = new BlockPos.Mutable();
+        int y0 = level >= 2 ? box.minY() : pos.getY(), y1 = level >= 2 ? box.maxY() : pos.getY();
+        for (int y = y0; y <= y1; y++)
+            for (int x = box.minX(); x <= box.maxX(); x++)
+                for (int z = box.minZ(); z <= box.maxZ(); z++) {
+                    p.set(x, y, z);
+                    if (p.equals(pos)) continue;
+                    BlockState o = world.getBlockState(p);
+                    if (!o.isOf(this) || o.get(FACING) != side || o.get(LOADED)) continue;
+                    if (!(world.getBlockEntity(p) instanceof CannonBlockEntity obe)) continue;
+                    if (!player.isCreative() && !takeOne(player, shotItem)) {
+                        if (loaded > 0) player.sendMessage(Text.literal("§7Out of shot."), false);
+                        return loaded;
+                    }
+                    obe.setAmmo(ammo);
+                    world.setBlockState(p, o.with(LOADED, true));
+                    loaded++;
+                }
+        if (loaded > 0) world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, SoundCategory.BLOCKS, 1.0f, 0.7f);
+        return loaded;
+    }
+
+    private static net.minecraft.item.Item shotItemOf(int ammo) {
+        return switch (ammo) {
+            case net.get900.pixelpirates.homestead.ship.Shot.CHAIN -> net.get900.pixelpirates.homestead.HomesteadItems.CHAIN_SHOT;
+            case net.get900.pixelpirates.homestead.ship.Shot.GRAPE -> net.get900.pixelpirates.homestead.HomesteadItems.GRAPE_SHOT;
+            default -> ModItems.CANNON_BALL;
+        };
+    }
+
+    private static boolean takeOne(PlayerEntity player, net.minecraft.item.Item item) {
+        var inv = player.getInventory();
+        for (int i = 0; i < inv.size(); i++) {
+            ItemStack s = inv.getStack(i);
+            if (s.isOf(item)) { s.decrement(1); return true; }
+        }
+        return false;
+    }
+
     // ── Interaction ───────────────────────────────────────────────────────────
 
     @Override
@@ -76,7 +132,9 @@ public class CannonBlock extends HorizontalFacingBlock implements BlockEntityPro
                 be.setAmmo(ammo);
                 world.setBlockState(pos, state.with(LOADED, true));
                 world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_IRON, SoundCategory.BLOCKS, 1.0f, 0.8f);
-                player.sendMessage(Text.literal("§eLoaded" + net.get900.pixelpirates.homestead.ship.Shot.label(ammo) + "! Right-click again to charge."), true);
+                int more = loadBroadside((ServerWorld) world, pos, state, player, held, ammo);
+                player.sendMessage(Text.literal("§eLoaded" + (more > 0 ? " " + (more + 1) + " cannons" : "")
+                        + net.get900.pixelpirates.homestead.ship.Shot.label(ammo) + "! Right-click again to charge."), true);
             } else {
                 player.sendMessage(Text.literal("§7Hold a cannonball to load."), true);
             }

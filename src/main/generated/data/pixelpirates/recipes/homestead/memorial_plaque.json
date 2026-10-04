@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "pixelpirates:anchor_block"
+    },
+    "S": {
+      "item": "minecraft:polished_andesite"
+    }
+  },
+  "pattern": [
+    "SAS"
+  ],
+  "result": {
+    "item": "pixelpirates:memorial_plaque"
+  },
+  "show_notification": true
+}

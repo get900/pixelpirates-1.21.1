@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:broken_shackle"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_chained_revenant.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_chained_revenant.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_kraken",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "pixelpirates:raw_salted_swimmer"
+  },
+  "result": "pixelpirates:cooked_salted_swimmer"
+}

@@ -183,7 +183,8 @@ public class SirenEntity extends AquaticHostileEntity implements GeoEntity {
         super.dropLoot(source, causedByPlayer);
         int shards = this.random.nextInt(3);
         if (shards > 0) this.dropStack(new ItemStack(Items.PRISMARINE_SHARD, shards));
-        if (causedByPlayer && this.random.nextFloat() < 0.1f) this.dropStack(new ItemStack(Items.NAUTILUS_SHELL));
+        if (this.random.nextFloat() < 0.6f) this.dropStack(new ItemStack(net.get900.pixelpirates.item.ModItems.SIREN_SCALE, 1 + this.random.nextInt(2)));
+        if (causedByPlayer && this.random.nextFloat() < 0.05f) this.dropStack(new ItemStack(net.get900.pixelpirates.item.ModItems.SIREN_CONCH));   // her song, kept
     }
 
     @Override

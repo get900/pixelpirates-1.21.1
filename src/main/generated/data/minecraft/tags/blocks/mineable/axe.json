@@ -4,6 +4,7 @@
     "pixelpirates:hammock",
     "pixelpirates:ship_bedroll",
     "pixelpirates:shipwright_table",
+    "pixelpirates:rope_bollard",
     "pixelpirates:ghostwood_log",
     "pixelpirates:ghostwood_planks",
     "pixelpirates:ghost_mast",
@@ -79,6 +80,12 @@
     "pixelpirates:golden_marlin_trophy",
     "pixelpirates:ghost_swordfish_trophy",
     "pixelpirates:coelacanth_trophy",
+    "pixelpirates:shark_trophy",
+    "pixelpirates:reefback_trophy",
+    "pixelpirates:lava_crab_trophy",
+    "pixelpirates:ghost_shark_trophy",
+    "pixelpirates:angler_trophy",
+    "pixelpirates:abyss_eel_trophy",
     "pixelpirates:salvage_crate",
     "pixelpirates:trading_post",
     "pixelpirates:bounty_board",
@@ -89,6 +96,15 @@
     "pixelpirates:dread_skull_figurehead",
     "pixelpirates:navy_eagle_figurehead",
     "pixelpirates:jolly_roger_sail_canvas",
-    "pixelpirates:roulette_table"
+    "pixelpirates:roulette_table",
+    "pixelpirates:perch_branch",
+    "pixelpirates:parrot_roost",
+    "pixelpirates:weapon_rack",
+    "pixelpirates:bellows",
+    "pixelpirates:pattern_board",
+    "pixelpirates:wren_music_box",
+    "pixelpirates:tattoo_chair",
+    "pixelpirates:liars_dice_table",
+    "pixelpirates:crown_anchor_table"
   ]
 }

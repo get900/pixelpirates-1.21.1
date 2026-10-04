@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "pixelpirates:chili_pepper"
+    },
+    {
+      "item": "pixelpirates:brimstone"
+    },
+    {
+      "item": "pixelpirates:volcanic_ember"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:cinder_chili_sauce"
+  }
+}

@@ -201,6 +201,8 @@ public class MagmaBruteEntity extends HostileEntity implements GeoEntity {
         int cream = this.random.nextInt(3);
         if (cream > 0) this.dropStack(new ItemStack(Items.MAGMA_CREAM, cream));
         if (causedByPlayer && this.random.nextFloat() < 0.15f) this.dropStack(new ItemStack(Items.OBSIDIAN));
+        this.dropStack(new ItemStack(ModItems.BRIMSTONE, 1 + this.random.nextInt(2)));
+        if (this.random.nextFloat() < 0.3f) this.dropStack(new ItemStack(ModItems.OBSIDIAN_SHARD));
     }
 
     @Override

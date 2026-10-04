@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:ink_sac"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PIP"
+  ],
+  "result": {
+    "item": "pixelpirates:hymn_board"
+  },
+  "show_notification": true
+}

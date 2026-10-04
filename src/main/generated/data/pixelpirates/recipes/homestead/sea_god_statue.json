@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "minecraft:prismarine"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "pattern": [
+    "QGQ",
+    "QPQ",
+    "QQQ"
+  ],
+  "result": {
+    "item": "pixelpirates:sea_god_statue"
+  },
+  "show_notification": true
+}

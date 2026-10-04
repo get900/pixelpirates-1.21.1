@@ -75,6 +75,8 @@ public class FloatingBarrelEntity extends Entity {
                         if (captain != null) {
                             List<ItemStack> loot = generateLoot();
                             for (ItemStack stack : loot) captain.giveItemStack(stack);
+                            if (captain instanceof net.minecraft.server.network.ServerPlayerEntity sp)
+                                net.get900.pixelpirates.world.PirateXp.discovery(sp, net.get900.pixelpirates.world.PirateLevelingSystem.XP_BARREL_LOOT);
                             captain.sendMessage(
                                 Text.literal("§6Your ship scooped up a floating barrel!"), true);
                         }
@@ -121,8 +123,11 @@ public class FloatingBarrelEntity extends Entity {
     public ActionResult interact(PlayerEntity player, Hand hand) {
         if (this.getWorld().isClient) return ActionResult.SUCCESS;
         List<ItemStack> loot = generateLoot();
+        if (net.get900.pixelpirates.world.SkillEffects.doubleLoot(player, false)) loot.addAll(generateLoot());      // Treasure Hunter
         player.sendMessage(Text.literal("§6You rummage through the floating barrel..."), true);
         for (ItemStack stack : loot) player.giveItemStack(stack);
+        if (player instanceof net.minecraft.server.network.ServerPlayerEntity sp)
+            net.get900.pixelpirates.world.PirateXp.discovery(sp, net.get900.pixelpirates.world.PirateLevelingSystem.XP_BARREL_LOOT);
         this.discard();
         return ActionResult.SUCCESS;
     }

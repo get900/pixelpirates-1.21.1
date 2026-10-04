@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "pattern": [
+    " Q ",
+    "QGQ",
+    "QQQ"
+  ],
+  "result": {
+    "item": "pixelpirates:governor_statue"
+  },
+  "show_notification": true
+}

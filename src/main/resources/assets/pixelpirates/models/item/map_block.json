@@ -1,1 +1,3 @@
-﻿{"parent":"pixelpirates:block/map_block"}
+{
+ "parent": "pixelpirates:block/map_block"
+}

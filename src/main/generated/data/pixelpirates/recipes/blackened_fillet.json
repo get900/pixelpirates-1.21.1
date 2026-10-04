@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    [
+      {
+        "item": "pixelpirates:cooked_fish_fillet"
+      },
+      {
+        "item": "minecraft:cooked_cod"
+      },
+      {
+        "item": "minecraft:cooked_salmon"
+      }
+    ],
+    {
+      "item": "pixelpirates:chili_pepper"
+    },
+    {
+      "item": "pixelpirates:lime"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:blackened_fillet"
+  }
+}

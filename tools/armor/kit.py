@@ -12,6 +12,8 @@ Build the RIGHT-side part and `pair(...)` mirrors it onto the left bone (art fli
 """
 from __future__ import annotations
 
+import math
+
 import json
 import pathlib
 import random
@@ -187,6 +189,7 @@ class AR(Rig):
     def __init__(self, name, seed, tex=128):
         super().__init__(name, tex, tex, seed)
         self.rng = random.Random(seed * 7 + 3)
+        self.motion = []               # (bone, kind, phase) - every loose part gets its own bone + a sway (2026-09-30)
         b = self.bone
         b("bipedHead", [0, 24, 0]); b("armorHead", [0, 24, 0], "bipedHead")
         b("bipedBody", [0, 24, 0]); b("armorBody", [0, 24, 0], "bipedBody")
@@ -212,6 +215,41 @@ class AR(Rig):
     def boots(self, mat, art=None, h=6):
         return self.pair("armorRightBoot", "armorLeftBoot", [-5, 0, -3], [6, h, 6], mat, art=art)
 
+    # ------------------------------------------------------------------ animation (loose parts sway)
+    MOTION = {  # kind: (x amplitude, z amplitude, x bias) in degrees; one 3 s loop, per-part phase
+        "cape": (4.0, 1.5, 4.0),        # flutters out behind, never into the legs
+        "strand": (7.0, 5.0, 0.0),
+        "tentacle": (9.0, 7.0, 0.0),
+        "chain": (6.0, 4.0, 0.0),
+        "blade": (2.5, 0.0, 0.0),
+        "fringe": (4.0, 3.0, 0.0),      # short hat fringe
+        "skirt": (3.0, 1.5, 0.0),       # front/back skirt panels: no outward bias (it would swing into the legs)
+    }
+
+    def moving(self, parent, pivot, kind):
+        """A child bone of `parent` pivoting at `pivot` that sways in the armor's idle clip."""
+        name = f"{kind}{len(self.motion)}"
+        self.bone(name, [round(float(v), 3) for v in pivot], parent)
+        self.motion.append((name, kind, (len(self.motion) * 1.7) % (2 * math.pi)))
+        return name
+
+    def idle_anim(self, length=3.0, samples=16):
+        bones = {}
+        for name, kind, ph in self.motion:
+            ax, az, bias = self.MOTION[kind]
+            wave = 2 if kind == "blade" else 1
+            keys = {}
+            for i in range(samples + 1):
+                q = 2 * math.pi * i / samples
+                keys[f"{round(length * i / samples, 4)}"] = [round(bias + ax * math.sin(wave * q + ph), 3), 0,
+                                                             round(az * math.cos(q + ph * 1.3), 3)]
+            bones[name] = {"rotation": keys}
+        return {"idle": {"animation_length": length, "loop": True, "bones": bones}} if bones else {}
+
+    def hang(self, bone, origin, size, mat, pivot, kind="strand", **kw):
+        """A loose hanging cube (tail, tassel, flap) on its own swaying bone, pivoting at `pivot`."""
+        return self.cube(self.moving(bone, pivot, kind), origin, size, mat, pivot=pivot if kw.get("rot") else None, **kw)
+
     # ------------------------------------------------------------------ helpers
     def R(self, bone_r, origin, size, mat, **kw):
         """A cube on a right bone + its mirror on the matching left bone."""
@@ -235,7 +273,8 @@ class AR(Rig):
     def cape(self, bone, x0, x1, y_top, y_bot, z, mat, depth=4, seed=None):
         """A thin cloth panel (1 px) from y_top down to y_bot with a ragged hem."""
         size = [x1 - x0, y_top - y_bot, 1]
-        return self.cube(bone, [x0, y_bot, z], size, mat, art=self.rag(size, depth, seed=seed))
+        nb = self.moving(bone, [(x0 + x1) / 2, y_top, z], "cape")
+        return self.cube(nb, [x0, y_bot, z], size, mat, art=self.rag(size, depth, seed=seed))
 
     def strands(self, bone, x0, x1, y_top, z, mat, lengths, width=1, depth=1):
         """Hanging strands (kelp, tentacles, fringe, feathers) side by side from y_top downward."""
@@ -243,7 +282,8 @@ class AR(Rig):
         i = 0
         while x + width <= x1 + 1e-6:
             L = lengths[i % len(lengths)]
-            self.cube(bone, [x, y_top - L, z], [width, L, depth], mat)
+            nb = self.moving(bone, [x + width / 2, y_top, z + depth / 2], "strand")
+            self.cube(nb, [x, y_top - L, z], [width, L, depth], mat)
             x += width
             i += 1
 
@@ -279,7 +319,8 @@ class AR(Rig):
             w = width - k * 2
             b = bottom + k * 5
             size = [w, top - b, 1]
-            self.cube(bone, [-w / 2, b, 3.5 + k * 0.6], size, mat,
+            nb = self.moving(bone, [0, top, 3.5], "cape")
+            self.cube(nb, [-w / 2, b, 3.5 + k * 0.6], size, mat,
                       art=self.rag(size, depth - k, seed=None if seed is None else seed + k),
                       rot=[flare + k * 3, 0, 0], pivot=[0, top, 3.5])
 
@@ -290,12 +331,16 @@ class AR(Rig):
             o, size = [base[0] - width / 2, base[1], base[2] - 0.5], [width, length, 1]
         else:
             o, size = [base[0] - 0.5, base[1], base[2] - width / 2], [1, length, width]
-        return self.cube(bone, o, size, mat, rot=[rot[0], rot[1], -rot[2]], pivot=list(base))
+        nb = self.moving(bone, base, "blade") if length >= 4 else bone      # fins/feathers flex a little
+        return self.cube(nb, o, size, mat, rot=[rot[0], rot[1], -rot[2]], pivot=list(base))
 
     def chain(self, bone, p0, p1, mat, links=None):
         """A chain of alternating 1-px links from p0 to p1."""
         import math as _m
         n = links or max(2, int(_m.dist(p0, p1)))
+        # a chain that HANGS (ends lower than it starts) swings from its top; one strung across stays put
+        if p1[1] < p0[1] - 1:
+            bone = self.moving(bone, p0, "chain")
         for i in range(n + 1):
             t = i / n
             x, y, z = [p0[j] + (p1[j] - p0[j]) * t for j in range(3)]
@@ -319,6 +364,7 @@ class AR(Rig):
     def tentacle(self, bone, base, length, mat, tip_mat=None, rot=(0, 0, 0), width=2, sucker="#d8b8e0", skin="#4e2a62"):
         """A hanging tentacle: a thick upper part with suckers down the front and a thinner curling tip."""
         L1 = max(2, round(length * 0.6)); L2 = max(1, round(length * 0.4))
+        bone = self.moving(bone, base, "tentacle")
         suck = {"north": A(["TO", "TT", "OT", "TT"] * L1, T=skin, O=sucker)}
         self.cube(bone, [base[0] - width / 2, base[1] - L1, base[2] - width / 2], [width, L1, width], mat,
                   rot=list(rot), pivot=list(base), art=suck)
@@ -339,5 +385,6 @@ class AR(Rig):
             gimg.save(gpath)
         elif gpath.exists():
             gpath.unlink()                              # never ship an empty glowmask (GeckoLib throws - crash cause #8)
-        (an_dir / f"{self.name}.animation.json").write_text(json.dumps({"format_version": "1.8.0", "animations": {}}), encoding="utf-8")
+        (an_dir / f"{self.name}.animation.json").write_text(
+            json.dumps({"format_version": "1.8.0", "animations": self.idle_anim()}), encoding="utf-8")
         return self.tw, self.th

@@ -1,0 +1,42 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:red_snapper"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.gone_fishing.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.gone_fishing.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "pixelpirates:root",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:parrotfish",
+              "pixelpirates:red_snapper",
+              "pixelpirates:mahi_mahi",
+              "pixelpirates:lionfish",
+              "pixelpirates:moonfish",
+              "pixelpirates:emberfin",
+              "pixelpirates:lava_eel",
+              "pixelpirates:ghostfin",
+              "pixelpirates:bonefish",
+              "pixelpirates:anglerfry",
+              "pixelpirates:voidfin"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

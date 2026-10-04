@@ -151,7 +151,7 @@ public class AbyssalKingEntity extends ModBoss {
     // ------------------------------------------------------------------ sluices
     /** Can this player turn a sluice right now? Sends the reason when not. */
     public boolean acceptsSluice(PlayerEntity p) {
-        if (!BossProgression.eligible(p, chainIndex())) {
+        if (!fights(p)) {
             p.sendMessage(BossProgression.sealedMessage(p, chainIndex()), true);
             return false;
         }
@@ -367,7 +367,7 @@ public class AbyssalKingEntity extends ModBoss {
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if (source.getAttacker() instanceof PlayerEntity p && BossProgression.eligible(p, chainIndex())) {
+        if (source.getAttacker() instanceof PlayerEntity p && fights(p)) {
             if (resealTicks > 0) {
                 resealDamage += amount;
                 if (resealDamage >= 24f) interruptReseal(Text.literal("The King's hold on the tide breaks - he staggers!").formatted(Formatting.GOLD));

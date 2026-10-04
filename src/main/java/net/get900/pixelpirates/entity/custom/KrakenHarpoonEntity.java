@@ -48,6 +48,7 @@ public class KrakenHarpoonEntity extends ProjectileEntity implements GeoEntity {
     private double carried;
     private int ticks, pinned;
     private float damage = 8f;
+    private boolean playerShot, dropped;           // fired from the Krakenmaw Harpoon Gun (item/relic)
 
     public KrakenHarpoonEntity(EntityType<? extends ProjectileEntity> type, World world) {
         super(type, world);
@@ -62,6 +63,26 @@ public class KrakenHarpoonEntity extends ProjectileEntity implements GeoEntity {
         h.setVelocity(dir.normalize().multiply(SPEED));
         h.face(dir);
         return h;
+    }
+
+    /** The Krakenmaw Harpoon Gun: a player's harpoon - hits mobs (never players), bosses only take the damage (too big to
+     *  carry), and the harpoon drops back as an item when it's done. */
+    public static KrakenHarpoonEntity fired(World world, LivingEntity owner, float damage) {
+        Vec3d dir = owner.getRotationVec(1f);
+        KrakenHarpoonEntity h = spit(world, owner, owner.getEyePos().add(dir.multiply(1.2)).add(0, -0.2, 0), dir, damage);
+        h.playerShot = true;
+        h.setVelocity(dir.normalize().multiply(2.2));
+        return h;
+    }
+
+    @Override
+    public void remove(RemovalReason reason) {
+        if (playerShot && !dropped && !this.getWorld().isClient && reason == RemovalReason.DISCARDED) {
+            dropped = true;
+            this.getWorld().spawnEntity(new net.minecraft.entity.ItemEntity(this.getWorld(), getX(), getY(), getZ(),
+                    new net.minecraft.item.ItemStack(net.get900.pixelpirates.item.ModItems.HARPOON)));
+        }
+        super.remove(reason);
     }
 
     @Override
@@ -92,8 +113,9 @@ public class KrakenHarpoonEntity extends ProjectileEntity implements GeoEntity {
                 HitResult block = sw.raycast(new RaycastContext(from, to, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, this));
                 if (block.getType() != HitResult.Type.MISS) to = block.getPos();
                 EntityHitResult eh = ProjectileUtil.getEntityCollision(sw, this, from, to, this.getBoundingBox().stretch(v).expand(1.0),
-                        e -> e instanceof LivingEntity le && le.isAlive() && !(le instanceof ModMob) && e != getOwner() && !e.isSpectator()
-                                && !(e instanceof net.minecraft.entity.player.PlayerEntity p && p.isCreative()));
+                        e -> e instanceof LivingEntity le && le.isAlive() && e != getOwner() && !e.isSpectator()
+                                && (playerShot ? !(e instanceof net.minecraft.entity.player.PlayerEntity)
+                                               : !(le instanceof ModMob) && !(e instanceof net.minecraft.entity.player.PlayerEntity p && p.isCreative())));
                 if (eh != null && eh.getEntity() instanceof LivingEntity le) { impale(sw, le); return; }
                 if (block.getType() != HitResult.Type.MISS) { stick(sw, (BlockHitResult) block); return; }
                 this.setPosition(to);
@@ -123,6 +145,13 @@ public class KrakenHarpoonEntity extends ProjectileEntity implements GeoEntity {
     }
 
     private void impale(ServerWorld sw, LivingEntity le) {
+        if (playerShot && (le instanceof net.get900.pixelpirates.entity.mob.ModBoss || le.getWidth() > 2.2f
+                || le instanceof net.get900.pixelpirates.entity.mob.LeviathanSegmentEntity)) {     // too big to carry off
+            le.damage(this.getDamageSources().mobProjectile(this, getOwner() instanceof LivingEntity o ? o : null), damage);
+            sw.playSound(null, getBlockPos(), SoundEvents.ITEM_TRIDENT_HIT, SoundCategory.PLAYERS, 2.0f, 0.6f);
+            this.discard();
+            return;
+        }
         victim = le;
         state = State.CARRYING;
         carried = 0;
@@ -137,7 +166,7 @@ public class KrakenHarpoonEntity extends ProjectileEntity implements GeoEntity {
 
     private void pin(ServerWorld sw, BlockHitResult wall) {
         state = State.PINNED;
-        pinned = PIN_TICKS;
+        pinned = playerShot ? 60 : PIN_TICKS;
         this.setVelocity(Vec3d.ZERO);
         Vec3d back = getVelocityDir().multiply(-0.6);
         this.setPosition(wall.getPos().add(back));

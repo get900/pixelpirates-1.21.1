@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:abyssal_heartstone"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_abyssal_heart.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_abyssal_heart.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_chained_revenant",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

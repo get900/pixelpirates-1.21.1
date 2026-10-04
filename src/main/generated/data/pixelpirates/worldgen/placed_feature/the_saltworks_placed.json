@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:the_saltworks",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

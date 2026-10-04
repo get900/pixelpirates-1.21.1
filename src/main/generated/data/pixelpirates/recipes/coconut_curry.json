@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "pixelpirates:coconut"
+    },
+    {
+      "item": "pixelpirates:chili_pepper"
+    },
+    [
+      {
+        "item": "pixelpirates:cooked_fish_fillet"
+      },
+      {
+        "item": "minecraft:cooked_cod"
+      },
+      {
+        "item": "minecraft:cooked_salmon"
+      }
+    ],
+    {
+      "item": "minecraft:potato"
+    }
+  ],
+  "result": {
+    "item": "pixelpirates:coconut_curry"
+  }
+}

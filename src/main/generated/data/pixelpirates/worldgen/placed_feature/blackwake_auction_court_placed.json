@@ -1,0 +1,9 @@
+{
+  "feature": "pixelpirates:blackwake_auction_court",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    }
+  ]
+}

@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "ripe=true": {
       "model": "pixelpirates:block/banana_block"
+    },
+    "ripe=false": {
+      "model": "pixelpirates:block/banana_block_unripe"
     }
   }
 }

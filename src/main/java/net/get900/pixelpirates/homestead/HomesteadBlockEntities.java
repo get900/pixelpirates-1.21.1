@@ -18,6 +18,9 @@ public final class HomesteadBlockEntities {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(PixelPirates.MOD_ID, name), FabricBlockEntityTypeBuilder.create(f, blocks).build());
     }
 
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.trophy.MobTrophyBlockEntity> MOB_TROPHY = be("mob_trophy",
+            net.get900.pixelpirates.homestead.trophy.MobTrophyBlockEntity::new, HomesteadBlocks.SHARK_TROPHY, HomesteadBlocks.REEFBACK_TROPHY,
+            HomesteadBlocks.LAVA_CRAB_TROPHY, HomesteadBlocks.GHOST_SHARK_TROPHY, HomesteadBlocks.ANGLER_TROPHY, HomesteadBlocks.ABYSS_EEL_TROPHY);
     public static final BlockEntityType<RumStillBlockEntity> RUM_STILL = be("rum_still", RumStillBlockEntity::new, HomesteadBlocks.RUM_STILL);
     public static final BlockEntityType<AgingCaskBlockEntity> AGING_CASK = be("aging_cask", AgingCaskBlockEntity::new, HomesteadBlocks.AGING_CASK);
 
@@ -43,6 +46,17 @@ public final class HomesteadBlockEntities {
 
     public static final BlockEntityType<net.get900.pixelpirates.homestead.roulette.RouletteTableBlockEntity> ROULETTE_TABLE = be("roulette_table",
             net.get900.pixelpirates.homestead.roulette.RouletteTableBlockEntity::new, HomesteadBlocks.ROULETTE_TABLE);
+
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.tavern.LiarsDiceBlockEntity> LIARS_DICE = be("liars_dice_table",
+            net.get900.pixelpirates.homestead.tavern.LiarsDiceBlockEntity::new, HomesteadBlocks.LIARS_DICE_TABLE);
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.tavern.CrownAnchorBlockEntity> CROWN_ANCHOR = be("crown_anchor_table",
+            net.get900.pixelpirates.homestead.tavern.CrownAnchorBlockEntity::new, HomesteadBlocks.CROWN_ANCHOR_TABLE);
+
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.chapel.ChapelBlocks.BellRopeEntity> BELL_ROPE = be("bell_rope",
+            net.get900.pixelpirates.homestead.chapel.ChapelBlocks.BellRopeEntity::new, HomesteadBlocks.BELL_ROPE);
+
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.forge.ForgeAnvilBlockEntity> FORGE_ANVIL = be("forge_anvil",
+            net.get900.pixelpirates.homestead.forge.ForgeAnvilBlockEntity::new, HomesteadBlocks.FORGE_ANVIL);
 
     public static void init() {}
 }

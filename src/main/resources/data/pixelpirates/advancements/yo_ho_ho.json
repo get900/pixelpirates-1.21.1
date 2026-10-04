@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:vintage_rum"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.yo_ho_ho.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.yo_ho_ho.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:gone_fishing",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pixelpirates:vintage_rum"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

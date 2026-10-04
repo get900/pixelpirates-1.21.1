@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#c:ores",
+    "minecraft:sandstone",
+    "minecraft:red_sandstone",
+    "minecraft:calcite",
+    "minecraft:basalt",
+    "minecraft:smooth_basalt",
+    "minecraft:blackstone",
+    "minecraft:magma_block",
+    "minecraft:dripstone_block",
+    "minecraft:pointed_dripstone",
+    "minecraft:packed_ice",
+    "minecraft:ice",
+    "minecraft:snow_block",
+    "minecraft:moss_block",
+    "pixelpirates:tide_pool_rock",
+    "pixelpirates:pearl_block",
+    "pixelpirates:sulfur_block",
+    "pixelpirates:soul_barnacle",
+    "pixelpirates:abyssal_slate",
+    "pixelpirates:luminous_vein"
+  ]
+}

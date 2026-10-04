@@ -26,7 +26,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond",
+          "name": "pixelpirates:ectoplasm",
           "weight": 6,
           "functions": [
             {
@@ -56,18 +56,18 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:enchanted_book",
-          "weight": 8,
+          "name": "pixelpirates:cursed_bone",
+          "weight": 1,
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
             }
           ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:enchanted_golden_apple",
-          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -91,7 +91,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:totem_of_undying",
+          "name": "pixelpirates:lost_soul",
           "weight": 2
         }
       ]
@@ -102,8 +102,33 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond_block",
-          "weight": 1
+          "name": "pixelpirates:ectoplasm",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pixelpirates:rare_strongbox"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.2
         }
       ]
     }

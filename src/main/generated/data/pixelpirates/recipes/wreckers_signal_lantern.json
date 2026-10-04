@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "L": {
+      "item": "minecraft:lantern"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "GLG",
+    "CCC"
+  ],
+  "result": {
+    "item": "pixelpirates:wreckers_signal_lantern"
+  },
+  "show_notification": true
+}

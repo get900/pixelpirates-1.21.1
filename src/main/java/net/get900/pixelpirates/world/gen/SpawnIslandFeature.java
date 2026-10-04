@@ -56,6 +56,7 @@ public class SpawnIslandFeature extends Feature<DefaultFeatureConfig> {
                 for (int y = PortCityLayout.Y0; y <= PortCityLayout.Y1; y++) {
                     int id = PortCityLayout.get(x, y, z);
                     if (id == 0) continue;
+                    if (id > states.length) states = paletteStates();     // a capture grew the palette meanwhile
                     BlockState state = states[id - 1];
                     pos.set(x, y, z);
                     if (state.isAir()) {
@@ -72,6 +73,7 @@ public class SpawnIslandFeature extends Feature<DefaultFeatureConfig> {
                     if (loot != null) {
                         LootableContainerBlockEntity.setLootTable(world, world.getRandom(), pos, new Identifier(loot));
                     }
+                    IslandEdits.applyData(world, pos);
                 }
             }
         }
@@ -83,12 +85,42 @@ public class SpawnIslandFeature extends Feature<DefaultFeatureConfig> {
         return placedAny;
     }
 
-    /** Parses the layout's palette strings into block states once. */
-    private static BlockState[] paletteStates() {
+    /**
+     * Re-stamps a box of the layout into a LIVE world (/ppmarket rebuild): existing worlds keep the city they were
+     * generated with, so a redesigned district (the 2026-10-01 bazaar) only reaches them this way. Every planned cell
+     * in the box is written (air included), with listener-only updates. Returns the number of blocks changed.
+     */
+    public static int restamp(net.minecraft.server.world.ServerWorld world, int x1, int z1, int x2, int z2) {
+        PortCityLayout.ensureBuilt();
+        BlockState[] states = paletteStates();
+        BlockPos.Mutable pos = new BlockPos.Mutable();
+        int n = 0;
+        for (int x = Math.max(x1, PortCityLayout.X0); x <= Math.min(x2, PortCityLayout.X1); x++)
+            for (int z = Math.max(z1, PortCityLayout.Z0); z <= Math.min(z2, PortCityLayout.Z1); z++)
+                for (int y = PortCityLayout.Y0; y <= PortCityLayout.Y1; y++) {
+                    int id = PortCityLayout.get(x, y, z);
+                    if (id == 0) continue;
+                    if (id > states.length) states = paletteStates();     // a capture grew the palette meanwhile
+                    pos.set(x, y, z);
+                    BlockState state = states[id - 1];
+                    if (world.getBlockState(pos) != state) {
+                        world.setBlockState(pos, state, Block.NOTIFY_LISTENERS | Block.FORCE_STATE);
+                        n++;
+                    }
+                    IslandEdits.applyData(world, pos);                       // captured sign text, banner patterns, contents
+                }
+        return n;
+    }
+
+    /** Drop the parsed palette (an in-game capture can add new block states to it). */
+    static void refreshPalette() { paletteStates = null; }
+
+    /** Parses the layout's palette strings into block states once (again if the palette grew). */
+    static BlockState[] paletteStates() {
         BlockState[] states = paletteStates;
-        if (states != null) return states;
+        if (states != null && states.length == PortCityLayout.palette().size()) return states;
         synchronized (SpawnIslandFeature.class) {
-            if (paletteStates != null) return paletteStates;
+            if (paletteStates != null && paletteStates.length == PortCityLayout.palette().size()) return paletteStates;
             List<String> palette = PortCityLayout.palette();
             states = new BlockState[palette.size()];
             for (int i = 0; i < palette.size(); i++) {

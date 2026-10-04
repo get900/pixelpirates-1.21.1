@@ -19,15 +19,17 @@ import net.minecraft.item.ItemPlacementContext;
  */
 public class HangingRopeBlock extends Block {
     public static final BooleanProperty END = BooleanProperty.of("end");
+    /** Thrown down from a ROPE item (RopeItem): reels back in as rope when broken, drops nothing on its own. */
+    public static final BooleanProperty DEPLOYED = BooleanProperty.of("deployed");
     private static final VoxelShape SHAPE = Block.createCuboidShape(6.5, 0, 6.5, 9.5, 16, 9.5);
 
     public HangingRopeBlock(Settings s) {
         super(s);
-        setDefaultState(getStateManager().getDefaultState().with(END, true));
+        setDefaultState(getStateManager().getDefaultState().with(END, true).with(DEPLOYED, false));
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> b) { b.add(END); }
+    protected void appendProperties(StateManager.Builder<Block, BlockState> b) { b.add(END, DEPLOYED); }
 
     @Override
     public VoxelShape getOutlineShape(BlockState s, BlockView w, BlockPos p, ShapeContext c) { return SHAPE; }
@@ -45,7 +47,8 @@ public class HangingRopeBlock extends Block {
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState s, Direction d, BlockState n, WorldAccess w, BlockPos p, BlockPos np) {
-        if (d == Direction.UP && !canPlaceAt(s, w, p)) return net.minecraft.block.Blocks.AIR.getDefaultState();
+        // a thrown (DEPLOYED) line holds by its knot at the top, even hung over an edge; breaking it reels it in (RopeItem)
+        if (d == Direction.UP && !s.get(DEPLOYED) && !canPlaceAt(s, w, p)) return net.minecraft.block.Blocks.AIR.getDefaultState();
         if (d == Direction.DOWN) return s.with(END, !n.isOf(this));
         return s;
     }

@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "pixelpirates:royal_tide_sigil"
+    },
+    "title": {
+      "translate": "advancements.pixelpirates.boss_abyssal_king.title"
+    },
+    "description": {
+      "translate": "advancements.pixelpirates.boss_abyssal_king.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pixelpirates:boss_ghost_captain",
+  "criteria": {
+    "got_here": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "C": {
+      "item": "pixelpirates:coin"
+    },
+    "I": {
+      "item": "minecraft:ink_sac"
+    },
+    "P": {
+      "item": "minecraft:spruce_planks"
+    }
+  },
+  "pattern": [
+    "BCI",
+    "PPP",
+    "P P"
+  ],
+  "result": {
+    "item": "pixelpirates:dues_ledger"
+  },
+  "show_notification": true
+}

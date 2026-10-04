@@ -1,0 +1,187 @@
+{
+ "textures": {
+  "stone": "minecraft:block/smooth_stone",
+  "quartz": "minecraft:block/quartz_block_side",
+  "cloth": "pixelpirates:block/altar_cloth",
+  "linen": "minecraft:block/white_wool",
+  "red": "minecraft:block/red_wool",
+  "particle": "minecraft:block/quartz_block_side"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    2
+   ],
+   "to": [
+    16,
+    2,
+    14
+   ],
+   "faces": {
+    "north": {
+     "texture": "#stone"
+    },
+    "south": {
+     "texture": "#stone"
+    },
+    "east": {
+     "texture": "#stone"
+    },
+    "west": {
+     "texture": "#stone"
+    },
+    "up": {
+     "texture": "#stone"
+    },
+    "down": {
+     "texture": "#stone"
+    }
+   }
+  },
+  {
+   "from": [
+    1,
+    2,
+    3
+   ],
+   "to": [
+    15,
+    13,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#quartz"
+    },
+    "south": {
+     "texture": "#quartz"
+    },
+    "east": {
+     "texture": "#quartz"
+    },
+    "west": {
+     "texture": "#quartz"
+    },
+    "up": {
+     "texture": "#quartz"
+    },
+    "down": {
+     "texture": "#quartz"
+    }
+   }
+  },
+  {
+   "from": [
+    -0.2,
+    13,
+    1.8
+   ],
+   "to": [
+    16.2,
+    15,
+    14.2
+   ],
+   "faces": {
+    "north": {
+     "texture": "#cloth",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#linen",
+     "uv": [
+      15.8,
+      1,
+      16,
+      3
+     ]
+    },
+    "east": {
+     "texture": "#linen"
+    },
+    "west": {
+     "texture": "#linen"
+    },
+    "up": {
+     "texture": "#linen",
+     "uv": [
+      15.8,
+      1.8,
+      16,
+      14.2
+     ]
+    },
+    "down": {
+     "texture": "#linen",
+     "uv": [
+      15.8,
+      1.8000000000000007,
+      16,
+      14.2
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    -0.1,
+    6,
+    1.9
+   ],
+   "to": [
+    16.1,
+    13,
+    2.1
+   ],
+   "faces": {
+    "north": {
+     "texture": "#cloth",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    6,
+    15,
+    1.7
+   ],
+   "to": [
+    10,
+    15.2,
+    14.3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#red"
+    },
+    "south": {
+     "texture": "#red"
+    },
+    "east": {
+     "texture": "#red"
+    },
+    "west": {
+     "texture": "#red"
+    },
+    "up": {
+     "texture": "#red"
+    },
+    "down": {
+     "texture": "#red"
+    }
+   }
+  }
+ ]
+}

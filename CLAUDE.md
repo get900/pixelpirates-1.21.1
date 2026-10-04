@@ -106,12 +106,12 @@ a row in this table.
 
 **Current state (2026-10-03):** all 10 chain bosses overhauled; economy/materials/skills reworked; the spawn island is
 being overhauled building by building with the user (done #3-#20, ALL townhouses #21-#41 done, one character each - see `docs/spawn-island.md`; hand edits saved in game with `/ppisland capture`).
-2026-10-04 session (compiled + server-tested, NOT seen in a client; uncommitted): townhouses #29-#41, #42 THE NORTH WALL + GREAT NORTH GATE (+ the way up to the hills), #43 THE WAVEBREAK LIGHT (beacon beam), #44 THE GOVERNOR'S FORTRESS (star fort; its fort cannons fire on players with Iron Armada rep < 0), #45 THE WRECK OF THE MERRY WREN (easter egg: Captain Wren's music box, homestead/wreck/), THE FLEET (12 new faction ships + AI, zone ladders - `docs/ships.md`), SHIP LIVERIES (26 skins, the Shipwright's Livery tab, `world/livery/`), SHIP'S CATS (+ the Cattery Counter)
+2026-10-04 session (committed 070868a; most of it NOT clicked through in a client yet): townhouses #29-#41, #42 THE NORTH WALL + GREAT NORTH GATE (+ the way up to the hills), #43 THE WAVEBREAK LIGHT (beacon beam), #44 THE GOVERNOR'S FORTRESS (star fort; its fort cannons fire on players with Iron Armada rep < 0), #45 THE WRECK OF THE MERRY WREN (easter egg: Captain Wren's music box, homestead/wreck/), THE FLEET (12 new faction ships + AI, zone ladders - `docs/ships.md`), SHIP LIVERIES (26 skins, the Shipwright's Livery tab, `world/livery/`), SHIP'S CATS (+ the Cattery Counter)
 (`homestead/cat/`) + SHIPS IN BOTTLES + TATTOOS (cosmetic, the chair at #33) (`docs/gameplay-systems.md`), Tidewater Shrine + Smuggler's Grotto converted to layout
 JSON (`/ppstruct export`, `docs/structure-layouts.md`), `docs/structures.md` (what spawns where).
 2026-10-03 session (ALL compiled, NONE seen in a client yet - the user tests in game):
 - island hand edits committed (8cb918f) - **the push to GitHub is still the user's to do** (needs their sign-in);
-  everything below is UNCOMMITTED in the working tree.
+  the rest of that session was committed with 070868a.
 - Inn: INN_SIGN block (2 placed). Fence/wall/pane/bar CONNECTIONS: `world/gen/Connections` + `PortCityLayout.connectAll()`
   + the checker's CONNECT rule (`docs/spawn-island.md` build rule 9).
 - PARROTS phases 1-4 (`docs/parrot_ideas.md`): 15 types, glow, abilities (Ghost = possession), daily aviary restock with

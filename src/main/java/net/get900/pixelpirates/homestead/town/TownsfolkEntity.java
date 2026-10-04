@@ -65,7 +65,7 @@ import java.util.UUID;
  */
 public class TownsfolkEntity extends MerchantEntity implements GeoEntity {
     /** What they're doing - picks the animation, and which props the renderer shows. */
-    public enum Act { IDLE, WORK, SIT, DRINK, GAMBLE, CHESS_SIT, CHESS_STAND, PAINT, PRAY, SLEEP, ORGAN, PREACH, SWING, FIDDLE, DANCE, FISH }
+    public enum Act { IDLE, WORK, SIT, DRINK, GAMBLE, CHESS_SIT, CHESS_STAND, PAINT, PRAY, SLEEP, ORGAN, PREACH, SWING, FIDDLE, DANCE, FISH, DARTS }
 
     private static final TrackedData<String> FOLK = DataTracker.registerData(TownsfolkEntity.class, TrackedDataHandlerRegistry.STRING);
     private static final TrackedData<Integer> ACT = DataTracker.registerData(TownsfolkEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -507,7 +507,8 @@ public class TownsfolkEntity extends MerchantEntity implements GeoEntity {
                 .triggerableAnim("laugh", RawAnimation.begin().thenPlay("cheer"))
                 .triggerableAnim("cheer", RawAnimation.begin().thenPlay("cheer"))
                 .triggerableAnim("wave", RawAnimation.begin().thenPlay("wave"))
-                .triggerableAnim("flourish", RawAnimation.begin().thenPlay("flourish")));
+                .triggerableAnim("flourish", RawAnimation.begin().thenPlay("flourish"))
+                .triggerableAnim("throw", RawAnimation.begin().thenPlay("throw")));
     }
 
     @Override

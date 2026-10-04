@@ -62,7 +62,7 @@ public final class TownLife {
         Townsfolk.Phase phase;
         TownsfolkEntity.Act act = TownsfolkEntity.Act.IDLE;
         BlockPos stand;
-        BlockPos seat, bed, board, easel;
+        BlockPos seat, bed, board, easel, dartboard;
         Vec3d look;
         int side, wander;
         BlockPos wanderCentre;
@@ -168,6 +168,16 @@ public final class TownLife {
                         .then(CommandManager.argument("hobby", StringArgumentType.word())
                                 .suggests((c, b) -> { for (Townsfolk.Hobby h : Townsfolk.Hobby.values()) b.suggest(h.name().toLowerCase()); return b.buildFuture(); })
                                 .executes(c -> force(c.getSource(), StringArgumentType.getString(c, "id"), StringArgumentType.getString(c, "hobby"))))))
+                .then(CommandManager.literal("darts").then(CommandManager.argument("a", StringArgumentType.word())
+                        .suggests((c, b) -> { Townsfolk.ALL.keySet().forEach(b::suggest); return b.buildFuture(); })
+                        .then(CommandManager.argument("b", StringArgumentType.word())
+                                .suggests((c, b) -> { Townsfolk.ALL.keySet().forEach(b::suggest); return b.buildFuture(); })
+                                .executes(c -> {
+                                    String r = TownDarts.match(c.getSource().getWorld(), c.getSource().getPosition(),
+                                            StringArgumentType.getString(c, "a"), StringArgumentType.getString(c, "b"));
+                                    c.getSource().sendFeedback(() -> Text.literal(r), false);
+                                    return 1;
+                                }))))
                 .then(CommandManager.literal("service").executes(c -> {
                     ServerWorld w = c.getSource().getServer().getWorld(PortTraders.DIM);
                     if (w == null) return 0;
@@ -235,6 +245,8 @@ public final class TownLife {
         BlockPos home = home(w, f), work = new BlockPos(f.work()[0], f.work()[1], f.work()[2]);
         Challenge ch = CHALLENGES.get(f.id());
         if (ch != null) return challengePlan(w, phase, ch);
+        Plan darts = TownDarts.plan(w, e, phase);                              // at a dartboard (homestead/darts)
+        if (darts != null) return darts;
         if (mode != null && mode != TownEvents.Mode.NONE) {
             Plan p = eventPlan(w, e, f, phase, mode);
             if (p != null) return p;
@@ -287,7 +299,7 @@ public final class TownLife {
                     Plan p = switch (hs.get((start + i) % hs.size())) {
                         case DRINK -> TownEvents.musicNight(w) && e.getRandom().nextInt(3) == 0 ? dancePlan(w, phase, TownEvents.STAGE, 2, 4)
                                 : seatPlan(w, e, phase, TAVERN, TownsfolkEntity.Act.DRINK, null);
-                        case GAMBLE -> gamblePlan(w, e, phase);
+                        case GAMBLE -> { Plan q = TownDarts.leisure(w, e, phase); yield q != null ? q : gamblePlan(w, e, phase); }
                         case CHESS -> chessPlan(w, e, phase, null);
                         case PAINT -> { Plan q = null; for (int[] b : EASEL_BOXES) if (q == null) q = easelPlan(w, e, phase, b); yield q; }
                         case PRAY -> seatPlan(w, e, phase, CHAPEL, TownsfolkEntity.Act.PRAY, ALTAR);
@@ -508,7 +520,7 @@ public final class TownLife {
 
     private static final Map<String, Challenge> CHALLENGES = new HashMap<>();
 
-    static boolean challenged(TownsfolkEntity e) { return CHALLENGES.containsKey(e.folkId()); }
+    static boolean challenged(TownsfolkEntity e) { return CHALLENGES.containsKey(e.folkId()) || TownDarts.claimed(e.folkId()); }
 
     static boolean canChallenge(Townsfolk.Folk f) { return f.hobbies().contains(Townsfolk.Hobby.CHESS) || f.style() == Townsfolk.WorkStyle.CHESS; }
 
@@ -863,6 +875,13 @@ public final class TownLife {
         return null;
     }
 
+    /** The dartboards in the tavern and the inn (homestead/darts). */
+    static List<BlockPos> dartboards(ServerWorld w) {
+        List<BlockPos> out = new ArrayList<>(venue(w, "dartboards", TAVERN, s -> s.getBlock() instanceof net.get900.pixelpirates.homestead.darts.DartboardBlock));
+        out.addAll(venue(w, "dartboards_inn", INN_BOX, s -> s.getBlock() instanceof net.get900.pixelpirates.homestead.darts.DartboardBlock));
+        return out;
+    }
+
     /** A free easel: blank, or one a townsperson left (a player's work in progress is never touched). */
     private static Plan easelPlan(ServerWorld w, TownsfolkEntity e, Townsfolk.Phase phase, int[] box) {
         for (BlockPos p : venue(w, "easels" + Arrays.toString(box), box, s -> s.getBlock() instanceof EaselBlock && s.get(EaselBlock.HALF) == DoubleBlockHalf.LOWER)) {
@@ -955,12 +974,14 @@ public final class TownLife {
     static boolean stillValid(ServerWorld w, TownsfolkEntity e, Plan p) {
         if (p.seat != null && !(w.getBlockState(p.seat).getBlock() instanceof SeatBlock)) return false;
         if (p.easel != null && TownsfolkEntity.easel(w, p.easel) == null) return false;
+        if (p.dartboard != null && !TownDarts.claimed(e.folkId())) return false;      // the game is over
         return true;
     }
 
     /** Give up everything they hold: seats, places, easels, a waiting board or a game in progress. */
     static void release(ServerWorld w, TownsfolkEntity e) {
         String me = e.folkId();
+        if (e.plan != null && e.plan.dartboard != null) TownDarts.left(w, e);
         TAKEN.values().removeIf(me::equals);
         for (Iterator<Map.Entry<BlockPos, String>> it = WAITING.entrySet().iterator(); it.hasNext(); ) {
             var en = it.next();

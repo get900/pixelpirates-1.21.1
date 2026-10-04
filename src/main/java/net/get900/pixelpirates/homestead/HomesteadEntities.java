@@ -49,6 +49,11 @@ public final class HomesteadEntities {
             FabricEntityTypeBuilder.<net.get900.pixelpirates.homestead.town.SeagullEntity>create(SpawnGroup.MISC, net.get900.pixelpirates.homestead.town.SeagullEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeBlocks(80).build());
 
+    /** A thrown dart (homestead/darts/DartEntity). */
+    public static final EntityType<net.get900.pixelpirates.homestead.darts.DartEntity> DART = register("dart",
+            FabricEntityTypeBuilder.<net.get900.pixelpirates.homestead.darts.DartEntity>create(SpawnGroup.MISC, net.get900.pixelpirates.homestead.darts.DartEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.15f, 0.15f)).trackRangeBlocks(32).trackedUpdateRate(1).forceTrackedVelocityUpdates(true).build());
+
     public static void init() {
         net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(SEAGULL, net.get900.pixelpirates.homestead.town.SeagullEntity.attributes());
         net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(TOWNSFOLK, net.get900.pixelpirates.homestead.town.TownsfolkEntity.attributes());

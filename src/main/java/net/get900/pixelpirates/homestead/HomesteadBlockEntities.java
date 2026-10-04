@@ -23,6 +23,8 @@ public final class HomesteadBlockEntities {
             HomesteadBlocks.LAVA_CRAB_TROPHY, HomesteadBlocks.GHOST_SHARK_TROPHY, HomesteadBlocks.ANGLER_TROPHY, HomesteadBlocks.ABYSS_EEL_TROPHY);
     public static final BlockEntityType<net.get900.pixelpirates.homestead.art.EaselBlockEntity> EASEL = be("easel",
             net.get900.pixelpirates.homestead.art.EaselBlockEntity::new, HomesteadBlocks.EASEL);
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.darts.DartboardBlockEntity> DARTBOARD = be("dartboard",
+            net.get900.pixelpirates.homestead.darts.DartboardBlockEntity::new, HomesteadBlocks.DARTBOARD);
     public static final BlockEntityType<net.get900.pixelpirates.homestead.chess.ChessBoardEntity> CHESS = be("chess",
             net.get900.pixelpirates.homestead.chess.ChessBoardEntity::new, HomesteadBlocks.CHESS_TABLE, HomesteadBlocks.GIANT_CHESS);
     public static final BlockEntityType<net.get900.pixelpirates.homestead.swing.SwingBlockEntity> SWING = be("swing",

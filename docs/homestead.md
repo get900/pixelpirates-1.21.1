@@ -75,6 +75,26 @@ from `PixelPirates` after `registerModBlocks`, `client/HomesteadClient.init()`),
   server: a 3-regular and a 2-regular game run start -> bids -> calls -> reveals -> dice lost -> winner -> lobby, no
   exceptions. NOT verified in a client: both screens, joining/betting with real players, payouts, the decor models.
 
+## DARTS (2026-10-05) - `homestead/darts/` + `homestead/town/TownDarts`
+- DARTBOARD block (wall, `FurnitureBlock` facing; back plate + board, its face `Darts.FACE_DEPTH` 2.5 px out) and DART
+  item (3D model `models/item/dart.json`, tip +Z; `special()` so datagen leaves it alone). Recipes: board = dark oak +
+  black/red wool, 4 darts = iron nugget + stick + feather. Assets: `python tools/gen_darts_assets.py` (the 128px face is
+  drawn from the scoring geometry - keep `R_*`/`ORDER` in step with `Darts.java`). Placed in the Grog Barrel's den
+  (75,69,36 facing west) and the inn's games snug (-52,69,41 facing north) - `/ppisland restamp 7` / `8` in old worlds.
+- `Darts`: rings in board px (game-sized: bull 0.6, outer 1.3, treble 3.6-4.3, double 6.2-7.0), segments clockwise from
+  20 as the thrower sees them; `aim(left)` (finishing rules) + `scatter(skill)` for townsfolk.
+- `DartboardBlockEntity` runs 301 (exactly 0 wins, below 0 = bust, no double-out): use the board to start - a regular
+  (GAMBLE/DRINK hobby, drinking/gambling/sitting within 24) is recruited and walks to the oche (3 blocks out), else
+  practice; other players join by using it in the lobby; sneak+use to leave. Players' darts must be thrown from >= 2
+  blocks on their turn and come back after it. Dart calls on the action bar, 100+/180/bust/checkout in chat.
+- `DartEntity`: player darts fly with light gravity and stick in any block (no entity hits); townsfolk darts fly
+  straight to the scattered point. Both end in `landed()`. Free darts (no game) can be picked up.
+- Townsfolk: Act.DARTS + the "throw" clip (all 49 regenerated). Leisure GAMBLE: join a regular waiting at a board, or
+  (1 evening in 3) go and wait; skill per person (`TownDarts.SKILL`: Brannoc 0.9, Lazlo 0.85, Rufus 0.8...). Wins make
+  the news; playing them adds friendship. Test: `/pptown darts <a> <b>` (nearest board).
+- VERIFIED in a client 2026-10-05: Brannoc v Rufus played to a checkout (134 turn, a bust, the win), darts stuck the
+  right way round. NOT tested: a player throwing (aim/turns/darts handed back), the inn board, leisure pairing.
+
 ## THE WEATHERED CHRONICLE (2026-10-01) - the lore book (replaced the Captain's Logbook)
 
 Item `weathered_chronicle` (`item/custom/ChronicleItem`). Everyone gets one the first time they reach the PP dimension

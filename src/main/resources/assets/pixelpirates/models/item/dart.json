@@ -1,0 +1,282 @@
+{
+ "textures": {
+  "tip": "minecraft:block/iron_block",
+  "brass": "minecraft:block/gold_block",
+  "shaft": "minecraft:block/black_concrete",
+  "flight": "minecraft:block/red_wool",
+  "particle": "minecraft:block/gold_block"
+ },
+ "elements": [
+  {
+   "from": [
+    7.75,
+    7.75,
+    13
+   ],
+   "to": [
+    8.25,
+    8.25,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#tip"
+    },
+    "south": {
+     "texture": "#tip"
+    },
+    "east": {
+     "texture": "#tip"
+    },
+    "west": {
+     "texture": "#tip"
+    },
+    "up": {
+     "texture": "#tip"
+    },
+    "down": {
+     "texture": "#tip"
+    }
+   }
+  },
+  {
+   "from": [
+    7.5,
+    7.5,
+    9
+   ],
+   "to": [
+    8.5,
+    8.5,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#brass"
+    },
+    "south": {
+     "texture": "#brass"
+    },
+    "east": {
+     "texture": "#brass"
+    },
+    "west": {
+     "texture": "#brass"
+    },
+    "up": {
+     "texture": "#brass"
+    },
+    "down": {
+     "texture": "#brass"
+    }
+   }
+  },
+  {
+   "from": [
+    7.75,
+    7.75,
+    5
+   ],
+   "to": [
+    8.25,
+    8.25,
+    9
+   ],
+   "faces": {
+    "north": {
+     "texture": "#shaft"
+    },
+    "south": {
+     "texture": "#shaft"
+    },
+    "east": {
+     "texture": "#shaft"
+    },
+    "west": {
+     "texture": "#shaft"
+    },
+    "up": {
+     "texture": "#shaft"
+    },
+    "down": {
+     "texture": "#shaft"
+    }
+   }
+  },
+  {
+   "from": [
+    6.5,
+    8,
+    1
+   ],
+   "to": [
+    9.5,
+    8,
+    5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#flight"
+    },
+    "south": {
+     "texture": "#flight"
+    },
+    "east": {
+     "texture": "#flight"
+    },
+    "west": {
+     "texture": "#flight"
+    },
+    "up": {
+     "texture": "#flight"
+    },
+    "down": {
+     "texture": "#flight"
+    }
+   }
+  },
+  {
+   "from": [
+    8,
+    6.5,
+    1
+   ],
+   "to": [
+    8,
+    9.5,
+    5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#flight"
+    },
+    "south": {
+     "texture": "#flight"
+    },
+    "east": {
+     "texture": "#flight"
+    },
+    "west": {
+     "texture": "#flight"
+    },
+    "up": {
+     "texture": "#flight"
+    },
+    "down": {
+     "texture": "#flight"
+    }
+   }
+  }
+ ],
+ "display": {
+  "gui": {
+   "rotation": [
+    0,
+    90,
+    -45
+   ],
+   "scale": [
+    1.6,
+    1.6,
+    1.6
+   ]
+  },
+  "ground": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    2,
+    0
+   ],
+   "scale": [
+    0.6,
+    0.6,
+    0.6
+   ]
+  },
+  "fixed": {
+   "rotation": [
+    0,
+    90,
+    -45
+   ],
+   "scale": [
+    1.4,
+    1.4,
+    1.4
+   ]
+  },
+  "thirdperson_righthand": {
+   "rotation": [
+    -80,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    3,
+    1
+   ],
+   "scale": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  "thirdperson_lefthand": {
+   "rotation": [
+    -80,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    3,
+    1
+   ],
+   "scale": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    -10,
+    180,
+    0
+   ],
+   "translation": [
+    1,
+    4,
+    1
+   ],
+   "scale": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  "firstperson_lefthand": {
+   "rotation": [
+    -10,
+    180,
+    0
+   ],
+   "translation": [
+    1,
+    4,
+    1
+   ],
+   "scale": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  }
+ }
+}

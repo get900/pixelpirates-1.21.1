@@ -9637,7 +9637,7 @@ public final class PortCityLayout {
         set(73, g, 40, slabTop("dark_oak")); set(74, g, 40, slabTop("dark_oak"));
         set(73, g + 1, 40, id("pixelpirates:dice_cup[facing=north]")); set(74, g + 1, 40, id("minecraft:light_weighted_pressure_plate"));
         set(73, g, 41, stairs("dark_oak", "south")); set(74, g, 39, stairs("dark_oak", "north")); set(75, g, 40, stairs("dark_oak", "west"));
-        set(76, g + 1, 36, id("minecraft:target"));
+        set(75, g + 1, 36, id("pixelpirates:dartboard[facing=west]"));            // a playable board (homestead/darts) on the east wall
         set(75, g + 2, 34, wallBanner("yellow", "west")); set(75, g + 2, 38, wallBanner("green", "west"));
         for (int z = 22; z <= 43; z += 7) set(75, g + 2, z, wallSkull("west"));
         set(64, g, 43, id("pixelpirates:tavern_keg[facing=north,drink=0]")); set(65, g, 43, GROG_BARREL);
@@ -9706,7 +9706,7 @@ public final class PortCityLayout {
         for (int x = -52; x <= -51; x++) for (int z = 37; z <= 38; z++) { ip(x, g, z, slabTop("dark_oak")); ip(x, g + 1, z, carpet(((x + z) & 1) == 0 ? "black" : "white")); }
         ip(-53, g, 37, stairs("dark_oak", "west")); ip(-50, g, 38, stairs("dark_oak", "east"));
         ip(-55, g, 40, slabTop("spruce")); ip(-55, g + 1, 40, candle("red", 2)); ip(-56, g, 40, stairs("spruce", "west")); ip(-54, g, 40, stairs("spruce", "east"));
-        set(-52, g + 2, 42, id("minecraft:target"));
+        set(-52, g + 1, 41, id("pixelpirates:dartboard[facing=north]"));          // a playable board (homestead/darts) on the south wall
         ip(-49, g, 35, id("minecraft:jukebox")); ip(-49, g, 34, BOOKSHELF); ip(-49, g + 1, 34, BOOKSHELF);
         ip(-49, g, 41, BOOKSHELF); ip(-50, g, 41, BOOKSHELF);
         for (int x = -55; x <= -50; x++) for (int z = 35; z <= 39; z++) ip(x, g, z, carpet(x == -55 || x == -50 || z == 35 || z == 39 ? "green" : "lime"));

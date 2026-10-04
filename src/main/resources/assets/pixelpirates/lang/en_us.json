@@ -1101,5 +1101,8 @@
   "entity.pixelpirates.townsfolk": "Townsperson",
   "block.pixelpirates.street_lamp": "Street Lamp",
   "block.pixelpirates.chess_trophy": "The Commodore's Chess Trophy",
-  "entity.pixelpirates.seagull": "Seagull"
+  "entity.pixelpirates.seagull": "Seagull",
+  "block.pixelpirates.dartboard": "Dartboard",
+  "item.pixelpirates.dart": "Dart",
+  "entity.pixelpirates.dart": "Dart"
 }

@@ -36,6 +36,8 @@ public final class HomesteadItems {
     public static final Item RARE_STRONGBOX = item("rare_strongbox", new net.get900.pixelpirates.homestead.hoard.StrongboxItem(new Item.Settings().maxCount(16).rarity(net.minecraft.util.Rarity.UNCOMMON), 1));
     // PARROT TYPES (2026-10-03): a crate holding one parrot of a set type - treasure loot (homestead/parrot/ParrotCrateItem)
     public static final Item PARROT_CRATE = item("parrot_crate", new net.get900.pixelpirates.homestead.parrot.ParrotCrateItem(new Item.Settings().maxCount(1).rarity(net.minecraft.util.Rarity.RARE)));
+    // DARTS (2026-10-05): thrown at the dartboard (homestead/darts); a hand-made 3D model, so special() (no datagen model)
+    public static final Item DART = special("dart", new net.get900.pixelpirates.homestead.darts.DartItem(new Item.Settings().maxCount(16)));
     public static final Item LEGENDARY_STRONGBOX = item("legendary_strongbox", new net.get900.pixelpirates.homestead.hoard.StrongboxItem(new Item.Settings().maxCount(16).rarity(net.minecraft.util.Rarity.RARE), 2));
 
     static <T extends Item> T tool(String name, T item) {

@@ -1,0 +1,77 @@
+{
+ "textures": {
+  "wood": "minecraft:block/dark_oak_planks",
+  "face": "pixelpirates:block/dartboard_face",
+  "rim": "pixelpirates:block/dartboard_rim",
+  "particle": "pixelpirates:block/dartboard_face"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    15
+   ],
+   "to": [
+    16,
+    16,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#wood"
+    },
+    "south": {
+     "texture": "#wood"
+    },
+    "east": {
+     "texture": "#wood"
+    },
+    "west": {
+     "texture": "#wood"
+    },
+    "up": {
+     "texture": "#wood"
+    },
+    "down": {
+     "texture": "#wood"
+    }
+   }
+  },
+  {
+   "from": [
+    0.5,
+    0.5,
+    13.5
+   ],
+   "to": [
+    15.5,
+    15.5,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#face",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#rim"
+    },
+    "west": {
+     "texture": "#rim"
+    },
+    "up": {
+     "texture": "#rim"
+    },
+    "down": {
+     "texture": "#rim"
+    }
+   }
+  }
+ ]
+}

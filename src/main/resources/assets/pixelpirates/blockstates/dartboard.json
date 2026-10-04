@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/dartboard"
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/dartboard",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/dartboard",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/dartboard",
+   "y": 270
+  }
+ }
+}

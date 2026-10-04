@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "  I",
+    " S ",
+    "F  "
+  ],
+  "result": {
+    "count": 4,
+    "item": "pixelpirates:dart"
+  },
+  "show_notification": true
+}

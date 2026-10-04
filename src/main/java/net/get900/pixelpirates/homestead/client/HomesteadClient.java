@@ -33,7 +33,8 @@ public final class HomesteadClient {
         // the harbour gulls; the festival fireworks (harmless client-side bursts - homestead/town/TownEvents)
         net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(net.get900.pixelpirates.homestead.HomesteadEntities.SEAGULL,
                 ctx -> new software.bernie.geckolib.renderer.GeoEntityRenderer<>(ctx, new net.get900.pixelpirates.entity.client.NamedGeoModel<>("seagull")));
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), HomesteadBlocks.STREET_LAMP);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), HomesteadBlocks.STREET_LAMP, HomesteadBlocks.DARTBOARD);
+        net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(net.get900.pixelpirates.homestead.HomesteadEntities.DART, DartRenderer::new);
         net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.registerGlobalReceiver(net.get900.pixelpirates.homestead.town.TownEvents.FX, (client, handler, buf, sender) -> {
             double x = buf.readDouble(), y = buf.readDouble(), z = buf.readDouble();
             int seed = buf.readVarInt();

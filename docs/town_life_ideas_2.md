@@ -29,7 +29,7 @@ Everything from part 1 that you said yes to is BUILT (see the list at the end). 
 - [Yes] **The Chess League**: a ranking board on the Chess Green - every townsperson and player who plays has a rating;
       a monthly tournament with a champion.
 - [No] **Arm-wrestling with Brannoc**: a quick timing mini-game at a tavern table; beat him for bragging rights.
-- [Yes] **Darts**: the tavern's dartboard becomes playable (throw darts at it, the regulars keep score) and regulars can play against eachother.
+- [Yes - BUILT 2026-10-05, see docs/homestead.md "DARTS"] **Darts**: the tavern's dartboard becomes playable (throw darts at it, the regulars keep score) and regulars can play against eachother.
 - [No] **A new card game**: e.g. "Pirate's Gambit" at the den's card table, against the regulars.
 - [No] **Puppet show**: Gideon puts on a puppet show in the park for the children (and anyone watching).
 

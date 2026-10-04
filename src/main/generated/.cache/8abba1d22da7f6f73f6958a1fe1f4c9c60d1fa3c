@@ -1,4 +1,4 @@
-// 1.20.1	2026-10-04T23:52:27.2085673	Pixel Pirates/Homestead Block Loot
+// 1.20.1	2026-10-05T10:38:33.4635192	Pixel Pirates/Homestead Block Loot
 cd6c0254d445db45e3901cad95db8e4812cd3992 data\pixelpirates\loot_tables\blocks\lime_crop.json
 a601cd15b35bc8a006b19c75bc12b090cea9de04 data\pixelpirates\loot_tables\blocks\treasure_pedestal.json
 61c5be95bc7594d686a39c6fb586595ad402502f data\pixelpirates\loot_tables\blocks\chili_crop.json
@@ -20,6 +20,7 @@ da1376ef67d0f9549f9b0dcfb79fa08a0d525721 data\pixelpirates\loot_tables\blocks\tr
 1afc5dd422d06194260f2d4a22a4e3b51ab5e1f4 data\pixelpirates\loot_tables\blocks\barber_chair.json
 91d695856faa491abf530a31290f244b66aabe8f data\pixelpirates\loot_tables\blocks\aging_cask.json
 f6c29a6694b46a18cbda14817f5de345b487b8d5 data\pixelpirates\loot_tables\blocks\pineapple_crop.json
+bc2d0b85b43d751b6aaf41d9ebfaa10e2452069b data\pixelpirates\loot_tables\blocks\dartboard.json
 5ac537a75d2028823f79dee4290f859335114f09 data\pixelpirates\loot_tables\blocks\pattern_board.json
 29943213ae6bbaaf1eca8627e3e39b1909688d3b data\pixelpirates\loot_tables\blocks\thatch.json
 9a726a67de75c4e431fc6883692cec283f1fd342 data\pixelpirates\loot_tables\blocks\shark_trophy.json
@@ -114,8 +115,8 @@ af25d2c35aade1b34be1731934b580ee5134406a data\pixelpirates\loot_tables\blocks\ch
 1d3e3b147aef313b92e2e045d6008f4c00ec84a2 data\pixelpirates\loot_tables\blocks\forge_anvil.json
 730da703e2ef3fa8f0cfa0870fdc9c2df383c579 data\pixelpirates\loot_tables\blocks\wanted_poster.json
 e9e947081a184202bfe2382baa3862823005bbf6 data\pixelpirates\loot_tables\blocks\driftwood_fence_gate.json
-f7c2ca4c5d85d648eb35f884261ce4fd4efb5e3f data\pixelpirates\loot_tables\blocks\dues_ledger.json
 e1462a9f42e823e602f65e650a382f4a24b994cf data\pixelpirates\loot_tables\blocks\chess_table.json
+f7c2ca4c5d85d648eb35f884261ce4fd4efb5e3f data\pixelpirates\loot_tables\blocks\dues_ledger.json
 7a10d549e0bf73b34bf81eaf0914e74e45fbe389 data\pixelpirates\loot_tables\blocks\sea_god_statue.json
 ccdf9f6e7ea6bf18c8ef049d8f25988829b58186 data\pixelpirates\loot_tables\blocks\display_cannon.json
 2e7fc81b422c3083d20da2cc009724344e338cc4 data\pixelpirates\loot_tables\blocks\crown_anchor_table.json

@@ -261,6 +261,8 @@ public final class HomesteadBlocks {
     /** The Commodore's chess trophy: beat Commodore Pettigrew at chess (homestead/town). */
     // DARTS (2026-10-05): a wall board with a game of 301 in it (homestead/darts)
     public static final Block DARTBOARD = block("dartboard", new net.get900.pixelpirates.homestead.darts.DartboardBlock(wood().strength(1.0f)), true);
+    // THE CHESS LEAGUE (2026-10-05): the standings + tournament sign-up, on the Chess Green (homestead/town/ChessLeague)
+    public static final Block LEAGUE_BOARD = block("league_board", new net.get900.pixelpirates.homestead.chess.LeagueBoardBlock(wood().strength(1.0f)), true);
     public static final Block CHESS_TROPHY = block("chess_trophy", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(stoneDecor().sounds(BlockSoundGroup.METAL), false, b(4, 0, 4, 12, 16, 12)), true);
     public static final Block CHESS_TABLE = block("chess_table", new net.get900.pixelpirates.homestead.chess.ChessTableBlock(wood().strength(1.5f)), true);
     public static final Block GIANT_CHESS = block("giant_chess", new net.get900.pixelpirates.homestead.chess.GiantChessBlock(

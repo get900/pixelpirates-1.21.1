@@ -26,7 +26,7 @@ Everything from part 1 that you said yes to is BUILT (see the list at the end). 
 - [No] **Hourly bells**: the chapel bell strikes the hour across the town.
 
 ## Games + competitions
-- [Yes] **The Chess League**: a ranking board on the Chess Green - every townsperson and player who plays has a rating;
+- [Yes - BUILT 2026-10-05, see docs/townsfolk.md "The Chess League"] **The Chess League**: a ranking board on the Chess Green - every townsperson and player who plays has a rating;
       a monthly tournament with a champion.
 - [No] **Arm-wrestling with Brannoc**: a quick timing mini-game at a tavern table; beat him for bragging rights.
 - [Yes - BUILT 2026-10-05, see docs/homestead.md "DARTS"] **Darts**: the tavern's dartboard becomes playable (throw darts at it, the regulars keep score) and regulars can play against eachother.

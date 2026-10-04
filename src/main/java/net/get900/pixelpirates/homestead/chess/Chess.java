@@ -192,6 +192,7 @@ public final class Chess {
         };
         announce(w, be, r);
         w.playSound(null, be.getPos(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundCategory.BLOCKS, 0.6f, 1f);
+        net.get900.pixelpirates.homestead.town.ChessLeague.gameOver(w, be);   // ratings + the tournament
     }
 
     private static void announce(ServerWorld w, ChessBoardEntity be, String s) {

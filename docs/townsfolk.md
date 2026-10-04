@@ -60,6 +60,28 @@ x100/102) and the Green (pedestal -30,79,-118, stands -31/-20,79,-114); swings i
   marco (market days only - TownEvents.present).
 - Test: `/pptown event festival|wedding|memorial|party`, `/pptown friend <id>`.
 
+## The big-events calendar (2026-10-05) - `TownCalendar`
+Market (d%7==3), festival (d%8==5) and weddings (d%12==6) stay put. Every EVEN day free of those is a big-event day, and
+the five big events take them in turn: CHESS_TOURNAMENT, FISHING_CONTEST, HARVEST_FESTIVAL, GOVERNORS_BALL, REGATTA -
+each every 12-16 days (avg 14), never two on one day (the user's "spread out"). `daysUntil()` for boards/the crier.
+
+## The Chess League (2026-10-05) - `ChessLeague`
+- Every rated game moves both Elo ratings (K 32) - hooked at the one place every chess game ends (`Chess.moved`), so
+  player v player, player v townsperson and townsfolk games all count; the computer is unrated. Townsfolk seed at
+  950/1150 by chess level (+-40 by name), players at 1000. PersistentState `pixelpirates_chess_league`.
+- LEAGUE_BOARD on the Chess Green (-31,y+1,-112 facing east; `gen_chess_assets.py league_board()`): use = standings
+  (top 10 + you, the champion starred, days to the next tournament); sneak + use (empty hand) = sign up / withdraw.
+- THE TOURNAMENT (calendar day, from 12500): 4 entrants - signed-up players online (max 2, by rating) + the best-rated
+  townsfolk who play chess; seeds 1v4 on the giant board, 2v3 at the toymaker's table (a missing/unloaded board -> that
+  game waits for the giant board), final on the giant board. Players always take white v townsfolk; 2.5 min to sit or
+  forfeit (getting up = forfeit); draw -> higher seed; townsfolk games over 7.5 min or past 17500 adjudicated by
+  rating. Champion in the news + on the board; a player champion gets 30 coins, runner-up 10.
+  Townsfolk in a game keep playing past bedtime (`ChessLeague.plan` comes first in `TownLife.plan`).
+- Test: `/pptown league start|stop`. VERIFIED in a client 2026-10-05 (the refreshed test world): Ptolemy beat Aldous,
+  Pettigrew beat Gideon (both semis at once), Ptolemy won the final - all real games. NOT tested: a player entrant.
+- The test world `run/saves/ppshot` was a copy from 2026-10-04 with an old island; it was restamped (`/ppisland restamp
+  all`) on 2026-10-05 - restamp it again after island changes before testing there.
+
 ## Fort security (2026-10-05)
 - New guards (models `tools/mobs/townsfolk.py`, Governor's Guard in Armada blue via `soldier(coat=GUARD_BLUE)`):
   pell + quayle (the Residence gate sentry boxes 25/35,71,-51), crane (the guardroom duty desk 22,71,-67), ruddock

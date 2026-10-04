@@ -1,4 +1,4 @@
-// 1.20.1	2026-10-05T10:38:33.441196	Pixel Pirates/Homestead Recipes
+// 1.20.1	2026-10-05T10:53:42.9442066	Pixel Pirates/Homestead Recipes
 fc7e39ead41d39a870421a4f4c559429fd6229ad data\pixelpirates\advancements\recipes\decorations\homestead\forge_hearth.json
 397d3e5374fdbdb22c164bec57cb0846f6c9f570 data\pixelpirates\recipes\homestead\tropical_fruit_salad.json
 2cb0e92914db4868d0cb7da988963b5103952458 data\pixelpirates\advancements\recipes\decorations\homestead\kraken_axe.json
@@ -14,9 +14,9 @@ d29fa5687270e374c7a6eb8eba5a214d8eadd8c2 data\pixelpirates\recipes\homestead\han
 c54722b440a2ae8ece6ef63693b43f88682c5104 data\pixelpirates\advancements\recipes\decorations\homestead\lion_statue.json
 418e05de0c5bb6cb43493ce923e8340701155e3d data\pixelpirates\advancements\recipes\decorations\homestead\giant_chess.json
 23b0e9847b229d6e2f7f47a3514d07d945772f21 data\pixelpirates\advancements\recipes\decorations\homestead\telescope.json
+cc8c414877c1475e7777e1ea054c8d83d4913f0e data\pixelpirates\recipes\homestead\dartboard.json
 7076a9d9c02f71d5f9d01e0375ccb3fc71f04614 data\pixelpirates\recipes\homestead\ship_in_bottle_galleon.json
 24cfae305f838e2164f1da50a081825c06b0d75d data\pixelpirates\recipes\homestead\mermaid_figurehead.json
-cc8c414877c1475e7777e1ea054c8d83d4913f0e data\pixelpirates\recipes\homestead\dartboard.json
 0206f1773cf674a39445b6e28710b53656617681 data\pixelpirates\recipes\homestead\mooring_post.json
 a83401f6f01d613409133c55147590dfcf8cedfe data\pixelpirates\recipes\homestead\smithy_sign.json
 50819f9183fc933f0b1dabb7e5335944d9b43a33 data\pixelpirates\advancements\recipes\decorations\homestead\tiki_torch.json

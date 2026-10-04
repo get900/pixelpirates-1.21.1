@@ -114,13 +114,49 @@ def pedestal():
     return m
 
 
-LANG = {"block.pixelpirates.chess_table": "Chess Table", "block.pixelpirates.giant_chess": "Giant Chess Set"}
+def league_board():
+    """THE CHESS LEAGUE board (2026-10-05): two posts and a notice panel - a chequered header over the standings."""
+    img = Image.new("RGBA", (32, 32), (226, 210, 168, 255))
+    r = random.Random(7)
+    for y in range(32):
+        for x in range(32):
+            c = img.getpixel((x, y))
+            n = r.randint(-8, 6)
+            img.putpixel((x, y), (c[0] + n, c[1] + n, c[2] + n, 255))
+    for y in range(2, 8):                                                   # the header: a strip of chessboard
+        for x in range(2, 30):
+            img.putpixel((x, y), (30, 26, 24, 255) if ((x - 2) // 3 + (y - 2) // 3) % 2 else (236, 228, 206, 255))
+    for i, y in enumerate(range(11, 30, 3)):                               # the standings: name ... rating
+        ink = (150, 30, 30, 255) if i == 0 else (60, 44, 30, 255)
+        for x in range(3, 3 + 12 + r.randint(0, 6)): img.putpixel((x, y), ink)
+        for x in range(24, 29): img.putpixel((x, y), ink)
+    for x in range(32):
+        for y in (0, 31): img.putpixel((x, y), (84, 56, 32, 255))
+    for y in range(32):
+        for x in (0, 31): img.putpixel((x, y), (84, 56, 32, 255))
+    save(img, "block/league_board.png")
+    m = BM("league_board", {"post": "minecraft:block/dark_oak_log", "wood": "minecraft:block/dark_oak_planks",
+                            "panel": "pixelpirates:block/league_board", "particle": "minecraft:block/dark_oak_planks"})
+    m.box([1, 0, 7], [3, 16, 9], all="#post"); m.box([13, 0, 7], [15, 16, 9], all="#post")
+    m.box([0, 5, 7.5], [16, 15, 8.5], faces={"north": "#panel", "south": "#wood", "east": "#wood", "west": "#wood", "up": "#wood", "down": "#wood"},
+          uv={"north": [0, 0, 16, 16]})
+    m.box([0, 15, 7], [16, 16, 9], all="#wood")                             # a little roof rail
+    m.write()
+    write_blockstate("league_board", {"variants": {f"facing={f}": ({"model": "pixelpirates:block/league_board", "y": r} if r else
+                                                                  {"model": "pixelpirates:block/league_board"}) for f, r in ROT.items()}})
+    item_model("league_board", "pixelpirates:block/league_board")
+    return m
+
+
+LANG = {"block.pixelpirates.chess_table": "Chess Table", "block.pixelpirates.giant_chess": "Giant Chess Set",
+        "block.pixelpirates.league_board": "Chess League Board"}
 
 if __name__ == "__main__":
     PREV.mkdir(parents=True, exist_ok=True)
     textures(); icons()
     table().preview(PREV / "chess_table.png", size=256)
     pedestal().preview(PREV / "giant_chess.png", size=256)
+    league_board().preview(PREV / "league_board.png", size=256)
     p = RES / "lang/en_us.json"
     d = json.loads(p.read_text(encoding="utf-8")); d.update(LANG)
     p.write_bytes(json.dumps(d, indent=2, ensure_ascii=False).encode("utf-8"))

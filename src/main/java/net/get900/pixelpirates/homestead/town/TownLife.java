@@ -115,6 +115,7 @@ public final class TownLife {
             gulls(w);
             watchChallenges(w);
             Garrison.tick(w);
+            ChessLeague.tick(w);
         });
         // a captain lost at sea: their name on the memorial roll + a memorial service in the chapel next morning
         net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
@@ -178,6 +179,9 @@ public final class TownLife {
                                     c.getSource().sendFeedback(() -> Text.literal(r), false);
                                     return 1;
                                 }))))
+                .then(CommandManager.literal("league")
+                        .then(CommandManager.literal("start").executes(c -> { String r = ChessLeague.start(c.getSource().getWorld()); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }))
+                        .then(CommandManager.literal("stop").executes(c -> { String r = ChessLeague.stop(c.getSource().getWorld()); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; })))
                 .then(CommandManager.literal("service").executes(c -> {
                     ServerWorld w = c.getSource().getServer().getWorld(PortTraders.DIM);
                     if (w == null) return 0;
@@ -243,6 +247,8 @@ public final class TownLife {
     // ------------------------------------------------------------------ plans
     static Plan plan(ServerWorld w, TownsfolkEntity e, Townsfolk.Folk f, Townsfolk.Phase phase, TownEvents.Mode mode) {
         BlockPos home = home(w, f), work = new BlockPos(f.work()[0], f.work()[1], f.work()[2]);
+        Plan league = ChessLeague.plan(w, f.id(), phase);                       // a tournament game (even past bedtime)
+        if (league != null) return league;
         Challenge ch = CHALLENGES.get(f.id());
         if (ch != null) return challengePlan(w, phase, ch);
         Plan darts = TownDarts.plan(w, e, phase);                              // at a dartboard (homestead/darts)
@@ -520,7 +526,9 @@ public final class TownLife {
 
     private static final Map<String, Challenge> CHALLENGES = new HashMap<>();
 
-    static boolean challenged(TownsfolkEntity e) { return CHALLENGES.containsKey(e.folkId()) || TownDarts.claimed(e.folkId()); }
+    static boolean challenged(TownsfolkEntity e) {
+        return CHALLENGES.containsKey(e.folkId()) || TownDarts.claimed(e.folkId()) || ChessLeague.playing(e.folkId());
+    }
 
     static boolean canChallenge(Townsfolk.Folk f) { return f.hobbies().contains(Townsfolk.Hobby.CHESS) || f.style() == Townsfolk.WorkStyle.CHESS; }
 
@@ -930,6 +938,23 @@ public final class TownLife {
     }
 
     static boolean waitingAt(BlockPos board, String id) { return id.equals(WAITING.get(board)); }
+
+    // ---- for the Chess League (ChessLeague): the two boards, and sitting someone at one for a tournament game
+    static final int TABLE = 0, GREEN = 1;
+
+    static BlockPos boardPos(int idx) { return BOARDS.get(idx).pos; }
+
+    static int chessLevel(String id) { return level(id); }
+
+    static Plan seatAt(ServerWorld w, Townsfolk.Phase phase, int idx, int side) {
+        Board b = BOARDS.get(idx);
+        BlockPos place = side == 0 ? b.white : b.black;
+        Plan p = new Plan(phase, standNear(w, place, 2));
+        p.board = b.pos; p.side = side; p.look = b.centre; p.challenge = true;
+        p.act = b.sit ? TownsfolkEntity.Act.CHESS_SIT : TownsfolkEntity.Act.CHESS_STAND;
+        if (b.sit) p.seat = place;
+        return p;
+    }
 
     /** Nobody came: after a minute the one waiting plays the computer instead. */
     private static void chessTimeouts(ServerWorld w) {

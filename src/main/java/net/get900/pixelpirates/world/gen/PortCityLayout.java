@@ -9018,6 +9018,7 @@ public final class PortCityLayout {
         lamppost(-31, y, -111); lamppost(-20, y, -118);
         set(-31, y + 1, -113, id("minecraft:oak_sign[rotation=4]"));
         signText(-31, y + 1, -113, "", "THE CHESS", "GREEN", "use the clock");
+        set(-31, y + 1, -112, id("pixelpirates:league_board[facing=east]"));      // the Chess League standings + sign-up (homestead/town/ChessLeague)
     }
 
     /** A pond on the north-east downs: reeds, lily pads, a little jetty, a bench. */

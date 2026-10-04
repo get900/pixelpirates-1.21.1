@@ -9,7 +9,7 @@ Everything from part 1 that you said yes to is BUILT (see the list at the end). 
       chess, weddings, boss kills, the best catch, new paintings, who was lost at sea.
 - [Yes] **Regatta**: once in a while a boat race round buoys in the harbour; townsfolk line the quay and cheer; you can
       enter your own ship for a prize.
-- [Yes] **Fishing contest**: Finn challenges the town - biggest fish by sundown wins a trophy (players can enter).
+- [Yes - BUILT 2026-10-05, see docs/townsfolk.md] **Fishing contest**: Finn challenges the town - biggest fish by sundown wins a trophy (players can enter).
 - [Yes] **The Governor's Ball**: a formal dance at the fort - everyone in their best, a string quartet, the Governor's
       speech. Invitations go to players with good Armada standing.
 - [No] **Quiz night at the Grog Barrel**: Rufus asks pirate trivia in chat; first right answer wins a round of drinks.

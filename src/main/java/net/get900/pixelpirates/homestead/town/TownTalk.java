@@ -136,6 +136,8 @@ public final class TownTalk {
     }
 
     private static String line(TownsfolkEntity e, Townsfolk.Folk f) {
+        if (f.id().equals("finn") && e.getWorld() instanceof ServerWorld w && FishingContest.on(w))
+            return "Contest's on till sundown! Biggest so far: " + FishingContest.standings();
         String[] l = f.lines();
         return l[Math.floorMod(e.line++, l.length)];
     }

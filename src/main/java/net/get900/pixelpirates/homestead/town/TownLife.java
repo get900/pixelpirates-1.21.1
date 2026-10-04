@@ -116,6 +116,7 @@ public final class TownLife {
             watchChallenges(w);
             Garrison.tick(w);
             ChessLeague.tick(w);
+            FishingContest.tick(w);
         });
         // a captain lost at sea: their name on the memorial roll + a memorial service in the chapel next morning
         net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
@@ -131,11 +132,12 @@ public final class TownLife {
         });
         CommandRegistrationCallback.EVENT.register((d, reg, env) -> d.register(CommandManager.literal("pptown").requires(s -> s.hasPermissionLevel(2))
                 .then(CommandManager.literal("event").then(CommandManager.argument("what", StringArgumentType.word())
-                        .suggests((c, b) -> { for (String s : new String[]{"festival", "wedding", "memorial", "party"}) b.suggest(s); return b.buildFuture(); })
+                        .suggests((c, b) -> { for (String s : new String[]{"festival", "wedding", "memorial", "party", "fishing"}) b.suggest(s); return b.buildFuture(); })
                         .executes(c -> {
                             ServerWorld w = c.getSource().getServer().getWorld(PortTraders.DIM);
                             String what = StringArgumentType.getString(c, "what");
                             if (w == null) return 0;
+                            if (what.equals("fishing")) { String r = FishingContest.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
                             if (what.equals("party") && c.getSource().getPlayer() != null) TownEvents.bossKilled(c.getSource().getPlayer(), "a test monster");
                             else TownEvents.force(w, what);
                             c.getSource().sendFeedback(() -> Text.literal("Started: " + what), false);
@@ -197,6 +199,13 @@ public final class TownLife {
         return s.getOverworld().getPersistentStateManager().getOrCreate(State::read, State::new, "pixelpirates_town");
     }
 
+    /** The live entity of a townsperson, if loaded. */
+    static TownsfolkEntity live(ServerWorld w, String id) {
+        UUID u = state(w.getServer()).owner.get(id);
+        Entity e = u == null ? null : w.getEntity(u);
+        return e instanceof TownsfolkEntity t ? t : null;
+    }
+
     static boolean owns(ServerWorld w, TownsfolkEntity e) {
         UUID u = state(w.getServer()).owner.get(e.folkId());
         return e.getUuid().equals(u);
@@ -249,6 +258,8 @@ public final class TownLife {
         BlockPos home = home(w, f), work = new BlockPos(f.work()[0], f.work()[1], f.work()[2]);
         Plan league = ChessLeague.plan(w, f.id(), phase);                       // a tournament game (even past bedtime)
         if (league != null) return league;
+        Plan contest = FishingContest.plan(w, f.id(), phase);                   // Finn's fishing contest: on the quay all day
+        if (contest != null) return contest;
         Challenge ch = CHALLENGES.get(f.id());
         if (ch != null) return challengePlan(w, phase, ch);
         Plan darts = TownDarts.plan(w, e, phase);                              // at a dartboard (homestead/darts)

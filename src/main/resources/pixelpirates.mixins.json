@@ -23,6 +23,7 @@
     "MobPossessionMixin",
     "PlayerShoulderInvoker",
     "SalvageHookBobberMixin",
+    "FishingContestMixin",
     "ShipBuildLimitMixin",
     "LootableContainerAccessor",
     "SealedHoardLootMixin"

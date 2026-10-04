@@ -82,6 +82,17 @@ each every 12-16 days (avg 14), never two on one day (the user's "spread out"). 
 - The test world `run/saves/ppshot` was a copy from 2026-10-04 with an old island; it was restamped (`/ppisland restamp
   all`) on 2026-10-05 - restamp it again after island changes before testing there.
 
+## Finn's fishing contest (2026-10-05) - `FishingContest` + `mixin/FishingContestMixin`
+- Calendar day, 1000-12000. Players: every fish reeled in within 320 blocks of the island is weighed by species
+  (`weigh()`, the roll squared so big ones are rare; cod 1.5-14 lb, salmon 3-22...), the weight goes on the fish's lore,
+  and the angler's best is entered (their place on the action bar). The hook: `@ModifyArg` on the FISHING_ROD_HOOKED
+  trigger in `FishingBobberEntity.use` (ordinal 1 = the loot branch).
+- Finn + Hob, Ned, Jack fish the quay all day (`SPOTS`, before every other plan), a bite now and then, heavier for the
+  better anglers. A new leader is called out to the pirate world; Finn's chat gives the top three.
+- Sundown: the winner in the news; a player winner gets the GOLDEN MARLIN TROPHY + 20 coins.
+- Test: `/pptown event fishing` (moves the clock into the window). VERIFIED in a client: start, Finn leading, beating his
+  own best, the sundown result; the mixin applies. NOT tested: a player's catch being weighed (needs a real cast).
+
 ## Fort security (2026-10-05)
 - New guards (models `tools/mobs/townsfolk.py`, Governor's Guard in Armada blue via `soldier(coat=GUARD_BLUE)`):
   pell + quayle (the Residence gate sentry boxes 25/35,71,-51), crane (the guardroom duty desk 22,71,-67), ruddock

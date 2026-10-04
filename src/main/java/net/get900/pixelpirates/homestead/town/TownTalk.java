@@ -79,6 +79,7 @@ public final class TownTalk {
         if (TownLife.canChallenge(f)) opts.add(new Opt("challenge", "Challenge to a game of chess"));
         if (f.id().equals("anselm") && partner(p) != null) opts.add(new Opt("marry", "Marry us! (with " + partner(p).getName().getString() + ")"));
         if (f.id().equals("rufus")) opts.add(new Opt("tale", "Ask for a tale"));
+        if (f.id().equals("anselm") && HarvestFestival.collecting(p.getServerWorld())) opts.add(new Opt("harvest", "Give to the harvest"));
         opts.add(new Opt("bye", "Goodbye"));
         send(p, e, f, say, opts);
     }
@@ -149,6 +150,7 @@ public final class TownTalk {
         switch (key) {
             case "chat" -> { e.triggerAnim("action", "talk"); open(p, e, line(e, f)); }
             case "gift" -> gift(p, e, f);
+            case "harvest" -> { e.triggerAnim("action", "talk"); open(p, e, HarvestFestival.donate(p)); }
             case "challenge" -> { e.triggerAnim("action", "talk"); open(p, e, TownLife.challenge(p, e)); }
             case "heal" -> heal(p, e, f);
             case "gallery" -> gallery(p, e, f);

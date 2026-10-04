@@ -60,6 +60,11 @@ public final class TownEvents {
 
     static long day(ServerWorld w) { return w.getTimeOfDay() / 24000L; }
 
+    /** A gold line to everyone in the pirate world (the big events' calls). */
+    static void broadcastTown(ServerWorld w, String s) {
+        for (ServerPlayerEntity p : w.getPlayers()) p.sendMessage(Text.literal(s).formatted(Formatting.GOLD), false);
+    }
+
     static int tod(ServerWorld w) { return (int) Math.floorMod(w.getTimeOfDay(), 24000L); }
 
     // ------------------------------------------------------------------ the calendar

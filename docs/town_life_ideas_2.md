@@ -19,7 +19,7 @@ Everything from part 1 that you said yes to is BUILT (see the list at the end). 
       otherwise a ship wrecks on the rocks and the town has to rescue the crew.
 - [Yes] **A ship limps in**: a damaged merchant ship drifts into the harbour; townsfolk rush to the quay with bandages
       and ropes (the doctor patches the crew up).
-- [Yes] **Harvest festival**: once a "season" the chapel collects food; the farmers, the miller and the cider maker bring
+- [Yes - BUILT 2026-10-05, see docs/townsfolk.md] **Harvest festival**: once a "season" the chapel collects food; the farmers, the miller and the cider maker bring
       their best; a big feast in the plaza with temporary setup tables.
 - [No] **Ghost stories**: on foggy nights the townsfolk gather round the tavern hearth; sometimes a "ghost" is seen
       on the quay (a harmless glowing figure that vanishes).

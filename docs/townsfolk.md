@@ -93,6 +93,19 @@ each every 12-16 days (avg 14), never two on one day (the user's "spread out"). 
 - Test: `/pptown event fishing` (moves the clock into the window). VERIFIED in a client: start, Finn leading, beating his
   own best, the sundown result; the mixin applies. NOT tested: a player's catch being weighed (needs a real cast).
 
+## The harvest festival (2026-10-05) - `HarvestFestival`
+- Calendar day. MORNING 2000-5000: Hob (wheat), Elspeth (fleece), Cobb (cider + pumpkin), Wilma (flour + melon) walk to
+  the chapel and add to the display before the altar (display entities), each in the chat + the news. ALL DAY until
+  the feast: "Give to the harvest" on Father Anselm's card takes up to 16 of the food in your hand - +2 friendship with
+  every townsperson, once a day. EVENING 12500-15500: two laden trestle tables either side of the bazaar's fountain
+  (x -30..-12 / 12..30, z 30), everyone eats there (a place by name, Dan fiddling at the head of the east table,
+  Anselm by the fountain), grace at +200: every player within 30 gets 2 pumpkin pie + 2 bread; donors also Regeneration
+  (2 min) + Saturation. All cleared at the end.
+- `TownLife.replanAll(w)`: an event starting MID-PHASE (the feast at 12500 - leisure began at 11000) must tell the
+  townsfolk to re-plan, or nobody comes; the regatta does the same (and sends the skippers to their helms).
+- Test: `/pptown event harvest` (deliveries now - the bringers are walked over - the feast a minute later).
+  VERIFIED in a client: the four deliveries + the altar display, the tables, grace, the supper, the town at table.
+
 ## The regatta (2026-10-05) - `Regatta` + AiShipController racing mode
 - Calendar day, 5 pm (`/pptown event regatta`, `/pptown regatta stop`). The town's three boats line up ABREAST on the
   start line off the grand pier (x -24/0/24, z 215, bows +Z at the turn): Commodore Pettigrew's HMS Swift (navy_cutter),

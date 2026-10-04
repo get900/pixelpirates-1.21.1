@@ -197,6 +197,8 @@ public final class Regatta {
         }
         buoys(w);
         phase = Phase.GATHER;
+        TownLife.replanAll(w);                                                // the town to the quay
+        for (Racer r : racers) if (r.skipper != null) { TownsfolkEntity e = TownLife.live(w, r.skipper); if (e != null) e.plan = null; }   // skippers to their helms
         phaseAt = w.getTime();
         goAt = w.getTime() + (forced ? 400 : Math.max(200, GO - (int) (w.getTimeOfDay() % 24000L)));
         broadcast(w, "The regatta! " + String.join(", ", racers.stream().map(r -> r.name).toList())
@@ -313,6 +315,7 @@ public final class Regatta {
         racers.clear();
         for (Vec3d m : MARKS) TownEvents.clear(w, TAG, BlockPos.ofFloored(m), 40);
         phase = Phase.IDLE;
+        TownLife.replanAll(w);
     }
 
     /** /pptown regatta stop. */

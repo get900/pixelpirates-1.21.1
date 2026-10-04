@@ -17,8 +17,58 @@ public final class HomesteadClient {
             if (renderer instanceof net.minecraft.client.render.entity.ParrotEntityRenderer r) helper.register(new ParrotGlowFeature(r));
             if (renderer instanceof net.minecraft.client.render.entity.CatEntityRenderer r) helper.register(new CatGlowFeature(r));     // ship's cats
             if (renderer instanceof net.minecraft.client.render.entity.PlayerEntityRenderer r) helper.register(new TattooFeature(r)); // tattoos
+            if (renderer instanceof net.minecraft.client.render.entity.PlayerEntityRenderer r) helper.register(new BeardFeature(r));  // facial hair
         });
         TattooFeature.registerClient();
+        // the townsfolk (homestead/town): their models, the dialogue card
+        net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(net.get900.pixelpirates.homestead.HomesteadEntities.TOWNSFOLK, TownsfolkRenderer::new);
+        net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.registerGlobalReceiver(net.get900.pixelpirates.homestead.town.TownTalk.OPEN, (client, handler, buf, sender) -> {
+            int id = buf.readVarInt();
+            String name = buf.readString(), title = buf.readString(), say = buf.readString();
+            String friend = buf.readString();
+            java.util.List<String[]> opts = new java.util.ArrayList<>();
+            for (int i = buf.readVarInt(); i > 0; i--) opts.add(new String[]{buf.readString(), buf.readString()});
+            client.execute(() -> client.setScreen(new net.get900.pixelpirates.client.screen.TownsfolkScreen(id, name, title, say, opts).friendship(friend)));
+        });
+        // the harbour gulls; the festival fireworks (harmless client-side bursts - homestead/town/TownEvents)
+        net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(net.get900.pixelpirates.homestead.HomesteadEntities.SEAGULL,
+                ctx -> new software.bernie.geckolib.renderer.GeoEntityRenderer<>(ctx, new net.get900.pixelpirates.entity.client.NamedGeoModel<>("seagull")));
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), HomesteadBlocks.STREET_LAMP);
+        net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.registerGlobalReceiver(net.get900.pixelpirates.homestead.town.TownEvents.FX, (client, handler, buf, sender) -> {
+            double x = buf.readDouble(), y = buf.readDouble(), z = buf.readDouble();
+            int seed = buf.readVarInt();
+            client.execute(() -> net.get900.pixelpirates.client.TownFx.burst(client, x, y, z, seed));
+        });
+        BeardFeature.registerClient();
+        TelescopeView.register();
+        // chess: the screen (open / refresh), the pieces on the boards
+        net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.registerGlobalReceiver(net.get900.pixelpirates.homestead.chess.Chess.STATE, (client, handler, buf, sender) -> {
+            var pos = buf.readBlockPos();
+            var n = buf.readNbt();
+            client.execute(() -> {
+                if (n == null) return;
+                if (client.currentScreen instanceof net.get900.pixelpirates.client.screen.ChessScreen s && s.pos.equals(pos)) s.update(n);
+                else if (n.getBoolean("Open")) client.setScreen(new net.get900.pixelpirates.client.screen.ChessScreen(pos, n));
+            });
+        });
+        net.minecraft.client.render.block.entity.BlockEntityRendererFactories.register(net.get900.pixelpirates.homestead.HomesteadBlockEntities.CHESS, ChessRenderer::new);                                              // the telescope block (homestead/nav/Telescopes)
+        // paintings: the easel's canvas screen, the canvas on the easel, paintings on walls (homestead/art)
+        net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.registerGlobalReceiver(net.get900.pixelpirates.homestead.art.Art.OPEN, (client, handler, buf, sender) -> {
+            var pos = buf.readBlockPos();
+            int size = buf.readByte();
+            String title = buf.readString(32);
+            int[] px = buf.readIntArray(32 * 32);
+            boolean canvas = buf.readBoolean();
+            client.execute(() -> client.setScreen(new net.get900.pixelpirates.client.screen.PaintScreen(pos, size, title, px, canvas)));
+        });
+        net.minecraft.client.render.block.entity.BlockEntityRendererFactories.register(net.get900.pixelpirates.homestead.HomesteadBlockEntities.EASEL, EaselRenderer::new);
+        net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(net.get900.pixelpirates.homestead.HomesteadEntities.CUSTOM_PAINTING, CustomPaintingRenderer::new);
+        // swings: the seat swinging with its rider
+        net.minecraft.client.render.block.entity.BlockEntityRendererFactories.register(net.get900.pixelpirates.homestead.HomesteadBlockEntities.SWING, SwingRenderer::new);
+        net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(net.get900.pixelpirates.homestead.HomesteadEntities.SWING_SEAT,
+                net.minecraft.client.render.entity.EmptyEntityRenderer::new);
+        net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin.register(ctx -> ctx.addModels(SwingRenderer.SEAT_MODEL));
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), HomesteadBlocks.SWING, HomesteadBlocks.HANGING_SWING, HomesteadBlocks.EASEL);
         // the Parrot Roost: the server sends the player's unlocked parrot types (homestead/parrot/ParrotCollection)
         net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.registerGlobalReceiver(
                 net.get900.pixelpirates.homestead.parrot.ParrotCollection.ROOST_OPEN, (client, handler, buf, sender) -> {

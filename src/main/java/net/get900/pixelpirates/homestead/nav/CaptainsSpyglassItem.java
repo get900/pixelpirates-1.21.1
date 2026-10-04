@@ -43,11 +43,15 @@ public class CaptainsSpyglassItem extends SpyglassItem {
         if (used % 20 == 10) glints((ServerWorld) world, p);
     }
 
-    private static void identify(ServerWorld w, ServerPlayerEntity p) {
+    private static void identify(ServerWorld w, ServerPlayerEntity p) { identify(w, p, 160, 240); }
+
+    /** What's under the crosshair (a creature up to {@code mobRange}, a ship hull up to {@code shipRange}) on the action bar.
+     *  Also used by the TELESCOPE block (Telescopes) with longer reach. */
+    public static void identify(ServerWorld w, ServerPlayerEntity p, int mobRange, int shipRange) {
         Vec3d eye = p.getEyePos(), look = p.getRotationVec(1f);
-        Vec3d end = eye.add(look.multiply(160));
-        EntityHitResult hit = ProjectileUtil.raycast(p, eye, end, p.getBoundingBox().stretch(look.multiply(160)).expand(1),
-                e -> e instanceof LivingEntity && !e.isSpectator() && e != p && !e.isInvisible(), 160 * 160);
+        Vec3d end = eye.add(look.multiply(mobRange));
+        EntityHitResult hit = ProjectileUtil.raycast(p, eye, end, p.getBoundingBox().stretch(look.multiply(mobRange)).expand(1),
+                e -> e instanceof LivingEntity && !e.isSpectator() && e != p && !e.isInvisible(), (double) mobRange * mobRange);
         if (hit != null && hit.getEntity() instanceof LivingEntity le) {
             int d = (int) le.distanceTo(p);
             p.sendMessage(Text.literal("").append(le.getDisplayName().copy().formatted(Formatting.GOLD))
@@ -55,7 +59,7 @@ public class CaptainsSpyglassItem extends SpyglassItem {
                             .formatted(Formatting.WHITE)), true);
             return;
         }
-        for (int i = 8; i <= 240; i += 4) {                                  // march along the look ray for a ship hull
+        for (int i = 8; i <= shipRange; i += 4) {                            // march along the look ray for a ship hull
             Vec3d q = eye.add(look.multiply(i));
             org.joml.primitives.AABBd b = new org.joml.primitives.AABBd(q.x - 1.5, q.y - 1.5, q.z - 1.5, q.x + 1.5, q.y + 1.5, q.z + 1.5);
             try {

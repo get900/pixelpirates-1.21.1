@@ -523,6 +523,28 @@ run dedicated server, `execute in pixelpirates:pixel_pirates run forceload add <
     tools/previews/spawn/wreck_se.png, wreck_nw.png (the export shows seabed as grass), tools/previews/props/wren_music_box.png.
   - Existing worlds: `/ppisland restamp 45`.
 
+- **THE NORTH DOWNS (rebuilt 2026-10-04)** - `countryside()` (fields, windmill, the paths, the reset of the old potato field
+  + old lookout to downland) and `northDowns()` (a pass right after the Beach Wreck so #45 keeps its number):
+  - **#46 THE DOWNS FARMSTEAD** (`farmstead()`, x-64..-32 z-158..-123, north of the fort road): a fenced farmyard (cobbles,
+    the well, the chicken coop + run, the pigsty with its mud wallow + trough, hay, a cart), THE FARMHOUSE (stone ground floor,
+    white plaster + spruce frame above, gabled roof, brick chimney; kitchen, parlour, ladder to the bedroom), THE BARN (dark
+    oak on a stone plinth, big doors to the yard, stalls, a hayloft full of hay, a loft door + hoist), the kitchen garden
+    behind (potatoes + beetroot, a scarecrow). Gate on the east (the farm path from the fork) with a "DOWNS FARM" sign.
+  - **#47 THE ORCHARD** (`orchard()`, x21..58 z-141..-119): rows of blossoming fruit trees (azalea + flowering azalea crowns,
+    some bee nests, pink petals), a grass ride both ways, fruit crates; THE CIDER HOUSE outside the east gate (barrels, the
+    press, a counter, crates).
+  - **#48 THE SHEPHERD'S HUT** (`shepherdsHut()`, x-30..-4 z-158..-144, down the north slope): a green hut on wheels (curved
+    roof, stove + smoking pipe, bunk), the dry-stone fold (hay racks, troughs), a kennel, a bench.
+  - **#49 THE RIDGE LOOKOUT** (`lookout(5, -139)`, replaces the old open pavilion): a round stone watchtower (door south,
+    arrow slits, ladder up to a hatch), a gallery with FOUR WORKING TELESCOPES (N/E/S/W), a signal fire, the Jolly Roger,
+    benches round the foot, a cairn, a bell.
+  - Also: a pond with reeds, lily pads and a jetty (x60..77 z-154..-142); the SIGNPOST at the fork (3,-119): Fort/Farmstead,
+    Lighthouse/Orchard, Lookout/Shepherd, Wavebreak Port. Paths: fork -> lookout, -> shepherd, -> farm gate. North palms keep
+    out of all of it. LayoutCheck: no issues in #46-#49 ("Countryside <- ..." pad-over-path overlaps are INTENDED). Walk check:
+    farmyard, farmhouse + barn + cider house interiors, orchard, fold, lookout door, pond all reached without jumping.
+    Seen in the dev client after `restamp 46-49` (tools/previews/downs/). Existing worlds: `/ppisland restamp 46`..`49`, and
+    `restamp all` (or new chunks) for the fields reset, paths, pond and signpost (unlabelled passes).
+
 ## HAND EDITS - build in game, then save (2026-10-02, `world/gen/IslandEdits`)
 
 - **`/ppisland capture all`** = "save everything I changed": `IslandEditTracker` (overworld saved data, survives restarts)

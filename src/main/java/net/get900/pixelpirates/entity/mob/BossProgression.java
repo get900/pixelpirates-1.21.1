@@ -108,6 +108,7 @@ public final class BossProgression {
                     .append(Text.translatable(step.relic().getTranslationKey()).formatted(Formatting.LIGHT_PURPLE)), false);
         }
         if (!advanced) return;
+        net.get900.pixelpirates.homestead.town.TownEvents.bossKilled(p, step.name());   // the town throws a party
         Step nxt = next(p);
         if (index == indexOf("abyssal_heart")) {
             p.sendMessage(Text.literal("[~] The Leviathan's Rift has opened. The Heartstone will lead you to it.")

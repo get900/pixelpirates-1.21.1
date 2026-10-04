@@ -81,7 +81,7 @@ Like `/ppisland capture`: `/ppship place <name>` stamps the blueprint as plain b
 HIGH up or over open water so the hull is clear of the ground) and remembers it; edit by hand (no assembling); then
 `/ppship capture <name>` saves every block face-joined to the helm (inside the placed box +8; never air, fluids or natural
 ground; waterlogged blocks saved dry; warns if there is no ship_waterline) as blueprint <name> - a new name makes a new ship.
-`/ppship remove <name>` clears the placed blocks away again. The save goes to config/pixelpirates/ships AND (dev workspace)
+`/ppship remove <name>` clears the placed blocks away again. MOVING THE HELM is fine: placements are remembered on disk (PersistentState "pixelpirates_ship_placements", survives restarts), capture finds the helm anywhere in the placed box (nearest to where it was) and re-centres the blueprint on it; after each capture the remembered box follows the ship. With no remembered placement it takes the nearest helm within 40 blocks of you. Client-verified: helm moved up a block, captured from 48 blocks away -> 819 blocks, helm at the origin. The save goes to config/pixelpirates/ships AND (dev workspace)
 src/main/resources/data/pixelpirates/ships + `captured.txt` there; tools/gen_ship_blueprints.py + gen_fleet_ships.py SKIP
 captured ships unless run with `--force`. `ShipSchematic.installBundled` now UPDATES installed blueprints when the mod brings
 a new version (config/pixelpirates/ships/.bundled holds the installed hashes; the old file is kept as .nbt.bak; a copy you

@@ -214,7 +214,7 @@ public final class HomesteadBlocks {
             AbstractBlock.Settings.create().mapColor(MapColor.IRON_GRAY).strength(1.5f).sounds(BlockSoundGroup.METAL).nonOpaque().luminance(s -> 11), true, b(0, 0, 4, 16, 12, 12)), true);
     public static final Block BAPTISMAL_FONT = block("baptismal_font", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(stoneDecor(), true, b(1, 0, 1, 15, 14, 15)), true);
     public static final Block HYMN_BOARD = block("hymn_board", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(1.0f), false, b(2, 0, 14, 14, 16, 16)), true);
-    public static final Block MEMORIAL_PLAQUE = block("memorial_plaque", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(stoneDecor(), false, b(1, 3, 15, 15, 13, 16)), true);
+    public static final Block MEMORIAL_PLAQUE = block("memorial_plaque", new net.get900.pixelpirates.homestead.chapel.MemorialPlaqueBlock(stoneDecor(), false, b(1, 3, 15, 15, 13, 16)), true);
     public static final Block VOTIVE_SHIP = block("votive_ship", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(wood().strength(0.5f), false, b(2, 2, 4, 14, 16, 12)), true);
     // the governor's residence (tools/gen_manor_assets.py): marble statues, urns, chandeliers, the portrait
     static AbstractBlock.Settings marble() { return AbstractBlock.Settings.create().mapColor(MapColor.WHITE).strength(3.0f, 6.0f).sounds(BlockSoundGroup.CALCITE).nonOpaque().requiresTool(); }
@@ -250,6 +250,20 @@ public final class HomesteadBlocks {
     public static final Block SHIP_IN_BOTTLE_GHOST = shipInBottle("ghost", 6);
     // the tattooist's chair (townhouse #33, homestead/tattoo): use it to get inked
     // the ship's-cat keeper's counter (townhouse #36, homestead/cat/Cattery): buy one of today's cats
+    // the easel (paintings), the swings, the barber's chair (2026-10-04)
+    public static final Block EASEL = block("easel", new net.get900.pixelpirates.homestead.art.EaselBlock(wood().strength(1.5f)), true);
+    public static final Block SWING = block("swing", new net.get900.pixelpirates.homestead.swing.SwingBlock(wood().strength(1.5f), false), true);
+    public static final Block HANGING_SWING = block("hanging_swing", new net.get900.pixelpirates.homestead.swing.SwingBlock(wood().strength(1.0f).noCollision(), true), true);
+    // chess (2026-10-04): the table in the toymaker's shop, the giant floor set in the park
+    /** The street lamp (homestead/town/StreetLampBlock): dark by day, lit at dusk by the lamplighter. */
+    public static final Block STREET_LAMP = block("street_lamp", new net.get900.pixelpirates.homestead.town.StreetLampBlock(
+            AbstractBlock.Settings.create().mapColor(MapColor.IRON_GRAY).requiresTool().strength(3.5f).sounds(BlockSoundGroup.LANTERN).nonOpaque()), true);
+    /** The Commodore's chess trophy: beat Commodore Pettigrew at chess (homestead/town). */
+    public static final Block CHESS_TROPHY = block("chess_trophy", new net.get900.pixelpirates.homestead.furniture.FurnitureBlock(stoneDecor().sounds(BlockSoundGroup.METAL), false, b(4, 0, 4, 12, 16, 12)), true);
+    public static final Block CHESS_TABLE = block("chess_table", new net.get900.pixelpirates.homestead.chess.ChessTableBlock(wood().strength(1.5f)), true);
+    public static final Block GIANT_CHESS = block("giant_chess", new net.get900.pixelpirates.homestead.chess.GiantChessBlock(
+            AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).strength(2.0f, 6.0f).sounds(BlockSoundGroup.STONE).nonOpaque().requiresTool()), true);
+    public static final Block BARBER_CHAIR = block("barber_chair", new net.get900.pixelpirates.homestead.beard.BarberChairBlock(wood().strength(2.0f)), true);
     public static final Block CATTERY_COUNTER = block("cattery_counter", new net.get900.pixelpirates.homestead.cat.CatteryCounterBlock(wood().strength(2.0f)), true);
     /** Captain Wren's music box - the Beach Wreck's easter egg (homestead/wreck, not craftable). */
     public static final Block WREN_MUSIC_BOX = block("wren_music_box", new net.get900.pixelpirates.homestead.wreck.MusicBoxBlock(wood().strength(1.0f).nonOpaque()), true);

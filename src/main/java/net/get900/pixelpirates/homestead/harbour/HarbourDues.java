@@ -83,6 +83,8 @@ public class HarbourDues extends PersistentState {
         ShipRegistryState reg = ShipRegistryState.get(server.getOverworld());
         long now = now(server);
         Set<Long> clampedNow = new java.util.HashSet<>();
+        java.util.List<net.minecraft.util.math.Vec3d> moored = new java.util.ArrayList<>();
+        java.util.List<String> owners = new java.util.ArrayList<>();
         for (LoadedServerShip ship : shipWorld.getLoadedShips().getIdToShipData().values()) {
             long id = ship.getId();
             UUID owner = reg.ownerOf(id);
@@ -91,6 +93,11 @@ public class HarbourDues extends PersistentState {
             Vector3dc p = ship.getTransform().getPositionInWorld();
             if (!inHarbour(p.x(), p.z())) { st.stillTicks.remove(id); st.berth.remove(id); continue; }
             boolean still = ship.getVelocity().length() < 0.6;
+            if (still) {                                                     // the townsfolk come down to look (homestead/town)
+                moored.add(new net.minecraft.util.math.Vec3d(p.x(), p.y(), p.z()));
+                ServerPlayerEntity op = server.getPlayerManager().getPlayer(owner);
+                if (op != null) owners.add(op.getName().getString());
+            }
             int t = still ? Math.min(GRACE * 4, st.stillTicks.getOrDefault(id, 0) + INTERVAL) : st.stillTicks.getOrDefault(id, 0);
             st.stillTicks.put(id, t);
             boolean valid = st.permitUntil.getOrDefault(id, 0L) > now;
@@ -114,6 +121,7 @@ public class HarbourDues extends PersistentState {
         }
         CLAMPED.clear();
         CLAMPED.addAll(clampedNow);
+        if (server.getTicks() % (INTERVAL * 10) == 0) net.get900.pixelpirates.homestead.town.TownLife.harbourShips(pp, moored, owners);
     }
 
     /** HELM_STEER hook: a chained helm does nothing (and says why, at most every 5 s). */

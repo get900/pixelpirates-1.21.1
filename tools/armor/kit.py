@@ -25,6 +25,7 @@ from mobkit import *          # noqa: E402,F401  (Rig, A, noise, bands, over, li
 from mobkit import Rig, A, SIDES   # noqa: E402
 
 from gen_mob_assets import FACE_LIGHT, hexc, mul, mix   # noqa: E402
+import zfight                                       # noqa: E402
 
 ASSETS = TOOLS.parent / "src/main/resources/assets/pixelpirates"
 
@@ -377,7 +378,9 @@ class AR(Rig):
         geo_dir = ASSETS / "geo/armor"; tex_dir = ASSETS / "textures/armor"; an_dir = ASSETS / "animations/armor"
         for d in (geo_dir, tex_dir, an_dir):
             d.mkdir(parents=True, exist_ok=True)
-        (geo_dir / f"{self.name}.geo.json").write_text(json.dumps(self.geo(), indent=1), encoding="utf-8")
+        geo = self.geo()
+        zfight.fix_geo(geo)                                    # no coplanar faces (flicker) - tools/zfight.py
+        (geo_dir / f"{self.name}.geo.json").write_text(json.dumps(geo, indent=1), encoding="utf-8")
         img, gimg = self.paint()
         img.save(tex_dir / f"{self.name}.png")
         gpath = tex_dir / f"{self.name}_glowmask.png"

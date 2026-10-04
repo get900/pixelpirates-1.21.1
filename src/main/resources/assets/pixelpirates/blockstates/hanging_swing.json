@@ -1,0 +1,64 @@
+{
+ "variants": {
+  "facing=north,half=lower,occupied=false": {
+   "model": "pixelpirates:block/hanging_swing"
+  },
+  "facing=north,half=lower,occupied=true": {
+   "model": "pixelpirates:block/hanging_swing_occupied"
+  },
+  "facing=north,half=upper,occupied=false": {
+   "model": "pixelpirates:block/swing_top"
+  },
+  "facing=north,half=upper,occupied=true": {
+   "model": "pixelpirates:block/swing_top"
+  },
+  "facing=east,half=lower,occupied=false": {
+   "model": "pixelpirates:block/hanging_swing",
+   "y": 90
+  },
+  "facing=east,half=lower,occupied=true": {
+   "model": "pixelpirates:block/hanging_swing_occupied",
+   "y": 90
+  },
+  "facing=east,half=upper,occupied=false": {
+   "model": "pixelpirates:block/swing_top",
+   "y": 90
+  },
+  "facing=east,half=upper,occupied=true": {
+   "model": "pixelpirates:block/swing_top",
+   "y": 90
+  },
+  "facing=south,half=lower,occupied=false": {
+   "model": "pixelpirates:block/hanging_swing",
+   "y": 180
+  },
+  "facing=south,half=lower,occupied=true": {
+   "model": "pixelpirates:block/hanging_swing_occupied",
+   "y": 180
+  },
+  "facing=south,half=upper,occupied=false": {
+   "model": "pixelpirates:block/swing_top",
+   "y": 180
+  },
+  "facing=south,half=upper,occupied=true": {
+   "model": "pixelpirates:block/swing_top",
+   "y": 180
+  },
+  "facing=west,half=lower,occupied=false": {
+   "model": "pixelpirates:block/hanging_swing",
+   "y": 270
+  },
+  "facing=west,half=lower,occupied=true": {
+   "model": "pixelpirates:block/hanging_swing_occupied",
+   "y": 270
+  },
+  "facing=west,half=upper,occupied=false": {
+   "model": "pixelpirates:block/swing_top",
+   "y": 270
+  },
+  "facing=west,half=upper,occupied=true": {
+   "model": "pixelpirates:block/swing_top",
+   "y": 270
+  }
+ }
+}

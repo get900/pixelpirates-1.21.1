@@ -93,10 +93,11 @@ Sea of Thieves–inspired mod. Ring-based progression world centred on 0,0. Play
 | Bosses 5-8 (Abyssal King, Bloodfin, Kraken, Chained Revenant) + lairs | `docs/bosses-mid.md` |
 | Bosses 9-10 (Abyssal Heart, Leviathan) + Titan's Chest, `world/leviathan/` | `docs/bosses-late.md` |
 | Armor (boss sets, 3D GeckoLib armor), materials ladder, treasure block, THE FORGE (forging/mending, forged weapons) | `docs/gear.md` |
-| Relic weapons, galley/food, advancements, XP, skills, traders, bazaar, currencies, loot, tabs, strongboxes, ship's cats, ships in bottles, tattoos | `docs/gameplay-systems.md` |
+| Relic weapons, galley/food, advancements, XP, skills, traders, bazaar, currencies, loot, tabs, strongboxes, ship's cats, ships in bottles, tattoos, paintings, facial hair, swings | `docs/gameplay-systems.md` |
 | `homestead/` (tavern games + drinks, chapel bells + organ, Chronicle) | `docs/homestead.md` |
 | Parrots: 15 types + rarities, abilities, the aviary's daily stock, Parrot Roost (collection), Parrot Crate, Perch Branch | `docs/parrot_ideas.md` (plan + per-phase log) |
 | Structures authored as layout JSON (ChatGPT packages), `LayoutStructures`, in-game editing with `/ppstruct`, the brief to give ChatGPT | `docs/structure-layouts.md` |
+| Townsfolk NPCs (`homestead/town/`): roster, daily routines, chess/painting/tavern/chapel service, inn lodging, `/pptown` | `docs/townsfolk.md` (+ the user's idea lists `docs/town_life_ideas.md` (built) and `docs/town_life_ideas_2.md`) |
 | What existed before 2026-08 / old status log (historical, partly outdated) | `docs/history.md` |
 
 Several source folders also have a short `CLAUDE.md` that points at their doc (loaded automatically when you open a file there).
@@ -106,7 +107,7 @@ a row in this table.
 
 **Current state (2026-10-03):** all 10 chain bosses overhauled; economy/materials/skills reworked; the spawn island is
 being overhauled building by building with the user (done #3-#20, ALL townhouses #21-#41 done, one character each - see `docs/spawn-island.md`; hand edits saved in game with `/ppisland capture`).
-2026-10-04 session (committed 070868a; most of it NOT clicked through in a client yet): townhouses #29-#41, #42 THE NORTH WALL + GREAT NORTH GATE (+ the way up to the hills), #43 THE WAVEBREAK LIGHT (beacon beam), #44 THE GOVERNOR'S FORTRESS (star fort; its fort cannons fire on players with Iron Armada rep < 0), #45 THE WRECK OF THE MERRY WREN (easter egg: Captain Wren's music box, homestead/wreck/), THE FLEET (12 new faction ships + AI, zone ladders - `docs/ships.md`), SHIP LIVERIES (26 skins, the Shipwright's Livery tab, `world/livery/`), SHIP'S CATS (+ the Cattery Counter)
+2026-10-04 session (committed 070868a; most of it NOT clicked through in a client yet): townhouses #29-#41, #42 THE NORTH WALL + GREAT NORTH GATE (+ the way up to the hills), #43 THE WAVEBREAK LIGHT (beacon beam), #44 THE GOVERNOR'S FORTRESS (star fort; its fort cannons fire on players with Iron Armada rep < 0), #45 THE WRECK OF THE MERRY WREN (easter egg: Captain Wren's music box, homestead/wreck/), THE FLEET (12 new faction ships + AI, zone ladders - `docs/ships.md`), SHIP LIVERIES (26 skins, the Shipwright's Livery tab, `world/livery/`), PAINTINGS (easel), FACIAL HAIR (barber's chair), SWINGS (`docs/gameplay-systems.md`), THE TELESCOPE (usable), THE NORTH DOWNS #46-#49 (farmstead, orchard, shepherd's hut, ridge lookout), CHESS (table in #35 + giant set on #50 the Chess Green; vs players or the computer), SHIP'S CATS (+ the Cattery Counter)
 (`homestead/cat/`) + SHIPS IN BOTTLES + TATTOOS (cosmetic, the chair at #33) (`docs/gameplay-systems.md`), Tidewater Shrine + Smuggler's Grotto converted to layout
 JSON (`/ppstruct export`, `docs/structure-layouts.md`), `docs/structures.md` (what spawns where).
 2026-10-03 session (ALL compiled, NONE seen in a client yet - the user tests in game):
@@ -199,6 +200,12 @@ Copy that pattern for any future non-hostile mob; see the SPAWNING rules above f
 - **GeckoLib entity render scale:** use `withScale(float)` in the renderer constructor, not `poseStack.scale()` in an overridden `render()`. A large scale factor (the shark had 10×) is a symptom of a model authored at the wrong size — fix the model, not the renderer.
 - **Zero-size cubes ARE fine in GeckoLib 4.4.9** (verified in-game 2026-08-05): `"size": [1, 1, 0]` is the standard Bedrock idiom for flat planes (teeth, fins) and bakes without error. Ignore the older warning in crash cause #4 below for this case; that entry's real triggers are `binding` fields, per-cube 1.16.0-format `pivot`/`rotation`, and negative UVs.
 - **Shark water confinement:** `SharkAttackGoal` and `OrbitRaftGoal` steer the shark by hand with `setVelocity` + `move(MovementType.SELF, …)`, bypassing `SwimNavigation` entirely — so no amount of pathfinding config keeps it in water. **All goal-driven shark movement must go through `SharkEntity.swim(Vec3d)`**, which refuses to self-propel out of water, per-axis-clamps against a 1.25-block look-ahead water probe (so it slides along a shoreline instead of stalling), and carries the VS2 `move()` NPE guard. `enforceWaterConfinement()` in `tick()` is the backstop: a beached shark stops navigating, flops toward the nearest water, and dries out after 100 ticks (grace period long enough that a breach never triggers it). The breach requires `isSubmergedInWater()` so it cannot launch off a shallow shore. Never add a new shark goal that calls `move()` directly.
+- **Z-fighting (the "glitchy/flickering texture" look) - fixed everywhere 2026-10-05.** Two faces pointing the same way
+  on one plane flicker. `tools/zfight.py` finds them in geo (cubes in the same rest-pose space, across bones too) and in
+  block/item model elements, and fixes them by inflating the SMALLER cube 0.05 px (elements grow 0.025 px a side; box UVs
+  don't move). The writers call it (`gen_mob_assets.dump`, `armor/kit.write_armor`, `blockmodels.BM.write`,
+  `gen_weapon_item_models`), so generated models come out clean. Hand-made models: run
+  `python tools/check_zfight.py --all` (add `--fix` to repair; it keeps each file's formatting). Keep it at 0.
 - **Model vs hitbox:** `EntityDimensions` is independent of the rendered model. `withScale()` in the renderer does NOT move the hitbox — every scale change needs a matching `.dimensions(...)` edit in `ModEntities`, and the two comments should cross-reference each other. A model rescaled without updating `.dimensions(...)` in `ModEntities` leaves an invisible mismatched hitbox — the shark rendered multiple blocks long against a `0.3×0.2` box, so melee mostly whiffed.
 - **GeckoLib item in entity hand:** `ItemArmorGeoLayer` + `rightItem`/`leftItem` bones in geo file. Works with standard items. GeoItem (e.g. Cutlass) held by another GeoEntity may have render-state conflicts — test in-game if items appear invisible.
 - **Biome system:** Custom `PixelPiratesBiomeSource` — use `BiomeModifications` (Fabric API) to add spawns/features; selectors work via registry key regardless of biome source type.
@@ -274,6 +281,8 @@ believing the stack trace's mod.
 VS2 physics thread and server thread race on fastutil `LongAVLTreeSet`. **Fix:** `try { this.move(...); } catch (NullPointerException ignored) { }`. Applied in `FloatingBarrelEntity`, `CannonBallEntity`.
 
 ### 7. Client exits `-1073741819` (0xC0000005) at launch — Java 21 vs LWJGL 3.3.1
+**2026-10-04: `org.gradle.java.home` (JDK 17) IS now set in gradle.properties** - the toolchain pin alone did not cover runClient
+(it still launched on JDK 21 and died silently a few seconds into loading, no crash report). After changing it: `gradlew --stop`.
 `runClient` dies natively right after `[LWJGL] [ThreadLocalUtil] Unsupported JNI version detected` in `run/logs/latest.log`. MC 1.20.1 ships LWJGL 3.3.1, which doesn't support Java 20+ JNI; JAVA_HOME points at Adoptium JDK 21 (installed for 1.21.x work). **Fix:** Java 17 toolchain is pinned in build.gradle; if the crash recurs, add `org.gradle.java.home=C:/Program Files/Eclipse Adoptium/jdk-17.0.15.6-hotspot` to gradle.properties (then `gradlew --stop`). The warning is intermittent — a successful launch on 21 doesn't mean it's safe.
 
 ### 8. GeckoLib `IllegalStateException: Invalid glow layer texture provided, must have at least one pixel!` (FIXED 2026-09-28)

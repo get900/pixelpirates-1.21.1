@@ -1,4 +1,4 @@
-// 1.20.1	2026-10-04T12:51:27.7147316	Pixel Pirates/Recipes
+// 1.20.1	2026-10-04T23:52:27.2055755	Pixel Pirates/Recipes
 59016b80984eaa42b5181fb39f6d27ea4d5d2287 data\pixelpirates\recipes\salmagundi.json
 c1a8258b5b9f04c277c421b6c4d7317e0835295c data\pixelpirates\advancements\recipes\combat\navy_officer_chestplate.json
 82bbc2548518ae46cbf28787c4cfff74414f946e data\pixelpirates\advancements\recipes\misc\volcanic_ember.json
@@ -83,8 +83,8 @@ a8a223f76d76009dcd208710b44a8b7861eb020a data\pixelpirates\advancements\recipes\
 c498d8f02cb0b508770b54889845bbb7a42a3448 data\pixelpirates\recipes\shipwright_table.json
 627aedb8ea6079cb7190687d3ded8e25d8302ee6 data\pixelpirates\advancements\recipes\combat\corsair_boots.json
 a537600e3b38a60e88d610f66cfe1a04ea5727dc data\pixelpirates\recipes\dagger.json
-50e37500dbe9180479b242c451e0d384afcec8e6 data\pixelpirates\advancements\recipes\combat\heartseeker.json
 99031316704ff7c44dd503fd29929140de21d99a data\pixelpirates\advancements\recipes\food\grog.json
+50e37500dbe9180479b242c451e0d384afcec8e6 data\pixelpirates\advancements\recipes\combat\heartseeker.json
 dea877b70e167dd471cb420ba4e6268b0a898fb1 data\pixelpirates\advancements\recipes\combat\soulrender.json
 76614e57e65b858d35bbfeeba61cd400e2f30b25 data\pixelpirates\recipes\rope.json
 c03c470fd734619e51b7ce4482b1d1e1069eb85d data\pixelpirates\recipes\kraken_fang.json

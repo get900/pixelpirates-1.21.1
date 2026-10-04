@@ -17,7 +17,7 @@ import sys
 
 REGISTRY = {}
 SKINS = {}
-for _mod in ("p1", "p2", "p3", "p4", "p5"):
+for _mod in ("p1", "p2", "p3", "p4", "p5", "townsfolk", "gull"):
     _m = importlib.import_module("mobs." + _mod)
     REGISTRY.update(_m.MOBS)
     SKINS.update(getattr(_m, "SKINS", {}))
@@ -47,6 +47,8 @@ def write_skin(base, name, skin, build, seed):
 
 if __name__ == "__main__":
     names = sys.argv[1:] or list(REGISTRY)
+    if names == ["townsfolk"]:                       # every townsperson (mobs/townsfolk.py)
+        names = [n for n in REGISTRY if n.startswith("folk_")]
     for n in names:
         seed = sum(map(ord, n))
         m = REGISTRY[n](seed)

@@ -21,11 +21,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     // Name fragments -> mining tool. First match wins, so the more specific words come first.
     private static final List<String> AXE = List.of("planks", "_log", "_wood", "driftwood", "twigs", "table", "mast", "helm",
-            "barrel", "waterline", "map_block", "diary", "hammock", "bedroll", "music_box", "coconut", "cask", "palm_stairs", "palm_slab", "palm_fence", "palm_door", "palm_trapdoor", "rope_", "tiki", "woven_palm", "desk", "sea_chest", "cargo_crate", "rum_rack", "ships_wheel", "chair", "stool", "hanging_", "trophy", "lobster_pot", "fish_trap", "salvage_crate", "trading_post", "bounty_board", "jolly_roger", "mooring_post", "figurehead", "roulette_table", "bellows", "weapon_rack", "pattern_board", "perch_branch", "parrot_roost");
+            "barrel", "waterline", "map_block", "diary", "hammock", "bedroll", "music_box", "easel", "swing", "coconut", "cask", "palm_stairs", "palm_slab", "palm_fence", "palm_door", "palm_trapdoor", "rope_", "tiki", "woven_palm", "desk", "sea_chest", "cargo_crate", "rum_rack", "ships_wheel", "chair", "stool", "hanging_", "trophy", "lobster_pot", "fish_trap", "salvage_crate", "trading_post", "bounty_board", "jolly_roger", "mooring_post", "figurehead", "roulette_table", "bellows", "weapon_rack", "pattern_board", "perch_branch", "parrot_roost");
     private static final List<String> SHOVEL = List.of("dirt", "sand", "silt", "shell_block");
     private static final List<String> HOE = List.of("leaves", "banana", "flesh");
     private static final List<String> PICKAXE = List.of("stone", "rock", "brick", "ore", "crystal", "emblem", "token",
-            "anchor", "sword", "treasure", "slate", "vein", "barnacle", "pearl", "sulfur", "cannon", "water_light", "still", "pedestal", "hoard", "forge_hearth", "forge_anvil", "statue", "marble_bust", "garden_urn", "signal_lantern", "puzzle_node");
+            "anchor", "sword", "treasure", "slate", "vein", "barnacle", "pearl", "sulfur", "cannon", "water_light", "still", "pedestal", "hoard", "forge_hearth", "forge_anvil", "statue", "marble_bust", "giant_chess", "street_lamp", "chess_trophy", "garden_urn", "signal_lantern", "puzzle_node");
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {

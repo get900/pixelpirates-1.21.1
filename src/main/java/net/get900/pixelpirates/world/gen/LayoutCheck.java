@@ -329,7 +329,7 @@ public final class LayoutCheck {
     /** Overlaps that are the design (the yard / piers / warehouse dock are built over the quay's edge on purpose). */
     static final Set<String> INTENDED = Set.of("Quay & Harbour <- Shipwright Yard", "Quay & Harbour <- Piers",
             "Quay & Harbour <- Warehouse (east)", "Quay & Harbour <- Warehouse (west)", "Piers <- Harbour Boats", "City Wall <- Gatehouse",
-            "Chapel <- Gatehouse", "Manor <- Gatehouse");                     // the chapel + manor gardens run into the wall's band
+            "Countryside <- Ridge Lookout", "Countryside <- Chess Green", "Countryside <- Farmstead", "Countryside <- Shepherd's Hut", "Chapel <- Gatehouse", "Manor <- Gatehouse");                     // the chapel + manor gardens run into the wall's band
     /** The ground layers every building is meant to build over. */
     static final Set<String> GROUND_PASSES = Set.of("City Paving", "Streets", "Terraces");
 

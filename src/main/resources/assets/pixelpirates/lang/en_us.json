@@ -1087,5 +1087,19 @@
   "block.pixelpirates.ship_in_bottle_ghost": "Ship in a Bottle (Ghost Ship)",
   "block.pixelpirates.tattoo_chair": "Tattoo Chair",
   "block.pixelpirates.cattery_counter": "Cattery Counter",
-  "block.pixelpirates.wren_music_box": "Captain Wren's Music Box"
+  "block.pixelpirates.wren_music_box": "Captain Wren's Music Box",
+  "block.pixelpirates.easel": "Easel",
+  "block.pixelpirates.swing": "Swing",
+  "block.pixelpirates.hanging_swing": "Hanging Swing",
+  "block.pixelpirates.barber_chair": "Barber's Chair",
+  "item.pixelpirates.blank_canvas": "Blank Canvas",
+  "item.pixelpirates.player_painting": "Painting",
+  "entity.pixelpirates.player_painting": "Painting",
+  "entity.pixelpirates.swing_seat": "Swing",
+  "block.pixelpirates.chess_table": "Chess Table",
+  "block.pixelpirates.giant_chess": "Giant Chess Set",
+  "entity.pixelpirates.townsfolk": "Townsperson",
+  "block.pixelpirates.street_lamp": "Street Lamp",
+  "block.pixelpirates.chess_trophy": "The Commodore's Chess Trophy",
+  "entity.pixelpirates.seagull": "Seagull"
 }

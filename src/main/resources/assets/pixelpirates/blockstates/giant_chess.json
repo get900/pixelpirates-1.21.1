@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "pixelpirates:block/giant_chess",
+   "y": 180
+  },
+  "facing=east": {
+   "model": "pixelpirates:block/giant_chess",
+   "y": 270
+  },
+  "facing=south": {
+   "model": "pixelpirates:block/giant_chess"
+  },
+  "facing=west": {
+   "model": "pixelpirates:block/giant_chess",
+   "y": 90
+  }
+ }
+}

@@ -90,6 +90,14 @@ final class HomesteadRecipes {
         shaped(ex, HomesteadBlocks.CROWN_ANCHOR_TABLE, 1, new String[]{"GWG", "PPP", "S S"}, 'G', Items.GOLD_NUGGET, 'W', Items.WHITE_CARPET, 'P', Items.SPRUCE_PLANKS, 'S', Items.STICK);
         shaped(ex, HomesteadBlocks.CATTERY_COUNTER, 1, new String[]{"WCW", "PPP", "P P"}, 'W', Items.WHITE_WOOL, 'C', Items.COD, 'P', Items.SPRUCE_PLANKS);
         shaped(ex, HomesteadBlocks.TATTOO_CHAIR, 1, new String[]{"L  ", "LLL", "S S"}, 'L', Items.LEATHER, 'S', Items.DARK_OAK_SLAB);
+        // paintings, swings, the barber's chair (2026-10-04)
+        shaped(ex, HomesteadBlocks.EASEL, 1, new String[]{" S ", "SPS", "S S"}, 'S', Items.STICK, 'P', Items.OAK_PLANKS);
+        shaped(ex, net.get900.pixelpirates.homestead.HomesteadItems.BLANK_CANVAS, 2, new String[]{"SSS", "SWS", "SSS"}, 'S', Items.STICK, 'W', Items.WHITE_WOOL);
+        shaped(ex, HomesteadBlocks.SWING, 1, new String[]{"LLL", "LRL", "LSL"}, 'L', Items.OAK_LOG, 'R', Items.STRING, 'S', Items.OAK_SLAB);
+        shaped(ex, HomesteadBlocks.HANGING_SWING, 1, new String[]{"R R", "R R", "SSS"}, 'R', Items.STRING, 'S', Items.OAK_SLAB);
+        shaped(ex, HomesteadBlocks.CHESS_TABLE, 1, new String[]{"WBW", "PPP", "S S"}, 'W', Items.WHITE_WOOL, 'B', Items.BLACK_WOOL, 'P', Items.OAK_PLANKS, 'S', Items.STICK);
+        shaped(ex, HomesteadBlocks.GIANT_CHESS, 1, new String[]{" C ", "QBQ", "SSS"}, 'C', Items.CLOCK, 'Q', Items.QUARTZ_BLOCK, 'B', Items.BLACKSTONE, 'S', Items.STONE_BRICKS);
+        shaped(ex, HomesteadBlocks.BARBER_CHAIR, 1, new String[]{"L  ", "LLL", "IGI"}, 'L', Items.RED_WOOL, 'I', Items.IRON_INGOT, 'G', Items.GOLD_INGOT);
         p.shapeless(RecipeCategory.DECORATIONS, HomesteadBlocks.SHIP_IN_BOTTLE_SLOOP, 1, Items.GLASS_BOTTLE, Items.OAK_PLANKS, Items.STRING, Items.PAPER).offerTo(ex, HomesteadRecipeProvider.id("ship_in_bottle_sloop"));
         p.shapeless(RecipeCategory.DECORATIONS, HomesteadBlocks.SHIP_IN_BOTTLE_BRIG, 1, Items.GLASS_BOTTLE, Items.DARK_OAK_PLANKS, Items.STRING, Items.PAPER, Items.RED_DYE).offerTo(ex, HomesteadRecipeProvider.id("ship_in_bottle_brig"));
         p.shapeless(RecipeCategory.DECORATIONS, HomesteadBlocks.SHIP_IN_BOTTLE_GALLEON, 1, Items.GLASS_BOTTLE, Items.DARK_OAK_PLANKS, Items.STRING, Items.PAPER, Items.GOLD_NUGGET, Items.RED_DYE).offerTo(ex, HomesteadRecipeProvider.id("ship_in_bottle_galleon"));

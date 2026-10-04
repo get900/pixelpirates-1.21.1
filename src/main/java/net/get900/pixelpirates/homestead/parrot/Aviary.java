@@ -48,7 +48,7 @@ public final class Aviary {
         });
     }
 
-    static Box cage() {
+    public static Box cage() {
         int[] c = PortCityLayout.AVIARY_CENTRE;
         return new Box(c[0] - 3, c[1] - 2, c[2] - 3, c[0] + 4, c[1] + 8, c[2] + 4);
     }

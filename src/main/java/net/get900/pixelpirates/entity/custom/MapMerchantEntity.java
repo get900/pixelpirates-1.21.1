@@ -28,6 +28,9 @@ public class MapMerchantEntity extends PathAwareEntity implements GeoEntity {
     private static final RawAnimation WALK_ANIMATION = RawAnimation.begin().thenLoop("move");
     @org.jetbrains.annotations.Nullable private net.minecraft.util.math.BlockPos home;
     private int flourishIn = 400;
+    /** Evenings in the inn's common room, nights in an inn bed (homestead/town/Lodging). */
+    private final net.get900.pixelpirates.homestead.town.Lodging.Mover lodging = new net.get900.pixelpirates.homestead.town.Lodging.Mover();
+    private static final RawAnimation SIT_ANIMATION = RawAnimation.begin().thenLoop("sit");
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
@@ -44,6 +47,10 @@ public class MapMerchantEntity extends PathAwareEntity implements GeoEntity {
 
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
+        if (this.isSleeping()) {
+            if (!player.getWorld().isClient) player.sendMessage(net.minecraft.text.Text.literal("The Map Merchant is asleep. The market opens at dawn."), true);
+            return ActionResult.SUCCESS;
+        }
         if (!player.getWorld().isClient && player instanceof ServerPlayerEntity serverPlayer) {
             this.playSound(net.get900.pixelpirates.sound.ModSounds.MAP_MERCHANT_TRADE, 1.0f, 1.0f);
             this.triggerAnim("action", "talk");
@@ -58,6 +65,7 @@ public class MapMerchantEntity extends PathAwareEntity implements GeoEntity {
     @Override
     protected void mobTick() {
         super.mobTick();
+        if (lodging.tick(this, "map_merchant")) return;                                    // off duty: the inn
         if (home != null && this.age % 20 == 0 && this.getBlockPos().getSquaredDistance(home) > 4)
             this.getNavigation().startMovingTo(home.getX() + 0.5, home.getY(), home.getZ() + 0.5, 0.5);
         if (--flourishIn <= 0) {
@@ -110,6 +118,7 @@ public class MapMerchantEntity extends PathAwareEntity implements GeoEntity {
     }
 
     private PlayState animPredicate(AnimationState<MapMerchantEntity> state) {
+        if (this.hasVehicle()) return state.setAndContinue(SIT_ANIMATION);
         if (state.isMoving()) {
             return state.setAndContinue(WALK_ANIMATION);
         }

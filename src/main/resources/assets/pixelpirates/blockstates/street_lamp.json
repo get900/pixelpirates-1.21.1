@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "hanging=false,lit=false": {
+   "model": "pixelpirates:block/street_lamp_off"
+  },
+  "hanging=false,lit=true": {
+   "model": "pixelpirates:block/street_lamp_on"
+  },
+  "hanging=true,lit=false": {
+   "model": "pixelpirates:block/street_lamp_off_hanging"
+  },
+  "hanging=true,lit=true": {
+   "model": "pixelpirates:block/street_lamp_on_hanging"
+  }
+ }
+}

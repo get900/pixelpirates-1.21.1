@@ -677,6 +677,65 @@ public class ModCommands {
                         return 1;
                     }))));
 
+            // /ppchess <pos> demo: the computer plays itself on that board (testing - homestead/chess)
+            dispatcher.register(CommandManager.literal("ppchess").requires(src -> src.hasPermissionLevel(2))
+                    .then(CommandManager.argument("pos", net.minecraft.command.argument.BlockPosArgumentType.blockPos())
+                            .then(CommandManager.literal("demo").executes(ctx -> {
+                                BlockPos pos = net.minecraft.command.argument.BlockPosArgumentType.getLoadedBlockPos(ctx, "pos");
+                                boolean ok = net.get900.pixelpirates.homestead.chess.Chess.demo(ctx.getSource().getWorld(), pos);
+                                ctx.getSource().sendFeedback(() -> Text.literal(ok ? "The computer plays itself." : "No chess board there."), false);
+                                return ok ? 1 : 0;
+                            }))
+                            .then(CommandManager.literal("open").executes(ctx -> {
+                                BlockPos pos = net.minecraft.command.argument.BlockPosArgumentType.getLoadedBlockPos(ctx, "pos");
+                                if (!(ctx.getSource().getWorld().getBlockEntity(pos) instanceof net.get900.pixelpirates.homestead.chess.ChessBoardEntity be)) return 0;
+                                net.get900.pixelpirates.homestead.chess.Chess.open(ctx.getSource().getPlayerOrThrow(), be);
+                                return 1;
+                            }))));
+
+            // /pptelescope <pos>: look through the telescope there (testing - homestead/nav/Telescopes)
+            dispatcher.register(CommandManager.literal("pptelescope").requires(src -> src.hasPermissionLevel(2))
+                    .then(CommandManager.argument("pos", net.minecraft.command.argument.BlockPosArgumentType.blockPos()).executes(ctx -> {
+                        BlockPos pos = net.minecraft.command.argument.BlockPosArgumentType.getLoadedBlockPos(ctx, "pos");
+                        ServerPlayerEntity p = ctx.getSource().getPlayerOrThrow();
+                        if (!(p.getServerWorld().getBlockState(pos).getBlock() instanceof net.get900.pixelpirates.homestead.furniture.TelescopeBlock)) {
+                            ctx.getSource().sendError(Text.literal("No telescope there.")); return 0;
+                        }
+                        net.get900.pixelpirates.homestead.nav.Telescopes.start(p, pos);
+                        return 1;
+                    })));
+
+            // /ppswing <pos>: sit on the swing there (testing - homestead/swing)
+            dispatcher.register(CommandManager.literal("ppswing").requires(src -> src.hasPermissionLevel(2))
+                    .then(CommandManager.argument("pos", net.minecraft.command.argument.BlockPosArgumentType.blockPos()).executes(ctx -> {
+                        BlockPos pos = net.minecraft.command.argument.BlockPosArgumentType.getLoadedBlockPos(ctx, "pos");
+                        ServerPlayerEntity p = ctx.getSource().getPlayerOrThrow();
+                        var st = p.getServerWorld().getBlockState(pos);
+                        if (st.getBlock() instanceof net.get900.pixelpirates.homestead.swing.SwingBlock && st.get(net.get900.pixelpirates.homestead.TallFurniture.HALF)
+                                == net.minecraft.block.enums.DoubleBlockHalf.UPPER) pos = pos.down();
+                        boolean ok = net.get900.pixelpirates.homestead.swing.SwingSeatEntity.sit(p.getServerWorld(), pos, p);
+                        ctx.getSource().sendFeedback(() -> Text.literal(ok ? "Swinging." : "No free swing there."), false);
+                        return ok ? 1 : 0;
+                    })));
+
+            // /ppbeard <style|none> [colour] | /ppbeard grow <days> (testing facial hair - homestead/beard)
+            dispatcher.register(CommandManager.literal("ppbeard").requires(src -> src.hasPermissionLevel(2))
+                    .then(CommandManager.literal("grow").then(CommandManager.argument("days", IntegerArgumentType.integer(1, 60)).executes(ctx -> {
+                        String m = net.get900.pixelpirates.homestead.beard.Beards.debug(ctx.getSource().getPlayerOrThrow(), "", null, IntegerArgumentType.getInteger(ctx, "days"));
+                        ctx.getSource().sendFeedback(() -> Text.literal(m), false); return 1; })))
+                    .then(CommandManager.argument("style", StringArgumentType.word())
+                            .suggests((c, b) -> net.minecraft.command.CommandSource.suggestMatching(java.util.stream.Stream.concat(java.util.stream.Stream.of("none"),
+                                    net.get900.pixelpirates.homestead.beard.Beards.STYLES.stream().map(s -> s.id())), b))
+                            .executes(ctx -> {
+                                String m = net.get900.pixelpirates.homestead.beard.Beards.debug(ctx.getSource().getPlayerOrThrow(), StringArgumentType.getString(ctx, "style"), null, 0);
+                                ctx.getSource().sendFeedback(() -> Text.literal(m), false); return 1; })
+                            .then(CommandManager.argument("colour", StringArgumentType.word())
+                                    .suggests((c, b) -> net.minecraft.command.CommandSource.suggestMatching(net.get900.pixelpirates.homestead.beard.Beards.COLOURS, b))
+                                    .executes(ctx -> {
+                                        String m = net.get900.pixelpirates.homestead.beard.Beards.debug(ctx.getSource().getPlayerOrThrow(), StringArgumentType.getString(ctx, "style"),
+                                                StringArgumentType.getString(ctx, "colour"), 0);
+                                        ctx.getSource().sendFeedback(() -> Text.literal(m), false); return 1; }))));
+
             dispatcher.register(CommandManager.literal("ppcattery").requires(src -> src.hasPermissionLevel(2)).executes(ctx -> {
                 var w = ctx.getSource().getServer().getWorld(net.get900.pixelpirates.homestead.trade.PortTraders.DIM);
                 var got = w == null ? java.util.List.<net.get900.pixelpirates.homestead.cat.CatCoats.Coat>of() : net.get900.pixelpirates.homestead.cat.Cattery.restock(w);

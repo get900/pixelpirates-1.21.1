@@ -12,10 +12,7 @@
     (red rings, then the fort's cannons / falling shells hit them); Grog Swig once <25%. Voice lines in chat. 200 HP.
   - Enraged skin: `ModBoss` syncs ENRAGED; `GlowingMobRenderer.of` swaps to `NAME_enraged.png` if it exists. Skins come
     from `SKINS` in tools/mobs/pN.py, and `gen_mob_roster.py` refuses a skin whose cubes differ from the base (UVs).
-  - **Z-fighting check:** `python tools/check_zfight.py <mob...>` lists cubes on one bone whose same-facing faces
-    share a plane (the flicker the user spotted on Rackham's epaulettes + plume tip). Run it after every model edit.
-    Stack parts so they TOUCH, never overlap on a shared face. 2026-09-29: rackham 0; 180 remain in other mobs
-    (abyssal_heart 75, coral_jelly 15, ...) - fix each when its boss/mob gets its overhaul.
+  - **Z-fighting:** see CLAUDE.md "Z-fighting" (2026-10-05: every model fixed, the writers fix new ones).
   - Model: `tools/mobs/rackham.py` (peg leg, tricorn, braids, bandolier, parrot bones `parrot/parrot_head/pwing_*`).
   - Lair: `world/dungeon/RackhamFort` (Rackham's Hold, full +-22 footprint): gatehouse, 4 towers, keep (war room,
     captain's cabin, Jolly Roger), vault under the keep sealed by BLAST_RUBBLE, powder magazine (dynamite loot), brig

@@ -32,7 +32,8 @@ public class HomesteadState extends PersistentState {
     private final Map<UUID, BlockPos> deaths = new HashMap<>();
     private final Map<UUID, Set<String>> discoveries = new HashMap<>();
     private final Map<UUID, NbtCompound> bounties = new HashMap<>();
-    private final Map<UUID, NbtCompound> tattoos = new HashMap<>();                     // slot -> design (homestead/tattoo)
+    private final Map<UUID, NbtCompound> tattoos = new HashMap<>();
+    private final Map<UUID, NbtCompound> beards = new HashMap<>();                      // growth, style, colour (homestead/beard)                     // slot -> design (homestead/tattoo)
 
     public static HomesteadState get(MinecraftServer server) {
         return server.getOverworld().getPersistentStateManager().getOrCreate(HomesteadState::fromNbt, HomesteadState::new, "pixelpirates_homestead");
@@ -84,6 +85,9 @@ public class HomesteadState extends PersistentState {
 
     /** The player's tattoos, slot -> design id (live: change it, then touch()). */
     public NbtCompound tattoos(UUID p) { return tattoos.computeIfAbsent(p, k -> new NbtCompound()); }
+
+    /** The player's facial hair {G growth ticks, S style, C colour, K keep clean} (live: change it, then markDirty()). */
+    public NbtCompound beard(UUID p) { return beards.computeIfAbsent(p, k -> new NbtCompound()); }
 
     public void touch() { markDirty(); }
 
@@ -146,6 +150,9 @@ public class HomesteadState extends PersistentState {
         NbtList tl = new NbtList();
         tattoos.forEach((u, t) -> { if (!t.isEmpty()) { NbtCompound c = new NbtCompound(); c.putUuid("P", u); c.put("T", t); tl.add(c); } });
         nbt.put("Tattoos", tl);
+        NbtList bdl = new NbtList();
+        beards.forEach((u, b) -> { NbtCompound c = new NbtCompound(); c.putUuid("P", u); c.put("B", b); bdl.add(c); });
+        nbt.put("Beards", bdl);
         NbtList fl = new NbtList();
         for (String f : flags) fl.add(NbtString.of(f));
         nbt.put("Flags", fl);
@@ -185,6 +192,10 @@ public class HomesteadState extends PersistentState {
         for (NbtElement e : nbt.getList("Tattoos", NbtElement.COMPOUND_TYPE)) {
             NbtCompound c = (NbtCompound) e;
             s.tattoos.put(c.getUuid("P"), c.getCompound("T"));
+        }
+        for (NbtElement e : nbt.getList("Beards", NbtElement.COMPOUND_TYPE)) {
+            NbtCompound c = (NbtCompound) e;
+            s.beards.put(c.getUuid("P"), c.getCompound("B"));
         }
         for (NbtElement e : nbt.getList("Flags", NbtElement.STRING_TYPE)) s.flags.add(e.asString());
         NbtCompound nums = nbt.getCompound("Numbers");

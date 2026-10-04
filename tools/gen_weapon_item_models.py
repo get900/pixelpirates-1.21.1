@@ -16,6 +16,7 @@ Model conventions (tools/gen_weapon_models.py, tools/mobs/guns.py, tools/mobs/ga
   blades/poles/bow/flail: grip at the origin, pointing +Y, edge -Z;  guns: barrel -Z, grip hangs -Y, `GRIP` = hand centre.
 """
 import json, math, pathlib
+import zfight
 import numpy as np
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent / "src/main/resources/assets/pixelpirates"
@@ -162,6 +163,7 @@ def main():
     for n in list(GUNS) + MELEE:
         disp = gun(n) if n in GUNS else melee(n)
         out = {"parent": "builtin/entity", "gui_light": "front", "textures": {"particle": PARTICLE[n]}, "display": disp}
+        zfight.fix_elements(out)                               # no coplanar faces (flicker) - tools/zfight.py
         (ROOT / "models/item" / (n + ".json")).write_text(json.dumps(out, indent=1), encoding="utf-8")
         print(f"{n:24s} 3p {disp['thirdperson_righthand']['rotation']} {disp['thirdperson_righthand']['translation']}"
               f"  gui {disp['gui']['rotation']} s{disp['gui']['scale'][0]}")

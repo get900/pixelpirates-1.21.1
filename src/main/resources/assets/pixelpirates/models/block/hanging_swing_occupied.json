@@ -1,0 +1,122 @@
+{
+ "textures": {
+  "wood": "minecraft:block/stripped_oak_log",
+  "plank": "minecraft:block/oak_planks",
+  "rope": "pixelpirates:block/rope",
+  "particle": "minecraft:block/oak_planks"
+ },
+ "elements": [
+  {
+   "from": [
+    3.5,
+    30.4,
+    7.75
+   ],
+   "to": [
+    4.0,
+    32,
+    8.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rope",
+     "uv": [
+      12.0,
+      0,
+      12.5,
+      1.6000000000000014
+     ]
+    },
+    "south": {
+     "texture": "#rope",
+     "uv": [
+      3.5,
+      0,
+      4.0,
+      1.6000000000000014
+     ]
+    },
+    "east": {
+     "texture": "#rope",
+     "uv": [
+      7.75,
+      0,
+      8.25,
+      1.6000000000000014
+     ]
+    },
+    "west": {
+     "texture": "#rope",
+     "uv": [
+      7.75,
+      0,
+      8.25,
+      1.6000000000000014
+     ]
+    },
+    "up": {
+     "texture": "#rope"
+    },
+    "down": {
+     "texture": "#rope"
+    }
+   }
+  },
+  {
+   "from": [
+    12,
+    30.4,
+    7.75
+   ],
+   "to": [
+    12.5,
+    32,
+    8.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rope",
+     "uv": [
+      3.5,
+      0,
+      4,
+      1.6000000000000014
+     ]
+    },
+    "south": {
+     "texture": "#rope",
+     "uv": [
+      12,
+      0,
+      12.5,
+      1.6000000000000014
+     ]
+    },
+    "east": {
+     "texture": "#rope",
+     "uv": [
+      7.75,
+      0,
+      8.25,
+      1.6000000000000014
+     ]
+    },
+    "west": {
+     "texture": "#rope",
+     "uv": [
+      7.75,
+      0,
+      8.25,
+      1.6000000000000014
+     ]
+    },
+    "up": {
+     "texture": "#rope"
+    },
+    "down": {
+     "texture": "#rope"
+    }
+   }
+  }
+ ]
+}

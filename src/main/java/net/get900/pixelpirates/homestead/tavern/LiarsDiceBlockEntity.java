@@ -138,7 +138,10 @@ public class LiarsDiceBlockEntity extends GameTableBlockEntity {
     }
 
     private void addRegular() {
-        for (String n : REGULARS) {
+        java.util.List<String> names = new java.util.ArrayList<>();
+        if (world instanceof ServerWorld sw) names.addAll(net.get900.pixelpirates.homestead.town.TownLife.regularsNear(sw, pos));   // the townsfolk at the table first
+        names.addAll(java.util.List.of(REGULARS));
+        for (String n : names) {
             boolean used = false;
             for (Seat s : seats) used |= n.equals(s.name);
             if (used) continue;
@@ -280,6 +283,10 @@ public class LiarsDiceBlockEntity extends GameTableBlockEntity {
         deadline = now() + OVER_TICKS;
         if (win == null) { winner = "Nobody"; return; }
         winner = win.name;
+        java.util.List<UUID> hs = new java.util.ArrayList<>();
+        java.util.List<String> bots = new java.util.ArrayList<>();
+        for (Seat s : seats) { if (s.bot) bots.add(s.name); else hs.add(s.id); }
+        net.get900.pixelpirates.homestead.town.TownLife.diceOver(w, hs, bots, win.name, win.bot);              // the townsfolk remember
         log(win.name + " wins the pot of " + pot + " coins!");
         if (!win.bot) payOut(w, win.id, pot);
         announce(Text.literal("[Liar's Dice] " + win.name + " wins" + (pot > 0 ? " " + pot + " pirate coins!" : "!")).formatted(Formatting.GOLD));

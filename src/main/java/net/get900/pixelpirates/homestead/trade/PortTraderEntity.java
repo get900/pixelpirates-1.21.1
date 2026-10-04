@@ -61,11 +61,14 @@ public class PortTraderEntity extends MerchantEntity implements GeoEntity {
     public enum Kind { QUARTERMASTER, FISHMONGER, BARKEEP, CURIO_DEALER, GUNSMITH, CHANDLER, COOK }
 
     private static final TrackedData<Integer> KIND = DataTracker.registerData(PortTraderEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle"), MOVE = RawAnimation.begin().thenLoop("move");
+    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle"), MOVE = RawAnimation.begin().thenLoop("move"),
+            SIT = RawAnimation.begin().thenLoop("sit");
     private int flourishIn = 300;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     @Nullable private BlockPos home;
     private int restock = 2400;
+    /** Evenings in the inn's common room, nights in an inn bed (homestead/town/Lodging). */
+    private final net.get900.pixelpirates.homestead.town.Lodging.Mover lodging = new net.get900.pixelpirates.homestead.town.Lodging.Mover();
 
     public PortTraderEntity(EntityType<? extends MerchantEntity> type, World world) {
         super(type, world);
@@ -106,6 +109,10 @@ public class PortTraderEntity extends MerchantEntity implements GeoEntity {
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!this.isAlive() || this.hasCustomer() || this.isBaby()) return super.interactMob(player, hand);
+        if (this.isSleeping()) {
+            if (!this.getWorld().isClient) player.sendMessage(Text.literal("The " + kindName() + " is asleep. The market opens at dawn.").formatted(Formatting.GRAY), true);
+            return ActionResult.success(this.getWorld().isClient);
+        }
         if (this.getWorld().isClient) clientOpenedAt = System.currentTimeMillis();   // -> the port counter skin (MerchantScreenSkinMixin)
         if (!this.getWorld().isClient) {
             if (this.getOffers().isEmpty()) return ActionResult.CONSUME;
@@ -237,6 +244,7 @@ public class PortTraderEntity extends MerchantEntity implements GeoEntity {
             restock = 24000;                                              // once a Minecraft day (was every 2 minutes)
             for (TradeOffer t : this.getOffers()) t.resetUses();
         }
+        if (lodging.tick(this, "trader_" + kind().name().toLowerCase())) return;           // off duty: the inn
         // mind the booth: back behind the counter whenever he strays more than a couple of blocks
         if (home != null && this.age % 20 == 0 && this.getBlockPos().getSquaredDistance(home) > 4 && !hasCustomer())
             this.getNavigation().startMovingTo(home.getX() + 0.5, home.getY(), home.getZ() + 0.5, 0.5);
@@ -306,7 +314,7 @@ public class PortTraderEntity extends MerchantEntity implements GeoEntity {
     // ------------------------------------------------------------------ GeckoLib
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "movement", 5, st -> st.setAndContinue(st.isMoving() ? MOVE : IDLE)));
+        controllers.add(new AnimationController<>(this, "movement", 5, st -> st.setAndContinue(this.hasVehicle() ? SIT : st.isMoving() ? MOVE : IDLE)));
         controllers.add(new AnimationController<>(this, "action", 3, st -> software.bernie.geckolib.core.object.PlayState.STOP)
                 .triggerableAnim("talk", RawAnimation.begin().thenPlay("talk"))
                 .triggerableAnim("flourish", RawAnimation.begin().thenPlay("flourish")));

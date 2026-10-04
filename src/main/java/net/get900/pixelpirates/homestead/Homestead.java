@@ -38,6 +38,9 @@ public final class Homestead {
         registerSeedDrops();
         net.get900.pixelpirates.homestead.trade.Prices.init();
         net.get900.pixelpirates.homestead.trade.PortTraders.register();
+        net.get900.pixelpirates.homestead.town.TownLife.register();                 // the townsfolk: who lives where, their days
+        net.get900.pixelpirates.homestead.town.TownTalk.register();
+        net.get900.pixelpirates.homestead.town.TownMusic.register();
         net.get900.pixelpirates.homestead.bounty.Bounties.register();
         net.get900.pixelpirates.homestead.bounty.Bounties.registerNetworking();
         net.get900.pixelpirates.homestead.tavern.TavernGames.registerNetworking();
@@ -48,7 +51,11 @@ public final class Homestead {
         net.get900.pixelpirates.homestead.parrot.ParrotCompanion.register();
         net.get900.pixelpirates.homestead.parrot.Aviary.register();
         net.get900.pixelpirates.homestead.cat.Cattery.register();
-        net.get900.pixelpirates.homestead.wreck.WreckSecret.register();          // the Beach Wreck easter egg (#45)
+        net.get900.pixelpirates.homestead.wreck.WreckSecret.register();
+        net.get900.pixelpirates.homestead.art.Art.register();                    // paintings (the easel)
+        net.get900.pixelpirates.homestead.beard.Beards.register();
+        net.get900.pixelpirates.homestead.nav.Telescopes.register();
+        net.get900.pixelpirates.homestead.chess.Chess.register();                  // chess: the table + the giant set           // look through a telescope               // facial hair (the barber's chair, #38)          // the Beach Wreck easter egg (#45)
         net.get900.pixelpirates.homestead.tattoo.Tattoos.register();             // tattoos (the tattooist's chair, #33)               // ship's cats (townhouse #36)
         net.get900.pixelpirates.homestead.parrot.ParrotAbilities.register();
         net.get900.pixelpirates.homestead.parrot.ParrotCollection.register();

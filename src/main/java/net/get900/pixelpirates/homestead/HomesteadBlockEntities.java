@@ -21,6 +21,12 @@ public final class HomesteadBlockEntities {
     public static final BlockEntityType<net.get900.pixelpirates.homestead.trophy.MobTrophyBlockEntity> MOB_TROPHY = be("mob_trophy",
             net.get900.pixelpirates.homestead.trophy.MobTrophyBlockEntity::new, HomesteadBlocks.SHARK_TROPHY, HomesteadBlocks.REEFBACK_TROPHY,
             HomesteadBlocks.LAVA_CRAB_TROPHY, HomesteadBlocks.GHOST_SHARK_TROPHY, HomesteadBlocks.ANGLER_TROPHY, HomesteadBlocks.ABYSS_EEL_TROPHY);
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.art.EaselBlockEntity> EASEL = be("easel",
+            net.get900.pixelpirates.homestead.art.EaselBlockEntity::new, HomesteadBlocks.EASEL);
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.chess.ChessBoardEntity> CHESS = be("chess",
+            net.get900.pixelpirates.homestead.chess.ChessBoardEntity::new, HomesteadBlocks.CHESS_TABLE, HomesteadBlocks.GIANT_CHESS);
+    public static final BlockEntityType<net.get900.pixelpirates.homestead.swing.SwingBlockEntity> SWING = be("swing",
+            net.get900.pixelpirates.homestead.swing.SwingBlockEntity::new, HomesteadBlocks.SWING, HomesteadBlocks.HANGING_SWING);
     public static final BlockEntityType<RumStillBlockEntity> RUM_STILL = be("rum_still", RumStillBlockEntity::new, HomesteadBlocks.RUM_STILL);
     public static final BlockEntityType<AgingCaskBlockEntity> AGING_CASK = be("aging_cask", AgingCaskBlockEntity::new, HomesteadBlocks.AGING_CASK);
 

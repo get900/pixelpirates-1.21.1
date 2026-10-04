@@ -246,3 +246,63 @@ on the note-block bell from a server-side note queue (`MusicBoxBlock.tick`, END_
 note particles. NOT craftable: one per player from the Beach Wreck's buried chest (`WreckSecret`, see docs/spawn-island.md
 #45). Model `tools/gen_props_assets.py musicbox` (dark oak, brass corners, open velvet lid, cylinder + comb, key).
 NOT seen in a client.
+
+## PAINTINGS, FACIAL HAIR, SWINGS (2026-10-04)
+- PAINTINGS (`homestead/art/`): the EASEL (2 blocks tall, `TallFurniture`) opens `client/screen/PaintScreen` - a canvas of
+  up to 32 x 32 px in ANY colour (hue/shade picker, 32 swatches, recent colours, eyedropper = right-click), pencil, 2x2
+  brush, fill, undo (ctrl+Z), clear, a title; shapes 1x1 (32x32 px), 2x2 (32x32 shown big), 2x1 (32x16), 1x2 (16x32) -
+  changing shape starts fresh. The work in progress lives on the easel (`EaselBlockEntity`, synced; `EaselRenderer` shows
+  it on the board); closing the screen saves it. FINISH uses one BLANK CANVAS (2 from 8 sticks + white wool) and gives a
+  PAINTING item {Art: Size, Title, Author, Pixels} - hang it on a wall like a vanilla painting (`CustomPaintingEntity`,
+  `CustomPaintingRenderer`: the picture in a dark-oak frame; pictures become dynamic textures, `ArtTextures`, 256 kept).
+  Purely decorative. Easel recipe: sticks + planks. The marine painter (#41) has a real easel with a half-finished
+  "Harbour at Dawn" on it (`PortCityLayout.seascape()`).
+- FACIAL HAIR (`homestead/beard/Beards`): grows while you're ONLINE - stubble after 1 MC day of play (24000 ticks),
+  a short beard after 3, a long beard after 7; left alone it goes stubble -> short beard -> full beard. The BARBER'S CHAIR
+  (#38, recipe red wool + iron + gold) opens `BarberScreen` (your pirate wearing what you look at, growth bar + time to the
+  next stage): 12 styles - stubble; moustache, goatee, chinstrap, mutton chops, short beard (short); French moustache,
+  handlebar, full beard, forked beard, braided pirate beard, captain's beard (long) - greyed until you've grown enough.
+  Trimming costs 5 doubloons (Haggler) and cuts the growth back to that style's length; 7 colours (a dye job on what you
+  wear is free); Shave clean; Stay clean-shaven (stops growth). Stored in HomesteadState "Beards"; every client gets each
+  player's look (Beards.SYNC) and `client/BeardFeature` draws it on the head (a face layer + a hanging piece for long
+  styles, tinted; textures from tools/gen_beard_textures.py). Test: `/ppbeard <style|none> [colour]`, `/ppbeard grow <days>`.
+- SWINGS (`homestead/swing/`): the SWING (an A-frame, 2 tall) and the HANGING SWING (ropes + seat; place it under a
+  solid block or a fence - it hangs down 2). Right-click to sit: `SwingSeatEntity` carries you along a 2.4 s pendulum,
+  building to +-32 degrees along the way it faces; sneak to get off. While occupied the resting seat hides (OCCUPIED) and
+  `SwingRenderer` draws the seat model (block/swing_seat_moving, loaded via ModelLoadingPlugin) at the rider's angle.
+  Two swings stand in the park's west garden. Test: `/ppswing <pos>`.
+- Models/icons: tools/gen_leisure_assets.py (previews tools/previews/leisure/). Verified in the dev client: easel showing
+  its canvas, a 2x2 painting on a wall (both the right way up), barber chair, framed + hanging swings, riding both swings,
+  9 beard styles incl. the long ones in several colours (tools/previews/leisure/ingame_1/2.png). NOT verified: painting in
+  the PaintScreen by hand, Finish/hanging from the item, the BarberScreen itself, natural growth over days.
+
+## THE TELESCOPE (2026-10-04) - `homestead/nav/Telescopes` + `homestead/client/TelescopeView`
+Use a TELESCOPE block to put your eye to it: the spyglass scope overlay, the view zoomed x10 (the scroll wheel steps
+x10 / x20 / x40), a compass bearing at the top, and - like the Captain's Spyglass (`CaptainsSpyglassItem.identify`, now
+with a range) - the name, health and range of a creature under the crosshair (to 320) or the flag + hull of a ship (to
+480) on the action bar, every 5 ticks, server side. Sneak, step off the spot, attack/use or open a screen to step back;
+the server also ends it if you walk 4+ blocks away or the telescope goes. Client mixins (pixelpirates.mixins.json client):
+TelescopeSpyglassMixin (the local player counts as using a spyglass: overlay + slow aim), TelescopeFovMixin (the zoom -
+vanilla only zooms a spyglass that is being held up, isUsingItem), TelescopeScrollMixin (the wheel zooms). Test:
+`/pptelescope <pos>`. Verified in the dev client (scope, zoom, bearing). The Ridge Lookout (#49) has four on its gallery.
+
+## CHESS (2026-10-04) - `homestead/chess/`
+Two variants, both played through the chess screen (`client/screen/ChessScreen`):
+- the CHESS TABLE (one block, a little ivory/ebony set on its board; recipe wool + planks + sticks) - one stands in the
+  toymaker's shop (#35, Townhouse 15) between two stools;
+- GIANT CHESS (a pedestal with a chess clock; recipe clock + quartz + blackstone + stone bricks): the board is the 8 x 8
+  floor IN FRONT of it (a1 straight ahead, files to the right, white plays from the pedestal; `GiantChessBlock.square`),
+  the pieces knee- to waist-high (the king ~1.4 blocks). It stands on #50 THE CHESS GREEN, just out of the North Gate
+  between the fort road and the wheat field (quartz + blackstone squares, benches, lamps, a sign).
+- Seats: sit as white or black, or put the COMPUTER in an empty seat - easy (one move ahead, noisy) or normal (3-ply
+  alpha-beta, captures first, material + development/centre). Two players, one player vs the computer, or watch.
+- `ChessRules`: full rules - castling, en passant, promotion (the screen asks which piece), check, checkmate, stalemate,
+  fifty moves, bare kings. Perft-verified (start d4 197281, Kiwipete d3 97862, position 3 d4 43238). The computer answers
+  in ~20-35 ms on the server thread.
+- `ChessBoardEntity` (one per board) keeps the game + seats + the last move; synced to clients. `ChessRenderer` draws the
+  pieces from boxes and ANIMATES the last move over 10 ticks (glide, a knight hops, a castling rook slides, the taken piece
+  sinks and shrinks). Everyone with the screen open gets each move live (`Chess.STATE`); check / mate / draws are
+  announced to players within 16 blocks.
+- Art: tools/gen_chess_assets.py (table + pedestal models, piece textures, 12 screen icons). Test: `/ppchess <pos> demo`
+  (the computer plays itself), `/ppchess <pos> open`. Verified in the dev client: both boards playing themselves, the
+  screen mid-game. NOT verified: clicking moves / promotion by hand, two players.

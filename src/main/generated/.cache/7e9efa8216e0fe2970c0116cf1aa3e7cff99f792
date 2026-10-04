@@ -1,17 +1,17 @@
-// 1.20.1	2026-10-04T12:51:27.6997716	Pixel Pirates/Pixel Pirates Biomes
+// 1.20.1	2026-10-04T23:52:27.1995917	Pixel Pirates/Pixel Pirates Biomes
 3070de3544ff39719c4bb411533644792a7c3b12 data\pixelpirates\worldgen\biome\abyssal_rings.json
 c55c38ce24c3a6e07781359d1bd573c9a1ab083b data\pixelpirates\worldgen\biome\phantom_wake.json
-a2fca49f0e92727d4b84ddd889f042096d6a86da data\pixelpirates\worldgen\biome\ash_reef.json
 1ffb1ca5bc58b0f5737019b3ccaa476937812e98 data\pixelpirates\worldgen\biome\temperate_shallows.json
-fc9ff3a73d2931b4387523db59e4a870cb7b001c data\pixelpirates\worldgen\biome\magma_sea.json
+a2fca49f0e92727d4b84ddd889f042096d6a86da data\pixelpirates\worldgen\biome\ash_reef.json
 8fe15891de80da5037809456eb64e39229b74ff4 data\pixelpirates\worldgen\biome\reef_edge.json
+fc9ff3a73d2931b4387523db59e4a870cb7b001c data\pixelpirates\worldgen\biome\magma_sea.json
 901247637b99ac5923ee7520e5e90b64cdbf690b data\pixelpirates\worldgen\biome\open_ocean.json
 124daa3998b50144e7ee6a20562bba9e8fa92b0e data\pixelpirates\worldgen\biome\siren_sea.json
 a3ca7d9d225032929dfac37f2ed2e3a92dad335c data\pixelpirates\worldgen\biome\coral_bay.json
 c2d965f3c2b5c284748c40b7ac4e96060cac5c56 data\pixelpirates\worldgen\biome\pillar_sea.json
 445b3725b8ff343195e3955e831dc7f382d56422 data\pixelpirates\worldgen\biome\shipgrave_depths.json
+64db2f8e9719b240a2c64c497e2deffc0d9acd82 data\pixelpirates\worldgen\biome\maw_depths.json
 f0d2488e5991756417a2961d8e744a22c9dcdab7 data\pixelpirates\worldgen\biome\spawn_island.json
 74df17d6f2028dd8b4aca3f14f03bf73c0427a52 data\pixelpirates\worldgen\biome\island_thickets.json
-64db2f8e9719b240a2c64c497e2deffc0d9acd82 data\pixelpirates\worldgen\biome\maw_depths.json
 68f74b834fa7e2892a32f1dde3bf40fd9c1ebcd2 data\pixelpirates\worldgen\biome\boiling_basin.json
 15743ca5a71089e03d0da7a17166a9f90140fb96 data\pixelpirates\worldgen\biome\drowned_trench.json

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:oak_log"
+    },
+    "R": {
+      "item": "minecraft:string"
+    },
+    "S": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "LRL",
+    "LSL"
+  ],
+  "result": {
+    "item": "pixelpirates:swing"
+  },
+  "show_notification": true
+}

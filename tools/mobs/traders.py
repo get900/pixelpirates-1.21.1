@@ -286,7 +286,21 @@ def map_merchant(seed):
     return m
 
 
+def _with_sit(build):
+    """Every merchant also sits of an evening in the inn (homestead/town/Lodging): legs forward, hips on the stool."""
+    def b(seed):
+        m = build(seed)
+        anim(m, "sit", 4.0, {"root": {"position": keys((0, [0, -12, 0]))}, "rleg": {"rotation": keys((0, [-85, 8, 0]))},
+                             "lleg": {"rotation": keys((0, [-85, -8, 0]))}, "rarm": {"rotation": keys((0, [-30, 0, 5]))},
+                             "larm": {"rotation": keys((0, [-30, 0, -5]))},
+                             "head": {"rotation": wave(4.0, lambda q: [5 + S(q) * 3, S(q * 0.5) * 18, 0])}})
+        return m
+    return b
+
+
 MOBS = {"trader_quartermaster": quartermaster, "trader_fishmonger": fishmonger, "trader_barkeep": barkeep,
         "trader_curio_dealer": curio_dealer, "trader_gunsmith": gunsmith, "trader_chandler": chandler,
         "trader_cook": cook, "map_merchant": map_merchant}
 SKINS = {}
+
+MOBS = {k: _with_sit(v) for k, v in MOBS.items()}

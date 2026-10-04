@@ -509,7 +509,7 @@ public final class PortCityLayout {
         set(x, gy + 1, z, SPRUCE_FENCE);
         set(x, gy + 2, z, SPRUCE_FENCE);
         set(x, gy + 3, z, SPRUCE_FENCE);
-        set(x, gy + 4, z, LANTERN);
+        set(x, gy + 4, z, id("pixelpirates:street_lamp[hanging=false,lit=false,waterlogged=false]"));   // lit at dusk by Ginny (homestead/town)
     }
 
     /** Grid of hanging lanterns lighting one interior floor (y = ceiling height). */
@@ -719,6 +719,7 @@ public final class PortCityLayout {
         pass("North Paths", () -> northPaths());
         pass("Countryside", () -> countryside());
         named("Beach Wreck", PortCityLayout::beachWreck);
+        pass("North Downs", () -> northDowns());
         pass("Harbour Boats", () -> harborBoats());
         pass("Buoys", () -> buoys());
         pass("North Palms", () -> northPalms(rng));
@@ -4879,6 +4880,29 @@ public final class PortCityLayout {
         pkPlayShip();
         pkPromenade();
         pkBeds();
+        // two swings on the west garden lawn, swinging north-south (homestead/swing)
+        for (int[] s : new int[][]{{-76, -17}, {-85, -15}}) {
+            if (getRaw(s[0], PK + 1, s[1]) > 0 && getRaw(s[0], PK + 1, s[1]) != AIR) continue;
+            set(s[0], PK + 1, s[1], id("pixelpirates:swing[facing=south,half=lower,occupied=false]"));
+            set(s[0], PK + 2, s[1], id("pixelpirates:swing[facing=south,half=upper,occupied=false]"));
+        }
+        // three blank easels on the lawns looking out over the harbour: the townsfolk paint here of an evening (homestead/town)
+        int easels = 0;
+        int moss = id("minecraft:moss_block");
+        for (int[] s : new int[][]{{-80, -15}, {-62, -15}, {-83, -18}, {-59, -18}, {-87, -20}, {-64, -20}}) {
+            if (easels >= 3) break;
+            int under = getRaw(s[0], PK, s[1]);
+            if (under != GRASS && under != moss) continue;
+            boolean clear = true;
+            for (int[] c : new int[][]{{0, 1, 0}, {0, 2, 0}, {0, 1, -1}, {0, 2, -1}}) {
+                int v = getRaw(s[0] + c[0], PK + c[1], s[1] + c[2]);
+                if (v > 0 && v != AIR) clear = false;
+            }
+            if (!clear) continue;
+            set(s[0], PK + 1, s[1], id("pixelpirates:easel[facing=north,half=lower]"));
+            set(s[0], PK + 2, s[1], id("pixelpirates:easel[facing=north,half=upper]"));
+            easels++;
+        }
         // the old park reached x-85..-55 z-43..-19 (over the street): keep it inside the label so a restamp clears it
         int[] box = LABELS.get(CUR);
         box[0] = Math.min(box[0], -89); box[1] = Math.min(box[1], -43); box[2] = Math.max(box[2], -55); box[3] = Math.max(box[3], -12);
@@ -7137,6 +7161,9 @@ public final class PortCityLayout {
         ip(102, g, -31, id("minecraft:dark_oak_slab")); ip(103, g, -31, stairs("oak", "west")); ip(102, g + 1, -31, id("minecraft:brown_wool"));
         ip(99, g, -32, slabTop("bamboo")); ip(99, g + 1, -32, id("minecraft:pointed_dripstone[vertical_direction=up,thickness=tip]"));
         hangLantern(102, 74, -33); hangLantern(102, 74, -30);
+        // a chess table (homestead/chess - playable) with a stool each side; white sits on the west
+        ip(101, g, -30, id("pixelpirates:chess_table[facing=west]"));
+        ip(100, g, -30, id("pixelpirates:barrel_stool[facing=east]")); ip(102, g, -30, id("pixelpirates:barrel_stool[facing=west]"));
         // upstairs: the bed, the toy chest, the desk, a patchwork rug
         ip(100, u, -29, bed("yellow", "south", true)); ip(100, u, -30, bed("yellow", "south", false));
         ip(99, u, -36, chest("south")); ip(100, u, -36, barrel("south")); ip(105, u, -36, id("minecraft:lectern[facing=west]"));
@@ -7401,7 +7428,7 @@ public final class PortCityLayout {
     private static void furnishBarber() {
         final int g = UG + 1, u = 76;
         // the barber's chair facing the window, the basin + strop, towels
-        ip(-49, g, -71, stairs("crimson", "north")); ip(-48, g, -71, CAULDRON_WATER);
+        ip(-49, g, -71, id("pixelpirates:barber_chair[facing=south]")); ip(-48, g, -71, CAULDRON_WATER);   // the working chair (homestead/beard)
         ip(-47, g, -71, barrel("up")); ip(-47, g + 1, -71, id("minecraft:white_carpet"));
         // the apothecary shelves (west wall): jars of coloured glass + brewing stands on barrels
         String[] jars = {"lime", "green", "yellow", "light_blue", "red", "purple"};
@@ -7670,6 +7697,32 @@ public final class PortCityLayout {
         ubBox(96, 108);
     }
 
+    /** The painter's work in progress (32 x 32 ARGB, as SNBT): a dawn sky, the sun on the horizon, the sea, a sail. */
+    private static String seascape() {
+        StringBuilder sb = new StringBuilder("[I;");
+        for (int y = 0; y < 32; y++)
+            for (int x = 0; x < 32; x++) {
+                int c;
+                if (y < 18) {                                                   // the sky: blue above, gold at the horizon
+                    float f = y / 17f;
+                    int r = (int) (110 + 140 * f), gg = (int) (160 + 50 * f), b = (int) (225 - 120 * f);
+                    c = r << 16 | gg << 8 | b;
+                    if ((x - 20) * (x - 20) + (y - 16) * (y - 16) <= 12) c = 0xFFF2C0;                 // the sun
+                    if (y == 6 && x >= 4 && x <= 9 || y == 7 && x >= 3 && x <= 11) c = 0xF4EEE4;         // a cloud
+                } else {                                                        // the sea, darker further down, a glitter path
+                    float f = (y - 18) / 13f;
+                    c = (int) (40 - 20 * f) << 16 | (int) (110 - 50 * f) << 8 | (int) (170 - 60 * f);
+                    if (Math.abs(x - 20) <= 1 + (y - 18) / 3 && (x + y) % 3 == 0) c = 0xF6D890;
+                    if ((x * 7 + y * 13) % 23 == 0) c = 0xD8E8F0;
+                }
+                if (x >= 6 && x <= 12 && y >= 15 && y <= 17 && x - 6 >= (17 - y) - 1) c = 0x5A3A22;            // a hull
+                if (x == 9 && y >= 7 && y <= 14) c = 0x5A3A22;                                                     // its mast
+                if (x >= 10 && x <= 13 && y >= 8 && y <= 13 && x - 10 <= (y - 8)) c = 0xF2EAD8;                    // the sail
+                sb.append(c | 0xFF000000).append(y == 31 && x == 31 ? "" : ",");
+            }
+        return sb.append("]").toString();
+    }
+
     private static void furnishPainter() {
         final int g = UG + 1;
         // the easels: a calm sea with the sun, a sunset, a storm
@@ -7680,6 +7733,13 @@ public final class PortCityLayout {
         for (int i = 0; i < 3; i++) {
             int x = easel[i][0], z = easel[i][1];
             if (getRaw(x, g, z) != AIR || getRaw(x, g + 1, z) != AIR) continue;
+            if (i == 1) {                                                   // a real easel (homestead/art): paint on it
+                set(x, g, z, id("pixelpirates:easel[facing=south,half=lower]"));
+                set(x, g + 1, z, id("pixelpirates:easel[facing=south,half=upper]"));
+                nbt(x, g, z, "{Size:0b,Title:\"Harbour at Dawn\",Npc:\"isadora\",Pixels:" + seascape() + "}");   // Npc: Isadora's own (homestead/town)
+                ip(x, g, z + 1, stairs("spruce", "south"));
+                continue;
+            }
             set(x, g, z, id("minecraft:spruce_fence"));
             standingBanner(x, g + 1, z, (String) canvases[i][0], 0, (Object[]) canvases[i][1]);
             ip(x, g, z + 1, stairs("spruce", "south"));
@@ -8558,6 +8618,10 @@ public final class PortCityLayout {
             if (Math.abs(x - 108) < 12 && Math.abs(z + 102) < 12) continue;
             if (Math.abs(x + 98) < 26 && Math.abs(z + 120) < 27) continue;
             if (Math.abs(x) < 6) continue;
+            boolean downs = false;                                          // the North Downs buildings + pond (2026-10-04)
+            for (int[] b : new int[][]{{-67, -159, -29, -120}, {18, -144, 73, -116}, {-33, -160, -1, -141}, {-6, -150, 16, -128}, {57, -157, 80, -139}, {-34, -120, -18, -108}})
+                downs |= x >= b[0] && x <= b[2] && z >= b[1] && z <= b[3];
+            if (downs) continue;
             int gy = (int) Math.round(SpawnIslandTerrain.islandSurfaceY(x, z));
             if (!openSky(x, gy, z, 3)) continue;   // keep clear of fields, windmill, lookout
             palm(x, gy, z, 5 + rng.nextInt(4));
@@ -8625,15 +8689,369 @@ public final class PortCityLayout {
             }
     }
 
+    /*
+     * THE NORTH DOWNS (rebuilt 2026-10-04): the open downland north of the wall (a plateau ~y76-81 falling to the north
+     * coast), reached through the Great North Gate. From the signpost at the fork (0,-121) the paths run west to the fort
+     * and THE DOWNS FARMSTEAD (#46: farmhouse, barn + hayloft, farmyard, well, coop, pigsty, paddock, potato + cabbage
+     * plots), east to the lighthouse past THE ORCHARD (#47: blossoming fruit trees in rows, beehives, the cider house),
+     * north up the ridge to THE RIDGE LOOKOUT (#49: a stone watchtower with working TELESCOPES on its gallery, a signal
+     * fire, the flag) and on down the north slope to THE SHEPHERD'S HUT (#48: a hut on wheels, the dry-stone fold). Plus
+     * the wheat + carrot fields and the windmill by the wall (kept), a pond with reeds and a jetty, the signpost.
+     */
     private static void countryside() {
         farmField(-60, -108, -31, -99, "wheat");                        // kept clear of the wall + its towers (#42, 2026-10-04)
         farmField(24, -106, 53, -99, "carrots");
-        farmField(-27, -126, -10, -117, "potatoes");
         windmill(-18, -101);
-        // track from the north path up to the ridge-top lookout
-        pathSegment(0, -121, 4, -131);
-        lookout(5, -138);
+        // the old potato field (x-27..-10 z-126..-117) and the old lookout go back to downland (cells nothing else claims)
+        for (int x = -30; x <= 16; x++)
+            for (int z = -146; z <= -114; z++) {
+                boolean field = x >= -29 && x <= -8 && z >= -128 && z <= -115, look = x >= -2 && x <= 13 && z >= -146 && z <= -130;
+                if (!(field || look) || !natural(x, z) || getRaw(x, surf(x, z), z) != 0) continue;
+                ground(x, z, surf(x, z), GRASS, DIRT, 2, surf(x, z) + 26);                // (the old flagpole stood ~20 up)
+            }
+        pathSegment(0, -121, 4, -129);                                     // up the ridge to the lookout...
+        diagonalPath(2, -129, -6, -142);                                   // ...and on down the north slope to the shepherd
+        diagonalPath(-4, -122, -31, -130);                                 // west to the farmstead gate
+    }
+
+    /** The North Downs buildings (#46-#49, after the Beach Wreck so the map numbers stay put), the pond, the signpost. */
+    private static void northDowns() {
+        named("Farmstead", PortCityLayout::farmstead);
+        named("Orchard", PortCityLayout::orchard);
+        named("Shepherd's Hut", PortCityLayout::shepherdsHut);
+        named("Ridge Lookout", () -> lookout(5, -139));
+        named("Chess Green", PortCityLayout::chessGreen);
+        downsPond();
+        signpost(3, -119);
         smoothPaths();
+    }
+
+    /** A pad levelled to the area's average height (grass on top); returns that height. */
+    private static int downsPad(int x1, int z1, int x2, int z2) {
+        int y = averageSurf(x1, z1, x2, z2);
+        levelPad(x1, z1, x2, z2, y, GRASS);
+        return y;
+    }
+
+    /** A timber + stone building shell: stone footing to y+1, walls of {@code wall} between log posts, floor, door gap. */
+    private static void downsShell(int x1, int z1, int x2, int z2, int y, int h, int wall, int post, int floor) {
+        for (int x = x1; x <= x2; x++)
+            for (int z = z1; z <= z2; z++) {
+                boolean edge = x == x1 || x == x2 || z == z1 || z == z2, corner = (x == x1 || x == x2) && (z == z1 || z == z2);
+                for (int yy = y - 3; yy < y; yy++) set(x, yy, z, COBBLE);
+                set(x, y, z, edge ? COBBLE : floor);
+                for (int yy = y + 1; yy <= y + h; yy++)
+                    set(x, yy, z, !edge ? AIR : corner ? post : yy == y + 1 ? id("minecraft:mossy_cobblestone") : wall);
+                if (!edge) for (int yy = y + h + 1; yy <= y + h + 8; yy++) set(x, yy, z, AIR);   // the roof space
+            }
+    }
+
+    // ------------------------------------------------------------------ #46 THE DOWNS FARMSTEAD (x-66..-30, z-150..-112)
+    private static void farmstead() {
+        int y = downsPad(-64, -149, -32, -123);
+        int white = id("minecraft:white_terracotta"), beam = STRIPPED_SPRUCE_Y, cob = COBBLE;
+        // the farmyard: cobbles + gravel, a fence round it all, the gate on the east (the path comes in at z-131)
+        for (int x = -62; x <= -34; x++)
+            for (int z = -135; z <= -125; z++) set(x, y, z, ((x * 3 + z * 7) & 7) == 0 ? GRAVEL : ((x + z) & 3) == 0 ? MOSSY_COBBLE : cob);
+        for (int x = -64; x <= -32; x++) { set(x, y + 1, -123, OAK_FENCE); set(x, y + 1, -149, OAK_FENCE); }
+        for (int z = -149; z <= -123; z++) { set(-64, y + 1, z, OAK_FENCE); if (z < -133 || z > -129) set(-32, y + 1, z, OAK_FENCE); }
+        set(-32, y + 1, -131, id("minecraft:oak_fence_gate[facing=east,open=true]")); set(-32, y + 1, -130, id("minecraft:oak_fence_gate[facing=east,open=true]"));
+        for (int z : new int[]{-133, -128}) { set(-32, y + 1, z, OAK_LOG_Y); set(-32, y + 2, z, OAK_LOG_Y); set(-32, y + 3, z, LANTERN); }
+        hangingSign(-32, y + 3, -131, "spruce", "", "DOWNS FARM", "", "");
+        set(-32, y + 4, -131, id("minecraft:spruce_slab[type=bottom]"));
+        for (int z = -132; z <= -129; z++) set(-32, y + 4, z, id("minecraft:spruce_slab[type=bottom]"));
+        // THE FARMHOUSE (x-62..-52, z-147..-139): stone below, white plaster + spruce frame above, a gabled roof, chimney
+        downsShell(-62, -147, -52, -139, y, 4, cob, OAK_LOG_Y, SPRUCE);
+        for (int x = -62; x <= -52; x++)
+            for (int z = -147; z <= -139; z++) {
+                boolean edge = x == -62 || x == -52 || z == -147 || z == -139;
+                set(x, y + 5, z, edge ? id("minecraft:stripped_spruce_log[axis=x]") : SPRUCE);
+                if (!edge) { for (int yy = y + 6; yy <= y + 13; yy++) set(x, yy, z, AIR); continue; }
+                for (int yy = y + 6; yy <= y + 8; yy++) set(x, yy, z, (x - -62) % 5 == 0 || (z == -147 || z == -139) && (x == -62 || x == -52) ? beam : white);
+            }
+        for (int x : new int[]{-59, -55}) for (int yy : new int[]{y + 2, y + 3, y + 7}) { set(x, yy, -139, GLASS_PANE); set(x, yy, -147, GLASS_PANE); }
+        for (int yy : new int[]{y + 2, y + 7}) { set(-62, yy, -143, GLASS_PANE); set(-52, yy, -143, GLASS_PANE); }
+        set(-57, y + 1, -139, id("minecraft:spruce_door[facing=south,half=lower,hinge=left]")); set(-57, y + 2, -139, id("minecraft:spruce_door[facing=south,half=upper,hinge=left]"));
+        set(-57, y + 3, -138, id("minecraft:spruce_trapdoor[facing=south,half=top,open=false]"));
+        gableRoofX(-62, -52, -147, -139, y + 9, "spruce", SPRUCE);
+        gableEndsX(-62, -147, -139, y + 9, white); gableEndsX(-52, -147, -139, y + 9, white);
+        for (int yy = y - 2; yy <= y + 15; yy++) set(-60, yy, -145, id("minecraft:bricks"));
+        set(-60, y + 16, -145, CAMPFIRE);
+        // inside: the kitchen (range, table, dresser) + the parlour, a ladder to the bedroom under the roof
+        set(-61, y + 1, -145, id("minecraft:smoker[facing=east,lit=true]")); set(-61, y + 1, -144, id("minecraft:furnace[facing=east]"));
+        set(-61, y + 1, -146, barrel("east")); set(-60, y + 1, -146, barrel("up")); set(-60, y + 2, -146, id("minecraft:flower_pot"));
+        for (int x = -59; x <= -57; x++) set(x, y + 1, -143, slabTop("spruce"));
+        set(-58, y + 2, -143, id("minecraft:candle[candles=3,lit=true]"));
+        set(-59, y + 1, -142, stairs("spruce", "north")); set(-57, y + 1, -142, stairs("spruce", "north")); set(-58, y + 1, -144, stairs("spruce", "south"));
+        set(-54, y + 1, -146, BOOKSHELF); set(-53, y + 1, -146, chest("south"));
+        set(-53, y + 1, -141, id("pixelpirates:captains_chair[facing=west]"));
+        rug(-56, -145, -54, -141, y + 1, "brown", "yellow");
+        for (int yy = y + 1; yy <= y + 5; yy++) set(-53, yy, -145, id("minecraft:ladder[facing=west]"));
+        set(-53, y + 5, -145, id("minecraft:ladder[facing=west]"));
+        set(-61, y + 6, -146, bed("red", "east", false)); set(-60, y + 6, -146, bed("red", "east", true));
+        set(-56, y + 6, -146, chest("south")); set(-61, y + 6, -140, barrel("up"));
+        hangLantern(-57, y + 4, -143); hangLantern(-57, y + 8, -143);
+        // THE BARN (x-48..-36, z-149..-137): dark wood on a stone plinth, big doors to the yard, a hayloft, a tall roof
+        downsShell(-48, -149, -36, -137, y, 7, id("minecraft:dark_oak_planks"), DARK_OAK_LOG_Y, id("minecraft:packed_mud"));
+        for (int x = -46; x <= -38; x++) for (int yy = y + 1; yy <= y + 5; yy++) if (x >= -43 && x <= -41) set(x, yy, -137, AIR);
+        for (int x : new int[]{-44, -40}) for (int yy = y + 1; yy <= y + 5; yy++) set(x, yy, -136, id("minecraft:dark_oak_trapdoor[facing=south,half=bottom,open=true]"));
+        for (int x = -47; x <= -37; x++) for (int z = -148; z <= -141; z++) set(x, y + 5, z, SPRUCE);         // the hayloft
+        for (int x = -47; x <= -37; x++) for (int z = -148; z <= -142; z++) if (((x + z) & 1) == 0 || z < -145) set(x, y + 6, z, HAY);
+        for (int yy = y + 1; yy <= y + 5; yy++) set(-37, yy, -140, id("minecraft:ladder[facing=west]"));
+        gableRoofZ(-149, -137, -48, -36, y + 8, "dark_oak", DARK_OAK);
+        gableEndsZ(-149, -48, -36, y + 8, id("minecraft:dark_oak_planks")); gableEndsZ(-137, -48, -36, y + 8, id("minecraft:dark_oak_planks"));
+        set(-42, y + 11, -137, id("minecraft:spruce_trapdoor[facing=south,half=bottom,open=true]"));             // the loft door
+        set(-42, y + 13, -136, id("minecraft:spruce_fence")); set(-42, y + 13, -137, id("minecraft:spruce_fence"));
+        set(-42, y + 12, -136, CHAIN);
+        // stalls inside, a cart, sacks, tools
+        for (int z = -147; z <= -142; z += 5) for (int x = -47; x <= -45; x++) set(x, y + 1, z, OAK_FENCE);
+        for (int x = -47; x <= -45; x++) { set(x, y + 1, -145, HAY); set(x, y + 1, -146, HAY); }
+        set(-39, y + 1, -146, id("minecraft:composter")); set(-38, y + 1, -146, barrel("up")); set(-38, y + 1, -147, barrel("up"));
+        set(-40, y + 1, -143, id("pixelpirates:cargo_crate[facing=south]")); set(-40, y + 2, -143, id("pixelpirates:cargo_crate[facing=east]"));
+        set(-38, y + 1, -142, id("minecraft:grindstone[face=floor,facing=south]"));
+        hangLantern(-42, y + 4, -143);
+        // THE WELL in the yard, the CHICKEN COOP, the PIGSTY, hay stacks, a cart
+        for (int x = -51; x <= -49; x++)
+            for (int z = -132; z <= -130; z++) {
+                boolean rim = x != -50 || z != -131;
+                if (rim) { set(x, y, z, STONE_BRICKS); set(x, y + 1, z, id("minecraft:cobblestone_wall")); }
+                else for (int yy = y - 6; yy <= y; yy++) set(x, yy, z, WATER);
+            }
+        for (int[] p : new int[][]{{-51, -132}, {-49, -130}}) { set(p[0], y + 2, p[1], OAK_FENCE); set(p[0], y + 3, p[1], OAK_FENCE); }
+        for (int x = -51; x <= -49; x++) for (int z = -132; z <= -130; z++) set(x, y + 4, z, id("minecraft:spruce_slab[type=bottom]"));
+        set(-50, y + 3, -131, CHAIN); set(-50, y + 2, -131, CHAIN);
+        // the coop: a little raised hut + a run
+        for (int x = -62; x <= -59; x++) for (int z = -135; z <= -132; z++) {
+            boolean e = x == -62 || x == -59 || z == -135 || z == -132;
+            set(x, y + 1, z, OAK_FENCE);
+            set(x, y + 2, z, e ? id("minecraft:spruce_planks") : HAY);
+            set(x, y + 3, z, e ? id("minecraft:spruce_planks") : AIR);
+            set(x, y + 4, z, id("minecraft:spruce_slab[type=bottom]"));
+        }
+        set(-59, y + 2, -133, AIR); set(-59, y + 3, -133, AIR);
+        set(-58, y + 1, -133, stairs("spruce", "west"));
+        for (int x = -58; x <= -54; x++) { set(x, y + 1, -136, OAK_FENCE); set(x, y + 1, -128, OAK_FENCE); }
+        for (int z = -136; z <= -128; z++) set(-54, y + 1, z, OAK_FENCE);
+        set(-56, y + 1, -130, id("minecraft:composter")); set(-57, y + 1, -134, HAY);
+        // the pigsty (east of the yard): a mud wallow in a stone-walled pen, a trough, a lean-to
+        for (int x = -40; x <= -34; x++) for (int z = -135; z <= -127; z++) {
+            boolean e = x == -40 || x == -34 || z == -135 || z == -127;
+            if (e) { set(x, y + 1, z, id("minecraft:cobblestone_wall")); continue; }
+            set(x, y, z, ((x + z) & 1) == 0 ? id("minecraft:mud") : id("minecraft:coarse_dirt"));
+        }
+        set(-40, y + 1, -131, id("minecraft:oak_fence_gate[facing=west]"));
+        set(-36, y + 1, -134, CAULDRON_WATER); set(-35, y + 1, -134, id("minecraft:cauldron"));
+        for (int z = -134; z <= -132; z++) { set(-35, y + 3, z, id("minecraft:spruce_slab[type=bottom]")); }
+        set(-35, y + 1, -132, OAK_FENCE); set(-35, y + 2, -132, OAK_FENCE);
+        set(-45, y + 1, -127, HAY); set(-44, y + 1, -127, HAY); set(-45, y + 2, -127, HAY);
+        set(-47, y + 1, -126, barrel("up")); set(-48, y + 1, -126, id("pixelpirates:cargo_crate[facing=south]"));
+        // the kitchen garden (beetroot + potatoes) behind the house
+        int farmland = id("minecraft:farmland[moisture=7]");
+        levelPad(-63, -157, -51, -150, y, GRASS);
+        for (int x = -62; x <= -52; x++)
+            for (int z = -155; z <= -150; z++) {
+                set(x, y, z, x == -57 ? WATER : farmland);
+                if (x != -57) set(x, y + 1, z, id(x < -57 ? "minecraft:potatoes[age=7]" : "minecraft:beetroots[age=3]"));
+            }
+        for (int x = -63; x <= -51; x++) { set(x, y + 1, -156, OAK_FENCE); }
+        // a scarecrow over the garden
+        set(-58, y + 2, -153, OAK_FENCE); set(-58, y + 3, -153, OAK_FENCE); set(-59, y + 3, -153, OAK_FENCE); set(-57, y + 3, -153, OAK_FENCE);
+        set(-58, y + 4, -153, id("minecraft:carved_pumpkin[facing=south]"));
+        set(-58, y + 1, -153, OAK_FENCE);
+    }
+
+    // ------------------------------------------------------------------ #47 THE ORCHARD (x20..70, z-142..-119)
+    private static void orchard() {
+        int y = downsPad(21, -141, 58, -119);
+        Random r = new Random(4747);
+        // rows of fruit trees in blossom, a grass ride down the middle, beehives on some trunks
+        for (int x = 24; x <= 56; x += 5)
+            for (int z = -138; z <= -122; z += 5) {
+                if (x == 39) continue;                                                  // the ride
+                int h = 3 + r.nextInt(2);
+                for (int yy = y + 1; yy <= y + h; yy++) set(x, yy, z, OAK_LOG_Y);
+                for (int dx = -2; dx <= 2; dx++)
+                    for (int dz = -2; dz <= 2; dz++)
+                        for (int dy = 0; dy <= 2; dy++) {
+                            int d = Math.abs(dx) + Math.abs(dz) + dy;
+                            if (d > 3 || (dx == 0 && dz == 0 && dy < 1)) continue;
+                            if (dy == 0 && Math.abs(dx) + Math.abs(dz) < 2) continue;
+                            set(x + dx, y + h + dy, z + dz, id(r.nextInt(3) == 0 ? "minecraft:azalea_leaves[persistent=true]" : "minecraft:flowering_azalea_leaves[persistent=true]"));
+                        }
+                set(x, y + h + 3, z, id("minecraft:flowering_azalea_leaves[persistent=true]"));
+                if (r.nextInt(4) == 0) set(x, y + 2, z + 1, id("minecraft:bee_nest[facing=south,honey_level=3]"));
+                if (r.nextInt(3) == 0) set(x + 1, y + 1, z + 1, id("minecraft:pink_petals[facing=north,flower_amount=4]"));
+            }
+        for (int z = -141; z <= -119; z++) set(39, y, z, DIRT_PATH);
+        for (int x = 21; x <= 58; x++) set(x, y, -130, x == 39 ? DIRT_PATH : getRaw(x, y + 1, -130) == AIR || getRaw(x, y + 1, -130) == 0 ? DIRT_PATH : GRASS);
+        for (int x = 21; x <= 58; x++) { set(x, y + 1, -141, OAK_FENCE); set(x, y + 1, -119, x >= 23 && x <= 25 ? AIR : OAK_FENCE); }
+        for (int z = -141; z <= -119; z++) { set(21, y + 1, z, OAK_FENCE); set(58, y + 1, z, z >= -131 && z <= -129 ? AIR : OAK_FENCE); }
+        for (int x : new int[]{22, 26}) { set(x, y + 1, -119, OAK_LOG_Y); set(x, y + 2, -119, LANTERN); }
+        // the picking: crates of fruit, ladders against the trees, baskets
+        set(38, y + 1, -128, id("pixelpirates:cargo_crate[facing=south]")); set(40, y + 1, -128, id("pixelpirates:cargo_crate[facing=east]"));
+        set(38, y + 2, -128, id("pixelpirates:cargo_crate[facing=east]"));
+        set(30, y + 1, -129, barrel("up")); set(45, y + 1, -131, barrel("up"));
+        // THE CIDER HOUSE (x60..68, z-134..-126) outside the east gate
+        int cy = downsPad(59, -136, 70, -124);
+        downsShell(60, -134, 68, -126, cy, 4, id("minecraft:stripped_oak_log[axis=y]"), OAK_LOG_Y, id("minecraft:spruce_planks"));
+        set(60, cy + 2, -132, GLASS_PANE); set(60, cy + 2, -128, GLASS_PANE);
+        set(60, cy + 1, -130, id("minecraft:spruce_door[facing=west,half=lower,hinge=left]")); set(60, cy + 2, -130, id("minecraft:spruce_door[facing=west,half=upper,hinge=left]"));
+        gableRoofX(60, 68, -134, -126, cy + 5, "spruce", SPRUCE);
+        gableEndsX(60, -134, -126, cy + 5, id("minecraft:stripped_oak_log[axis=y]")); gableEndsX(68, -134, -126, cy + 5, id("minecraft:stripped_oak_log[axis=y]"));
+        for (int z = -133; z <= -127; z++) { set(67, cy + 1, z, barrel("west")); if ((z & 1) == 0) set(67, cy + 2, z, barrel("west")); }
+        set(63, cy + 1, -133, id("minecraft:piston[facing=down]")); set(63, cy + 2, -133, id("minecraft:oak_log[axis=y]"));         // the press
+        set(63, cy + 1, -132, CAULDRON_WATER);
+        for (int x = 62; x <= 65; x++) set(x, cy + 1, -127, slabTop("spruce"));
+        set(64, cy + 2, -127, id("minecraft:candle[candles=2,lit=true]"));
+        set(62, cy + 1, -129, id("pixelpirates:cargo_crate[facing=west]")); set(62, cy + 1, -131, id("pixelpirates:cargo_crate[facing=west]"));
+        hangLantern(64, cy + 4, -130);
+        hangingSign(59, cy + 3, -130, "oak", "", "CIDER", "HOUSE", "");
+        set(59, cy + 4, -130, OAK_FENCE);
+    }
+
+    // ------------------------------------------------------------------ #48 THE SHEPHERD'S HUT + FOLD (x-30..-4, z-159..-143)
+    private static void shepherdsHut() {
+        int y = downsPad(-30, -158, -4, -144);
+        // the fold: a dry-stone wall (mossy + plain cobble walls), a gate, hay racks, a water trough
+        for (int x = -28; x <= -16; x++)
+            for (int z = -157; z <= -147; z++) {
+                boolean e = x == -28 || x == -16 || z == -157 || z == -147;
+                if (!e) continue;
+                set(x, y + 1, z, ((x * 5 + z) & 3) == 0 ? id("minecraft:mossy_cobblestone_wall") : id("minecraft:cobblestone_wall"));
+            }
+        set(-16, y + 1, -152, id("minecraft:oak_fence_gate[facing=east]"));
+        for (int z = -155; z <= -153; z++) { set(-27, y + 1, z, HAY); }
+        set(-27, y + 2, -154, HAY);
+        for (int x = -24; x <= -21; x++) set(x, y + 1, -156, CAULDRON_WATER);
+        // the hut on wheels (x-12..-8, z-154..-150): a curved roof, steps, a stove pipe
+        int hy = y + 1;
+        for (int x = -12; x <= -8; x++)
+            for (int z = -154; z <= -150; z++) {
+                set(x, hy, z, id("minecraft:spruce_planks"));                                         // the chassis
+                boolean e = x == -12 || x == -8 || z == -154 || z == -150;
+                for (int yy = hy + 1; yy <= hy + 3; yy++) set(x, yy, z, !e ? AIR : (z == -154 || z == -150) ? id("minecraft:green_terracotta") : id("minecraft:spruce_planks"));
+                set(x, hy + 4, z, z == -152 ? id("minecraft:dark_oak_planks") : id("minecraft:dark_oak_slab[type=" + (z == -154 || z == -150 ? "bottom" : "top") + "]"));
+            }
+        for (int x = -12; x <= -8; x++) { set(x, hy + 4, -155, id("minecraft:dark_oak_stairs[facing=south,half=bottom]")); set(x, hy + 4, -149, id("minecraft:dark_oak_stairs[facing=north,half=bottom]")); }
+        for (int[] w : new int[][]{{-12, -155}, {-8, -155}, {-12, -149}, {-8, -149}})
+            set(w[0], hy, w[1], id("minecraft:dark_oak_trapdoor[facing=" + (w[1] < -152 ? "north" : "south") + ",half=bottom,open=true]"));   // the wheels
+        set(-8, hy + 1, -152, id("minecraft:spruce_door[facing=east,half=lower]")); set(-8, hy + 2, -152, id("minecraft:spruce_door[facing=east,half=upper]"));
+        set(-7, hy, -152, stairs("spruce", "west"));
+        set(-10, hy + 2, -154, GLASS_PANE); set(-10, hy + 2, -150, GLASS_PANE);
+        set(-11, hy + 1, -153, id("minecraft:smoker[facing=south,lit=true]"));
+        for (int yy = hy + 2; yy <= hy + 6; yy++) set(-11, yy, -153, yy <= hy + 3 ? id("minecraft:chain") : id("minecraft:cobblestone_wall"));
+        set(-11, hy + 7, -153, id("minecraft:campfire[lit=true]"));                                 // smoke from the stove
+        set(-11, hy + 1, -151, bed("green", "west", true)); set(-10, hy + 1, -151, bed("green", "west", false));
+        set(-9, hy + 1, -153, barrel("up"));
+        // the dog's kennel, a crook against the hut, a bench to watch the flock from
+        for (int[] k : new int[][]{{-6, -146}, {-5, -146}}) { set(k[0], y + 1, k[1], id("minecraft:spruce_planks")); set(k[0], y + 2, k[1], id("minecraft:spruce_stairs[facing=south]")); }
+        set(-6, y + 1, -146, AIR);
+        set(-13, hy + 1, -151, OAK_FENCE); set(-13, hy + 2, -151, id("minecraft:tripwire_hook[facing=west]"));
+        set(-14, y + 1, -147, stairs("spruce", "north")); set(-13, y + 1, -147, stairs("spruce", "north"));
+    }
+
+    /** THE RIDGE LOOKOUT (#49): a round stone watchtower on the ridge - a stair inside, a gallery with four working
+     *  TELESCOPES (north, east, south, west), a signal fire on the top, the flag; a ring of benches at its foot. */
+    private static void lookout(int cx, int cz) {
+        int y = averageSurf(cx - 4, cz - 4, cx + 4, cz + 4);
+        levelPad(cx - 8, cz - 8, cx + 8, cz + 8, y, GRASS);
+        for (int x = cx - 8; x <= cx + 8; x++)
+            for (int z = cz - 8; z <= cz + 8; z++) {
+                double d = Math.hypot(x - cx, z - cz);
+                if (d > 8.4) continue;
+                if (d > 6.4) { set(x, y, z, ((x + z) & 3) == 0 ? MOSSY_COBBLE : COBBLE); continue; }       // the ring path
+                for (int yy = y + 1; yy <= y + 16; yy++) set(x, yy, z, AIR);
+                if (d > 4.6) continue;
+                boolean wall = d > 3.6;
+                for (int yy = y - 2; yy <= y + 11; yy++) set(x, yy, z, wall ? (yy % 4 == 0 ? CHISELED_STONE_BRICKS : wallStone(x, yy, z)) : yy == y ? STONE_BRICKS : AIR);
+                set(x, y + 12, z, STONE_BRICKS);                                        // the gallery floor
+                if (wall) { set(x, y + 13, z, STONE_BRICK_WALL); }
+            }
+        // the door (south), arrow-slit windows, a ladder up the inside to a hatch in the gallery
+        set(cx, y + 1, cz + 4, AIR); set(cx, y + 2, cz + 4, AIR); set(cx, y + 1, cz + 5, stairs("stone_brick", "north")); set(cx, y, cz + 5, STONE_BRICKS);
+        for (int[] w : new int[][]{{4, 0}, {-4, 0}, {0, -4}}) for (int yy : new int[]{y + 4, y + 8}) set(cx + w[0], yy, cz + w[1], IRON_BARS);
+        for (int yy = y + 1; yy <= y + 12; yy++) set(cx, yy, cz - 3, id("minecraft:ladder[facing=south]"));
+        set(cx, y + 12, cz - 3, id("minecraft:ladder[facing=south]"));
+        hangLantern(cx, y + 11, cz);
+        set(cx - 2, y + 1, cz - 2, id("minecraft:cartography_table")); set(cx + 2, y + 1, cz - 2, barrel("up"));
+        // the gallery: four telescopes looking out, a signal brazier in the middle, the flag
+        int g = y + 13;
+        set(cx, g, cz - 3, AIR);
+        int[][] scopes = {{0, -3, 0}, {3, 0, 1}, {0, 3, 2}, {-3, 0, 3}};
+        String[] f = {"north", "east", "south", "west"};
+        for (int[] s : scopes) set(cx + s[0] == cx && s[1] == -3 ? cx + 1 : cx + s[0], g, cz + s[1], id("pixelpirates:telescope[facing=" + f[s[2]] + "]"));
+        set(cx, g, cz, id("minecraft:campfire[lit=true]"));
+        for (int[] d : new int[][]{{1, 0}, {-1, 0}, {0, 1}}) set(cx + d[0], g, cz + d[1], id("minecraft:stone_brick_slab[type=bottom]"));
+        int fx = cx + 3, fz = cz - 2;
+        for (int yy = g; yy <= g + 8; yy++) set(fx, yy, fz, SPRUCE_FENCE);
+        for (int yy = g + 6; yy <= g + 8; yy++) for (int k = 1; k <= 3; k++) set(fx, yy, fz + k, BLACK_WOOL);
+        set(fx, g + 7, fz + 2, WHITE_WOOL);
+        // benches round the foot, a cairn, the bell for when a sail is sighted
+        for (int[] b : new int[][]{{-6, 0, 1}, {6, 0, 3}, {0, -6, 2}}) {
+            String face = new String[]{"north", "east", "south", "west"}[b[2]];
+            set(cx + b[0], y + 1, cz + b[1], stairs("spruce", face));
+            set(cx + b[0] + (b[1] != 0 ? 1 : 0), y + 1, cz + b[1] + (b[0] != 0 ? 1 : 0), stairs("spruce", face));
+        }
+        set(cx - 5, y + 1, cz + 5, COBBLE); set(cx - 5, y + 2, cz + 5, id("minecraft:cobblestone_wall")); set(cx - 6, y + 1, cz + 5, id("minecraft:cobblestone_slab"));
+        set(cx + 5, y + 1, cz + 5, OAK_LOG_Y); set(cx + 5, y + 2, cz + 5, OAK_LOG_Y); set(cx + 5, y + 3, cz + 5, id("minecraft:bell[attachment=floor,facing=south]"));
+    }
+
+    /**
+     * #50 THE CHESS GREEN (2026-10-04): GIANT CHESS on the green between the fort road and the wheat field, just out of the
+     * North Gate - an 8 x 8 board of quartz + blackstone squares, the pedestal with its chess clock on the west (white plays
+     * from there, facing east), benches on the far side for black and the onlookers, lamps, a sign. Use the pedestal to play
+     * (homestead/chess); the pieces are drawn on the squares by ChessRenderer.
+     */
+    private static void chessGreen() {
+        int y = averageSurf(-31, -118, -20, -111);
+        levelPad(-31, -118, -20, -111, y, GRASS);
+        for (int x = -29; x <= -22; x++)
+            for (int z = -118; z <= -111; z++) {
+                int f = z + 118, r = x + 29;                                        // file a..h north -> south, rank 1..8 west -> east
+                set(x, y, z, (f + r) % 2 == 0 ? id("minecraft:polished_blackstone") : id("minecraft:smooth_quartz"));
+                for (int yy = y + 1; yy <= y + 4; yy++) set(x, yy, z, AIR);
+            }
+        for (int z = -118; z <= -111; z++) { set(-30, y, z, POLISHED_ANDESITE); set(-21, y, z, POLISHED_ANDESITE); }
+        set(-30, y + 1, -118, id("pixelpirates:giant_chess[facing=east]"));
+        for (int z = -116; z <= -113; z++) set(-20, y + 1, z, stairs("spruce", "east"));             // black's bench (sit facing west)
+        set(-31, y + 1, -116, stairs("spruce", "west")); set(-31, y + 1, -115, stairs("spruce", "west"));
+        lamppost(-31, y, -111); lamppost(-20, y, -118);
+        set(-31, y + 1, -113, id("minecraft:oak_sign[rotation=4]"));
+        signText(-31, y + 1, -113, "", "THE CHESS", "GREEN", "use the clock");
+    }
+
+    /** A pond on the north-east downs: reeds, lily pads, a little jetty, a bench. */
+    private static void downsPond() {
+        int y = averageSurf(60, -152, 74, -142);
+        levelPad(60, -154, 77, -142, y, GRASS);
+        for (int x = 60; x <= 74; x++)
+            for (int z = -152; z <= -142; z++) {
+                double d = Math.pow((x - 67) / 7.0, 2) + Math.pow((z + 147) / 5.0, 2);
+                if (d > 1) continue;
+                int depth = d < 0.45 ? 2 : 1;
+                for (int yy = y - depth + 1; yy <= y; yy++) set(x, yy, z, WATER);
+                set(x, y - depth, z, d < 0.45 ? id("minecraft:clay") : SAND);
+                if (d > 0.7 && ((x * 3 + z) % 4 == 0)) { set(x, y + 1, z, id("minecraft:lily_pad")); }
+            }
+        for (int[] c : new int[][]{{60, -147}, {61, -150}, {73, -145}, {72, -143}, {74, -148}})
+            if (getRaw(c[0], y, c[1]) != WATER) { set(c[0], y, c[1], SAND); set(c[0], y + 1, c[1], id("minecraft:sugar_cane")); set(c[0], y + 2, c[1], id("minecraft:sugar_cane")); }
+        for (int x = 64; x <= 66; x++) { set(x, y + 1, -142, id("minecraft:spruce_slab[type=bottom]")); set(x, y, -142, id("minecraft:spruce_planks")); }
+        set(65, y + 1, -143, id("minecraft:spruce_slab[type=bottom]")); set(65, y, -143, SPRUCE_LOG_Y);
+        set(63, y + 1, -140, stairs("spruce", "north")); set(64, y + 1, -140, stairs("spruce", "north"));
+    }
+
+    /** The signpost at the fork: a post with an arm sign each way. */
+    private static void signpost(int x, int z) {
+        int y = surf(x, z);
+        set(x, y, z, COBBLE);
+        for (int yy = y + 1; yy <= y + 3; yy++) set(x, yy, z, STRIPPED_SPRUCE_Y);
+        set(x, y + 4, z, LANTERN);
+        String[][] arms = {{"west", "<- Fort", "<- Farmstead"}, {"east", "Lighthouse ->", "Orchard ->"}, {"north", "Lookout", "Shepherd"}, {"south", "Wavebreak", "Port"}};
+        for (String[] a : arms) {
+            int dx = a[0].equals("east") ? 1 : a[0].equals("west") ? -1 : 0, dz = a[0].equals("south") ? 1 : a[0].equals("north") ? -1 : 0;
+            set(x + dx, y + 2, z + dz, id("minecraft:spruce_wall_sign[facing=" + a[0] + "]"));
+            signText(x + dx, y + 2, z + dz, "", a[1], a[2], "");
+        }
     }
 
     /** Irrigated crop field: log border, a water channel every 5th column, fully grown crops, scarecrow. */
@@ -8720,54 +9138,6 @@ public final class PortCityLayout {
     }
 
     /** Timber gazebo on the north ridge with a view over the whole port, and the Jolly Roger. */
-    private static void lookout(int cx, int cz) {
-        int y = averageSurf(cx - 4, cz - 4, cx + 4, cz + 4) + 1;
-        levelPad(cx - 5, cz - 5, cx + 5, cz + 5, y - 1, GRASS);
-        for (int dx = -4; dx <= 4; dx++)
-            for (int dz = -4; dz <= 4; dz++) {
-                boolean rim = Math.abs(dx) == 4 || Math.abs(dz) == 4;
-                set(cx + dx, y, cz + dz, rim ? POLISHED_ANDESITE : STONE_BRICKS);
-                fill(cx + dx, y + 1, cz + dz, cx + dx, y + 7, cz + dz, AIR);
-            }
-        set(cx, y, cz + 4, stairs("stone_brick", "north"));  // step up from the path side
-        for (int[] c : new int[][]{{-4, -4}, {4, -4}, {-4, 4}, {4, 4}}) {
-            for (int yy = y + 1; yy <= y + 4; yy++) set(cx + c[0], yy, cz + c[1], SPRUCE_LOG_Y);
-        }
-        // hipped roof
-        for (int k = 0; k <= 4; k++) {
-            int r = 5 - k;
-            for (int dx = -r; dx <= r; dx++)
-                for (int dz = -r; dz <= r; dz++)
-                    if (Math.abs(dx) == r || Math.abs(dz) == r) set(cx + dx, y + 5 + k, cz + dz, k == 4 ? DARK_OAK : slab("spruce"));
-        }
-        set(cx, y + 5, cz, LANTERN_HANGING);
-        // rail with a gap facing the path, benches, a chart table
-        for (int d = -3; d <= 3; d++) {
-            set(cx + d, y + 1, cz - 4, SPRUCE_FENCE);
-            set(cx - 4, y + 1, cz + d, SPRUCE_FENCE);
-            set(cx + 4, y + 1, cz + d, SPRUCE_FENCE);
-            if (Math.abs(d) >= 2) set(cx + d, y + 1, cz + 4, SPRUCE_FENCE);
-        }
-        for (int d = -2; d <= 2; d++) {
-            set(cx + d, y + 1, cz - 3, stairs("spruce", "north"));
-        }
-        set(cx - 3, y + 1, cz, stairs("spruce", "west"));
-        set(cx - 3, y + 1, cz + 1, stairs("spruce", "west"));
-        set(cx + 3, y + 1, cz, stairs("spruce", "east"));
-        set(cx + 3, y + 1, cz + 1, stairs("spruce", "east"));
-        set(cx, y + 1, cz, CARTOGRAPHY);
-        set(cx, y + 2, cz, id("minecraft:potted_fern"));
-        // flagpole with a black-and-white Jolly Roger flying over the island
-        int fx = cx + 6, fz = cz - 1;
-        set(fx, y - 1, fz, COBBLE);
-        for (int yy = y; yy <= y + 12; yy++) set(fx, yy, fz, SPRUCE_FENCE);
-        for (int dx = 1; dx <= 4; dx++)
-            for (int yy = y + 9; yy <= y + 12; yy++)
-                set(fx + dx, yy, fz, BLACK_WOOL);
-        set(fx + 2, y + 11, fz, WHITE_WOOL); set(fx + 3, y + 11, fz, WHITE_WOOL);   // skull
-        set(fx + 2, y + 10, fz, WHITE_WOOL); set(fx + 3, y + 10, fz, WHITE_WOOL);
-        set(fx + 1, y + 9, fz, WHITE_WOOL); set(fx + 4, y + 9, fz, WHITE_WOOL);     // crossbones
-    }
 
     /** Scatter tall grass, ferns and wildflowers over the untouched northern hills. */
     private static void northMeadow(Random rng) {

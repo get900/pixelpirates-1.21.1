@@ -30,6 +30,8 @@ public final class HomesteadItems {
     }
 
     // SEALED STRONGBOXES (2026-10-01): cracked open at a Treasure Hoard - a spinning reel of prizes (hoard/Strongboxes)
+    public static final Item BLANK_CANVAS = item("blank_canvas", new Item(new Item.Settings().maxCount(16)));
+    public static final Item PAINTING = item("player_painting", new net.get900.pixelpirates.homestead.art.PaintingItem(new Item.Settings().maxCount(1)));
     public static final Item COMMON_STRONGBOX = item("common_strongbox", new net.get900.pixelpirates.homestead.hoard.StrongboxItem(new Item.Settings().maxCount(16), 0));
     public static final Item RARE_STRONGBOX = item("rare_strongbox", new net.get900.pixelpirates.homestead.hoard.StrongboxItem(new Item.Settings().maxCount(16).rarity(net.minecraft.util.Rarity.UNCOMMON), 1));
     // PARROT TYPES (2026-10-03): a crate holding one parrot of a set type - treasure loot (homestead/parrot/ParrotCrateItem)

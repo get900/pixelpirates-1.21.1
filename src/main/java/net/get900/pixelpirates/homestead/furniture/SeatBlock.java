@@ -17,6 +17,9 @@ public class SeatBlock extends FurnitureBlock {
         this.seatHeight = seatHeight;
     }
 
+    /** How high above the block's base a sitter sits (townsfolk sit here too - homestead/town). */
+    public double seatHeight() { return seatHeight; }
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (player.isSneaking() || player.hasVehicle() || !player.getStackInHand(hand).isEmpty()) return ActionResult.PASS;

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:string"
+    },
+    "S": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "pattern": [
+    "R R",
+    "R R",
+    "SSS"
+  ],
+  "result": {
+    "item": "pixelpirates:hanging_swing"
+  },
+  "show_notification": true
+}

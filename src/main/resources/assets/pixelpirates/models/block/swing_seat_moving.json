@@ -1,0 +1,154 @@
+{
+ "textures": {
+  "wood": "minecraft:block/stripped_oak_log",
+  "plank": "minecraft:block/oak_planks",
+  "rope": "pixelpirates:block/rope",
+  "particle": "minecraft:block/oak_planks"
+ },
+ "elements": [
+  {
+   "from": [
+    3.5,
+    8,
+    7.75
+   ],
+   "to": [
+    4.0,
+    30.4,
+    8.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rope",
+     "uv": [
+      12.0,
+      1.6000000000000014,
+      12.5,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#rope",
+     "uv": [
+      3.5,
+      1.6000000000000014,
+      4.0,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#rope",
+     "uv": [
+      7.75,
+      1.6000000000000014,
+      8.25,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#rope",
+     "uv": [
+      7.75,
+      1.6000000000000014,
+      8.25,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#rope"
+    },
+    "down": {
+     "texture": "#rope"
+    }
+   }
+  },
+  {
+   "from": [
+    12,
+    8,
+    7.75
+   ],
+   "to": [
+    12.5,
+    30.4,
+    8.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rope",
+     "uv": [
+      3.5,
+      1.6000000000000014,
+      4,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#rope",
+     "uv": [
+      12,
+      1.6000000000000014,
+      12.5,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#rope",
+     "uv": [
+      7.75,
+      1.6000000000000014,
+      8.25,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#rope",
+     "uv": [
+      7.75,
+      1.6000000000000014,
+      8.25,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#rope"
+    },
+    "down": {
+     "texture": "#rope"
+    }
+   }
+  },
+  {
+   "from": [
+    3,
+    6.5,
+    5.5
+   ],
+   "to": [
+    13,
+    8,
+    10.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#plank"
+    },
+    "south": {
+     "texture": "#plank"
+    },
+    "east": {
+     "texture": "#plank"
+    },
+    "west": {
+     "texture": "#plank"
+    },
+    "up": {
+     "texture": "#plank"
+    },
+    "down": {
+     "texture": "#plank"
+    }
+   }
+  }
+ ]
+}

@@ -19,6 +19,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
+import zfight
+
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / "src/main/resources/assets/pixelpirates"
 JAR = Path.home() / ".gradle/caches/fabric-loom/1.20.1/minecraft-client.jar"
@@ -110,7 +112,9 @@ class BM:
     def write(self, folder="block"):
         p = RES / "models" / folder / f"{self.name}.json"
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_bytes(json.dumps(self.json(), indent=1).encode("utf-8"))
+        j = self.json()
+        zfight.fix_elements(j)                                 # no coplanar faces (flicker) - tools/zfight.py
+        p.write_bytes(json.dumps(j, indent=1).encode("utf-8"))
         return p
 
     # ---------------------------------------------------------------- preview

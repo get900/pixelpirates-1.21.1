@@ -37,7 +37,10 @@
     "MerchantScreenSkinMixin",
     "PressableWidgetSkinMixin",
     "ParrotTextureMixin",
-    "ShoulderParrotTypeMixin"
+    "ShoulderParrotTypeMixin",
+    "TelescopeSpyglassMixin",
+    "TelescopeFovMixin",
+    "TelescopeScrollMixin"
   ],
   "injectors": {
     "defaultRequire": 1

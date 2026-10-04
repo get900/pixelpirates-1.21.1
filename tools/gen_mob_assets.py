@@ -30,6 +30,8 @@ from pathlib import Path
 
 from PIL import Image
 
+import zfight
+
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "src/main/resources/assets/pixelpirates"
 
@@ -314,6 +316,8 @@ class Model:
 
 
 def dump(path: Path, obj):
+    if path.name.endswith(".geo.json"):
+        zfight.fix_geo(obj)                                    # no coplanar faces (flicker) - tools/zfight.py
     path.write_bytes(json.dumps(obj, indent=1).encode("utf-8"))  # no BOM
 
 

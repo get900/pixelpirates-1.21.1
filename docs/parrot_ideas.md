@@ -118,8 +118,8 @@ Phase 4 - the collection block ("Parrot Roost"?)
 - [ ] 4.3 the keeper sells birds (with the unique NPCs) - prices by rarity AND ability:
       Common 20-40 coins, Uncommon 60-100, Rare 150-250, Very Rare 400-600, Legendary 1000+ (to tune)
 
-  Phase 4.1 + 4.2 DONE in code 2026-10-03 (compiles, datagen, checker clean) - NOT yet seen in game. 4.3 waits for the
-  unique NPCs (the port traders are tied to the bazaar booths).
+  Phase 4.1 + 4.2 DONE in code 2026-10-03 (compiles, datagen, checker clean) - NOT yet seen in game. 4.3 DONE with the
+  townsfolk (2026-10-04): the aviary keeper's BIRDS service ("See today's birds", homestead/town/TownTalk).
   - homestead/parrot/ParrotCollection: unlock on setOwner (mixin TameableOwnerMixin) -> HomesteadState discoveries
     "parrot:<id>"; ONE OF EACH: seeds refused on an untamed parrot of an owned type (UseEntityCallback), a crate of an
     owned type stays shut, TreasureLoot.roll(pool, rng, owned) never rolls an owned type (TreasureMapItem passes it).

@@ -109,6 +109,11 @@ reveal-all flag, name, level, fish caught, charted sites, bounties, hideout, fac
   (torn stubs come in pairs: `!met:N & met:N-1` named, `!met:N-1` vague); slain = red X + skull stamp on its portrait. The screen flows elements onto
   pages (keeps short paragraphs/quotes whole, no widow lines, headings keep with the next lines, empty pages get a faint
   compass). Keys: arrows/keypad/PgUp-Dn/scroll turn, 1-6 pick a tab; the Hunt index is clickable.
+- **2026-10-05 update (9 tabs):** World, The Hunt, The Seas, WAVEBREAK (the town: places, the people + their services,
+  friendship, the news, trade, the law + harbour dues), TOWN LIFE (the daily round, the calendar, the five great days,
+  the unlooked-for ships, games, pastimes), SHIPYARD (commissioning, the four fleets, the seven refits, liveries,
+  moorings/dues), Fishing (+ Finn's contest), Homestead (+ the Forge, Companions: parrots + cats), Ship's Log. The book
+  fits 9 tabs (H 220 / TAB_GAP 23); keys 1-9. Text only - reuses existing art. NOT seen in a client yet.
 - **Test:** `/pptest chronicle [on|off]` (also in `/pptest all`) reveals every page (stamps still show real kills).
 - **Art:** `python tools/gen_chronicle_art.py [book|art|painted|icon]` -> `textures/gui/chronicle/book.png` (spread +
   parts atlas at 2 texels/GUI px; B_* constants in the screen) and `art/*.png`. PAINTED art (2026-10-01) = the user's

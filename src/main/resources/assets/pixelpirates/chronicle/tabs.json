@@ -1,11 +1,41 @@
 {
   "_doc": "The Weathered Chronicle's tabs, top to bottom. Each id loads chronicle/<id>.json. See client/screen/ChronicleScreen for the element types.",
   "tabs": [
-    {"id": "world", "label": "World"},
-    {"id": "hunt", "label": "The Hunt"},
-    {"id": "seas", "label": "The Seas"},
-    {"id": "fishing", "label": "Fishing"},
-    {"id": "homestead", "label": "Homestead"},
-    {"id": "log", "label": "Ship's Log"}
+    {
+      "id": "world",
+      "label": "World"
+    },
+    {
+      "id": "hunt",
+      "label": "The Hunt"
+    },
+    {
+      "id": "seas",
+      "label": "The Seas"
+    },
+    {
+      "id": "wavebreak",
+      "label": "Wavebreak"
+    },
+    {
+      "id": "townlife",
+      "label": "Town Life"
+    },
+    {
+      "id": "shipyard",
+      "label": "Shipyard"
+    },
+    {
+      "id": "fishing",
+      "label": "Fishing"
+    },
+    {
+      "id": "homestead",
+      "label": "Homestead"
+    },
+    {
+      "id": "log",
+      "label": "Ship's Log"
+    }
   ]
 }

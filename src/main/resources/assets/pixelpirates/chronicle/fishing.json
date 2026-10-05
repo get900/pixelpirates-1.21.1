@@ -15,6 +15,8 @@
     {"p": "Once in a long while, the line comes up with something worth mounting on the wall: the Golden Marlin (warm open water and reefs), the Ghost Swordfish (Cursed Seas) and the Abyssal Coelacanth (the Abyss)."},
     {"h": "Traps", "icon": "pixelpirates:lobster_pot"},
     {"p": "A Fish Trap Net or a Lobster Pot left in the water fills itself over time. Lobsters and crab claws come from the pots."},
+    {"h": "Finn's contest", "icon": "pixelpirates:golden_marlin_trophy"},
+    {"p": "Every so often Finn Gale challenges the town: the biggest fish by sundown wins a Golden Marlin to mount. Every fish caught that day is weighed and the weight written on it."},
     {"h": "The Salvage Hook", "icon": "pixelpirates:salvage_hook"},
     {"p": "Cast it over a wreck site and you reel up salvage crates instead of fish."},
 

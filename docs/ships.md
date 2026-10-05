@@ -90,6 +90,11 @@ Verified in the dev client: place brigantine -> capture = identical 818 blocks; 
 floating ones are not; the bundle copy + captured.txt are written. `remove` and the .bundled update path NOT client-tested.
 NOTE: the bundled ships folder src/main/resources/data/pixelpirates/ships/ is not in git yet - commit it.
 
+`/ppship drain` (2026-10-05): clears water, kelp, seagrass and bubble columns out of the nearest ASSEMBLED ship (within
+64, its whole shipyard box) and dries waterlogged blocks - a copy placed at the waterline for editing fills with sea +
+kelp, and assembling it carried them aboard. Blueprints never hold water (capture skips fluids; checked all 19 with
+`tools/nbtio.py`). NOT client-tested.
+
 ## SHIP LIVERIES (2026-10-04) - `world/livery/`, the Shipwright's LIVERY tab
 A livery repaints the player's own ship (the nearest within 150 blocks, as for refits) by MATERIAL ROLE, keeping every
 block's shape (facing/half/axis/fence sides copied - `Liveries.reshape`), wood swapped for wood so the weight barely moves.

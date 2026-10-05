@@ -175,6 +175,42 @@ public final class ShipCapture {
     }
 
     /** /ppship remove: clear a placed (unassembled) ship from the world - the same blocks capture would save. */
+    /**
+     * /ppship drain (2026-10-05; the user: a drowned ship had "water blocks attached, including the seaweed/kelp"): an
+     * edited copy placed at the waterline fills with sea and kelp, and assembling it at the helm carries them aboard.
+     * Clears every water block, kelp, seagrass and bubble column out of the NEAREST ASSEMBLED ship (within 64; its whole
+     * shipyard box) and dries waterlogged blocks. Blueprints never hold water (capture skips fluids).
+     */
+    public static String drain(ServerPlayerEntity p) {
+        ServerWorld w = p.getServerWorld();
+        var sw = org.valkyrienskies.mod.common.VSGameUtilsKt.getShipObjectWorld(w);
+        if (sw == null) return "No ships in this world.";
+        org.valkyrienskies.core.api.ships.LoadedServerShip best = null;
+        double bd = 64 * 64;
+        for (var s : sw.getLoadedShips()) {
+            var q = s.getTransform().getPositionInWorld();
+            double d = p.squaredDistanceTo(q.x(), q.y(), q.z());
+            if (d < bd) { bd = d; best = s; }
+        }
+        if (best == null || best.getShipAABB() == null) return "No assembled ship within 64 blocks. (A copy placed for editing: /ppship remove <name> clears it.)";
+        var box = best.getShipAABB();
+        int water = 0, plants = 0, dried = 0;
+        BlockPos.Mutable m = new BlockPos.Mutable();
+        for (int x = box.minX(); x <= box.maxX(); x++)
+            for (int y = box.minY(); y <= box.maxY(); y++)
+                for (int z = box.minZ(); z <= box.maxZ(); z++) {
+                    m.set(x, y, z);
+                    BlockState s = w.getBlockState(m);
+                    if (s.isOf(Blocks.WATER) || s.isOf(Blocks.BUBBLE_COLUMN)) { w.setBlockState(m, Blocks.AIR.getDefaultState(), 2); water++; }
+                    else if (s.isOf(Blocks.KELP) || s.isOf(Blocks.KELP_PLANT) || s.isOf(Blocks.SEAGRASS) || s.isOf(Blocks.TALL_SEAGRASS)) {
+                        w.setBlockState(m, Blocks.AIR.getDefaultState(), 2 | 16); plants++;
+                    } else if (s.contains(net.minecraft.state.property.Properties.WATERLOGGED) && s.get(net.minecraft.state.property.Properties.WATERLOGGED)) {
+                        w.setBlockState(m, s.with(net.minecraft.state.property.Properties.WATERLOGGED, false), 2); dried++;
+                    }
+                }
+        return "Drained ship " + best.getId() + ": " + water + " water, " + plants + " kelp/seagrass removed, " + dried + " blocks dried.";
+    }
+
     public static String remove(ServerPlayerEntity p, String name) {
         ServerWorld w = p.getServerWorld();
         Object loc = locate(p, name);

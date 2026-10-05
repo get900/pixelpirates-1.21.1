@@ -1204,6 +1204,11 @@ public class ModCommands {
                                                 + " to save it (or sneak-click the helm to assemble).").formatted(Formatting.GREEN), false);
                                         return 1;
                                     })))
+                    .then(CommandManager.literal("drain").executes(ctx -> {
+                        String r = net.get900.pixelpirates.world.ShipCapture.drain(ctx.getSource().getPlayerOrThrow());
+                        ctx.getSource().sendFeedback(() -> Text.literal(r), false);
+                        return 1;
+                    }))
                     .then(CommandManager.literal("remove")
                             .then(CommandManager.argument("name", com.mojang.brigadier.arguments.StringArgumentType.word())
                                     .suggests((c, b) -> net.minecraft.command.CommandSource.suggestMatching(

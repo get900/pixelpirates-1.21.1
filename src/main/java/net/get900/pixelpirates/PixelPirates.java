@@ -218,8 +218,18 @@ public class PixelPirates implements ModInitializer {
 				Vec3d pPos = chosen.getPos();
 
 				int physicalZone = PlayerProgressionManager.getZoneAt(pPos);
-				Faction faction  = pickFactionForZone(physicalZone);
-				String blueprint = pickAiBlueprintForZone(physicalZone, faction, blueprints);
+				net.get900.pixelpirates.world.faction.SeaWar.daily(server, ppWorld.getTimeOfDay() / 24000L);
+				// 2026-10-05 (the user): any ship can sail anywhere - the faction by the balance of the war at sea, the hull
+				// any of that faction's. A quarter of the time, a ship already near the player meets her enemy (a battle).
+				Vec3d around = pPos;
+				Faction faction = pickFaction(server);
+				AiShipController.AiShipData rival = Math.random() < 0.25 ? nearestAiShip(ppWorld, pPos, 320) : null;
+				if (rival != null) {
+					Faction enemy = pickEnemyOf(rival.faction);
+					Vector3d rp = AiShipController.shipPos(ppWorld, rival.shipId);
+					if (enemy != null && rp != null) { faction = enemy; around = new Vec3d(rp.x, rp.y, rp.z); }
+				}
+				String blueprint = pickAiBlueprint(faction, blueprints);
 				if (blueprint == null) {
 					LOGGER.debug("[AI] Natural spawn skipped — no suitable blueprint for zone {} faction {}",
 						physicalZone, faction.id);
@@ -227,15 +237,20 @@ public class PixelPirates implements ModInitializer {
 				}
 
 				double angle  = Math.random() * 2 * Math.PI;
-				double dist   = 150 + Math.random() * 80;
+				double dist   = around == pPos ? 150 + Math.random() * 80 : 130 + Math.random() * 40;   // a battle: just over the rival's horizon
 				// Y=90: well above assembled ships whose hulls reach up to ~Y=74 at WATER_Y=62.
 				// The 16-block vertical gap prevents VS2 from seeing virtual ship blocks at the
 				// new spawn position during the setBlockState placement loop.
 				BlockPos origin = new BlockPos(
-					(int)(pPos.x + Math.cos(angle) * dist),
+					(int)(around.x + Math.cos(angle) * dist),
 					90,
-					(int)(pPos.z + Math.sin(angle) * dist)
+					(int)(around.z + Math.sin(angle) * dist)
 				);
+				// never round the spawn island (its harbour, the town's own boats, the regatta course)
+				if (Math.hypot(origin.getX() - net.get900.pixelpirates.world.gen.SpawnIslandTerrain.CX, origin.getZ() - net.get900.pixelpirates.world.gen.SpawnIslandTerrain.CZ) < ISLAND_KEEP_CLEAR) {
+					LOGGER.debug("[AI] Natural spawn skipped - too near the spawn island at ({}, {})", origin.getX(), origin.getZ());
+					continue;
+				}
 
 				BlockPos waterCheck = new BlockPos(origin.getX(), ppWorld.getSeaLevel() - 1, origin.getZ());
 				if (!ppWorld.getBlockState(waterCheck).getFluidState().isIn(FluidTags.WATER)) {
@@ -490,36 +505,47 @@ public class PixelPirates implements ModInitializer {
 	 * Picks a faction to spawn for the given zone using weighted random selection.
 	 * Zone 0 returns null (no spawn in starter area).
 	 */
-	private static Faction pickFactionForZone(int zone) {
-		double r = Math.random();
-		return switch (zone) {
-			case 1  -> r < 0.65 ? Faction.PIRATES : (r < 0.85 ? Faction.MERCHANTS : Faction.NAVY);
-			case 2  -> r < 0.50 ? Faction.PIRATES : (r < 0.75 ? Faction.MERCHANTS : Faction.NAVY);
-			case 3  -> r < 0.45 ? Faction.PIRATES : (r < 0.65 ? Faction.NAVY      : Faction.UNDEAD);
-			default -> r < 0.35 ? Faction.PIRATES : (r < 0.55 ? Faction.NAVY      : Faction.UNDEAD);
-		};
+	/** No natural AI ship spawns within this many blocks of the spawn island's centre. */
+	static final double ISLAND_KEEP_CLEAR = 420;
+
+	/** Any faction anywhere (2026-10-05): base shares pirates 35 / merchants 25 / navy 25 / drowned 15, scaled by SeaWar. */
+	private static Faction pickFaction(net.minecraft.server.MinecraftServer server) {
+		Faction[] fs = {Faction.PIRATES, Faction.MERCHANTS, Faction.NAVY, Faction.UNDEAD};
+		double[] w = {35, 25, 25, 15};
+		double total = 0;
+		for (int i = 0; i < fs.length; i++) total += w[i] = net.get900.pixelpirates.world.faction.SeaWar.spawnWeight(server, fs[i], w[i]);
+		double r = Math.random() * total;
+		for (int i = 0; i < fs.length; i++) if ((r -= w[i]) < 0) return fs[i];
+		return Faction.PIRATES;
 	}
 
-	/**
-	 * Returns a blueprint name for the given zone and faction (2026-10-04 fleet): a ship of that faction whose zone range
-	 * (AiShipConfig.zoneRange - each faction sails a small -> flagship ladder) covers the zone; failing that the faction ship
-	 * whose range lies nearest; failing that any blueprint (keeps things working with a bare config folder).
-	 */
-	private static String pickAiBlueprintForZone(int zone, Faction faction, List<String> available) {
-		if (zone <= 0) return null;
-		java.util.List<String> inZone = new java.util.ArrayList<>();
-		String nearest = null; int nearestGap = Integer.MAX_VALUE;
-		for (String b : available) {
-			AiShipConfig cfg = AiShipConfig.load(b);
-			if (Faction.fromId(cfg.faction) != faction) continue;
-			int[] r = cfg.zoneRange(b);
-			if (zone >= r[0] && zone <= r[1]) inZone.add(b);
-			int gap = zone < r[0] ? r[0] - zone : zone - r[1];
-			if (gap < nearestGap) { nearestGap = gap; nearest = b; }
-		}
-		if (!inZone.isEmpty()) return inZone.get((int) (Math.random() * inZone.size()));
-		if (nearest != null) return nearest;
-		return available.isEmpty() ? null : available.get((int) (Math.random() * available.size()));
+	private static Faction pickEnemyOf(Faction f) {
+		java.util.List<Faction> e = new java.util.ArrayList<>();
+		for (Faction o : Faction.values()) if (o.isEnemyFaction(f) || f.isEnemyFaction(o)) e.add(o);
+		return e.isEmpty() ? null : e.get((int) (Math.random() * e.size()));
 	}
+
+	/** The nearest AI ship (not a regatta racer) within r of p, or null. */
+	private static AiShipController.AiShipData nearestAiShip(ServerWorld w, Vec3d p, double r) {
+		AiShipController.AiShipData best = null; double bd = r * r;
+		for (AiShipController.AiShipData d : AiShipController.AI_SHIPS.values()) {
+			if (d.world != w || d.racing) continue;
+			Vector3d q = AiShipController.shipPos(w, d.shipId);
+			if (q == null) continue;
+			double dd = (q.x - p.x) * (q.x - p.x) + (q.z - p.z) * (q.z - p.z);
+			if (dd < bd) { bd = dd; best = d; }
+		}
+		return best;
+	}
+
+	/** Any of the faction's hulls, wherever we are (the zone ladder no longer limits where a ship sails). */
+	private static String pickAiBlueprint(Faction faction, List<String> available) {
+		java.util.List<String> mine = new java.util.ArrayList<>();
+		for (String b : available) if (Faction.fromId(AiShipConfig.load(b).faction) == faction && !b.equals("sloop") && !b.equals("skipper") && !b.equals("brigantine")) mine.add(b);
+		if (mine.isEmpty()) return available.isEmpty() ? null : available.get((int) (Math.random() * available.size()));
+		return mine.get((int) (Math.random() * mine.size()));
+	}
+
+
 
 }

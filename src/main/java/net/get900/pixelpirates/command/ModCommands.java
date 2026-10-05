@@ -1182,6 +1182,13 @@ public class ModCommands {
             // ── /ppship place <blueprint> - stamp a blueprint UNASSEMBLED beside you (to look at, edit, re-save) ──
             // Placed exactly as stored: helm at the origin, bow toward +Z (south), no rotation - so sneak-clicking its
             // helm with a named Ship Blueprint saves it back the same way round.
+            // /ppwar - the balance of power in the war at sea (world/faction/SeaWar)
+            dispatcher.register(CommandManager.literal("ppwar").executes(ctx -> {
+                String r = net.get900.pixelpirates.world.faction.SeaWar.report(ctx.getSource().getServer());
+                ctx.getSource().sendFeedback(() -> Text.literal(r), false);
+                return 1;
+            }));
+
             dispatcher.register(CommandManager.literal("ppship")
                     .requires(source -> source.hasPermissionLevel(2))
                     .then(CommandManager.literal("place")

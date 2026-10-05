@@ -135,6 +135,19 @@ block's shape (facing/half/axis/fence sides copied - `Liveries.reshape`), wood s
 - HUNTERS: half the pirate + drowned ships (`AiShipData.hunter`) see and chase players out to `HUNT_RANGE` 300.
 - STEERING FIX: `computeInputs` now flips the turn for EVERY ship (measured in the regatta; before only the Dutchman
   was flipped, and every other AI ship turned AWAY from its target when approaching / broadsiding / retreating).
+- THE WAR AT SEA (`world/faction/SeaWar`): every cannonball carries `firedByShip`; `SeaWar.hit` remembers each hull's
+  attackers (60 s), `SeaWar.sunk` (from the hp <= 0 path) credits the sinking: a FACTION kill is announced to captains
+  within 400 ("The Blackheart (Crimson Corsairs) sank HMS Vigilant (Iron Armada)!"), makes the town news and shifts the
+  BALANCE OF POWER (-10..10 per faction, saved, eases 1/day) which scales natural spawn shares x0.5..x2; a PLAYER
+  sinking by cannon now runs FactionManager.onShipDestroyed (rep, bounties, XP - before only boarding did); players
+  who fought alongside the victor get +25 with it. The wreck is the usual lootable derelict. `/ppwar` = the balance.
+- SPAWNING (2026-10-05, the user: "any ship can spawn anywhere, just not around the spawn island"): faction by base
+  shares 35/25/25/15 (pirates/merchants/navy/drowned) x the war balance, ANY of that faction's hulls (no zone ladder;
+  the player starters sloop/skipper/brigantine excluded); never within 420 of the island centre; a quarter of spawns
+  put an ENEMY of a ship already near the player 130-170 from it (a battle). Spectators are never targets.
+- CREW SIZE: `AiShipController.crewFor` = 3 + blocks/300 (3..12): cutter 4, brig ~7, galleon/man o' war 11-12.
+- VERIFIED in a client 2026-10-05: a pirate brig and a navy corvette spotted each other, broadsided, the corvette sank
+  and the report + derelict followed; crews 7 and 6.
 - CREWS: the Navy's vindicators are now ARMADA MARINES (`entity/custom/MarineEntity`, the pirate crew model in Armada
   blue + black cap, `tools/gen_crew_textures.py`, iron sword; they only attack players the Armada is hostile to).
   `entity/client/HeldItemGeoLayer` draws pirates' + marines' weapons (they always carried a cutlass, never drawn).

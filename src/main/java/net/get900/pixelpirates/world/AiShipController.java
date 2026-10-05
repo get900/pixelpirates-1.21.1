@@ -259,6 +259,7 @@ public class AiShipController {
                 continue;
             }
             if (hp <= 0) {
+                net.get900.pixelpirates.world.faction.SeaWar.sunk(data.world, data, shipPos);   // who sank her: news, rep, the balance of power
                 makeDerelict(data.shipId, data.world, server, data.blueprintName,
                              data.captainEntityId, null, data.faction);
                 it.remove();
@@ -382,6 +383,7 @@ public class AiShipController {
 
         // ── Player targets ────────────────────────────────────────────────────
         for (ServerPlayerEntity p : players) {
+            if (p.isSpectator()) continue;                                         // spectators are not at sea
             Vec3d pp = p.getPos();
             double d = distXZ(shipPos, pp);
             if (d > detection(data)) continue;
@@ -624,6 +626,7 @@ public class AiShipController {
             double spawnZ = origin.z + dirZ * 2.5;
 
             CannonBallEntity ball = new CannonBallEntity(data.world, spawnX, spawnY, spawnZ);
+            ball.firedByShip = data.shipId;
             double spread = data.config.accuracySpread;
             ball.setVelocity(
                 (dirX + (Math.random() - 0.5) * spread) * Math.cos(pitch) * CANNON_SPEED,
@@ -734,7 +737,7 @@ public class AiShipController {
      */
     private static void spawnCrew(LoadedServerShip ship, AiShipData data) {
         if (GhostShipEncounter.isDutchman(data.blueprintName)) { GhostShipEncounter.spawnCrew(ship, data); return; }
-        int wanted  = 3;
+        int wanted  = crewFor(data.blueprintName);
         int spawned = 0;
 
         boolean hasCaptain = data.faction == Faction.PIRATES || data.faction == Faction.UNDEAD;
@@ -901,6 +904,12 @@ public class AiShipController {
         };
     }
 
+    /** Bigger hulls carry more hands (2026-10-05, the user): 3 on a cutter, about 7 on a brig, up to 12 on a flagship. */
+    static int crewFor(String blueprint) {
+        try { return Math.max(3, Math.min(12, 3 + ShipSchematic.load(blueprint).getEntries().size() / 300)); }
+        catch (Exception e) { return 3; }
+    }
+
     // ── Idle despawn ──────────────────────────────────────────────────────────
 
     private static void deleteIdleShip(AiShipData data) {
@@ -966,7 +975,7 @@ public class AiShipController {
                 String notification = boardingKiller != null
                         ? "§6[~] " + boardingKiller.getName().getString() +
                           " §fhas boarded a " + faction.displayName + "§f ship! §75 min to claim."
-                        : "§c⚠ A " + faction.displayName + "§c ship is sinking! 5 min to claim.";
+                        : "§c[!] A " + faction.displayName + "§c ship is sinking! 5 min to claim.";
 
                 for (ServerPlayerEntity p : server.getPlayerManager().getPlayerList()) {
                     if (p.getServerWorld() != world) continue;

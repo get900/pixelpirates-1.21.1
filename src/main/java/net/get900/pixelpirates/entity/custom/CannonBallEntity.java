@@ -21,6 +21,8 @@ import org.valkyrienskies.core.api.ships.Ship;
 import org.valkyrienskies.mod.api.ValkyrienSkies;
 
 public class CannonBallEntity extends ThrownItemEntity {
+    /** The AI ship that fired this ball (-1 = a player's or a fort's) - SeaWar keeps score of who sank whom. */
+    public long firedByShip = -1;
 
     private static final float  DAMAGE          = 15.0f;
     private static final float  EXPLOSION_POWER = 1.5f;
@@ -182,6 +184,8 @@ public class CannonBallEntity extends ThrownItemEntity {
             if (hitPos != null) {
                 Ship ship = ValkyrienSkies.getShipManagingBlock(sw, hitPos.getX(), hitPos.getY(), hitPos.getZ());
                 if (ship != null) {
+                    net.get900.pixelpirates.world.faction.SeaWar.hit(sw, ship.getId(), firedByShip,
+                            getOwner() instanceof net.minecraft.server.network.ServerPlayerEntity sp ? sp : null);
                     ShipHealthState.get(sw).damage(sw, ship.getId(), hitPos,
                             (int) Math.round(HULL_DAMAGE * net.get900.pixelpirates.world.SkillEffects.hullMult(net.get900.pixelpirates.world.SkillEffects.playerOf(getOwner()))));
                 }

@@ -1105,5 +1105,6 @@
   "block.pixelpirates.dartboard": "Dartboard",
   "item.pixelpirates.dart": "Dart",
   "entity.pixelpirates.dart": "Dart",
-  "block.pixelpirates.league_board": "Chess League Board"
+  "block.pixelpirates.league_board": "Chess League Board",
+  "entity.pixelpirates.armada_marine": "Armada Marine"
 }

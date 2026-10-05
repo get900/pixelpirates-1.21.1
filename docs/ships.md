@@ -126,6 +126,20 @@ block's shape (facing/half/axis/fence sides copied - `Liveries.reshape`), wood s
 
 
 ## AI SHIPS
+**2026-10-05 (the user's list):**
+- WEIGHT: `world/UniformShipMass` - a VS2 BlockStateInfoProvider (priority 1000, above VS2's datapack masses at 100)
+  gives EVERY solid block 50 (a plank) - gold blocks (1930), iron (785), stone (250) no longer sink one end. Air/fluids and
+  the block TYPE stay VS2's. New/re-assembled ships; an existing one needs `/vs remass`.
+- SPAWNS: every 1200 ticks / player count (min 400) instead of a flat 2400; the "no ship within 250" clearance is now
+  120 (it rejected EVERY spawn while a player was out on their own ship - spawns land 150-230 from the player).
+- HUNTERS: half the pirate + drowned ships (`AiShipData.hunter`) see and chase players out to `HUNT_RANGE` 300.
+- STEERING FIX: `computeInputs` now flips the turn for EVERY ship (measured in the regatta; before only the Dutchman
+  was flipped, and every other AI ship turned AWAY from its target when approaching / broadsiding / retreating).
+- CREWS: the Navy's vindicators are now ARMADA MARINES (`entity/custom/MarineEntity`, the pirate crew model in Armada
+  blue + black cap, `tools/gen_crew_textures.py`, iron sword; they only attack players the Armada is hostile to).
+  `entity/client/HeldItemGeoLayer` draws pirates' + marines' weapons (they always carried a cutlass, never drawn).
+  Merchant villagers carry a sword/cutlass, drowned a trident (40%) or sword. Verified in a client: weapons in hand,
+  the marine texture. NOT verified: hunters chasing, the new steering in a real fight, ships floating level.
 **Crew stay aboard (2026-09-29):** `ShipPatrolGoal` tethers to a WORLD point, so crew walked off moving ships. Each
 crew member's post is stored in SHIP space (`AiShipData.crewPosts`); `keepCrewAboard` re-aims the tether every tick
 (patrol home, or `setPositionTarget(post, 4)` for villager/vindicator/drowned crews) and only snaps someone back as a last

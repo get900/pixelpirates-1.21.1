@@ -85,6 +85,7 @@ public class PixelPirates implements ModInitializer {
 		net.get900.pixelpirates.world.gen.PortCityLayout.LOCAL_EDITS = net.fabricmc.loader.api.FabricLoader.getInstance().getGameDir().resolve("pixelpirates/island_edits.txt");
 		net.get900.pixelpirates.world.gen.IslandEditTracker.init();
 		net.get900.pixelpirates.world.dungeon.StructureEditState.init();   // /ppstruct: hand edits to /ppdungeon copies of layout structures   // remembers what players change on the island (/ppisland capture all)
+		net.get900.pixelpirates.world.UniformShipMass.register();   // every block weighs a plank on a ship (VS2 mass provider)
 		ModItems.registerModItems();
 		net.get900.pixelpirates.item.ModCreativeTabs.register();   // self-sorting creative tabs (item/ModCreativeTabs)
 		ModBlocks.registerModBlocks();
@@ -110,6 +111,7 @@ public class PixelPirates implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.CURSED_MONKEY, CursedMonkeyEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SHIP_CAPTAIN, CaptainEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.PIRATE_CREW, PirateCrewEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.ARMADA_MARINE, PirateCrewEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.CHEST_CRAB, ChestCrabEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.LAVA_CRAB, LavaCrabEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.CASTAWAY, CastawayEntity.createAttributes());
@@ -189,7 +191,7 @@ public class PixelPirates implements ModInitializer {
 		// Multiple factions can spawn; defaults: every 2400 ticks, cap = max(8, players*2).
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
 			if (server.getTicks() < AdminTestState.nextSpawnTick) return;
-			AdminTestState.nextSpawnTick = server.getTicks() + AdminTestState.effectiveSpawnRate();
+			AdminTestState.nextSpawnTick = server.getTicks() + AdminTestState.effectiveSpawnRate(server.getPlayerManager().getCurrentPlayerCount());
 
 			List<String> blueprints = ShipSchematic.listNames();
 			if (blueprints.isEmpty()) {
@@ -241,15 +243,16 @@ public class PixelPirates implements ModInitializer {
 					continue;
 				}
 
-				// Reject if any existing VS2 ship is within 250 blocks XZ of the spawn origin.
+				// Reject if any existing VS2 ship is within 120 blocks XZ of the spawn origin (2026-10-05: was 250, which
+				// rejected EVERY spawn while a player was out on their own ship - spawns land 150-230 from the player).
 				// Expanded to 250 blocks: the AABB check uses VS2's physics-thread AABB index which
 				// can lag behind actual ship positions. ShipSpawner adds a second per-block
 				// getBlockState scan (VS2's own mixin, zero race window) as the final guard.
 				{
 					double ox = origin.getX(), oz = origin.getZ();
-					AABBd clearBox = new AABBd(ox - 250, 0, oz - 250, ox + 250, 256, oz + 250);
+					AABBd clearBox = new AABBd(ox - 120, 0, oz - 120, ox + 120, 256, oz + 120);
 					if (ValkyrienSkies.getShipsIntersecting(ppWorld, clearBox).iterator().hasNext()) {
-						LOGGER.debug("[AI] Natural spawn skipped — existing ship within 250 blocks of ({}, {})", (int)ox, (int)oz);
+						LOGGER.debug("[AI] Natural spawn skipped — existing ship within 120 blocks of ({}, {})", (int)ox, (int)oz);
 						continue;
 					}
 				}

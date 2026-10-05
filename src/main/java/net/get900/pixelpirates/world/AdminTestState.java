@@ -51,9 +51,12 @@ public final class AdminTestState {
 
     // ── Helpers ───────────────────────────────────────────────────────────────
 
-    public static int effectiveSpawnRate() {
-        return spawnRateOverride > 0 ? spawnRateOverride : 2400;
+    /** Ticks between natural ship spawns: a minute for one player, faster with more (2026-10-05: was a flat 2 min). */
+    public static int effectiveSpawnRate(int playerCount) {
+        return spawnRateOverride > 0 ? spawnRateOverride : Math.max(400, 1200 / Math.max(1, playerCount));
     }
+
+    public static int effectiveSpawnRate() { return effectiveSpawnRate(1); }
 
     public static int effectiveCap(int playerCount) {
         return capOverride > 0 ? capOverride : Math.max(8, playerCount * 2);

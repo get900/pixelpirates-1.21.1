@@ -68,16 +68,23 @@ public class PirateCrewEntity extends PathAwareEntity implements GeoEntity {
         this.goalSelector.add(2, patrolGoal);
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(4, new LookAroundGoal(this));
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::wouldAttack));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, CursedMonkeyEntity.class, true));
         this.targetSelector.add(3, new RevengeGoal(this));
     }
+
+    /** Which players this crew goes for: pirates, every one (the Armada's marines override it). */
+    protected boolean wouldAttack(net.minecraft.entity.LivingEntity e) { return true; }
+
+    /** What they carry (set in initialize, so it is saved with them). */
+    public ItemStack weapon() { return new ItemStack(ModItems.CUTLASS); }
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty,
                                  SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt) {
         EntityData data = super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
-        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(ModItems.CUTLASS));
+        this.equipStack(EquipmentSlot.MAINHAND, weapon());
+        this.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.05f);
         return data;
     }
 

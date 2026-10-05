@@ -95,6 +95,7 @@ public class PixelPiratesClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.MOB_PROJECTILE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.SHIP_CAPTAIN, CaptainEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.PIRATE_CREW, PirateCrewEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ARMADA_MARINE, PirateCrewEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.CURSED_MONKEY, CursedMonkeyEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.MAP_MERCHANT, MapMerchantEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.RAFT, RaftEntityRenderer::new);

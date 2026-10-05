@@ -211,6 +211,16 @@ public class ModEntities {
                     .build()
     );
 
+    /** The Iron Armada's ship crews (replaced the vindicators 2026-10-05) - entity/custom/MarineEntity. */
+    public static final EntityType<net.get900.pixelpirates.entity.custom.MarineEntity> ARMADA_MARINE = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(PixelPirates.MOD_ID, "armada_marine"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, net.get900.pixelpirates.entity.custom.MarineEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6f, 1.95f))
+                    .trackRangeChunks(8)
+                    .build()
+    );
+
     public static final EntityType<PirateCrewEntity> PIRATE_CREW = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(PixelPirates.MOD_ID, "pirate_crew"),

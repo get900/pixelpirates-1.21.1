@@ -105,6 +105,9 @@ public class AiShipController {
         // Bell sound — ships ring periodically so players can navigate toward them.
         public int bellTimer = 20 + (int)(Math.random() * 580);
 
+        /** A HUNTER (2026-10-05, half the pirate + drowned ships): seeks out players from {@link #HUNT_RANGE} and chases. */
+        public boolean hunter = false;
+
         /** THE REGATTA (homestead/town/Regatta): a racer sails for raceTarget at full sail and never fights. */
         public boolean racing = false;
         public Vec3d raceTarget = null;
@@ -134,6 +137,11 @@ public class AiShipController {
     private static final double CANNON_SPEED       = 2.5;
     private static final double CANNON_GRAVITY     = 0.04;
     private static final double LEAD_FACTOR        = 0.75;
+    /** How far a hunter sees and chases players (within VS2's ship load distance, ShipSimDistance). */
+    public static final double HUNT_RANGE          = 300;
+
+    private static double detection(AiShipData d) { return d.hunter ? Math.max(d.config.detectionRange, HUNT_RANGE) : d.config.detectionRange; }
+    private static double chase(AiShipData d) { return d.hunter ? Math.max(d.config.chaseRange, HUNT_RANGE + 40) : d.config.chaseRange; }
 
     // ── Registration ─────────────────────────────────────────────────────────
 
@@ -158,6 +166,7 @@ public class AiShipController {
         data.blueprintName = blueprintName;
         data.config        = AiShipConfig.load(blueprintName);
         data.faction       = factionOverride != null ? factionOverride : Faction.fromId(data.config.faction);
+        data.hunter = (data.faction == Faction.PIRATES || data.faction == Faction.UNDEAD) && Math.random() < 0.5;
         AI_SHIPS.put(shipId, data);
         int mastCount = ShipSteeringManager.MAST_COUNTS.getOrDefault(shipId, 1);
         ShipRegistryState registry = ShipRegistryState.get(world.getServer().getOverworld());
@@ -294,7 +303,7 @@ public class AiShipController {
                 case PATROL -> {
                     if (lowHp) {
                         transition(data, AiState.RETREAT);
-                    } else if (targetInfo != null && dist < data.config.detectionRange) {
+                    } else if (targetInfo != null && dist < detection(data)) {
                         LOGGER.info("[AI] {} ({}) spotted target at {} blocks — APPROACH",
                             data.shipId, data.faction.id, (int)dist);
                         transition(data, AiState.APPROACH);
@@ -304,7 +313,7 @@ public class AiShipController {
                 case APPROACH -> {
                     if (lowHp) {
                         transition(data, AiState.RETREAT);
-                    } else if (targetInfo == null || dist > data.config.chaseRange) {
+                    } else if (targetInfo == null || dist > chase(data)) {
                         transition(data, AiState.PATROL);
                     } else if (dist <= data.config.engageRange) {
                         data.broadsideLeft = chooseBroadsideSide(shipFwd, shipPos, targetInfo.pos);
@@ -333,7 +342,7 @@ public class AiShipController {
                         fireCannonVolley(data, tf, shipPos, shipFwd, targetInfo);
                         data.reloadTimer = data.config.reloadTicks;
                     }
-                    if (!lowHp && (targetInfo == null || dist > data.config.detectionRange)) {
+                    if (!lowHp && (targetInfo == null || dist > detection(data))) {
                         transition(data, AiState.PATROL);
                     }
                 }
@@ -375,7 +384,7 @@ public class AiShipController {
         for (ServerPlayerEntity p : players) {
             Vec3d pp = p.getPos();
             double d = distXZ(shipPos, pp);
-            if (d > data.config.detectionRange) continue;
+            if (d > detection(data)) continue;
             // the Flying Dutchman hunts whoever rang its bell, regardless of Undead reputation
             if (!GhostShipEncounter.isDutchman(data.blueprintName) && !FactionManager.isHostileTo(data.faction, p)) continue;
             if (best == null || d < best.dist) {
@@ -470,9 +479,10 @@ public class AiShipController {
                 }
             }
         }
-        // The Dutchman's bow is ship-space +z (GhostShipDesign): measured 2026-09-29, a positive turn input swings
-        // that bow clockwise-from-above, i.e. AWAY from a target the cross product says to turn toward - flip it.
-        if (GhostShipEncounter.isDutchman(data.blueprintName)) turn = -turn;
+        // MEASURED (the Dutchman 2026-09-29, then every regatta cutter 2026-10-05): a positive turn input swings the bow
+        // clockwise-from-above, i.e. AWAY from the side the cross product says to turn toward - so EVERY ship flips it
+        // (before this only the Dutchman did, and the rest of the fleet steered away from its targets).
+        turn = -turn;
         return new float[]{fwd * data.config.speedMult, turn, sprint};
     }
 
@@ -719,7 +729,7 @@ public class AiShipController {
      * Spawns faction-appropriate crew on the ship deck.
      * PIRATES / UNDEAD get a CaptainEntity in the first slot (boarding conquest target).
      * MERCHANTS get Villager crew (non-hostile, good for trading roleplay).
-     * NAVY get Vindicator crew (iron guard aesthetic).
+     * NAVY get Armada marines (entity/custom/MarineEntity - they replaced the vindicators 2026-10-05).
      * Remaining slots use faction mob types.
      */
     private static void spawnCrew(LoadedServerShip ship, AiShipData data) {
@@ -773,7 +783,7 @@ public class AiShipController {
                 crew.refreshPositionAndAngles(cx, spawnY, cz, (float)(Math.random() * 360), 0);
                 if (crew instanceof PirateCrewEntity pirate) {
                     pirate.setShipHome(cx, spawnY, cz);
-                    pirate.equipStack(EquipmentSlot.MAINHAND, new ItemStack(ModItems.CUTLASS));
+                    pirate.equipStack(EquipmentSlot.MAINHAND, pirate.weapon());           // a cutlass, or a marine's sword
                     pirate.setCanPickUpLoot(false);
                     pirate.setPersistent();
                 } else if (crew instanceof net.minecraft.entity.mob.MobEntity mob) {
@@ -864,15 +874,26 @@ public class AiShipController {
     }
 
     private static Entity spawnCrewMob(AiShipData data) {
+        // 2026-10-05 (the user): no more illagers - the Armada sails with MARINES; and everyone aboard holds a weapon
+        // (pirates + marines arm themselves in initialize; a villager or drowned is handed one here).
         return switch (data.faction) {
-            case MERCHANTS -> EntityType.VILLAGER.create(data.world);
-            case NAVY      -> EntityType.VINDICATOR.create(data.world);
+            case MERCHANTS -> {
+                var v = EntityType.VILLAGER.create(data.world);
+                if (v != null) {
+                    v.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Math.random() < 0.5 ? net.minecraft.item.Items.IRON_SWORD : ModItems.CUTLASS));
+                    v.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0f);
+                }
+                yield v;
+            }
+            case NAVY      -> ModEntities.ARMADA_MARINE.create(data.world);
             case UNDEAD    -> {
                 // drowned burn in daylight; a skull (not damageable, so it never wears through) keeps the sun off
                 var d = EntityType.DROWNED.create(data.world);
                 if (d != null) {
                     d.equipStack(EquipmentSlot.HEAD, new ItemStack(net.minecraft.item.Items.SKELETON_SKULL));
                     d.setEquipmentDropChance(EquipmentSlot.HEAD, 0f);
+                    d.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Math.random() < 0.4 ? net.minecraft.item.Items.TRIDENT : net.minecraft.item.Items.IRON_SWORD));
+                    d.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0f);
                 }
                 yield d;
             }

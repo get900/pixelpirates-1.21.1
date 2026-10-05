@@ -14,7 +14,8 @@ public class PirateCrewModel extends GeoModel<PirateCrewEntity> {
 
     @Override
     public Identifier getTextureResource(PirateCrewEntity entity) {
-        return new Identifier(PixelPirates.MOD_ID, "textures/entity/pirate.png");
+        return new Identifier(PixelPirates.MOD_ID, entity instanceof net.get900.pixelpirates.entity.custom.MarineEntity
+                ? "textures/entity/navy_marine.png" : "textures/entity/pirate.png");
     }
 
     @Override

@@ -940,6 +940,19 @@ public class AiShipController {
             Entity captainEnt = world.getEntity(captainEntityId);
             if (captainEnt != null) captainEnt.discard();
         }
+        // 2026-10-05 (the user): the crew go with her - before, they were left behind on the wreck (and in the water)
+        // with nobody tracking them any more. A splash where each one stood: they've abandoned ship.
+        AiShipData sunkData = AI_SHIPS.get(shipId);
+        if (sunkData != null) {
+            for (UUID uuid : sunkData.crewEntityIds) {
+                Entity crew = world.getEntity(uuid);
+                if (crew == null) continue;
+                world.spawnParticles(net.minecraft.particle.ParticleTypes.SPLASH, crew.getX(), crew.getY() + 0.5, crew.getZ(), 12, 0.3, 0.3, 0.3, 0.1);
+                crew.discard();
+            }
+            sunkData.crewEntityIds.clear();
+            sunkData.crewPosts.clear();
+        }
 
         // Apply reputation change for boarding kill
         if (boardingKiller != null) {

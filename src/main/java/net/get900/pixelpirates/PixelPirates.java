@@ -161,6 +161,7 @@ public class PixelPirates implements ModInitializer {
 		// Restore persisted ship registrations (MAST_COUNTS + AI_SHIPS) after world load.
 		// Must run after VS2 has loaded ship data — SERVER_STARTED fires once all worlds are ready.
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			net.get900.pixelpirates.world.ShipSimDistance.apply();          // ships stay simulated out to 320 blocks
 			ServerWorld ppWorld = server.getWorld(ModDimensions.PIXEL_PIRATES_WORLD);
 			if (ppWorld == null) {
 				LOGGER.warn("[ShipRegistry] PP world not found at SERVER_STARTED — ship registrations NOT restored.");

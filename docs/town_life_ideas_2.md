@@ -17,7 +17,7 @@ Everything from part 1 that you said yes to is BUILT (see the list at the end). 
       star after you if you're there.
 - [No] **Storm night at the lighthouse**: a big storm, Silas needs help keeping the light going (bring him oil/glowstone),
       otherwise a ship wrecks on the rocks and the town has to rescue the crew.
-- [Yes] **A ship limps in**: a damaged merchant ship drifts into the harbour; townsfolk rush to the quay with bandages
+- [Yes - BUILT 2026-10-05, see docs/townsfolk.md] **A ship limps in**: a damaged merchant ship drifts into the harbour; townsfolk rush to the quay with bandages
       and ropes (the doctor patches the crew up).
 - [Yes - BUILT 2026-10-05, see docs/townsfolk.md] **Harvest festival**: once a "season" the chapel collects food; the farmers, the miller and the cider maker bring
       their best; a big feast in the plaza with temporary setup tables.

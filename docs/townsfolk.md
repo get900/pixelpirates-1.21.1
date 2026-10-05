@@ -93,6 +93,16 @@ each every 12-16 days (avg 14), never two on one day (the user's "spread out"). 
 - Test: `/pptown event fishing` (moves the clock into the window). VERIFIED in a client: start, Finn leading, beating his
   own best, the sundown result; the mixin applies. NOT tested: a player's catch being weighed (needs a real cast).
 
+## A ship limps in (2026-10-05) - `LimpingShip`
+- Quiet days only (no market/festival/wedding/big event), 1 day in 10 at 3000, or `/pptown event wreck`: a smoking
+  merchant_lugger at 1/3 hull crawls from (20,285) to a berth at (20,118) between the grand pier and the east pier
+  (scripted AI mode, Keelbreaker II), anchors; Dr Marrow, Martha, Finn, Hob work from the pier edges, the town crowds the
+  quay, hearts over the ship for 2 min; "Help with the wounded" on Dr Marrow's card takes up to 8 Sea Bandages (5 coins
+  each + Merchants rep). Then she sails out and is despawned. VERIFIED once in a client (whole cycle, but she reached the
+  berth only by the timeout) - the second run (faster: skill 0.6, closer start) was NOT finished.
+- VS2 ship load/unload distance raised to 320/384 blocks at server start (`world/ShipSimDistance`; the defaults 128/196
+  dropped ships coming into port, racers and broadsides). NOT yet verified in game.
+
 ## The Governor's Ball (2026-10-05) - `GovernorsBall`
 - Calendar day. MORNING (1000): every player with Iron Armada rep >= 100 gets an INVITATION card (paper, NBT
   `GovernorsBallInvitation`; rep >= 100 also counts without it). EVENING 12500-16000 in the Residence BALLROOM (#17 east

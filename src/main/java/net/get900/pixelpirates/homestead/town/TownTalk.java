@@ -80,6 +80,7 @@ public final class TownTalk {
         if (f.id().equals("anselm") && partner(p) != null) opts.add(new Opt("marry", "Marry us! (with " + partner(p).getName().getString() + ")"));
         if (f.id().equals("rufus")) opts.add(new Opt("tale", "Ask for a tale"));
         if (f.id().equals("anselm") && HarvestFestival.collecting(p.getServerWorld())) opts.add(new Opt("harvest", "Give to the harvest"));
+        if (f.id().equals("elias") && LimpingShip.needsBandages()) opts.add(new Opt("wounded", "Help with the wounded"));
         opts.add(new Opt("bye", "Goodbye"));
         send(p, e, f, say, opts);
     }
@@ -150,6 +151,7 @@ public final class TownTalk {
         switch (key) {
             case "chat" -> { e.triggerAnim("action", "talk"); open(p, e, line(e, f)); }
             case "gift" -> gift(p, e, f);
+            case "wounded" -> { e.triggerAnim("action", "talk"); open(p, e, LimpingShip.help(p)); }
             case "harvest" -> { e.triggerAnim("action", "talk"); open(p, e, HarvestFestival.donate(p)); }
             case "challenge" -> { e.triggerAnim("action", "talk"); open(p, e, TownLife.challenge(p, e)); }
             case "heal" -> heal(p, e, f);

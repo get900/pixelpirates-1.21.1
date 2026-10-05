@@ -389,7 +389,15 @@
 106	68	-8	minecraft:red_sandstone_wall[east=none,north=low,south=low,up=false,waterlogged=false,west=none]
 106	68	2	minecraft:red_sandstone_wall[east=none,north=low,south=low,up=false,waterlogged=false,west=none]
 106	68	6	minecraft:red_sandstone_wall[east=none,north=low,south=low,up=false,waterlogged=false,west=none]
--28	78	-119	minecraft:grass
+-24	78	-119	minecraft:polished_andesite
+-27	78	-119	minecraft:polished_andesite
+-21	78	-119	minecraft:polished_andesite
+-25	78	-119	minecraft:polished_andesite
+-22	78	-119	minecraft:polished_andesite
+-23	78	-119	minecraft:polished_andesite
+-28	78	-119	minecraft:polished_andesite
+-29	78	-119	minecraft:polished_andesite
+-26	78	-119	minecraft:polished_andesite
 
 [Spawn Plaza]
 7	68	5	minecraft:grass
@@ -5727,6 +5735,8 @@
 -90	71	-12	minecraft:grass
 -90	71	-25	minecraft:grass
 -90	71	-18	minecraft:grass
+-74	76	-41	minecraft:stone_brick_slab[type=double,waterlogged=false]
+-66	76	-41	minecraft:stone_brick_slab[type=double,waterlogged=false]
 
 [Townhouse 16]
 120	71	-40	minecraft:air
@@ -6003,6 +6013,14 @@
 -55	71	-86	minecraft:spruce_fence[east=true,north=true,south=true,waterlogged=false,west=false]
 -55	71	-85	minecraft:spruce_fence[east=false,north=true,south=true,waterlogged=false,west=false]
 -66	71	-85	minecraft:spruce_fence[east=false,north=true,south=true,waterlogged=false,west=false]
+-27	79	-110	minecraft:air
+-26	79	-110	minecraft:air
+-27	78	-110	minecraft:polished_andesite
+-26	78	-110	minecraft:polished_andesite
+-29	78	-110	minecraft:polished_andesite
+-30	78	-110	minecraft:polished_andesite
+-31	79	-109	minecraft:grass
+-26	77	-110	minecraft:polished_andesite
 
 [Townhouse 20]
 72	71	-84	minecraft:birch_fence[east=true,north=false,south=true,waterlogged=false,west=false]
@@ -6969,3 +6987,29 @@
 120	68	-10	minecraft:red_sandstone_wall[east=none,north=low,south=low,up=false,waterlogged=false,west=none]
 120	68	0	minecraft:red_sandstone_wall[east=none,north=low,south=low,up=false,waterlogged=false,west=none]
 109	77	4	minecraft:dark_oak_log[axis=y]
+
+[Beach Wreck]
+145	63	81	minecraft:air
+143	66	66	minecraft:air
+147	66	62	minecraft:air
+147	66	61	minecraft:air
+146	66	65	minecraft:air
+142	67	62	minecraft:air
+141	66	66	minecraft:air
+141	67	62	minecraft:air
+147	66	63	minecraft:air
+141	68	62	minecraft:spruce_fence[east=false,north=true,south=true,waterlogged=false,west=false]
+145	61	81	minecraft:chest[facing=north,type=single,waterlogged=false]	{Items:[{Count:1b,Slot:0b,id:"pixelpirates:wren_music_box"},{Count:1b,Slot:4b,id:"minecraft:written_book",tag:{author:"Capt. A. Wren",pages:['{"text":"Day 38.\\n\\nThe storm drove the Wren onto the shoals off Wavebreak. Her back is broken. The men are ashore and safe, thank the Tide."}','{"text":"Day 40.\\n\\nThe salvagers will come for her by spring. They shall not have it. I have wrapped it in oilcloth and laid it where she was strongest - at the foot of her mainmast."}','{"text":"Forty years it played us to sleep, every night, in every sea.\\n\\nWind it, whoever you are, and think of the Wren.\\n\\n- A. Wren, Master"}'],title:"Last Log of the Merry Wren"}},{Count:9b,Slot:12b,id:"minecraft:gold_nugget"},{Count:1b,Slot:14b,id:"minecraft:compass"}]}
+140	67	64	minecraft:air
+145	66	66	minecraft:air
+145	62	81	minecraft:air
+
+[Chess Green]
+-31	79	-114	minecraft:grass
+-31	79	-113	minecraft:air
+-20	79	-114	pixelpirates:barrel_stool[facing=north]
+-20	79	-113	pixelpirates:barrel_stool[facing=north]
+-20	79	-115	pixelpirates:barrel_stool[facing=north]
+-20	79	-116	pixelpirates:barrel_stool[facing=north]
+-31	79	-115	pixelpirates:barrel_stool[facing=north]
+-31	79	-116	pixelpirates:barrel_stool[facing=north]

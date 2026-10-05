@@ -1,0 +1,17 @@
+# Ships saved by hand with /ppship capture - tools/gen_ship_blueprints.py and gen_fleet_ships.py skip these unless --force.
+corsair_xebec
+drowned_hulk
+merchant_fluyt
+merchant_indiaman
+merchant_lugger
+merchantman
+navy_corvette
+navy_cutter
+navy_frigate
+navy_man_o_war
+pirate_brig
+pirate_cutter
+pirate_galleon
+undead_bone_galley
+undead_phantom_galleon
+undead_wraith

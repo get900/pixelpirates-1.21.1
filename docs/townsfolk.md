@@ -98,10 +98,10 @@ each every 12-16 days (avg 14), never two on one day (the user's "spread out"). 
   merchant_lugger at 1/3 hull crawls from (20,285) to a berth at (20,118) between the grand pier and the east pier
   (scripted AI mode, Keelbreaker II), anchors; Dr Marrow, Martha, Finn, Hob work from the pier edges, the town crowds the
   quay, hearts over the ship for 2 min; "Help with the wounded" on Dr Marrow's card takes up to 8 Sea Bandages (5 coins
-  each + Merchants rep). Then she sails out and is despawned. VERIFIED once in a client (whole cycle, but she reached the
-  berth only by the timeout) - the second run (faster: skill 0.6, closer start) was NOT finished.
+  each + Merchants rep). Then she sails out and is despawned. VERIFIED in a client: 2nd run (skill 0.6, closer start) reached the berth in ~35 s, tended, sailed out. (1st run reached the
+  berth only by the timeout.)
 - VS2 ship load/unload distance raised to 320/384 blocks at server start (`world/ShipSimDistance`; the defaults 128/196
-  dropped ships coming into port, racers and broadsides). NOT yet verified in game.
+  dropped ships coming into port, racers and broadsides). Verified: the log shows 320 / 384 at start.
 
 ## The Governor's Ball (2026-10-05) - `GovernorsBall`
 - Calendar day. MORNING (1000): every player with Iron Armada rep >= 100 gets an INVITATION card (paper, NBT

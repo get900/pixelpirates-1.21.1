@@ -122,6 +122,7 @@ public final class TownLife {
             HarvestFestival.tick(w);
             GovernorsBall.tick(w);
             LimpingShip.tick(w);
+            CrewsAshore.tick(w);
         });
         // a captain lost at sea: their name on the memorial roll + a memorial service in the chapel next morning
         net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
@@ -137,11 +138,12 @@ public final class TownLife {
         });
         CommandRegistrationCallback.EVENT.register((d, reg, env) -> d.register(CommandManager.literal("pptown").requires(s -> s.hasPermissionLevel(2))
                 .then(CommandManager.literal("event").then(CommandManager.argument("what", StringArgumentType.word())
-                        .suggests((c, b) -> { for (String s : new String[]{"festival", "wedding", "memorial", "party", "fishing", "regatta", "harvest", "ball", "wreck"}) b.suggest(s); return b.buildFuture(); })
+                        .suggests((c, b) -> { for (String s : new String[]{"festival", "wedding", "memorial", "party", "fishing", "regatta", "harvest", "ball", "wreck", "crew"}) b.suggest(s); return b.buildFuture(); })
                         .executes(c -> {
                             ServerWorld w = c.getSource().getServer().getWorld(PortTraders.DIM);
                             String what = StringArgumentType.getString(c, "what");
                             if (w == null) return 0;
+                            if (what.equals("crew")) { String r = CrewsAshore.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
                             if (what.equals("wreck")) { String r = LimpingShip.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
                             if (what.equals("ball")) { String r = GovernorsBall.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
                             if (what.equals("harvest")) { String r = HarvestFestival.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
@@ -1033,6 +1035,8 @@ public final class TownLife {
     }
 
     static void releaseSeat(String id) { TAKEN.values().removeIf(id::equals); }
+
+    static int[] tavernBox() { return TAVERN; }
 
     static boolean stillValid(ServerWorld w, TownsfolkEntity e, Plan p) {
         if (p.seat != null && !(w.getBlockState(p.seat).getBlock() instanceof SeatBlock)) return false;

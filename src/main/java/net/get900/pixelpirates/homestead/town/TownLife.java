@@ -120,6 +120,7 @@ public final class TownLife {
             ChessLeague.tick(w);
             FishingContest.tick(w);
             HarvestFestival.tick(w);
+            GovernorsBall.tick(w);
         });
         // a captain lost at sea: their name on the memorial roll + a memorial service in the chapel next morning
         net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
@@ -135,11 +136,12 @@ public final class TownLife {
         });
         CommandRegistrationCallback.EVENT.register((d, reg, env) -> d.register(CommandManager.literal("pptown").requires(s -> s.hasPermissionLevel(2))
                 .then(CommandManager.literal("event").then(CommandManager.argument("what", StringArgumentType.word())
-                        .suggests((c, b) -> { for (String s : new String[]{"festival", "wedding", "memorial", "party", "fishing", "regatta", "harvest"}) b.suggest(s); return b.buildFuture(); })
+                        .suggests((c, b) -> { for (String s : new String[]{"festival", "wedding", "memorial", "party", "fishing", "regatta", "harvest", "ball"}) b.suggest(s); return b.buildFuture(); })
                         .executes(c -> {
                             ServerWorld w = c.getSource().getServer().getWorld(PortTraders.DIM);
                             String what = StringArgumentType.getString(c, "what");
                             if (w == null) return 0;
+                            if (what.equals("ball")) { String r = GovernorsBall.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
                             if (what.equals("harvest")) { String r = HarvestFestival.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
                             if (what.equals("regatta")) { String r = Regatta.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
                             if (what.equals("fishing")) { String r = FishingContest.force(w); c.getSource().sendFeedback(() -> Text.literal(r), false); return 1; }
@@ -279,6 +281,8 @@ public final class TownLife {
         if (regatta != null) return regatta;
         Plan harvest = HarvestFestival.plan(w, f, phase);                       // harvest day: bring the produce / the feast
         if (harvest != null) return harvest;
+        Plan ball = GovernorsBall.plan(w, f, phase);                            // the Governor's Ball: guests, quartet, dancers
+        if (ball != null) return ball;
         Challenge ch = CHALLENGES.get(f.id());
         if (ch != null) return challengePlan(w, phase, ch);
         Plan darts = TownDarts.plan(w, e, phase);                              // at a dartboard (homestead/darts)

@@ -50,7 +50,10 @@ public final class Garrison {
         for (ServerPlayerEntity p : w.getPlayers()) {
             if (p.isSpectator() || p.isCreative()) continue;
             Zone z = ZONES.stream().filter(zz -> zz.inside(p)).findFirst().orElse(null);
-            if (z == null || FactionManager.getReputation(p, FortCannonBlockEntity.ISLAND_FACTION) >= 0) {
+            boolean wanted = z != null && FactionManager.getReputation(p, FortCannonBlockEntity.ISLAND_FACTION) < 0;
+            // the Governor's Ball: invitation only at the Residence tonight (GovernorsBall)
+            boolean gatecrasher = z != null && !wanted && z == ZONES.get(0) && GovernorsBall.ball(w) && !GovernorsBall.invited(p);
+            if (!wanted && !gatecrasher) {
                 WARNED.remove(p.getUuid());
                 continue;
             }
@@ -59,13 +62,14 @@ public final class Garrison {
             Long at = WARNED.get(p.getUuid());
             if (at == null) {
                 WARNED.put(p.getUuid(), now);
-                say(p, guard, "Halt! You're wanted by the Iron Armada, captain - off " + z.name() + ", now!");
+                say(p, guard, gatecrasher ? "Good evening, captain - I'm afraid it's invitation only tonight. The Governor's Ball."
+                        : "Halt! You're wanted by the Iron Armada, captain - off " + z.name() + ", now!");
                 w.playSound(null, guard.getBlockPos(), SoundEvents.BLOCK_BELL_USE, SoundCategory.NEUTRAL, 0.6f, 1.4f);
             } else if (now - at >= GRACE) {
                 WARNED.remove(p.getUuid());
                 BlockPos out = w.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, z.exit());
                 p.teleport(w, out.getX() + 0.5, out.getY(), out.getZ() + 0.5, p.getYaw(), p.getPitch());
-                say(p, guard, "Out you go. Come back with the Governor's pardon, or not at all.");
+                say(p, guard, gatecrasher ? "This way out, if you please. Perhaps next time, captain." : "Out you go. Come back with the Governor's pardon, or not at all.");
                 p.sendMessage(Text.literal("[!] " + guard.folk().name() + " marches you out of the gate.").formatted(Formatting.RED), false);
             }
         }

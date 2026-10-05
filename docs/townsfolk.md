@@ -93,6 +93,18 @@ each every 12-16 days (avg 14), never two on one day (the user's "spread out"). 
 - Test: `/pptown event fishing` (moves the clock into the window). VERIFIED in a client: start, Finn leading, beating his
   own best, the sundown result; the mixin applies. NOT tested: a player's catch being weighed (needs a real cast).
 
+## The Governor's Ball (2026-10-05) - `GovernorsBall`
+- Calendar day. MORNING (1000): every player with Iron Armada rep >= 100 gets an INVITATION card (paper, NBT
+  `GovernorsBallInvitation`; rep >= 100 also counts without it). EVENING 12500-16000 in the Residence BALLROOM (#17 east
+  wing): the guests take their places (`PLACES` - the Governor at the head, the Commodore, Ashby, Anselm, Agatha,
+  Martha, Rufus along the walls), the quartet (Dan, Harmonia, Quill, Silas) in the musicians' corner, seven couples on
+  the parquet (`COUPLES`, two columns facing their partners) - from 12800 the waltz (`TownMusic.WALTZ`, after the Blue
+  Danube, public domain, harp) and the couples DANCE; at 13600 the Governor's speech + toast: every invited player in
+  the room +25 Armada rep and +3 friendship with the guests (once). News the next day.
+- The Residence guards (Garrison) turn away anyone WITHOUT an invitation during the ball, politely ("invitation only
+  tonight") - wanted players get the usual treatment.
+- Test: `/pptown event ball`. VERIFIED in a client: invitation, the room full, waltz + dancing, speech, the toast.
+
 ## The harvest festival (2026-10-05) - `HarvestFestival`
 - Calendar day. MORNING 2000-5000: Hob (wheat), Elspeth (fleece), Cobb (cider + pumpkin), Wilma (flour + melon) walk to
   the chapel and add to the display before the altar (display entities), each in the chat + the news. ALL DAY until

@@ -38,13 +38,21 @@ public class ShipHealthState extends PersistentState {
         };
     }
 
-    // 0 = healthy (>75%), 1 = light (50–75%), 2 = moderate (25–50%), 3 = heavy (1–25%), 4 = sinking (0)
-    private static int getThreshold(int hp) {
-        if (hp >= MAX_HP * 3 / 4) return 0;
-        if (hp >= MAX_HP / 2)     return 1;
-        if (hp >= MAX_HP / 4)     return 2;
-        if (hp > 0)               return 3;
+    // 0 = healthy (>75%), 1 = light (50–75%), 2 = moderate (25–50%), 3 = heavy (1–25%), 4 = sinking (0) - of THIS ship's max
+    private static int getThreshold(int hp, int max) {
+        if (hp >= max * 3 / 4) return 0;
+        if (hp >= max / 2)     return 1;
+        if (hp >= max / 4)     return 2;
+        if (hp > 0)            return 3;
         return 4;
+    }
+
+    /** The world this state belongs to (set by get) - for each ship's own max HP. */
+    private ServerWorld world;
+
+    /** This ship's max hull: her size + hull refits (ShipRegistryState.getEffectiveMaxHp). */
+    public int maxHp(long shipId) {
+        return world == null ? MAX_HP : ShipRegistryState.get(world.getServer().getOverworld()).getEffectiveMaxHp(shipId);
     }
 
     private final Map<Long, Integer>        shipHealth   = new HashMap<>();
@@ -53,7 +61,8 @@ public class ShipHealthState extends PersistentState {
     // ── Public API ────────────────────────────────────────────────────────────
 
     public int getHealth(long shipId) {
-        return shipHealth.getOrDefault(shipId, MAX_HP);
+        Integer hp = shipHealth.get(shipId);
+        return hp != null ? hp : maxHp(shipId);
     }
 
     /** Admin override — directly sets HP without triggering damage thresholds. */
@@ -74,8 +83,9 @@ public class ShipHealthState extends PersistentState {
         shipHealth.put(shipId, after);
         markDirty();
 
-        int tBefore = getThreshold(before);
-        int tAfter  = getThreshold(after);
+        int max = maxHp(shipId);
+        int tBefore = getThreshold(before, max);
+        int tAfter  = getThreshold(after, max);
 
         for (int t = tBefore + 1; t <= tAfter; t++) {
             applyStructuralDamage(world, shipId, hitPos, blocksForThreshold(t));
@@ -95,8 +105,9 @@ public class ShipHealthState extends PersistentState {
 
         SINKING_SHIPS.remove(shipId);
 
-        int tBefore = getThreshold(before);
-        int tAfter  = getThreshold(after);
+        int max = maxHp(shipId);
+        int tBefore = getThreshold(before, max);
+        int tAfter  = getThreshold(after, max);
 
         for (int t = tBefore; t > tAfter; t--) {
             restoreStructuralBlocks(world, shipId, blocksForThreshold(t));
@@ -220,11 +231,13 @@ public class ShipHealthState extends PersistentState {
     }
 
     public static ShipHealthState get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(
+        ShipHealthState s = world.getPersistentStateManager().getOrCreate(
             ShipHealthState::fromNbt,
             ShipHealthState::new,
             KEY
         );
+        s.world = world;
+        return s;
     }
 
     // ── Inner record ──────────────────────────────────────────────────────────

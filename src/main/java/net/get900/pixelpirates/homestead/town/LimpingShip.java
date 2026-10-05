@@ -119,7 +119,7 @@ public final class LimpingShip {
                 }
                 if (w.getTime() - phaseAt > TENDING) {
                     ShipSteeringManager.ANCHORED_SHIPS.remove(shipId);
-                    ShipHealthState.get(w).setHealth(shipId, ShipHealthState.MAX_HP * 3 / 4);
+                    ShipHealthState.get(w).setHealth(shipId, ShipHealthState.get(w).maxHp(shipId) * 3 / 4);
                     if (d != null) d.raceTarget = OUT;
                     phase = Phase.LEAVING;
                     phaseAt = w.getTime();
@@ -146,7 +146,7 @@ public final class LimpingShip {
         AiShipController.AiShipData d = AiShipController.AI_SHIPS.get(shipId);
         if (d != null) { d.racing = true; d.raceTarget = BERTH; d.raceSkill = 0.6f; }   // scripted, slow: she's barely afloat
         ShipRegistryState.get(w.getServer().getOverworld()).setUpgradeLevel(shipId, KeelBreaker.KEY, 2);
-        ShipHealthState.get(w).setHealth(shipId, ShipHealthState.MAX_HP / 3);
+        ShipHealthState.get(w).setHealth(shipId, ShipHealthState.get(w).maxHp(shipId) / 3);
         name = NAMES[Math.floorMod((int) (w.getTimeOfDay() / 24000L), NAMES.length)];
         phase = Phase.COMING;
         phaseAt = w.getTime();

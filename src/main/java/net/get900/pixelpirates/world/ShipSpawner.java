@@ -112,6 +112,8 @@ public class ShipSpawner {
             }
             throw new Exception("Ship assembly failed (VS2 overlap — ship in spawn area)", e);
         }
+        if (schematic.name != null)                                             // her size sets her hull HP (ShipSchematic.baseHpFor)
+            ShipRegistryState.get(world.getServer().getOverworld()).saveBlueprintName(ship.getId(), schematic.name);
         int effectiveMasts = Math.max(1, schematic.getMastCount());
         ShipSteeringManager.MAST_COUNTS.put(ship.getId(), effectiveMasts);
 

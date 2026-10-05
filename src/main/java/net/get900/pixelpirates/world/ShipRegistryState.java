@@ -71,7 +71,7 @@ public class ShipRegistryState extends PersistentState {
     }
 
     public int getEffectiveMaxHp(long shipId) {
-        return ShipHealthState.MAX_HP + getUpgradeLevel(shipId, "hull") * 100;
+        return ShipSchematic.baseHpFor(getBlueprintName(shipId)) + getUpgradeLevel(shipId, "hull") * 100;
     }
 
     public void setUpgradeLevel(long shipId, String key, int level) {

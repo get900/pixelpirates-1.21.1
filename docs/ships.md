@@ -145,6 +145,11 @@ block's shape (facing/half/axis/fence sides copied - `Liveries.reshape`), wood s
   shares 35/25/25/15 (pirates/merchants/navy/drowned) x the war balance, ANY of that faction's hulls (no zone ladder;
   the player starters sloop/skipper/brigantine excluded); never within 420 of the island centre; a quarter of spawns
   put an ENEMY of a ship already near the player 130-170 from it (a battle). Spectators are never targets.
+- HULL HP BY SIZE: `ShipSchematic.baseHpFor` = 250 + 0.3 x blocks, 300..1300 (sloop 300, cutters 350-380, brig 660,
+  frigate 850, galleon 1030, man o' war 1140) + Hull Reinforcement 100/level = `ShipRegistryState.getEffectiveMaxHp`.
+  ShipSpawner now records EVERY ship's blueprint (players' too - only AI ships did), `ShipHealthState.maxHp(id)` feeds
+  the damage stages (75/50/25% of that ship's max), AI retreat, the limping ship, the spyglass. A ship from before this
+  (no blueprint recorded) stays at 500. Sunk ships' crews are removed with her (a splash each).
 - CREW SIZE: `AiShipController.crewFor` = 3 + blocks/300 (3..12): cutter 4, brig ~7, galleon/man o' war 11-12.
 - VERIFIED in a client 2026-10-05: a pirate brig and a navy corvette spotted each other, broadsided, the corvette sank
   and the report + derelict followed; crews 7 and 6.

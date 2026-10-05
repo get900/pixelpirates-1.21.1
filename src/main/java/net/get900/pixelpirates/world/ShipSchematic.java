@@ -28,6 +28,8 @@ public class ShipSchematic {
     private static final int MAX_BLOCKS = 4096;              // the flagships (tools/gen_fleet_ships.py) run 2-3k blocks
 
     private final List<Entry> entries;
+    /** The blueprint it was loaded from (null for one built in code) - ShipSpawner records it so the hull's HP fits her size. */
+    public String name;
     private final int mastCount;
 
     private ShipSchematic(List<Entry> entries, int mastCount) {
@@ -111,7 +113,21 @@ public class ShipSchematic {
             entries.add(new Entry(rel, e.getCompound("state")));
         }
 
-        return new ShipSchematic(entries, mastCount);
+        ShipSchematic sc = new ShipSchematic(entries, mastCount);
+        sc.name = name;
+        return sc;
+    }
+
+    /** Max hull HP for a blueprint's size (2026-10-05; the user: "they all have the same amount"): 250 + 0.3 a block,
+     *  300..1300 - a cutter ~350, a brig ~650, a flagship ~1100. Cached; unknown/missing = the old 500. */
+    private static final java.util.Map<String, Integer> HP_CACHE = new java.util.concurrent.ConcurrentHashMap<>();
+
+    public static int baseHpFor(String blueprint) {
+        if (blueprint == null) return ShipHealthState.MAX_HP;
+        return HP_CACHE.computeIfAbsent(blueprint, b -> {
+            try { return Math.max(300, Math.min(1300, (int) Math.round((250 + 0.3 * load(b).getEntries().size()) / 10.0) * 10)); }
+            catch (Exception e) { return ShipHealthState.MAX_HP; }
+        });
     }
 
     /**

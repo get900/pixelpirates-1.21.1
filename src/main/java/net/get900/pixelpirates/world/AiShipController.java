@@ -251,7 +251,7 @@ public class AiShipController {
             TargetInfo targetInfo = selectTarget(data, shipPos, players, allShips);
 
             int hp    = ShipHealthState.get(data.world).getHealth(data.shipId);
-            boolean lowHp = hp < ShipHealthState.MAX_HP * data.config.retreatHpFrac;
+            boolean lowHp = hp < ShipHealthState.get(data.world).maxHp(data.shipId) * data.config.retreatHpFrac;
 
             if (hp <= 0 && GhostShipEncounter.isDutchman(data.blueprintName)) {
                 GhostShipEncounter.onSunk(data, server);

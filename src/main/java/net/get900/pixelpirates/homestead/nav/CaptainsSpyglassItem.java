@@ -67,7 +67,7 @@ public class CaptainsSpyglassItem extends SpyglassItem {
                     long id = s.getId();
                     int hp = ShipHealthState.get(w).getHealth(id);
                     String flag = AiShipController.AI_SHIPS.containsKey(id) ? AiShipController.getFactionForShip(id).displayName : "an unflagged ship";
-                    p.sendMessage(Text.literal(flag + "§r  hull " + hp + "/" + ShipHealthState.MAX_HP + "  -  " + i + " blocks").formatted(Formatting.WHITE), true);
+                    p.sendMessage(Text.literal(flag + "§r  hull " + hp + "/" + ShipHealthState.get(w).maxHp(id) + "  -  " + i + " blocks").formatted(Formatting.WHITE), true);
                     return;
                 }
             } catch (Exception ignored) {
